@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { pinyin } = require('pinyin-pro');
 
 /**
  * 教材生字表服务。
@@ -47,4 +48,18 @@ function get(id) {
   return loadAll().find((book) => book.id === id) || null;
 }
 
-module.exports = { list, get, stats };
+/** 详情：课文逐字去重并注音（在线“看拼音选字”用；多音字取常用读音，与打印注音同源） */
+function detail(id) {
+  const book = get(id);
+  if (!book) return null;
+  const lessons = book.lessons.map((l) => {
+    const seen = new Set();
+    const items = Array.from(String(l.chars || ''))
+      .filter((ch) => (seen.has(ch) ? false : seen.add(ch)))
+      .map((ch) => ({ ch, py: pinyin(ch, { toneType: 'symbol' }) }));
+    return { ...l, items };
+  });
+  return { ...book, lessons };
+}
+
+module.exports = { list, get, detail, stats };

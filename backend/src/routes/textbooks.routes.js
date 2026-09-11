@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  const book = textbookService.get(req.params.id);
+  const book = textbookService.detail(req.params.id);
   if (!book) return res.status(404).json({ error: '教材不存在' });
   return res.json({ book });
 });

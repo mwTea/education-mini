@@ -124,6 +124,12 @@ test('教材生字表接口（1-6 年级真实数据）', async () => {
   const autumn = book.lessons.find((l) => l.title.includes('秋天'));
   assert.equal(Array.from(autumn.chars).sort().join(''), '了人大子');
 
+  // 逐字拼音（在线看拼音选字用）：带调拼音且与生字一一对应
+  assert.equal(autumn.items.length, 4, 'items 应去重后与生字数一致');
+  const byChar = Object.fromEntries(autumn.items.map((it) => [it.ch, it.py]));
+  assert.equal(byChar['人'], 'rén');
+  assert.match(Object.values(byChar).join(' '), /^[a-zāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ\s]+$/);
+
   const missing = await fetch(`${base}/api/v1/textbooks/no-such-book`);
   assert.equal(missing.status, 404);
 });
