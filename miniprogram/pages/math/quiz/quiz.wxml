@@ -34,6 +34,7 @@
       <text class="q-meta">{{idx + 1}}/{{total}}</text>
       <view class="progress"><view class="pg-bar" style="width: {{(idx / total) * 100}}%"></view></view>
       <text class="q-timer {{qSec > 20 ? 'slow' : ''}}">{{qSec}}s</text>
+      <view class="submit-btn" bindtap="onSubmit">交卷</view>
     </view>
     <view class="q-stem" style="font-size:{{cur.stem.length > 22 ? 36 : cur.stem.length > 14 ? 48 : 64}}rpx;">{{cur.stem}}</view>
     <view class="ans-row">

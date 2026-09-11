@@ -9,9 +9,12 @@
 .menu-item{display:flex;align-items:center;gap:20rpx;padding:30rpx 32rpx;font-size:28rpx;color:var(--c-text);border-bottom:2rpx solid var(--c-line)}
 .menu-item:last-child{border-bottom:none}
 .arrow{margin-left:auto;color:var(--c-text-faint)}
-.menu-item.contact{background:none;margin:0;padding:30rpx 32rpx;width:100%;text-align:left;border-radius:0;font-size:28rpx;color:var(--c-text);display:flex;justify-content:space-between}
+.menu-item.contact{background:none;margin:0;padding:30rpx 32rpx;width:100%;text-align:left;border-radius:0;font-size:28rpx;font-weight:400;line-height:1.5;color:var(--c-text);display:flex;justify-content:space-between;font-family:inherit}
 .foot-tip{text-align:center;color:var(--c-text-faint);font-size:22rpx;padding:26rpx 0}
-.grade-row{justify-content:space-between}
-.grade-seg{display:flex;gap:10rpx;flex-wrap:wrap;justify-content:flex-end}
-.g-item{min-width:56rpx;text-align:center;padding:6rpx 0;font-size:24rpx;color:var(--c-text-sub);background:#f4f1e9;border:2rpx solid #e6dfcf;border-radius:10rpx}
-.g-item.on{background:var(--c-primary);color:#fff;border-color:var(--c-primary)}
+
+/* 年级选择：标签在上，六档通栏一行 */
+.grade-block{padding:26rpx 32rpx 30rpx}
+.grade-label{font-size:26rpx;color:var(--c-text-sub);margin-bottom:16rpx}
+.grade-seg{display:grid;grid-template-columns:repeat(6,1fr);gap:12rpx}
+.g-item{text-align:center;padding:14rpx 0;font-size:25rpx;color:var(--c-text-sub);background:#f4f1e9;border-radius:14rpx}
+.g-item.on{background:linear-gradient(135deg,var(--c-primary),var(--c-primary-deep));color:#fff;font-weight:600;box-shadow:0 6rpx 14rpx rgba(59,130,246,.28)}

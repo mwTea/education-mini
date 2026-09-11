@@ -38,21 +38,6 @@ Page({
     wx.navigateTo({ url: '/pages/english/english' });
   },
 
-  goNameSheet() {
-    wx.showModal({
-      title: '名字字帖',
-      editable: true,
-      placeholderText: '输入孩子姓名，如：李小明',
-      success: (r) => {
-        if (!r.confirm || !r.content || !r.content.trim()) return;
-        const name = r.content.trim();
-        wx.navigateTo({
-          url: `/pages/chinese/chinese?chars=${encodeURIComponent(name)}&title=${encodeURIComponent(`${name}的名字`)}`,
-        });
-      },
-    });
-  },
-
   goDictation() {
     wx.navigateTo({ url: '/pages/chinese/chinese?mode=dictation' });
   },
@@ -77,10 +62,6 @@ Page({
     wx.navigateTo({ url: '/pages/history/history' });
   },
 
-  goRadicals() {
-    wx.navigateTo({ url: '/pages/radicals/radicals' });
-  },
-
   goMath() {
     wx.navigateTo({ url: '/pages/math/index/index' });
   },
@@ -93,6 +74,13 @@ Page({
     const q = `version=${cfg.version}&bookId=${cfg.bookId}&diff=${cfg.difficulty || 'standard'}&label=${encodeURIComponent(cfg.label || '口算练习')}`;
     wx.navigateTo({ url: `/pages/math/quiz/quiz?${q}` });
   },
+
+  /** Hero 主按钮：进入学习专区（在线练习中心），避免"开始练习"被直达口算 */
+  goLearn() {
+    wx.switchTab({ url: '/pages/learn/learn' });
+  },
+
+  goEnglishQuiz() { wx.navigateTo({ url: '/pages/english/quiz/quiz' }); },
 
   onShareAppMessage() {
     return {

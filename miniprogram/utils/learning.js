@@ -20,10 +20,37 @@ function record(cfg, questions, wrongs, seconds, review) {
     }
   });
   d.wrongs = d.wrongs.filter((w) => w.successes < 2).slice(-300);
-  d.runs.unshift({ at: now, cfg: { ...cfg }, count: questions.length, correct: questions.length - wrongs.length, seconds, review: !!review });
+  d.runs.unshift({ at: now, cfg: { ...cfg }, subject: 'math', count: questions.length, correct: questions.length - wrongs.length, seconds, review: !!review });
   d.runs = d.runs.slice(0, 180);
   try { wx.setStorageSync(KEY, d); } catch (e) { wx.showToast({ title: '本次记录未保存，存储空间不足', icon: 'none' }); }
   return d;
+}
+
+/** 语文/英语等非口算练习的记账：只记运行流水，不进错题本 */
+function logRun(subject, cfg, count, correct, seconds) {
+  const d = read();
+  d.runs.unshift({ at: Date.now(), cfg: { ...cfg }, subject, count, correct, seconds, review: false });
+  d.runs = d.runs.slice(0, 180);
+  try { wx.setStorageSync(KEY, d); } catch (e) { /* 忽略 */ }
+  return d;
+}
+
+/** 分学科近 7 天汇总；旧数据没有 subject 字段时归入口算 */
+function subjectSummary() {
+  const d = read(), now = Date.now();
+  const week = d.runs.filter((r) => r.at >= now - 7 * DAY);
+  const out = {};
+  ['math', 'zh', 'en'].forEach((s) => {
+    const runs = week.filter((r) => (r.subject || 'math') === s);
+    const count = runs.reduce((n, r) => n + r.count, 0);
+    const correct = runs.reduce((n, r) => n + r.correct, 0);
+    out[s] = {
+      count,
+      rate: count ? Math.round((correct * 100) / count) : null,
+      days: new Set(runs.map((r) => new Date(r.at).toDateString())).size,
+    };
+  });
+  return out;
 }
 function reviewQuestions(cfg, dueOnly = true) {
   return read().wrongs.filter((w) => scopeKey(w.cfg) === scopeKey(cfg) && (!dueOnly || w.due <= Date.now())).map((w) => w.question);
@@ -38,4 +65,4 @@ function summary(cfg) {
     pending: wrongs.length, due: wrongs.filter((w) => w.due <= now).length,
     last: runs[0] || null };
 }
-module.exports = { read, record, reviewQuestions, summary };
+module.exports = { read, record, logRun, subjectSummary, reviewQuestions, summary };

@@ -1,14 +1,23 @@
 <view class="page-wrap">
-  <view class="page-title">选择学科</view>
-  <view class="page-sub">沿用现有教材和练习能力，快速开始</view>
-  <view class="subject-card" wx:for="{{subjects}}" wx:key="key" data-key="{{item.key}}" bindtap="openSubject">
-    <view class="subject-icon {{item.color}}">{{item.icon}}</view>
-    <view class="subject-copy"><view class="subject-name">{{item.name}}学习</view><view class="subject-desc">{{item.desc}}</view></view>
-    <view class="arrow">›</view>
+  <view class="page-title">在线练习</view><view class="page-sub">在线作答、即时判分；资料打印请移步「打印」</view>
+  <view class="prac-card p-blue" bindtap="goQuiz">
+    <image class="prac-mascot" src="/assets/mascot/write.png" mode="aspectFit" />
+    <view class="prac-copy"><view class="prac-name">数学 · 在线口算</view><view class="prac-desc">按教材进度出题，在线作答自动判分</view></view>
+    <view class="prac-go">去练习</view>
   </view>
-  <view class="quick-card" bindtap="goQuiz">
-    <view><view class="quick-title">今日快速练</view><view class="quick-desc">使用上次设置开始在线口算</view></view>
+  <view class="prac-card p-red" bindtap="goChineseQuiz">
+    <image class="prac-mascot" src="/assets/mascot/read.png" mode="aspectFit" />
+    <view class="prac-copy"><view class="prac-name">语文 · 看拼音选字</view><view class="prac-desc">按课练生字，看拼音四选一</view></view>
+    <view class="prac-go">去练习</view>
+  </view>
+  <view class="prac-card p-green" bindtap="goEnglishQuiz">
+    <image class="prac-mascot" src="/assets/mascot/star.png" mode="aspectFit" />
+    <view class="prac-copy"><view class="prac-name">英语 · 记词拼单词</view><view class="prac-desc">先记词，再用字母拼出来</view></view>
+    <view class="prac-go">去练习</view>
+  </view>
+  <view class="quick-card" bindtap="goQuizFast">
+    <view><view class="quick-title">继续上次的口算</view><view class="quick-desc">沿用上次设置，一键再练一组</view></view>
     <view class="quick-btn">开始</view>
   </view>
-  <view class="notice">更多语文、英语在线题型将在统一练习版本中开放</view>
+  <view class="notice">在线题型持续增加；纸笔练习请用「打印」生成资料</view>
 </view>

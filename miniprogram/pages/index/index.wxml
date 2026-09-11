@@ -1,21 +1,23 @@
 <view class="page-wrap">
-  <view class="brand-row"><view><view class="brand">描红习字簿</view><view class="slogan">小学生学习好帮手</view></view><view class="brand-mark">习</view></view>
+  <view class="brand-row"><view><view class="brand">描红习字簿</view><view class="slogan">小学生学习好帮手</view></view><view class="brand-mark">学</view></view>
   <view class="hero">
-    <view class="hero-copy"><view class="hero-title">每天进步一点点</view><view class="hero-sub">让练习更简单、更有成就感</view><view class="hero-btn" bindtap="goQuizFast">开始练习</view></view>
+    <view class="hero-copy"><view class="hero-title">每天进步一点点</view><view class="hero-sub">让练习更简单、更有成就感</view><view class="hero-btn" bindtap="goLearn">开始练习</view></view>
     <image class="hero-mascot" src="/assets/mascot/wave.png" mode="aspectFit" />
     <view class="bubble b1"></view>
     <view class="bubble b2"></view>
     <view class="bubble b3"></view>
+    <view class="deco-star"></view>
+    <view class="deco-ring"></view>
   </view>
   <view class="section-title">选择学科</view>
   <view class="subject-card red" bindtap="goChinese"><view class="subject-icon">语</view><view class="subject-copy"><view class="subject-name">语文</view><view class="subject-desc">在线练习 · 打印资料</view></view><view class="arrow">›</view></view>
   <view class="subject-card blue" bindtap="goMath"><view class="subject-icon">数</view><view class="subject-copy"><view class="subject-name">数学</view><view class="subject-desc">在线口算 · 同步题卡</view></view><view class="arrow">›</view></view>
   <view class="subject-card green" bindtap="goEnglish"><view class="subject-icon">Abc</view><view class="subject-copy"><view class="subject-name">英语</view><view class="subject-desc">单词书写 · 听写资料</view></view><view class="arrow">›</view></view>
   <view class="quick-grid">
-    <view class="quick-item" bindtap="goQuizFast"><image class="quick-icon" src="/assets/quick/quiz.png" mode="aspectFit" /><text>在线口算</text></view>
-    <view class="quick-item" bindtap="goNameSheet"><image class="quick-icon" src="/assets/quick/name.png" mode="aspectFit" /><text>名字字帖</text></view>
-    <view class="quick-item" bindtap="goRadicals"><image class="quick-icon" src="/assets/quick/radical.png" mode="aspectFit" /><text>偏旁部首</text></view>
-    <view class="quick-item" bindtap="goHistory"><image class="quick-icon" src="/assets/quick/history.png" mode="aspectFit" /><text>打印历史</text></view>
+    <view class="quick-item q-blue" bindtap="goQuizFast"><image class="quick-icon" src="/assets/quick/quiz.png" mode="aspectFit" /><text>在线口算</text></view>
+    <view class="quick-item q-green" bindtap="goEnglishQuiz"><image class="quick-icon" src="/assets/quick/english.png" mode="aspectFit" /><text>在线英语</text></view>
+    <view class="quick-item q-red" bindtap="goChinese"><image class="quick-icon" src="/assets/quick/chinese.png" mode="aspectFit" /><text>语文打印</text></view>
+    <view class="quick-item q-violet" bindtap="goHistory"><image class="quick-icon" src="/assets/quick/history.png" mode="aspectFit" /><text>打印历史</text></view>
   </view>
   <view wx:if="{{recent.length}}" class="recent-title">最近生成</view>
   <view class="recent-item" wx:for="{{recent}}" wx:key="id" data-id="{{item.id}}" bindtap="openSheet"><view class="recent-dot"></view><view class="recent-info"><view>{{item.title}}</view><text>{{item.pageCount || 1}} 页 · {{item.dateText}}</text></view><view class="arrow">›</view></view>

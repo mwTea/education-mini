@@ -9,8 +9,8 @@
   </view>
 
   <view class="menu-card">
-    <view class="menu-item grade-row">
-      <text>当前年级</text>
+    <view class="grade-block">
+      <view class="grade-label">当前年级</view>
       <view class="grade-seg">
         <view wx:for="{{grades}}" wx:key="*this" class="g-item {{grade === item ? 'on' : ''}}" data-g="{{item}}" bindtap="onGradeTap">{{item}}</view>
       </view>

@@ -1,18 +1,27 @@
-/* 学习页：与首页同体系的渐变学科图标 + 品牌蓝快捷卡。 */
+/* 学习页：三科在线练习大卡（小墨陪练 + 学科浅底 + 学科色按钮）+ 快速续练。 */
 .page-wrap{min-height:100vh;padding:36rpx 28rpx 60rpx;box-sizing:border-box}
 .page-title{font-size:44rpx;font-weight:700;color:#12305e}
 .page-sub{font-size:25rpx;color:var(--c-text-sub);margin:10rpx 0 30rpx}
-.subject-card{display:flex;align-items:center;padding:30rpx 26rpx;background:var(--bg-card);border-radius:var(--r-card);margin-bottom:18rpx;box-shadow:var(--shadow-card)}
-.subject-icon{width:88rpx;height:88rpx;border-radius:24rpx;color:#fff;display:flex;align-items:center;justify-content:center;font-size:34rpx;font-weight:700}
-.subject-icon.red{background:linear-gradient(135deg,#ff8f6b,var(--c-chinese));box-shadow:0 8rpx 18rpx rgba(245,108,108,.32)}
-.subject-icon.blue{background:linear-gradient(135deg,#6ea8ff,var(--c-math));box-shadow:0 8rpx 18rpx rgba(59,130,246,.32)}
-.subject-icon.green{background:linear-gradient(135deg,#5fd6ad,var(--c-english));box-shadow:0 8rpx 18rpx rgba(16,185,129,.32)}
-.subject-copy{flex:1;margin-left:22rpx}
-.subject-name{font-size:31rpx;font-weight:650;color:var(--c-text)}
-.subject-desc{font-size:23rpx;color:var(--c-text-sub);margin-top:8rpx}
-.arrow{font-size:44rpx;color:var(--c-text-faint)}
-.quick-card{display:flex;align-items:center;justify-content:space-between;margin-top:30rpx;padding:30rpx;background:linear-gradient(135deg,var(--c-primary-soft),#e0f2fe);border-radius:var(--r-card)}
-.quick-title{font-size:30rpx;font-weight:650;color:var(--c-primary-ink)}
+
+.prac-card{display:flex;align-items:center;gap:18rpx;border-radius:var(--r-card);padding:30rpx 26rpx;margin-bottom:18rpx;box-shadow:var(--shadow-card)}
+.p-blue{background:linear-gradient(160deg,#f2f7ff,#dcedff)}
+.p-red{background:linear-gradient(160deg,#fff4f2,#ffe7e3)}
+.p-green{background:linear-gradient(160deg,#eefcf7,#dcf6ea)}
+.prac-mascot{width:124rpx;height:112rpx;flex-shrink:0}
+.prac-copy{flex:1;min-width:0}
+.prac-name{font-size:31rpx;font-weight:650}
+.p-blue .prac-name{color:var(--c-primary-ink)}
+.p-red .prac-name{color:#8f3a2e}
+.p-green .prac-name{color:#14532d}
+.prac-desc{font-size:23rpx;color:var(--c-text-sub);margin-top:8rpx}
+.prac-go{padding:14rpx 26rpx;border-radius:999rpx;color:#fff;font-size:24rpx;font-weight:600;flex-shrink:0}
+.p-blue .prac-go{background:linear-gradient(135deg,var(--c-primary),var(--c-primary-deep));box-shadow:0 8rpx 18rpx rgba(59,130,246,.3)}
+.p-red .prac-go{background:linear-gradient(135deg,#ff8f6b,var(--c-chinese));box-shadow:0 8rpx 18rpx rgba(245,108,108,.3)}
+.p-green .prac-go{background:linear-gradient(135deg,#5fd6ad,var(--c-english));box-shadow:0 8rpx 18rpx rgba(16,185,129,.3)}
+
+.quick-card{display:flex;align-items:center;justify-content:space-between;margin-top:14rpx;padding:28rpx;background:var(--bg-card);border-radius:var(--r-card);box-shadow:var(--shadow-card)}
+.quick-title{font-size:29rpx;font-weight:650;color:var(--c-text)}
 .quick-desc{font-size:23rpx;color:var(--c-text-sub);margin-top:8rpx}
-.quick-btn{padding:14rpx 28rpx;border-radius:999rpx;background:linear-gradient(135deg,var(--c-primary),var(--c-primary-deep));color:#fff;font-size:24rpx;box-shadow:0 8rpx 18rpx rgba(59,130,246,.3)}
-.notice{text-align:center;color:var(--c-text-faint);font-size:22rpx;margin-top:38rpx}
+.quick-btn{padding:14rpx 28rpx;border-radius:999rpx;background:linear-gradient(135deg,var(--c-warm-light),var(--c-warm));color:#fff;font-size:24rpx;font-weight:600;box-shadow:0 8rpx 18rpx rgba(249,115,22,.28)}
+
+.notice{text-align:center;color:var(--c-text-faint);font-size:22rpx;margin-top:38rpx;line-height:1.6}

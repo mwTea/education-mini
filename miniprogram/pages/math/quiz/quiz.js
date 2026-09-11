@@ -6,6 +6,8 @@ const learning = require('../../../utils/learning');
 const norm = (s) => String(s || '').trim().replace(/\s/g, '').toLowerCase();
 const equivalent = (input, answer) => /^\d+(\.\d+)?$/.test(input) && /^\d+(\.\d+)?$/.test(norm(answer)) && Number(input) === Number(answer);
 
+const PROGRESS_KEY = 'cb_math_quiz_progress';
+
 Page({
   data: {
     stage: 'start', showCfg: true, cfg: null, books: [], cfgLabel: '', counts: [10, 20, 30], count: 20,
@@ -19,6 +21,60 @@ Page({
     this.setData({ reviewMode: this._reviewMode });
     this.setData({ cfg: this._cfg, showCfg: q.from !== 'page', cfgLabel: decodeURIComponent(q.label || '口算练习') });
     this.loadBooks();
+    this.checkProgress();
+  },
+
+  // ---- 进度保存/续练 ----
+  saveProgress() {
+    if (this.data.stage !== 'quiz' || !this._qs) return;
+    try {
+      wx.setStorageSync(PROGRESS_KEY, {
+        cfg: this._cfg, questions: this._qs, idx: this.data.idx, score: this.data.score,
+        wrongs: this._wrongs, review: !!this._review, elapsed: Date.now() - this._t0,
+      });
+    } catch (e) { /* 忽略 */ }
+  },
+  clearProgress() { try { wx.removeStorageSync(PROGRESS_KEY); } catch (e) { /* 忽略 */ } },
+  checkProgress() {
+    let p = null;
+    try { p = wx.getStorageSync(PROGRESS_KEY); } catch (e) { /* 忽略 */ }
+    if (!p || !Array.isArray(p.questions) || !p.questions.length || p.idx >= p.questions.length) return;
+    wx.showModal({
+      title: '继续上次练习？',
+      content: `${(p.cfg && p.cfg.label) || '口算练习'} · 已完成 ${p.idx}/${p.questions.length} 题`,
+      confirmText: '继续',
+      cancelText: '重新开始',
+      success: (r) => (r.confirm ? this.resume(p) : this.clearProgress()),
+    });
+  },
+  resume(p) {
+    this._cfg = p.cfg;
+    this._review = !!p.review;
+    this._reviewMode = !!p.review;
+    this._qs = p.questions;
+    this._wrongs = p.wrongs || [];
+    this._t0 = Date.now() - (p.elapsed || 0);
+    this._locked = false;
+    this._faulted = false;
+    this.setData({
+      cfg: this._cfg, cfgLabel: (p.cfg && p.cfg.label) || '口算练习', reviewMode: this._review,
+      stage: 'quiz', showCfg: false, total: this._qs.length, idx: p.idx, cur: this._qs[p.idx],
+      input: '', feedback: '', qSec: 0, score: p.score, wrongs: [],
+    });
+    this.tick();
+  },
+
+  // ---- 提前交卷 ----
+  answeredCount() { return this.data.idx + (this._locked || this.data.feedback ? 1 : 0); },
+  onSubmit() {
+    if (this.data.stage !== 'quiz') return;
+    const answered = this.answeredCount();
+    if (!answered) { wx.showToast({ title: '答完一题才能交卷', icon: 'none' }); return; }
+    wx.showModal({
+      title: '提前交卷',
+      content: `已完成 ${answered}/${this._qs.length} 题，确定交卷吗？`,
+      success: (r) => { if (r.confirm) this.finish(true); },
+    });
   },
 
   async loadBooks() {
@@ -140,17 +196,21 @@ Page({
     if (ni >= this._qs.length) { this.finish(); return; }
     this._faulted = false;
     this.setData({ idx: ni, cur: this._qs[ni], input: '', feedback: '', qSec: 0 });
+    this.saveProgress();
     this.tick();
   },
 
-  finish() {
+  finish(early) {
     clearInterval(this._timer);
+    const answered = early ? this.answeredCount() : this._qs.length;
+    if (!answered) return;
     const sec = Math.round((Date.now() - this._t0) / 1000);
-    const rate = Math.round((this.data.score / this._qs.length) * 100);
+    const rate = Math.round((this.data.score / answered) * 100);
     const stars = rate >= 95 ? '⭐⭐⭐' : rate >= 80 ? '⭐⭐' : rate >= 60 ? '⭐' : '💪';
     const words = rate >= 95 ? '太棒了，口算小达人！' : rate >= 80 ? '很不错，继续保持！' : rate >= 60 ? '有进步空间，再来一组！' : '别灰心，练一练就熟了！';
-    this.setData({ stage: 'done', usedSec: sec, avgSec: (sec / this._qs.length).toFixed(1), rate, stars, words, wrongs: this._wrongs });
-    learning.record(this._cfg, this._qs, this._wrongs, sec, this._review);
+    this.setData({ stage: 'done', usedSec: sec, avgSec: (sec / answered).toFixed(1), rate, stars, words, wrongs: this._wrongs, total: answered });
+    learning.record(this._cfg, this._qs.slice(0, answered), this._wrongs, sec, this._review);
+    this.clearProgress();
     try {
       const old = wx.getStorageSync('cb_math_wrongs') || [];
       wx.setStorageSync('cb_math_wrongs', old.concat(this._wrongs).slice(-100));
@@ -203,7 +263,7 @@ Page({
   noop() {},
 
   onUnload() { clearInterval(this._timer); clearTimeout(this._advance); },
-  onHide() { clearInterval(this._timer); clearTimeout(this._advance); this._hiddenAt = Date.now(); },
+  onHide() { clearInterval(this._timer); clearTimeout(this._advance); this.saveProgress(); this._hiddenAt = Date.now(); },
   onShow() {
     if (this.data.stage === 'quiz' && this._hiddenAt) {
       const pause = Date.now() - this._hiddenAt;

@@ -51,6 +51,7 @@
 .q-meta { color: var(--c-primary-ink); font-size: 26rpx; font-weight: 600; }
 .q-timer { color: #94a3b8; font-size: 24rpx; min-width: 56rpx; text-align: right; }
 .q-timer.slow { color: var(--c-error); }
+.submit-btn { font-size: 22rpx; color: var(--c-primary); border: 2rpx solid currentColor; border-radius: 999rpx; padding: 4rpx 18rpx; flex-shrink: 0; }
 .keypad { position: fixed; left: 24rpx; right: 24rpx; bottom: calc(24rpx + env(safe-area-inset-bottom)); display: flex; flex-wrap: wrap; gap: 12rpx; }
 .key.wide { background: var(--c-primary); color: #fff; border-color: var(--c-primary); }
 .key.func { font-size: 26rpx; color: var(--c-text-sub); }

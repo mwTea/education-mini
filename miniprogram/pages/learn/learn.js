@@ -1,18 +1,21 @@
+// 学习页：在线练习专区。数学口算、语文看拼音选字、英语记词拼单词。
 Page({
-  data: {
-    subjects: [
-      { key: 'chinese', icon: '语', name: '语文', desc: '生字、词语与同步练习', color: 'red' },
-      { key: 'math', icon: '数', name: '数学', desc: '在线口算与同步题卡', color: 'blue' },
-      { key: 'english', icon: 'Abc', name: '英语', desc: '单词书写与听写练习', color: 'green' }
-    ]
+  goQuiz() { wx.navigateTo({ url: '/pages/math/quiz/quiz' }); },
+
+  goChineseQuiz() { wx.navigateTo({ url: '/pages/chinese/quiz/quiz' }); },
+
+  goEnglishQuiz() { wx.navigateTo({ url: '/pages/english/quiz/quiz' }); },
+
+  /** 沿用上次口算配置（无则默认），直达在线作答 */
+  goQuizFast() {
+    let cfg = null;
+    try { cfg = wx.getStorageSync('cb_math_last'); } catch (e) { /* 忽略 */ }
+    if (!cfg || !cfg.bookId) cfg = { version: 'jijiao', bookId: 'math-4a', difficulty: 'standard', label: '冀教·四上·巩固' };
+    const q = `version=${cfg.version}&bookId=${cfg.bookId}&diff=${cfg.difficulty || 'standard'}&label=${encodeURIComponent(cfg.label || '口算练习')}`;
+    wx.navigateTo({ url: `/pages/math/quiz/quiz?${q}` });
   },
-  openSubject(e) {
-    const urls = {
-      chinese: '/pages/chinese/chinese',
-      math: '/pages/math/index/index',
-      english: '/pages/english/english'
-    };
-    wx.navigateTo({ url: urls[e.currentTarget.dataset.key] });
-  },
-  goQuiz() { wx.navigateTo({ url: '/pages/math/quiz/quiz' }); }
+
+  comingSoon() {
+    wx.showToast({ title: '在线练习即将开放', icon: 'none' });
+  }
 });

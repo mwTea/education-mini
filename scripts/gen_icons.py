@@ -95,6 +95,20 @@ def draw_grid(d, u):
     d.rounded_rectangle([43 * u, 43 * u, 66 * u, 66 * u], radius=6 * u, fill=255)
 
 
+_ABC_FONT = None
+
+
+def draw_abc(d, u):
+    """英语入口：粗体 Abc 字样（PingFang），与铅笔/时钟等彩色图形同规格。"""
+    global _ABC_FONT
+    if _ABC_FONT is None:
+        from PIL import ImageFont
+        _ABC_FONT = ImageFont.truetype('/System/Library/Fonts/PingFang.ttc', int(40 * u))
+    bbox = d.textbbox((0, 0), 'Abc', font=_ABC_FONT)
+    w, h = bbox[2] - bbox[0], bbox[3] - bbox[1]
+    d.text(((81 * u - w) / 2 - bbox[0], (81 * u - h) / 2 - bbox[1]), 'Abc', font=_ABC_FONT, fill=255)
+
+
 def draw_clock(d, u):
     d.ellipse([12 * u, 12 * u, 69 * u, 69 * u], fill=255)
     d.ellipse([19 * u, 19 * u, 62 * u, 62 * u], fill=0)
@@ -104,10 +118,10 @@ def draw_clock(d, u):
 
 
 QUICK_ICONS = {
-    'quiz': (draw_pencil, (37, 99, 235)),
-    'name': (draw_nametag, (239, 68, 68)),
-    'radical': (draw_grid, (245, 158, 11)),
-    'history': (draw_clock, (139, 92, 246)),
+    'quiz': (draw_pencil, (37, 99, 235)),      # 在线口算（数学）
+    'english': (draw_abc, (16, 185, 129)),     # 在线英语（记词拼单词）
+    'chinese': (draw_grid, (239, 68, 68)),     # 语文打印（田字格）
+    'history': (draw_clock, (139, 92, 246)),   # 打印历史
 }
 
 for name, (fn, color) in QUICK_ICONS.items():

@@ -1,0 +1,76 @@
+<view class="page-wrap">
+  <!-- 选词库/单元 -->
+  <block wx:if="{{stage === 'pick'}}">
+    <view class="head">
+      <image class="head-mascot" src="/assets/mascot/star.png" mode="aspectFit" />
+      <view><view class="head-title">记词拼单词</view><view class="head-sub">先记词，再用字母拼出来</view></view>
+    </view>
+    <scroll-view scroll-x class="book-scroll">
+      <view class="book-row">
+        <view wx:for="{{books}}" wx:key="id" class="book-chip {{item.id === bookId ? 'on' : ''}}" data-id="{{item.id}}" bindtap="onBookTap">{{item.short}}</view>
+      </view>
+    </scroll-view>
+    <view wx:if="{{loading}}" class="loading">词库加载中…</view>
+    <view wx:for="{{units}}" wx:key="title" class="unit-card {{item.selected ? 'selected' : ''}}" data-index="{{index}}" bindtap="onUnitTap">
+      <view class="unit-check"></view>
+      <view class="unit-info"><view class="unit-title">{{item.title}}</view><view class="unit-count">{{item.count}} 个可拼词</view></view>
+    </view>
+    <view class="start-bar">
+      <view class="start-info">{{selectedCount ? '将练 ' + roundSize + ' 个单词' : '勾选要练的单元'}}</view>
+      <view class="start-btn" bindtap="onStart">开始练习</view>
+    </view>
+  </block>
+
+  <!-- 练习 -->
+  <block wx:if="{{stage === 'quiz'}}">
+    <view class="quiz-top">
+      <view class="back" bindtap="backToPick">‹ 换单元</view>
+      <view class="progress-text">{{idx + 1}} / {{total}}</view>
+      <view class="quiz-right">
+        <view class="score-chip">无提示 {{score}}</view>
+        <view class="submit-btn" bindtap="onSubmit">交卷</view>
+      </view>
+    </view>
+    <view class="progress-bar"><view class="progress-fill" style="width: {{(idx + 1) * 100 / total}}%"></view></view>
+
+    <view wx:if="{{phase === 'memo'}}" class="memo-card">
+      <view class="memo-label">记住这个词</view>
+      <view class="memo-word">{{cur.word}}</view>
+      <view class="memo-countdown">{{memoSec}}s 后开始拼</view>
+      <view class="memo-btn" bindtap="beginSpell">记住了，开始拼</view>
+    </view>
+
+    <block wx:if="{{phase === 'spell'}}">
+      <view class="peek-line">
+        <view class="peek-flash" wx:if="{{peekFlash}}">{{cur.word}}</view>
+        <view class="peek-btn {{peeks ? '' : 'empty'}}" bindtap="onPeek">看一眼 ({{peeks}})</view>
+      </view>
+      <view class="slot-row">
+        <view wx:for="{{slots}}" wx:key="index" class="slot {{item ? 'filled' : ''}}">{{item}}</view>
+      </view>
+      <view class="tile-grid">
+        <view wx:for="{{tiles}}" wx:key="key" class="tile {{item.used ? 'used' : ''}} {{item.shake ? 'shake' : ''}}" data-index="{{index}}" bindtap="onTileTap">{{item.ch}}</view>
+      </view>
+      <view class="spell-tip">按顺序点出字母</view>
+    </block>
+  </block>
+
+  <!-- 结算 -->
+  <block wx:if="{{stage === 'done'}}">
+    <view class="done-card">
+      <image class="done-mascot" src="{{score * 100 / total >= 80 ? '/assets/mascot/cheer.png' : '/assets/mascot/encourage.png'}}" mode="aspectFit" />
+      <view class="done-stars">{{stars}}</view>
+      <view class="done-score">{{score}} / {{total}}</view>
+      <view class="done-words">{{words}}</view>
+      <view class="stat-row">
+        <view class="stat"><text>{{peekUsed}}</text><label>看一眼次数</label></view>
+        <view class="stat"><text>{{wrongTaps}}</text><label>点错次数</label></view>
+        <view class="stat"><text>{{total - score}}</text><label>提示过的词</label></view>
+      </view>
+      <view class="done-btns">
+        <view class="btn-ghost done-btn" bindtap="onRetry">再来一组</view>
+        <view class="btn-primary done-btn" bindtap="backToPick">换词库</view>
+      </view>
+    </view>
+  </block>
+</view>

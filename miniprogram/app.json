@@ -5,7 +5,9 @@
     "pages/print/print",
     "pages/growth/growth",
     "pages/chinese/chinese",
+    "pages/chinese/quiz/quiz",
     "pages/english/english",
+    "pages/english/quiz/quiz",
     "pages/preview/preview",
     "pages/history/history",
     "pages/about/about",
@@ -19,7 +21,7 @@
     "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "描红习字簿",
-    "backgroundColor": "#f8fafc",
+    "backgroundColor": "#f7f5f0",
     "backgroundTextStyle": "dark"
   },
   "tabBar": {
