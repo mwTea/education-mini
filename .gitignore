@@ -29,3 +29,4 @@ dist/
 
 # 部署脚本（含服务器地址和密钥路径，不入库）
 deploy/deploy.sh
+deploy/git-push.sh

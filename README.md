@@ -109,6 +109,30 @@ bash deploy/deploy.sh src/services/layout/math.service.js src/app.js
 
 脚本自动完成：本地语法检查 → rsync 同步 → 远端 node --check → systemctl restart → 健康检查。
 
+#### Git 推送脚本
+
+本地 `deploy/git-push.sh`（已 gitignore）：
+
+```bash
+# 自动 add + commit + push（默认 commit message 带时间戳）
+bash deploy/git-push.sh
+
+# 自定义 commit message
+bash deploy/git-push.sh "feat: 新增某功能"
+```
+
+脚本自动处理两个常见问题：
+- **网络代理**：github.com 需走本地代理（自动检测端口 12450）
+- **钥匙串冲突**：绕开 macOS Keychain（避免 Gitee 凭据干扰 GitHub 推送）
+
+#### 手动推送（不用脚本）
+
+```bash
+git add -A
+git commit -m "your message"
+git -c credential.helper= -c http.proxy=http://127.0.0.1:12450 push origin main
+```
+
 ## 环境变量
 
 | 变量 | 说明 | 默认值 |
