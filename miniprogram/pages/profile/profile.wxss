@@ -1,36 +1,17 @@
-.page-wrap{min-height:100vh;background:#f8fafc;padding:24rpx 32rpx 60rpx;box-sizing:border-box}
-.me-card{display:flex;align-items:center;gap:24rpx;background:linear-gradient(135deg,#3b82f6,#2563eb);border-radius:24rpx;padding:36rpx 32rpx;margin-bottom:24rpx}
-.avatar{width:110rpx;height:110rpx;border-radius:50%;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;color:#fffcf4;font-size:52rpx}
-.me-name{color:#fffcf4;font-size:34rpx;font-weight:600}.me-sub{color:#ffe9d2;font-size:22rpx;margin-top:8rpx}
-.menu-card{background:#fff;border:2rpx solid #e8eef7;border-radius:24rpx;margin-bottom:24rpx;overflow:hidden}
-.menu-item{display:flex;align-items:center;gap:20rpx;padding:30rpx 32rpx;font-size:28rpx;color:#1f2937;border-bottom:2rpx solid #eef2f7}
+/* 我的页：品牌蓝身份卡（小墨头像）+ 白卡菜单。 */
+.page-wrap{min-height:100vh;padding:24rpx 32rpx 60rpx;box-sizing:border-box}
+.me-card{display:flex;align-items:center;gap:24rpx;background:linear-gradient(135deg,var(--c-primary),var(--c-primary-ink));border-radius:var(--r-card);padding:36rpx 32rpx;margin-bottom:24rpx;box-shadow:0 12rpx 26rpx rgba(59,130,246,.28)}
+.avatar{width:110rpx;height:110rpx;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.avatar-img{width:96rpx;height:96rpx}
+.me-name{color:#fff;font-size:34rpx;font-weight:600}
+.me-sub{color:rgba(255,255,255,.85);font-size:22rpx;margin-top:8rpx}
+.menu-card{background:var(--bg-card);border-radius:var(--r-card);margin-bottom:24rpx;overflow:hidden;box-shadow:var(--shadow-card)}
+.menu-item{display:flex;align-items:center;gap:20rpx;padding:30rpx 32rpx;font-size:28rpx;color:var(--c-text);border-bottom:2rpx solid var(--c-line)}
 .menu-item:last-child{border-bottom:none}
-.menu-item.plain{background:none;line-height:1.5;margin:0;width:100%;text-align:left;border-radius:0;font-size:28rpx}
-.menu-item.plain::after{border:none}
-.mi-icon{width:44rpx;text-align:center}
-.arrow{margin-left:auto;color:#c5bab0}
-.menu-item.vip{color:#c07f4e}
-.ad-slot{height:120rpx}
-
-/* v2：彩色圆角图标（与全站字块风格一致），隐藏会员入口 */
-.mi-chip {
-  width: 64rpx; height: 64rpx; border-radius: 16rpx; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  color: #fff; font-size: 30rpx; font-weight: 600;
-}
-.mi-chip.c1 { background: linear-gradient(135deg, #ffb066, #f0821e); }
-.mi-chip.c2 { background: linear-gradient(135deg, #d9a066, #c07f4e); }
-.mi-chip.c3 { background: linear-gradient(135deg, #7cc0dd, #3f92bb); }
-.mi-chip.c4 { background: linear-gradient(135deg, #7cc7a2, #48a273); }
-.mi-chip.c5 { background: linear-gradient(135deg, #b3a89d, #8a7a68); }
-
-.menu-item.contact { background: none; margin: 0; padding: 30rpx 32rpx; width: 100%; text-align: left; border-radius: 0; font-size: 28rpx; color: #3a2e25; display: flex; justify-content: space-between; }
-.foot-tip { text-align: center; color: #c5bab0; font-size: 22rpx; padding: 26rpx 0; }
-
-.grade-row { justify-content: space-between; }
-.grade-seg { display: flex; gap: 10rpx; flex-wrap: wrap; justify-content: flex-end; }
-.g-item {
-  min-width: 56rpx; text-align: center; padding: 6rpx 0; font-size: 24rpx;
-  color: #64748b; background: #f8fafc; border: 2rpx solid #dbe4ef; border-radius: 10rpx;
-}
-.g-item.on { background: #3b82f6; color: #fff; border-color: #3b82f6; }
+.arrow{margin-left:auto;color:var(--c-text-faint)}
+.menu-item.contact{background:none;margin:0;padding:30rpx 32rpx;width:100%;text-align:left;border-radius:0;font-size:28rpx;color:var(--c-text);display:flex;justify-content:space-between}
+.foot-tip{text-align:center;color:var(--c-text-faint);font-size:22rpx;padding:26rpx 0}
+.grade-row{justify-content:space-between}
+.grade-seg{display:flex;gap:10rpx;flex-wrap:wrap;justify-content:flex-end}
+.g-item{min-width:56rpx;text-align:center;padding:6rpx 0;font-size:24rpx;color:var(--c-text-sub);background:#f4f1e9;border:2rpx solid #e6dfcf;border-radius:10rpx}
+.g-item.on{background:var(--c-primary);color:#fff;border-color:var(--c-primary)}

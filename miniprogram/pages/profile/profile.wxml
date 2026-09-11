@@ -1,6 +1,6 @@
 <view class="page-wrap">
   <view class="me-card">
-    <view class="avatar">习</view>
+    <view class="avatar"><image class="avatar-img" src="/assets/mascot/wave.png" mode="aspectFit" /></view>
     <view class="me-info">
       <view class="me-name">我的学习空间</view>
       <view class="me-sub" wx:if="{{vip}}">会员 · 有效期至 {{vipUntil}}</view>

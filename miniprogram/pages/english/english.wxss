@@ -11,18 +11,18 @@
 
 .hint {
   margin: 20rpx 0 16rpx;
-  background: #fff3e6;
-  border-left: 6rpx solid #f0821e;
+  background: var(--c-english-soft);
+  border-left: 6rpx solid var(--c-english);
   border-radius: 0 12rpx 12rpx 0;
   padding: 16rpx 20rpx;
-  color: #b0653a;
+  color: #2f8f6f;
   font-size: 24rpx;
   line-height: 1.6;
 }
 
 .field {
   padding: 24rpx 0;
-  border-bottom: 1rpx solid #f5efe4;
+  border-bottom: 1rpx solid var(--c-line);
 }
 
 .field.row-last,
@@ -32,7 +32,7 @@
 
 .field-label {
   font-size: 26rpx;
-  color: #8a7a68;
+  color: var(--c-text-sub);
   margin-bottom: 14rpx;
 }
 
@@ -41,18 +41,18 @@
   align-items: center;
   justify-content: space-between;
   font-size: 26rpx;
-  color: #8a7a68;
+  color: var(--c-text-sub);
   margin-bottom: 8rpx;
 }
 
 .counter {
-  color: #c9b8a3;
+  color: var(--c-text-faint);
   font-size: 22rpx;
 }
 
 .v-badge {
-  background: #fff1e0;
-  color: #e2703a;
+  background: var(--c-english-soft);
+  color: var(--c-english);
   font-size: 22rpx;
   border-radius: 999rpx;
   padding: 4rpx 16rpx;
@@ -60,7 +60,7 @@
 
 .input,
 .textarea {
-  background: #faf5ea;
+  background: #f4f1e9;
   border-radius: 16rpx;
   padding: 20rpx 24rpx;
   font-size: 28rpx;
@@ -83,21 +83,21 @@
   display: flex;
   align-items: center;
   gap: 16rpx;
-  background: #faf5ea;
+  background: #f4f1e9;
   border: 3rpx solid transparent;
   border-radius: 20rpx;
   padding: 18rpx;
   box-sizing: border-box;
   font-size: 24rpx;
-  color: #6b5f51;
+  color: var(--c-text-sub);
 }
 
 .opt-chip.on {
-  background: #fff6ec;
-  border-color: #f0821e;
-  color: #e2703a;
+  background: var(--c-english-soft);
+  border-color: var(--c-english);
+  color: var(--c-english);
   font-weight: 600;
-  box-shadow: 0 6rpx 16rpx rgba(240, 130, 30, 0.16);
+  box-shadow: 0 6rpx 16rpx rgba(16, 185, 129, 0.2);
 }
 
 .case-demo {
@@ -116,7 +116,7 @@
   border-radius: 10rpx;
   border: 3rpx solid #5b9e7d;
   box-sizing: border-box;
-  background: #fffdf6;
+  background: #fff;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -149,12 +149,12 @@
 
 .pd-sub {
   font-size: 20rpx;
-  color: #a4937f;
+  color: var(--c-text-faint);
   margin-top: 2rpx;
 }
 
 .opt-chip.on .pd-sub {
-  color: #d9a06b;
+  color: #7cc9b1;
 }
 
 .generate {
@@ -166,7 +166,7 @@
   margin-left: auto;
   font-size: 26rpx;
   font-weight: 700;
-  color: #d8c6a4;
+  color: var(--c-text-faint);
   font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
@@ -174,7 +174,7 @@
 .tb-mask {
   position: fixed;
   inset: 0;
-  background: rgba(58, 46, 37, 0.45);
+  background: rgba(15, 23, 42, 0.45);
   z-index: 100;
   display: flex;
   align-items: flex-end;
@@ -183,7 +183,7 @@
 .tb-panel {
   width: 100%;
   height: 82vh;
-  background: #fffdf6;
+  background: #fff;
   border-radius: 32rpx 32rpx 0 0;
   display: flex;
   flex-direction: column;
@@ -203,7 +203,7 @@
 
 .tb-block-label {
   font-size: 22rpx;
-  color: #a4937f;
+  color: var(--c-text-faint);
   padding: 20rpx 4rpx 14rpx;
 }
 
@@ -218,15 +218,15 @@
 .tb-title {
   font-size: 32rpx;
   font-weight: 700;
-  color: #3a2e25;
+  color: var(--c-text);
 }
 
 .tb-close {
   width: 56rpx;
   height: 56rpx;
   border-radius: 50%;
-  background: #f4ecdd;
-  color: #8a7a68;
+  background: #efece3;
+  color: var(--c-text-sub);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -236,7 +236,7 @@
 .tb-toptabs {
   flex-shrink: 0;
   display: flex;
-  background: #f4ecdd;
+  background: #efece3;
   border-radius: 16rpx;
   padding: 6rpx;
   margin: 0 32rpx 20rpx;
@@ -246,14 +246,14 @@
   flex: 1;
   text-align: center;
   font-size: 26rpx;
-  color: #a4937f;
+  color: var(--c-text-faint);
   border-radius: 12rpx;
   padding: 12rpx 0;
 }
 
 .tb-toptab.on {
   background: #fff;
-  color: #e2703a;
+  color: var(--c-english);
   font-weight: 600;
 }
 
@@ -267,7 +267,7 @@
   width: calc((100% - 42rpx) / 4);
   height: 88rpx;
   border-radius: 16rpx;
-  background: #f6efe0;
+  background: #f4f1e9;
   border: 2rpx solid transparent;
   display: flex;
   flex-direction: column;
@@ -278,29 +278,29 @@
 }
 
 .tb-book.on {
-  background: #fff2e2;
-  border-color: #f0821e;
+  background: var(--c-english-soft);
+  border-color: var(--c-english);
 }
 
 .tb-book-name {
   font-size: 26rpx;
-  color: #6b5f51;
+  color: var(--c-text-sub);
   font-weight: 600;
 }
 
 .tb-book.on .tb-book-name {
-  color: #e2703a;
+  color: var(--c-english);
 }
 
 .tb-book-count {
   font-size: 18rpx;
-  color: #b3a48f;
+  color: var(--c-text-faint);
 }
 
 .tb-current {
   padding: 16rpx 4rpx 0;
   font-size: 22rpx;
-  color: #a4937f;
+  color: var(--c-text-faint);
 }
 
 .tb-tabs {
@@ -312,7 +312,7 @@
 .tb-tab-all {
   margin-left: auto;
   font-size: 24rpx;
-  color: #b0653a;
+  color: #2f8f6f;
   padding: 10rpx 8rpx;
 }
 
@@ -326,23 +326,23 @@
 .tb-lesson {
   padding: 14rpx 24rpx;
   border-radius: 14rpx;
-  background: #f6efe0;
-  color: #4a4038;
+  background: #f4f1e9;
+  color: var(--c-text-sub);
   font-size: 24rpx;
   border: 2rpx solid transparent;
 }
 
 .tb-lesson.on {
-  background: #fff2e2;
-  border-color: #f0821e;
-  color: #e2703a;
+  background: var(--c-english-soft);
+  border-color: var(--c-english);
+  color: var(--c-english);
   font-weight: 600;
 }
 
 .tb-loading {
   padding: 30rpx 0;
   text-align: center;
-  color: #a4937f;
+  color: var(--c-text-faint);
   font-size: 26rpx;
 }
 
@@ -352,31 +352,31 @@
   align-items: center;
   gap: 24rpx;
   padding: 20rpx 32rpx 28rpx;
-  border-top: 2rpx solid #f0e2cc;
-  background: #fffdf6;
+  border-top: 2rpx solid var(--c-line);
+  background: #fff;
 }
 
 .tb-stat {
   flex: 1;
   font-size: 24rpx;
-  color: #6b5f51;
+  color: var(--c-text-sub);
   display: flex;
   flex-direction: column;
   gap: 4rpx;
 }
 
 .tb-stat b {
-  color: #e2703a;
+  color: var(--c-english);
   font-weight: 700;
 }
 
 .tb-limit {
   font-size: 20rpx;
-  color: #b3a48f;
+  color: var(--c-text-faint);
 }
 
 .tb-import {
-  background: linear-gradient(135deg, #ffa04d, #f2703f);
+  background: linear-gradient(135deg, #5fd6ad, var(--c-english));
   color: #fff;
   border-radius: 40rpx;
   font-size: 28rpx;
@@ -390,7 +390,7 @@
 }
 
 .tb-import[disabled] {
-  background: #e8dcc4;
+  background: #e5e0d5;
   color: #fff;
 }
 
@@ -399,7 +399,7 @@
   display: flex;
   align-items: center;
   gap: 20rpx;
-  background: #faf5ea;
+  background: #f4f1e9;
   border-radius: 20rpx;
   padding: 22rpx 24rpx;
 }
@@ -408,8 +408,8 @@
   width: 68rpx;
   height: 68rpx;
   border-radius: 20rpx;
-  background: #ffe9d2;
-  color: #d97a2b;
+  background: var(--c-english-soft);
+  color: var(--c-english);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -427,7 +427,7 @@
 .book-name {
   font-size: 27rpx;
   font-weight: 500;
-  color: #3a2e25;
+  color: var(--c-text);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -436,48 +436,48 @@
 .book-sub {
   margin-top: 4rpx;
   font-size: 22rpx;
-  color: #a4937f;
+  color: var(--c-text-faint);
 }
 
 .chev {
-  color: #d8c9bc;
+  color: var(--c-text-faint);
   font-size: 40rpx;
   flex-shrink: 0;
 }
 
 /* ================ 字母 / 单词预览 ================ */
 .letters-preview {
-  background: #faf5ea;
+  background: #f4f1e9;
   border-radius: 16rpx;
   padding: 24rpx;
   font-size: 30rpx;
   letter-spacing: 4rpx;
   line-height: 1.8;
-  color: #3a2e25;
+  color: var(--c-text);
   font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
 .words-preview {
-  background: #faf5ea;
+  background: #f4f1e9;
   border-radius: 16rpx;
   padding: 20rpx 24rpx;
   font-size: 26rpx;
   line-height: 1.7;
-  color: #3a2e25;
+  color: var(--c-text);
   word-break: break-all;
   font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
 .quota-tip {
-  text-align: center; color: #c5bab0; font-size: 24rpx; padding: 16rpx 0 24rpx;
+  text-align: center; color: var(--c-text-faint); font-size: 24rpx; padding: 16rpx 0 24rpx;
 }
 
 .tb-book-legacy {
   position: absolute; top: -10rpx; right: -8rpx;
-  background: #f5b942; color: #fff; font-size: 18rpx; line-height: 1;
+  background: var(--c-warn); color: #fff; font-size: 18rpx; line-height: 1;
   padding: 6rpx 10rpx; border-radius: 8rpx 8rpx 8rpx 0;
 }
 .tb-legacy-tip {
-  margin-top: 12rpx; font-size: 24rpx; color: #c07f4e;
-  background: #fdf6e9; border-radius: 10rpx; padding: 12rpx 20rpx;
+  margin-top: 12rpx; font-size: 24rpx; color: #0f766e;
+  background: var(--c-warm-soft); border-radius: 10rpx; padding: 12rpx 20rpx;
 }

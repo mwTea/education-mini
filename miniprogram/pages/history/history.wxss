@@ -10,7 +10,7 @@
   border-radius: 24rpx;
   padding: 26rpx 28rpx;
   margin-bottom: 16rpx;
-  box-shadow: 0 6rpx 20rpx rgba(150, 108, 60, 0.07);
+  box-shadow: 0 6rpx 20rpx rgba(31, 41, 55, 0.06);
 }
 
 .r-tag {
@@ -27,13 +27,13 @@
 }
 
 .r-tag.cn {
-  background: #ffe9d2;
-  color: #d97a2b;
+  background: var(--c-chinese-soft);
+  color: var(--c-chinese);
 }
 
 .r-tag.en {
-  background: #ddf3e6;
-  color: #2f9e63;
+  background: #dcfce7;
+  color: var(--c-success);
 }
 
 .history-info {
@@ -51,15 +51,15 @@
 
 .history-meta {
   margin-top: 6rpx;
-  color: #a4937f;
+  color: var(--c-text-faint);
   font-size: 22rpx;
 }
 
 .delete {
-  color: #d9534f;
+  color: var(--c-error);
   font-size: 24rpx;
   padding: 10rpx 22rpx;
-  border: 2rpx solid #f2c4c0;
+  border: 2rpx solid #fecaca;
   border-radius: 999rpx;
   flex-shrink: 0;
 }
@@ -76,7 +76,7 @@
   position: relative;
   width: 160rpx;
   height: 160rpx;
-  border: 4rpx solid #d8c9ac;
+  border: 4rpx solid var(--c-text-faint);
   border-radius: 20rpx;
   box-sizing: border-box;
   display: flex;
@@ -89,7 +89,7 @@
   left: 50%;
   top: 8rpx;
   bottom: 8rpx;
-  border-left: 3rpx dashed #e6d9bf;
+  border-left: 3rpx dashed var(--c-line);
 }
 
 .eg-h {
@@ -97,12 +97,12 @@
   top: 50%;
   left: 8rpx;
   right: 8rpx;
-  border-top: 3rpx dashed #e6d9bf;
+  border-top: 3rpx dashed var(--c-line);
 }
 
 .eg-char {
   font-size: 96rpx;
-  color: #d8c9ac;
+  color: var(--c-text-faint);
   font-family: 'Kaiti SC', 'STKaiti', serif;
   line-height: 1;
 }
@@ -110,18 +110,18 @@
 .empty-text {
   margin-top: 36rpx;
   font-size: 30rpx;
-  color: #6b5f51;
+  color: var(--c-text-sub);
 }
 
 .empty-sub {
   margin-top: 12rpx;
   font-size: 24rpx;
-  color: #a4937f;
+  color: var(--c-text-faint);
 }
 
 .keep-tip {
   text-align: center;
-  color: #c5bab0;
+  color: var(--c-text-faint);
   font-size: 22rpx;
   padding: 8rpx 0 16rpx;
 }

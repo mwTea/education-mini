@@ -4,5 +4,5 @@
   <view class="subject-row"><view class="subject red">语</view><view class="subject-info"><view>语文</view><text>统一练习版本开放后记录</text></view><view class="pending">待开放</view></view>
   <view class="subject-row"><view class="subject blue">数</view><view class="subject-info"><view>数学</view><text>{{summary.count ? '近7天完成 ' + summary.count + ' 题' : '还没有练习记录'}}</text></view><view class="rate">{{summary.rate === null ? '—' : summary.rate + '%'}}</view></view>
   <view class="subject-row"><view class="subject green">英</view><view class="subject-info"><view>英语</view><text>统一练习版本开放后记录</text></view><view class="pending">待开放</view></view>
-  <view class="empty-card"><view class="empty-icon">↗</view><view class="empty-title">每天进步一点点</view><view class="empty-desc">学习日历、轻成就将在成长版本中完善</view><button bindtap="goLearn">去学习</button></view>
+  <view class="empty-card"><image class="empty-mascot" src="/assets/mascot/read.png" mode="aspectFit" /><view class="empty-title">每天进步一点点</view><view class="empty-desc">学习日历、轻成就将在成长版本中完善</view><button bindtap="goLearn">去学习</button></view>
 </view>

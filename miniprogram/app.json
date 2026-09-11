@@ -30,23 +30,33 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页"
+        "text": "首页",
+        "iconPath": "assets/tabbar/home.png",
+        "selectedIconPath": "assets/tabbar/home-on.png"
       },
       {
         "pagePath": "pages/learn/learn",
-        "text": "学习"
+        "text": "学习",
+        "iconPath": "assets/tabbar/learn.png",
+        "selectedIconPath": "assets/tabbar/learn-on.png"
       },
       {
         "pagePath": "pages/print/print",
-        "text": "打印"
+        "text": "打印",
+        "iconPath": "assets/tabbar/print.png",
+        "selectedIconPath": "assets/tabbar/print-on.png"
       },
       {
         "pagePath": "pages/growth/growth",
-        "text": "成长"
+        "text": "成长",
+        "iconPath": "assets/tabbar/growth.png",
+        "selectedIconPath": "assets/tabbar/growth-on.png"
       },
       {
         "pagePath": "pages/profile/profile",
-        "text": "我的"
+        "text": "我的",
+        "iconPath": "assets/tabbar/profile.png",
+        "selectedIconPath": "assets/tabbar/profile-on.png"
       }
     ]
   },

@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: #eef0f2;
+  background: #eef2f7;
 }
 
 /* 顶部信息条 */
@@ -11,8 +11,8 @@
   align-items: center;
   gap: 20rpx;
   padding: 20rpx 32rpx;
-  background: rgba(255, 253, 246, 0.92);
-  border-bottom: 2rpx solid #f0e2cc;
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 2rpx solid var(--c-line);
 }
 
 .r-tag {
@@ -29,13 +29,13 @@
 }
 
 .r-tag.cn {
-  background: #ffe9d2;
-  color: #d97a2b;
+  background: var(--c-chinese-soft);
+  color: var(--c-chinese);
 }
 
 .r-tag.en {
-  background: #ddf3e6;
-  color: #2f9e63;
+  background: #dcfce7;
+  color: var(--c-success);
 }
 
 .info-chips {
@@ -46,8 +46,8 @@
 
 .ichip {
   background: #fff;
-  border: 2rpx solid #ecd9c3;
-  color: #8a7a68;
+  border: 2rpx solid var(--c-line);
+  color: var(--c-text-sub);
   border-radius: 999rpx;
   padding: 4rpx 18rpx;
   font-size: 22rpx;
@@ -73,7 +73,7 @@
   width: 72rpx;
   height: 72rpx;
   border-radius: 14rpx;
-  background: #d9534f;
+  background: var(--c-error);
   color: #fff;
   font-size: 40rpx;
   display: flex;
@@ -82,12 +82,12 @@
   font-family: 'Kaiti SC', serif;
   transform: rotate(12deg);
   opacity: 0.92;
-  box-shadow: 0 8rpx 18rpx rgba(217, 83, 79, 0.35);
+  box-shadow: 0 8rpx 18rpx rgba(239, 68, 68, 0.3);
 }
 
 .print-tip {
   text-align: center;
-  color: #b3a89d;
+  color: var(--c-text-faint);
   font-size: 24rpx;
   padding: 16rpx 0 24rpx;
 }
@@ -96,14 +96,14 @@
   padding-top: 0;
   margin-top: -12rpx;
   font-size: 22rpx;
-  color: #c5bab0;
+  color: var(--c-text-faint);
 }
 
 /* 底部操作：主按钮 + 次按钮行 */
 .preview-footer {
   padding: 20rpx 32rpx calc(20rpx + env(safe-area-inset-bottom));
-  background: #fffdf6;
-  border-top: 2rpx solid #f0e2cc;
+  background: #fff;
+  border-top: 2rpx solid var(--c-line);
 }
 
 .footer-main {
@@ -131,11 +131,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #9a8c80;
+  color: var(--c-text-faint);
 }
 
 .state.error {
-  color: #d9534f;
+  color: var(--c-error);
   padding: 0 60rpx;
   text-align: center;
   white-space: pre-line;
@@ -144,9 +144,9 @@
 
 .pdf-caption {
   text-align: center;
-  color: #b3a89d;
+  color: var(--c-text-faint);
   font-size: 22rpx;
   padding-top: 12rpx;
 }
 
-.r-tag.math { background: #3f92bb; }
+.r-tag.math { background: var(--c-primary); }
