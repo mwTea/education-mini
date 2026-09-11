@@ -1,13 +1,32 @@
 // pages/index/index.js
 const { getHistory } = require('../../utils/history');
+const { request } = require('../../utils/request');
+const { api } = require('../../config/index');
 
 Page({
   data: {
     recent: [],
+    stats: { lessons: 0, chars: 0 },
   },
 
   onShow() {
     this.setData({ recent: getHistory().slice(0, 3) });
+    this.loadStats();
+  },
+
+  /** 首页「同步课文/生字」数字取自后端统计 */
+  loadStats() {
+    if (this._statsOk) return;
+    request({ url: api.textbooks })
+      .then((d) => {
+        if (d && d.stats) {
+          this._statsOk = true;
+          this.setData({
+            stats: { lessons: d.stats.lessons || 0, chars: d.stats.distinctChars || 0 },
+          });
+        }
+      })
+      .catch(() => { /* 统计拉取失败不影响使用 */ });
   },
 
 

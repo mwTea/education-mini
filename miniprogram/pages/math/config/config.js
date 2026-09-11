@@ -39,7 +39,6 @@ Page({
   },
 
   onLoad(q) {
-    this._restoreSaved = q.saved === '1';
     const diff = q.diff || 'standard';
     this.setData({
       bookId: q.bookId || 'math-1a',
@@ -181,15 +180,6 @@ Page({
     }
   },
 
-  saveFavorite() {
-    const d = this.data, types = d.types.filter((t) => t.selected).map((t) => t.id);
-    if (!types.length) { wx.showToast({ title: '请先选择题型', icon: 'none' }); return; }
-    try {
-      wx.setStorageSync('cb_math_favorite', { bookId: d.bookId, bookName: d.bookName, version: d.version, diff: d.diff, count: d.count, withAnswer: d.withAnswer, types,
-        wordTopics: d.wordTopics.filter((t) => t.selected).map((t) => t.id) });
-      wx.showToast({ title: '已保存常用练习', icon: 'success' });
-    } catch (e) { wx.showToast({ title: '保存失败，请检查存储空间', icon: 'none' }); }
-  },
 
   onShareAppMessage() {
     return { title: '配置口算题卡 · 题型跟教材', path: '/pages/math/index/index', imageUrl: '/assets/share-math.png' };

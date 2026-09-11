@@ -1,68 +1,109 @@
-<view class="home">
+<view class="page-wrap">
 
-  <!-- 顶部品牌区 -->
+  <!-- 头部：渐变主视觉 + 实物感字帖卡 -->
   <view class="hero">
-    <view class="hero-left">
-      <view class="hero-title">字帖出题器</view>
-      <view class="hero-sub">语数英同步 · 打印 + 在线练</view>
+    <view class="hero-deco">帖</view>
+    <view class="hero-badge">同步人教版 1-6 年级 · 语数英三科</view>
+    <view class="hero-title">字帖出题器</view>
+    <view class="hero-sub">生字 · 单词 · 口算，打印练习 + 在线刷题</view>
+
+    <view class="hero-demo">
+      <view class="hd-cell">
+        <view class="hd-v"></view><view class="hd-h"></view>
+        <text class="hd-char demo">永</text>
+      </view>
+      <view class="hd-cell">
+        <view class="hd-v"></view><view class="hd-h"></view>
+        <text class="hd-char trace">字</text>
+      </view>
+      <view class="hd-cell">
+        <view class="hd-v"></view><view class="hd-h"></view>
+      </view>
+      <view class="hero-seal">练</view>
     </view>
-    <view class="hero-seal">
-      <view class="seal-v"></view>
-      <view class="seal-h"></view>
-      <text class="seal-char">练</text>
+
+    <view class="hero-stats">
+      <view class="stat">
+        <view class="stat-num">{{stats.lessons || '—'}}</view>
+        <view class="stat-label">同步课文</view>
+      </view>
+      <view class="stat-line"></view>
+      <view class="stat">
+        <view class="stat-num">{{stats.chars || '—'}}</view>
+        <view class="stat-label">同步生字</view>
+      </view>
+      <view class="stat-line"></view>
+      <view class="stat">
+        <view class="stat-num">30+</view>
+        <view class="stat-label">口算题型</view>
+      </view>
     </view>
   </view>
 
-  <!-- 三科入口：横排卡片 -->
-  <view class="subject-row">
-    <view class="sub-card chinese" bindtap="goChinese">
-      <view class="sub-icon">
-        <view class="icon-v"></view>
-        <view class="icon-h"></view>
-        <text class="icon-char">字</text>
+  <!-- 三学科入口 -->
+  <view class="entry-list">
+    <view class="entry-card cn" bindtap="goChinese">
+      <view class="entry-deco">字</view>
+      <view class="entry-head">
+        <view class="entry-name">语文生字帖</view>
+        <view class="entry-desc">田字格 · 米字格 · 描红 · 听写卷</view>
       </view>
-      <view class="sub-name">语文</view>
-      <view class="sub-desc">生字 · 听写</view>
+      <view class="entry-tags">
+        <text class="etag">写字表同步</text>
+        <text class="etag">名字字帖</text>
+      </view>
     </view>
-    <view class="sub-card math" bindtap="goMath">
-      <view class="sub-icon">
-        <view class="icon-v"></view>
-        <view class="icon-h"></view>
-        <text class="icon-char">算</text>
+
+    <view class="entry-card math" bindtap="goMath">
+      <view class="entry-deco">算</view>
+      <view class="entry-head">
+        <view class="entry-name">数学同步练习</view>
+        <view class="entry-desc">口算 · 应用题 · 钟表 · 竖式</view>
       </view>
-      <view class="sub-name">数学</view>
-      <view class="sub-desc">口算 · 竖式</view>
+      <view class="entry-tags">
+        <text class="etag">在线刷题</text>
+        <text class="etag">跟课本进度</text>
+      </view>
     </view>
-    <view class="sub-card english" bindtap="goEnglish">
-      <view class="sub-icon">
-        <view class="icon-line l1"></view>
-        <view class="icon-line l2"></view>
-        <view class="icon-line l3"></view>
-        <view class="icon-line l4"></view>
-        <text class="icon-char en">Aa</text>
+
+    <view class="entry-card en" bindtap="goEnglish">
+      <view class="entry-deco">Aa</view>
+      <view class="entry-head">
+        <view class="entry-name">英语书写帖</view>
+        <view class="entry-desc">四线三格 · 抄写描红 · 默写</view>
       </view>
-      <view class="sub-name">英语</view>
-      <view class="sub-desc">单词 · 默写</view>
+      <view class="entry-tags">
+        <text class="etag">大小写转换</text>
+        <text class="etag">报词栏</text>
+      </view>
     </view>
   </view>
 
-  <!-- 快捷工具 -->
-  <view class="tool-row">
-    <view class="tool-item" bindtap="goQuizFast">
-      <view class="tool-icon t1">快</view>
-      <view class="tool-label">在线口算</view>
+  <!-- 快捷出帖 -->
+  <view class="quick-head">
+    <view class="sec-dot"></view>
+    <text>快捷出帖</text>
+  </view>
+  <view class="quick-grid">
+    <view class="quick-item q-quiz" bindtap="goQuizFast">
+      <view class="q-bubble">算</view>
+      <view class="q-label">在线口算</view>
+      <view class="q-sub">打开就能练</view>
     </view>
-    <view class="tool-item" bindtap="goNameSheet">
-      <view class="tool-icon t2">名</view>
-      <view class="tool-label">名字字帖</view>
+    <view class="quick-item q-name" bindtap="goNameSheet">
+      <view class="q-bubble">名</view>
+      <view class="q-label">名字字帖</view>
+      <view class="q-sub">写下自己的名字</view>
     </view>
-    <view class="tool-item" bindtap="goRadicals">
-      <view class="tool-icon t3">部</view>
-      <view class="tool-label">偏旁部首</view>
+    <view class="quick-item q-radical" bindtap="goRadicals">
+      <view class="q-bubble">部</view>
+      <view class="q-label">偏旁部首</view>
+      <view class="q-sub">点开即打印</view>
     </view>
-    <view class="tool-item" bindtap="goEnglishDictation">
-      <view class="tool-icon t4">听</view>
-      <view class="tool-label">英语听写</view>
+    <view class="quick-item q-dict" bindtap="goEnglishDictation">
+      <view class="q-bubble">听</view>
+      <view class="q-label">英语听写</view>
+      <view class="q-sub">报词栏 + 默写</view>
     </view>
   </view>
 
@@ -72,7 +113,7 @@
     <text>最近生成</text>
   </view>
   <view class="recent-item" wx:for="{{recent}}" wx:key="id" data-id="{{item.id}}" bindtap="openSheet">
-    <view class="r-tag {{item.type}}">{{item.type === 'chinese' ? '语' : item.type === 'math' ? '数' : '英'}}</view>
+    <view class="r-tag {{item.type === 'chinese' ? 'cn' : item.type === 'math' ? 'math' : 'en'}}">{{item.type === 'chinese' ? '语' : item.type === 'math' ? '数' : 'EN'}}</view>
     <view class="recent-info">
       <view class="recent-title">{{item.title}}</view>
       <view class="recent-meta">{{item.pageCount || 1}} 页 · {{item.dateText}}</view>

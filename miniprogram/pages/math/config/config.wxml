@@ -80,7 +80,6 @@
     </view>
   </view>
   <button class="btn-primary generate" loading="{{submitting}}" bindtap="onGenerate">生成题卡 →</button>
-  <button bindtap="saveFavorite">保存为常用练习</button>
   <view class="quota-tip" wx:if="{{quotaRemaining !== null}}">今日剩余生成 {{quotaRemaining}} 份 · 生成后可反复打印</view>
   <view class="ad-slot" />
 </view>
