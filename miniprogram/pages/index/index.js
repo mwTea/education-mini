@@ -73,6 +73,10 @@ Page({
     wx.navigateTo({ url: '/pages/about/about' });
   },
 
+  goHistory() {
+    wx.navigateTo({ url: '/pages/history/history' });
+  },
+
   goRadicals() {
     wx.navigateTo({ url: '/pages/radicals/radicals' });
   },

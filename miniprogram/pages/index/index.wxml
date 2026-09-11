@@ -1,129 +1,19 @@
 <view class="page-wrap">
-
-  <!-- 头部：渐变主视觉 + 实物感字帖卡 -->
+  <view class="brand-row"><view><view class="brand">描红习字簿</view><view class="slogan">小学生学习好帮手</view></view><view class="brand-mark">习</view></view>
   <view class="hero">
-    <view class="hero-deco">帖</view>
-    <view class="hero-badge">同步人教版 1-6 年级 · 语数英三科</view>
-    <view class="hero-title">字帖出题器</view>
-    <view class="hero-sub">生字 · 单词 · 口算，打印练习 + 在线刷题</view>
-
-    <view class="hero-demo">
-      <view class="hd-cell">
-        <view class="hd-v"></view><view class="hd-h"></view>
-        <text class="hd-char demo">永</text>
-      </view>
-      <view class="hd-cell">
-        <view class="hd-v"></view><view class="hd-h"></view>
-        <text class="hd-char trace">字</text>
-      </view>
-      <view class="hd-cell">
-        <view class="hd-v"></view><view class="hd-h"></view>
-      </view>
-      <view class="hero-seal">练</view>
-    </view>
-
-    <view class="hero-stats">
-      <view class="stat">
-        <view class="stat-num">{{stats.lessons || '—'}}</view>
-        <view class="stat-label">同步课文</view>
-      </view>
-      <view class="stat-line"></view>
-      <view class="stat">
-        <view class="stat-num">{{stats.chars || '—'}}</view>
-        <view class="stat-label">同步生字</view>
-      </view>
-      <view class="stat-line"></view>
-      <view class="stat">
-        <view class="stat-num">30+</view>
-        <view class="stat-label">口算题型</view>
-      </view>
-    </view>
+    <view class="hero-copy"><view class="hero-title">每天进步一点点</view><view class="hero-sub">让练习更简单、更有成就感</view><view class="hero-btn" bindtap="goQuizFast">开始练习</view></view>
+    <view class="hero-art"><view class="bubble b1"></view><view class="bubble b2"></view><view class="book">练</view></view>
   </view>
-
-  <!-- 三学科入口 -->
-  <view class="entry-list">
-    <view class="entry-card cn" bindtap="goChinese">
-      <view class="entry-deco">字</view>
-      <view class="entry-head">
-        <view class="entry-name">语文生字帖</view>
-        <view class="entry-desc">田字格 · 米字格 · 描红 · 听写卷</view>
-      </view>
-      <view class="entry-tags">
-        <text class="etag">写字表同步</text>
-        <text class="etag">名字字帖</text>
-      </view>
-    </view>
-
-    <view class="entry-card math" bindtap="goMath">
-      <view class="entry-deco">算</view>
-      <view class="entry-head">
-        <view class="entry-name">数学同步练习</view>
-        <view class="entry-desc">口算 · 应用题 · 钟表 · 竖式</view>
-      </view>
-      <view class="entry-tags">
-        <text class="etag">在线刷题</text>
-        <text class="etag">跟课本进度</text>
-      </view>
-    </view>
-
-    <view class="entry-card en" bindtap="goEnglish">
-      <view class="entry-deco">Aa</view>
-      <view class="entry-head">
-        <view class="entry-name">英语书写帖</view>
-        <view class="entry-desc">四线三格 · 抄写描红 · 默写</view>
-      </view>
-      <view class="entry-tags">
-        <text class="etag">大小写转换</text>
-        <text class="etag">报词栏</text>
-      </view>
-    </view>
-  </view>
-
-  <!-- 快捷出帖 -->
-  <view class="quick-head">
-    <view class="sec-dot"></view>
-    <text>快捷出帖</text>
-  </view>
+  <view class="section-title">选择学科</view>
+  <view class="subject-card red" bindtap="goChinese"><view class="subject-icon">语</view><view class="subject-copy"><view class="subject-name">语文</view><view class="subject-desc">在线练习 · 打印资料</view></view><view class="arrow">›</view></view>
+  <view class="subject-card blue" bindtap="goMath"><view class="subject-icon">数</view><view class="subject-copy"><view class="subject-name">数学</view><view class="subject-desc">在线口算 · 同步题卡</view></view><view class="arrow">›</view></view>
+  <view class="subject-card green" bindtap="goEnglish"><view class="subject-icon">Abc</view><view class="subject-copy"><view class="subject-name">英语</view><view class="subject-desc">单词书写 · 听写资料</view></view><view class="arrow">›</view></view>
   <view class="quick-grid">
-    <view class="quick-item q-quiz" bindtap="goQuizFast">
-      <view class="q-bubble">算</view>
-      <view class="q-label">在线口算</view>
-      <view class="q-sub">打开就能练</view>
-    </view>
-    <view class="quick-item q-name" bindtap="goNameSheet">
-      <view class="q-bubble">名</view>
-      <view class="q-label">名字字帖</view>
-      <view class="q-sub">写下自己的名字</view>
-    </view>
-    <view class="quick-item q-radical" bindtap="goRadicals">
-      <view class="q-bubble">部</view>
-      <view class="q-label">偏旁部首</view>
-      <view class="q-sub">点开即打印</view>
-    </view>
-    <view class="quick-item q-dict" bindtap="goEnglishDictation">
-      <view class="q-bubble">听</view>
-      <view class="q-label">英语听写</view>
-      <view class="q-sub">报词栏 + 默写</view>
-    </view>
+    <view bindtap="goQuizFast"><view class="quick-icon blue-text">练</view><text>在线口算</text></view>
+    <view bindtap="goNameSheet"><view class="quick-icon red-text">名</view><text>名字字帖</text></view>
+    <view bindtap="goRadicals"><view class="quick-icon orange-text">偏</view><text>偏旁部首</text></view>
+    <view bindtap="goHistory"><view class="quick-icon purple-text">史</view><text>打印历史</text></view>
   </view>
-
-  <!-- 最近生成 -->
-  <view class="recent-head" wx:if="{{recent.length}}">
-    <view class="sec-dot"></view>
-    <text>最近生成</text>
-  </view>
-  <view class="recent-item" wx:for="{{recent}}" wx:key="id" data-id="{{item.id}}" bindtap="openSheet">
-    <view class="r-tag {{item.type === 'chinese' ? 'cn' : item.type === 'math' ? 'math' : 'en'}}">{{item.type === 'chinese' ? '语' : item.type === 'math' ? '数' : 'EN'}}</view>
-    <view class="recent-info">
-      <view class="recent-title">{{item.title}}</view>
-      <view class="recent-meta">{{item.pageCount || 1}} 页 · {{item.dateText}}</view>
-    </view>
-    <view class="arrow">›</view>
-  </view>
-
-  <view class="feedback-row">
-    <button open-type="contact">意见反馈</button>
-    <text class="dot">·</text>
-    <button bindtap="goAbout">关于与隐私</button>
-  </view>
+  <view wx:if="{{recent.length}}" class="recent-title">最近生成</view>
+  <view class="recent-item" wx:for="{{recent}}" wx:key="id" data-id="{{item.id}}" bindtap="openSheet"><view class="recent-dot"></view><view class="recent-info"><view>{{item.title}}</view><text>{{item.pageCount || 1}} 页 · {{item.dateText}}</text></view><view class="arrow">›</view></view>
 </view>

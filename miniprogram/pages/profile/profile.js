@@ -21,7 +21,7 @@ Page({
     wx.showToast({ title: `已设为${g}年级，教材将默认该年级`, icon: 'none' });
   },
 
-  goHistory() { wx.switchTab({ url: '/pages/history/history' }); },
+  goHistory() { wx.navigateTo({ url: '/pages/history/history' }); },
   goRadicals() { wx.navigateTo({ url: '/pages/radicals/radicals' }); },
   goMath() { wx.navigateTo({ url: '/pages/math/index/index' }); },
   goAbout() { wx.navigateTo({ url: '/pages/about/about' }); },

@@ -1,8 +1,8 @@
 <view class="page-wrap">
   <view class="me-card">
-    <view class="avatar">练</view>
+    <view class="avatar">习</view>
     <view class="me-info">
-      <view class="me-name">字帖小用户</view>
+      <view class="me-name">我的学习空间</view>
       <view class="me-sub" wx:if="{{vip}}">会员 · 有效期至 {{vipUntil}}</view>
       <view class="me-sub" wx:elif="{{quotaRemaining !== null}}">今日剩余生成 {{quotaRemaining}} 份</view>
     </view>
@@ -10,7 +10,7 @@
 
   <view class="menu-card">
     <view class="menu-item grade-row">
-      <text>所属年级</text>
+      <text>当前年级</text>
       <view class="grade-seg">
         <view wx:for="{{grades}}" wx:key="*this" class="g-item {{grade === item ? 'on' : ''}}" data-g="{{item}}" bindtap="onGradeTap">{{item}}</view>
       </view>
@@ -18,7 +18,7 @@
   </view>
 
   <view class="menu-card">
-    <view class="menu-item" bindtap="goHistory"><text>我的生成</text><text class="arrow">›</text></view>
+    <view class="menu-item" bindtap="goHistory"><text>打印历史</text><text class="arrow">›</text></view>
     <view class="menu-item" bindtap="goRadicals"><text>偏旁部首练习</text><text class="arrow">›</text></view>
     <view class="menu-item" bindtap="goMath"><text>口算题卡</text><text class="arrow">›</text></view>
   </view>
@@ -28,5 +28,5 @@
     <view class="menu-item" bindtap="goAbout"><text>关于与隐私</text><text class="arrow">›</text></view>
   </view>
 
-  <view class="foot-tip">生字 · 单词 · 口算，一起练起来</view>
+  <view class="foot-tip">教材设置与孩子档案将在下一阶段完善</view>
 </view>
