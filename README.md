@@ -95,6 +95,20 @@ npm test
 
 参照 `deploy/nginx.conf.sample` 配置反代；管理后台访问 `/admin`（Token 通过环境变量 `ADMIN_TOKEN` 设置）。
 
+#### 部署脚本
+
+本地 `deploy/deploy.sh`（已 gitignore，含服务器信息）：
+
+```bash
+# 全量部署（src/ + assets/ + package.json）
+bash deploy/deploy.sh
+
+# 只部署指定文件（改了哪个推哪个）
+bash deploy/deploy.sh src/services/layout/math.service.js src/app.js
+```
+
+脚本自动完成：本地语法检查 → rsync 同步 → 远端 node --check → systemctl restart → 健康检查。
+
 ## 环境变量
 
 | 变量 | 说明 | 默认值 |
