@@ -1,0 +1,41 @@
+<view class="page-wrap">
+
+  <view class="brand-card">
+    <view class="brand-grid">
+      <view class="bg-v"></view>
+      <view class="bg-h"></view>
+      <text class="bg-char">字</text>
+    </view>
+    <view class="brand-name">字帖出题器</view>
+    <view class="brand-sub">生字 / 单词，一键成帖 · 打印即练</view>
+  </view>
+
+  <view class="card">
+    <view class="sec-head"><view class="sec-dot"></view><text>隐私说明</text></view>
+    <view class="p">· 使用微信登录：进入小程序时通过微信静默登录取得 openid（微信提供的匿名标识），用于云端生成记录、每日生成次数统计和会员标识。我们不获取你的昵称、头像、手机号等任何资料，也不做任何第三方共享。</view>
+    <view class="p">· 未登录或登录失败时，改用本机随机设备标识计数，功能不受影响。</view>
+    <view class="p">· 每个账号每天可生成 8 份字帖（会员不限次），仅用于防止滥用。</view>
+    <view class="p">· 你输入的生字、单词、口算设置仅用于排版生成；生成记录（含 openid 归属）在服务器保留 10 天后自动删除。</view>
+    <view class="p">· 本机「历史」与云端记录一致显示；清除本地缓存不影响云端记录（10 天内）。</view>
+  </view>
+
+  <view class="card">
+    <view class="sec-head"><view class="sec-dot"></view><text>内容与版权</text></view>
+    <view class="p">· 古诗词均为公版作品；语文生字表整理自人教版教材写字表；英语词库整理自 PEP 教材（2024 新版）各单元词汇表；数学口算题由程序按人教版教材进度实时生成，不引用任何题库。</view>
+    <view class="p">· 内置字体：AR PL UKai 文鼎楷体（Arphic 公共许可证）、演示夏行楷（OFL 开源协议），均可免费商用。</view>
+    <view class="p">· 自动注音由程序生成，多音字偶有误差，可在生成页用「拼音修正」自行调整。</view>
+  </view>
+
+  <view class="card">
+    <view class="sec-head"><view class="sec-dot"></view><text>使用提示</text></view>
+    <view class="p">· 建议家长陪同孩子使用，打印后练习。</view>
+    <view class="p">· 语文三、四、五、六年级为旧版课目（新版数据整理中），英语五下、六下为旧版词表，均以孩子实际课本为准；数学口算按人教版进度出题。</view>
+    <view class="p">· 会员服务准备中，上线前生成次数均为免费额度。</view>
+    <view class="p">· 如内容涉及版权或有其他问题，请通过「意见反馈」联系我们。</view>
+  </view>
+
+  <view class="feedback-row">
+    <button class="feedback-btn" open-type="contact">意见反馈</button>
+  </view>
+
+</view>

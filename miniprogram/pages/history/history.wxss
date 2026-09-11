@@ -1,0 +1,127 @@
+.page-wrap {
+  padding: 24rpx 32rpx;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 26rpx 28rpx;
+  margin-bottom: 16rpx;
+  box-shadow: 0 6rpx 20rpx rgba(150, 108, 60, 0.07);
+}
+
+.r-tag {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  font-weight: 600;
+  flex-shrink: 0;
+  font-family: 'Kaiti SC', serif;
+}
+
+.r-tag.cn {
+  background: #ffe9d2;
+  color: #d97a2b;
+}
+
+.r-tag.en {
+  background: #ddf3e6;
+  color: #2f9e63;
+}
+
+.history-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.history-title {
+  font-size: 28rpx;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.history-meta {
+  margin-top: 6rpx;
+  color: #a4937f;
+  font-size: 22rpx;
+}
+
+.delete {
+  color: #d9534f;
+  font-size: 24rpx;
+  padding: 10rpx 22rpx;
+  border: 2rpx solid #f2c4c0;
+  border-radius: 999rpx;
+  flex-shrink: 0;
+}
+
+/* 空状态：一个田字格里的「字」 */
+.empty {
+  padding: 180rpx 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.empty-grid {
+  position: relative;
+  width: 160rpx;
+  height: 160rpx;
+  border: 4rpx solid #d8c9ac;
+  border-radius: 20rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eg-v {
+  position: absolute;
+  left: 50%;
+  top: 8rpx;
+  bottom: 8rpx;
+  border-left: 3rpx dashed #e6d9bf;
+}
+
+.eg-h {
+  position: absolute;
+  top: 50%;
+  left: 8rpx;
+  right: 8rpx;
+  border-top: 3rpx dashed #e6d9bf;
+}
+
+.eg-char {
+  font-size: 96rpx;
+  color: #d8c9ac;
+  font-family: 'Kaiti SC', 'STKaiti', serif;
+  line-height: 1;
+}
+
+.empty-text {
+  margin-top: 36rpx;
+  font-size: 30rpx;
+  color: #6b5f51;
+}
+
+.empty-sub {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: #a4937f;
+}
+
+.keep-tip {
+  text-align: center;
+  color: #c5bab0;
+  font-size: 22rpx;
+  padding: 8rpx 0 16rpx;
+}

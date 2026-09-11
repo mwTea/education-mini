@@ -1,0 +1,174 @@
+<view wx:if="{{vm}}" class="sheet">
+  <!-- 笔顺绘制用隐藏画板：canvas 原生层在部分机型不随页面滚动，
+       故只在离屏 canvas 上作画并导出图片，卡片内用 image 展示 -->
+  <canvas type="2d" id="cb-stroke-cv" class="stroke-work"></canvas>
+  <view class="sheet-title">{{vm.title}}</view>
+
+  <view class="bank" wx:if="{{vm.wordBank || vm.bankHintText}}">
+    <text class="bank-label">{{vm.bankLabel}}</text>
+    <text class="bank-words">{{vm.wordBank || vm.bankHintText}}</text>
+  </view>
+
+  <view class="sheet-page" wx:for="{{vm.pages}}" wx:for-item="page" wx:key="key">
+    <!-- 语文：信息行 / 笔顺行（预览跳过）/ 田字格练习行 -->
+    <block wx:if="{{vm.type === 'chinese'}}">
+      <block wx:for="{{page.rows}}" wx:for-item="row" wx:key="key">
+      <!-- 生字卡片：与 PDF 同构（红框卡 / 顶栏拼音格+笔顺演示 / 左栏大范字标签 / 右栏描红+组词练习） -->
+      <view class="cardbox" wx:if="{{row.kind === 'card'}}">
+        <view class="cb-top">
+          <view class="cb-pybox">
+            <text class="cb-py">{{row.pinyin || row.char}}</text>
+          </view>
+          <view class="cb-strokes">
+            <image wx:if="{{row.strokeImg}}" class="stroke-img" src="{{row.strokeImg}}" mode="aspectFit" />
+            <view wx:elif="{{!row.strokes}}" class="cb-strokes-empty">笔顺数据整理中</view>
+          </view>
+        </view>
+
+        <view class="cb-body">
+          <view class="cb-left">
+            <view class="cell cb-demo" style="border-color:{{vm.pal.border}};">
+              <block wx:if="{{vm.options.grid !== 'fang'}}">
+                <view class="gl-v" style="border-left-color:{{vm.pal.guide}};"></view>
+                <view class="gl-h" style="border-top-color:{{vm.pal.guide}};"></view>
+              </block>
+              <text
+                class="char demo{{vm.options.font === 'xingkai' ? ' xk' : ''}}"
+                style="font-size:{{vm.metrics.cardDemoChar}}px;color:{{vm.pal.demo}};"
+              >{{row.char}}</text>
+            </view>
+            <view class="cb-labels">
+              <text class="cb-label" wx:if="{{row.meta.strokes}}">{{row.meta.strokes}} 画</text>
+              <text class="cb-label" wx:if="{{row.meta.radical}}">部首 {{row.meta.radical}}</text>
+              <text class="cb-label" wx:if="{{row.meta.structure}}">{{row.meta.structure}}</text>
+            </view>
+          </view>
+
+          <view class="cb-right">
+            <view class="crow" wx:for="{{row.practiceRows}}" wx:for-item="prow" wx:key="key">
+              <view class="cwrap" wx:for="{{prow.cells}}" wx:for-item="cell" wx:key="key" style="width:{{vm.metrics.cardCellR}}px;">
+                <view class="cell" style="width:{{vm.metrics.cardCellR}}px;height:{{vm.metrics.cardCellR}}px;border-color:{{vm.pal.border}};">
+                  <block wx:if="{{vm.options.grid !== 'fang'}}">
+                    <view class="gl-v" style="border-left-color:{{vm.pal.guide}};"></view>
+                    <view class="gl-h" style="border-top-color:{{vm.pal.guide}};"></view>
+                  </block>
+                  <text
+                    wx:if="{{cell.style !== 'blank'}}"
+                    class="char {{cell.style}}{{vm.options.font === 'xingkai' ? ' xk' : ''}}"
+                    style="font-size:{{vm.metrics.cardCharR}}px;color:{{cell.style === 'demo' ? vm.pal.demo : vm.pal.trace}};"
+                  >{{cell.char}}</text>
+                </view>
+              </view>
+            </view>
+            <text class="cb-words" wx:if="{{row.words}}">组词　{{row.words}}</text>
+            <view class="crow" wx:for="{{row.wordRows}}" wx:for-item="wrow" wx:key="key">
+              <view class="cwrap" wx:for="{{wrow.cells}}" wx:for-item="cell" wx:key="key" style="width:{{vm.metrics.cardCellR}}px;">
+                <view class="cell" style="width:{{vm.metrics.cardCellR}}px;height:{{vm.metrics.cardCellR}}px;border-color:{{vm.pal.border}};">
+                  <block wx:if="{{vm.options.grid !== 'fang'}}">
+                    <view class="gl-v" style="border-left-color:{{vm.pal.guide}};"></view>
+                    <view class="gl-h" style="border-top-color:{{vm.pal.guide}};"></view>
+                  </block>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="crow" wx:elif="{{row.kind === 'practice'}}">
+        <view
+          class="cwrap"
+          wx:for="{{row.cells}}"
+          wx:for-item="cell"
+          wx:key="key"
+          style="width:{{vm.metrics.cell}}px;"
+        >
+          <view
+            wx:if="{{vm.options.showPinyin}}"
+            class="pinyin"
+            style="height:{{vm.metrics.pinyinH}}px;font-size:{{vm.metrics.pinyin}}px;line-height:{{vm.metrics.pinyinH}}px;"
+          >{{cell.pinyin || ''}}</view>
+          <view class="cell" style="width:{{vm.metrics.cell}}px;height:{{vm.metrics.cell}}px;border-color:{{vm.pal.border}};">
+            <block wx:if="{{vm.options.grid !== 'fang'}}">
+              <view class="gl-v" style="border-left-color:{{vm.pal.guide}};"></view>
+              <view class="gl-h" style="border-top-color:{{vm.pal.guide}};"></view>
+            </block>
+            <block wx:if="{{vm.options.grid === 'mi'}}">
+              <view class="gl-d d1" style="border-top-color:{{vm.pal.guide}};"></view>
+              <view class="gl-d d2" style="border-top-color:{{vm.pal.guide}};"></view>
+            </block>
+            <text
+              wx:if="{{cell.style !== 'blank'}}"
+              class="char {{cell.style}}{{vm.options.font === 'xingkai' ? ' xk' : ''}}"
+              style="font-size:{{vm.metrics.char}}px;color:{{cell.style === 'demo' ? vm.pal.demo : vm.pal.trace}};"
+            >{{cell.char}}</text>
+          </view>
+        </view>
+      </view>
+      </block>
+    </block>
+
+    <!-- 数学：口算三列 / 竖式 / 应用题 / 答案页 -->
+    <block wx:elif="{{vm.type === 'math'}}">
+      <block wx:for="{{page.rows}}" wx:for-item="row" wx:key="key">
+        <view wx:if="{{row.kind === 'section'}}" class="msection">{{row.text}}</view>
+        <view wx:elif="{{row.kind === 'clock'}}" class="clock-grid">
+          <view class="clock-item" wx:for="{{row.items}}" wx:for-item="item" wx:key="no">
+            <text>{{item.no}}. {{item.clock.blank ? item.answer : '写出时间'}}</text>
+            <image src="{{item.clockImage}}" mode="aspectFit" class="clock-image" />
+            <text wx:if="{{!item.clock.blank}}">时间：______</text>
+          </view>
+        </view>
+        <view wx:elif="{{row.kind === 'inline'}}" class="mgrid">
+          <view class="mitem cols-{{row.columns}}" style="width:{{100 / row.columns}}%;" wx:for="{{row.items}}" wx:for-item="item" wx:key="no">
+            <text>{{item.no}}. {{item.stem}}</text>
+          </view>
+        </view>
+        <view wx:elif="{{row.kind === 'vertical'}}" class="vgrid">
+          <view class="vbox" wx:for="{{row.items}}" wx:for-item="item" wx:key="no">{{item.no}}. {{item.stem}}</view>
+        </view>
+        <view wx:elif="{{row.kind === 'word'}}" class="mword">
+          <view class="wq" wx:for="{{row.items}}" wx:for-item="item" wx:key="no">{{item.no}}. {{item.stem}}</view>
+        </view>
+      </block>
+      <view class="mpage-sep" wx:if="{{page.rows.length && page.rows[0].kind === 'word'}}"></view>
+    </block>
+    <!-- 英语：默写提示行 / 方格行 / 四线三格 -->
+    <block wx:else>
+      <block wx:for="{{page.rows}}" wx:for-item="row" wx:key="key">
+      <view wx:if="{{row.kind === 'hint'}}" class="hrow">{{row.text}}</view>
+      <view wx:elif="{{row.kind === 'fang'}}" class="fgrow">
+        <view class="fcell" wx:for="{{row.count}}" wx:key="index" style="width:{{vm.metrics.rowH}}px;height:{{vm.metrics.rowH}}px;"></view>
+      </view>
+      <view
+        wx:else
+        class="erow"
+        style="height:{{vm.metrics.rowH}}px;margin-bottom:{{vm.metrics.rowGap}}px;{{row.width ? 'width:' + (row.width * vm.metrics.advance) + 'px;' : ''}}"
+      >
+        <view class="eline l1" style="border-top-color:{{vm.pal.line}};"></view>
+        <view class="eline l2" style="border-top-color:{{vm.pal.lineDashed}};"></view>
+        <view class="eline l3" style="border-top-color:{{vm.pal.line}};"></view>
+        <view class="eline l4" style="border-top-color:{{vm.pal.line}};"></view>
+        <view class="etext" style="font-size:{{vm.metrics.font}}px;">
+          <text
+            class="ecell"
+            wx:for="{{row.cells}}"
+            wx:for-item="cell"
+            wx:key="key"
+            style="width:{{vm.metrics.advance}}px;{{cell.style === 'trace' ? 'color:' + vm.pal.trace : 'color:transparent;'}}"
+          >{{cell.char}}</text>
+        </view>
+      </view>
+      </block>
+    </block>
+
+    <view class="page-no">第 {{page.number}} 页</view>
+  </view>
+
+  <!-- 数学答案页 -->
+  <block wx:if="{{vm.type === 'math' && vm.answerRows}}">
+    <view class="m-answers-head">答案</view>
+    <view class="mgrid" wx:for="{{vm.answerRows}}" wx:for-item="row" wx:key="key">
+      <view class="aitem" wx:for="{{row.items}}" wx:for-item="item" wx:key="no">{{item.no}}. {{item.answer}}</view>
+    </view>
+  </block>
+</view>

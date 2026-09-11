@@ -1,0 +1,483 @@
+.page-wrap {
+  padding: 24rpx 32rpx 56rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.card.block {
+  padding: 28rpx 28rpx 12rpx;
+}
+
+.hint {
+  margin: 20rpx 0 16rpx;
+  background: #fff3e6;
+  border-left: 6rpx solid #f0821e;
+  border-radius: 0 12rpx 12rpx 0;
+  padding: 16rpx 20rpx;
+  color: #b0653a;
+  font-size: 24rpx;
+  line-height: 1.6;
+}
+
+.field {
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #f5efe4;
+}
+
+.field.row-last,
+.field:last-child {
+  border-bottom: none;
+}
+
+.field-label {
+  font-size: 26rpx;
+  color: #8a7a68;
+  margin-bottom: 14rpx;
+}
+
+.field-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 26rpx;
+  color: #8a7a68;
+  margin-bottom: 8rpx;
+}
+
+.counter {
+  color: #c9b8a3;
+  font-size: 22rpx;
+}
+
+.v-badge {
+  background: #fff1e0;
+  color: #e2703a;
+  font-size: 22rpx;
+  border-radius: 999rpx;
+  padding: 4rpx 16rpx;
+}
+
+.input,
+.textarea {
+  background: #faf5ea;
+  border-radius: 16rpx;
+  padding: 20rpx 24rpx;
+  font-size: 28rpx;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 120rpx;
+  box-sizing: border-box;
+}
+
+.chip-row {
+  display: flex;
+  gap: 16rpx;
+}
+
+.opt-chip {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  background: #faf5ea;
+  border: 3rpx solid transparent;
+  border-radius: 20rpx;
+  padding: 18rpx;
+  box-sizing: border-box;
+  font-size: 24rpx;
+  color: #6b5f51;
+}
+
+.opt-chip.on {
+  background: #fff6ec;
+  border-color: #f0821e;
+  color: #e2703a;
+  font-weight: 600;
+  box-shadow: 0 6rpx 16rpx rgba(240, 130, 30, 0.16);
+}
+
+.case-demo {
+  font-size: 34rpx;
+  font-weight: 700;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  width: 56rpx;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.paper-demo {
+  position: relative;
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 10rpx;
+  border: 3rpx solid #5b9e7d;
+  box-sizing: border-box;
+  background: #fffdf6;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.paper-demo.plain {
+  border-color: #9aa39a;
+  background: #fff;
+}
+
+.pd-demo {
+  font-size: 38rpx;
+  color: #f09892;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1;
+}
+
+.pd-demo.gray {
+  color: #b6bcc2;
+}
+
+.pd-text {
+  min-width: 0;
+}
+
+.pd-name {
+  font-size: 24rpx;
+}
+
+.pd-sub {
+  font-size: 20rpx;
+  color: #a4937f;
+  margin-top: 2rpx;
+}
+
+.opt-chip.on .pd-sub {
+  color: #d9a06b;
+}
+
+.generate {
+  margin-top: 8rpx;
+}
+
+/* 区块序号 */
+.sec-idx {
+  margin-left: auto;
+  font-size: 26rpx;
+  font-weight: 700;
+  color: #d8c6a4;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* ================ 词库导入弹框（固定头 + 单一滚动区 + 固定底栏） ================ */
+.tb-mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(58, 46, 37, 0.45);
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+}
+
+.tb-panel {
+  width: 100%;
+  height: 82vh;
+  background: #fffdf6;
+  border-radius: 32rpx 32rpx 0 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.tb-body {
+  height: calc(82vh - 380rpx);
+  padding: 0 32rpx;
+  box-sizing: border-box;
+}
+
+.tb-body-pad {
+  height: 24rpx;
+}
+
+.tb-block-label {
+  font-size: 22rpx;
+  color: #a4937f;
+  padding: 20rpx 4rpx 14rpx;
+}
+
+.tb-head {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30rpx 32rpx 20rpx;
+}
+
+.tb-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #3a2e25;
+}
+
+.tb-close {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  background: #f4ecdd;
+  color: #8a7a68;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+}
+
+.tb-toptabs {
+  flex-shrink: 0;
+  display: flex;
+  background: #f4ecdd;
+  border-radius: 16rpx;
+  padding: 6rpx;
+  margin: 0 32rpx 20rpx;
+}
+
+.tb-toptab {
+  flex: 1;
+  text-align: center;
+  font-size: 26rpx;
+  color: #a4937f;
+  border-radius: 12rpx;
+  padding: 12rpx 0;
+}
+
+.tb-toptab.on {
+  background: #fff;
+  color: #e2703a;
+  font-weight: 600;
+}
+
+.tb-books-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14rpx;
+}
+
+.tb-book {
+  width: calc((100% - 42rpx) / 4);
+  height: 88rpx;
+  border-radius: 16rpx;
+  background: #f6efe0;
+  border: 2rpx solid transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rpx;
+  box-sizing: border-box;
+}
+
+.tb-book.on {
+  background: #fff2e2;
+  border-color: #f0821e;
+}
+
+.tb-book-name {
+  font-size: 26rpx;
+  color: #6b5f51;
+  font-weight: 600;
+}
+
+.tb-book.on .tb-book-name {
+  color: #e2703a;
+}
+
+.tb-book-count {
+  font-size: 18rpx;
+  color: #b3a48f;
+}
+
+.tb-current {
+  padding: 16rpx 4rpx 0;
+  font-size: 22rpx;
+  color: #a4937f;
+}
+
+.tb-tabs {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 4rpx 8rpx;
+}
+
+.tb-tab-all {
+  margin-left: auto;
+  font-size: 24rpx;
+  color: #b0653a;
+  padding: 10rpx 8rpx;
+}
+
+.tb-lesson-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14rpx;
+  padding-top: 6rpx;
+}
+
+.tb-lesson {
+  padding: 14rpx 24rpx;
+  border-radius: 14rpx;
+  background: #f6efe0;
+  color: #4a4038;
+  font-size: 24rpx;
+  border: 2rpx solid transparent;
+}
+
+.tb-lesson.on {
+  background: #fff2e2;
+  border-color: #f0821e;
+  color: #e2703a;
+  font-weight: 600;
+}
+
+.tb-loading {
+  padding: 30rpx 0;
+  text-align: center;
+  color: #a4937f;
+  font-size: 26rpx;
+}
+
+.tb-footer {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  padding: 20rpx 32rpx 28rpx;
+  border-top: 2rpx solid #f0e2cc;
+  background: #fffdf6;
+}
+
+.tb-stat {
+  flex: 1;
+  font-size: 24rpx;
+  color: #6b5f51;
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.tb-stat b {
+  color: #e2703a;
+  font-weight: 700;
+}
+
+.tb-limit {
+  font-size: 20rpx;
+  color: #b3a48f;
+}
+
+.tb-import {
+  background: linear-gradient(135deg, #ffa04d, #f2703f);
+  color: #fff;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 40rpx;
+  margin: 0;
+}
+
+.tb-import[disabled] {
+  background: #e8dcc4;
+  color: #fff;
+}
+
+/* ================ 导入入口行（与语文页同款） ================ */
+.book-row {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  background: #faf5ea;
+  border-radius: 20rpx;
+  padding: 22rpx 24rpx;
+}
+
+.book-bubble {
+  width: 68rpx;
+  height: 68rpx;
+  border-radius: 20rpx;
+  background: #ffe9d2;
+  color: #d97a2b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  font-weight: 600;
+  font-family: 'Kaiti SC', serif;
+  flex-shrink: 0;
+}
+
+.book-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.book-name {
+  font-size: 27rpx;
+  font-weight: 500;
+  color: #3a2e25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.book-sub {
+  margin-top: 4rpx;
+  font-size: 22rpx;
+  color: #a4937f;
+}
+
+.chev {
+  color: #d8c9bc;
+  font-size: 40rpx;
+  flex-shrink: 0;
+}
+
+/* ================ 字母 / 单词预览 ================ */
+.letters-preview {
+  background: #faf5ea;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  font-size: 30rpx;
+  letter-spacing: 4rpx;
+  line-height: 1.8;
+  color: #3a2e25;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.words-preview {
+  background: #faf5ea;
+  border-radius: 16rpx;
+  padding: 20rpx 24rpx;
+  font-size: 26rpx;
+  line-height: 1.7;
+  color: #3a2e25;
+  word-break: break-all;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.quota-tip {
+  text-align: center; color: #c5bab0; font-size: 24rpx; padding: 16rpx 0 24rpx;
+}
+
+.tb-book-legacy {
+  position: absolute; top: -10rpx; right: -8rpx;
+  background: #f5b942; color: #fff; font-size: 18rpx; line-height: 1;
+  padding: 6rpx 10rpx; border-radius: 8rpx 8rpx 8rpx 0;
+}
+.tb-legacy-tip {
+  margin-top: 12rpx; font-size: 24rpx; color: #c07f4e;
+  background: #fdf6e9; border-radius: 10rpx; padding: 12rpx 20rpx;
+}

@@ -1,0 +1,88 @@
+<view class="home">
+
+  <!-- 顶部品牌区 -->
+  <view class="hero">
+    <view class="hero-left">
+      <view class="hero-title">字帖出题器</view>
+      <view class="hero-sub">语数英同步 · 打印 + 在线练</view>
+    </view>
+    <view class="hero-seal">
+      <view class="seal-v"></view>
+      <view class="seal-h"></view>
+      <text class="seal-char">练</text>
+    </view>
+  </view>
+
+  <!-- 三科入口：横排卡片 -->
+  <view class="subject-row">
+    <view class="sub-card chinese" bindtap="goChinese">
+      <view class="sub-icon">
+        <view class="icon-v"></view>
+        <view class="icon-h"></view>
+        <text class="icon-char">字</text>
+      </view>
+      <view class="sub-name">语文</view>
+      <view class="sub-desc">生字 · 听写</view>
+    </view>
+    <view class="sub-card math" bindtap="goMath">
+      <view class="sub-icon">
+        <view class="icon-v"></view>
+        <view class="icon-h"></view>
+        <text class="icon-char">算</text>
+      </view>
+      <view class="sub-name">数学</view>
+      <view class="sub-desc">口算 · 竖式</view>
+    </view>
+    <view class="sub-card english" bindtap="goEnglish">
+      <view class="sub-icon">
+        <view class="icon-line l1"></view>
+        <view class="icon-line l2"></view>
+        <view class="icon-line l3"></view>
+        <view class="icon-line l4"></view>
+        <text class="icon-char en">Aa</text>
+      </view>
+      <view class="sub-name">英语</view>
+      <view class="sub-desc">单词 · 默写</view>
+    </view>
+  </view>
+
+  <!-- 快捷工具 -->
+  <view class="tool-row">
+    <view class="tool-item" bindtap="goQuizFast">
+      <view class="tool-icon t1">快</view>
+      <view class="tool-label">在线口算</view>
+    </view>
+    <view class="tool-item" bindtap="goNameSheet">
+      <view class="tool-icon t2">名</view>
+      <view class="tool-label">名字字帖</view>
+    </view>
+    <view class="tool-item" bindtap="goRadicals">
+      <view class="tool-icon t3">部</view>
+      <view class="tool-label">偏旁部首</view>
+    </view>
+    <view class="tool-item" bindtap="goEnglishDictation">
+      <view class="tool-icon t4">听</view>
+      <view class="tool-label">英语听写</view>
+    </view>
+  </view>
+
+  <!-- 最近生成 -->
+  <view class="recent-head" wx:if="{{recent.length}}">
+    <view class="sec-dot"></view>
+    <text>最近生成</text>
+  </view>
+  <view class="recent-item" wx:for="{{recent}}" wx:key="id" data-id="{{item.id}}" bindtap="openSheet">
+    <view class="r-tag {{item.type}}">{{item.type === 'chinese' ? '语' : item.type === 'math' ? '数' : '英'}}</view>
+    <view class="recent-info">
+      <view class="recent-title">{{item.title}}</view>
+      <view class="recent-meta">{{item.pageCount || 1}} 页 · {{item.dateText}}</view>
+    </view>
+    <view class="arrow">›</view>
+  </view>
+
+  <view class="feedback-row">
+    <button open-type="contact">意见反馈</button>
+    <text class="dot">·</text>
+    <button bindtap="goAbout">关于与隐私</button>
+  </view>
+</view>

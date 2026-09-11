@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "字帖预览",
+  "usingComponents": {
+    "sheet-view": "/components/sheet-view/index"
+  }
+}

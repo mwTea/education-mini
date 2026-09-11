@@ -1,0 +1,238 @@
+<view class="page-wrap">
+
+  <!-- 类型 -->
+  <view class="card block">
+    <view class="sec-head"><view class="sec-dot"></view><text>类型</text><text class="sec-idx">01</text></view>
+    <view class="seg" style="margin-top: 24rpx;">
+      <view class="seg-item {{modeIndex === 0 ? 'on' : ''}}" data-index="0" bindtap="onModeTap">练字帖</view>
+      <view class="seg-item {{modeIndex === 1 ? 'on' : ''}}" data-index="1" bindtap="onModeTap">听写卷</view>
+      <view class="seg-item {{modeIndex === 2 ? 'on' : ''}}" data-index="2" bindtap="onModeTap">生字卡片</view>
+    </view>
+    <view class="hint" wx:if="{{modeIndex === 1}}">听写卷自动显示拼音，整行空白——家长报词，孩子看拼音写汉字。</view>
+    <view class="hint" wx:if="{{modeIndex === 2}}">生字卡片：每字一卡，含拼音、部首、笔画、结构、组词与笔顺演示（笔顺在打印版 / PDF 中呈现）。</view>
+  </view>
+
+  <!-- 内容 -->
+  <view class="card block">
+    <view class="sec-head"><view class="sec-dot"></view><text>生字内容</text><text class="sec-idx">02</text></view>
+
+    <view class="field" wx:if="{{bookNames.length}}">
+      <view class="field-label">从课本导入（可多课合并）</view>
+      <view class="book-row" bindtap="openModal">
+        <view class="book-bubble">{{importSummary ? '✓' : '书'}}</view>
+        <view class="book-info">
+          <view class="book-name">{{importSummary || '选择教材与课文'}}</view>
+          <view class="book-sub">{{importSummary ? '已导入 ' + chars.length + ' 个生字，点击可重选' : bookNames.length + ' 册教材 · 按识字/拼音/课文分组'}}</view>
+        </view>
+        <view class="chev">›</view>
+      </view>
+    </view>
+
+    <view class="field">
+      <view class="field-label-row">
+        <text>生字（拼音自动标注）</text>
+        <text class="counter">{{chars.length}}/30</text>
+      </view>
+      <textarea class="textarea" placeholder="输入要练的汉字，如：大小日月" value="{{chars}}" bindinput="onCharsInput" maxlength="30" auto-height />
+      <view class="auto-tip">每个字独占一行：范字 1 格 + 描红 + 空白补满，按 A4 自动排版</view>
+
+      <view class="pinyin-override">
+        <input class="input" placeholder="拼音修正（可选）：多音字按顺序填写，空格分隔，如：zhǎng duō" value="{{pinyinOverride}}" bindinput="onPinyinInput" />
+        <view class="auto-tip">填写的拼音数量需与生字一致，不一致时自动忽略</view>
+      </view>
+    </view>
+
+    <!-- 课本导入时标题自动生成，不再重复填写 -->
+    <view class="field row-last" wx:if="{{!importSummary}}">
+      <view class="field-label">标题</view>
+      <input class="input" placeholder="{{modeIndex === 1 ? '语文听写卷' : '语文生字练习'}}" value="{{title}}" bindinput="onTitleInput" />
+    </view>
+  </view>
+
+  <!-- 样式 -->
+  <view class="card block">
+    <view class="sec-head"><view class="sec-dot"></view><text>样式</text><text class="sec-idx">03</text></view>
+
+    <view class="field" wx:if="{{modeIndex !== 1}}">
+      <view class="field-label">字体</view>
+      <view class="chip-row">
+        <view class="opt-chip {{fontIndex === 0 ? 'on' : ''}}" data-index="0" bindtap="onFontTap">
+          <text class="font-demo kai">永</text>
+          <view class="pd-text"><view class="pd-name">正楷</view><view class="pd-sub">楷体 · 适合初学</view></view>
+        </view>
+        <view class="opt-chip {{fontIndex === 1 ? 'on' : ''}}" data-index="1" bindtap="onFontTap">
+          <text class="font-demo xk">永</text>
+          <view class="pd-text"><view class="pd-name">行楷</view><view class="pd-sub">行书 · 进阶练字</view></view>
+        </view>
+      </view>
+    </view>
+
+    <view class="field" wx:if="{{modeIndex !== 1}}">
+      <view class="field-label">格线</view>
+      <view class="chip-row">
+        <view class="opt-chip {{gridIndex === 0 ? 'on' : ''}}" data-index="0" bindtap="onGridTap">
+          <view class="mini-grid"><view class="mg-v"></view><view class="mg-h"></view></view>
+          <text>田字格</text>
+        </view>
+        <view class="opt-chip {{gridIndex === 1 ? 'on' : ''}}" data-index="1" bindtap="onGridTap">
+          <view class="mini-grid"><view class="mg-v"></view><view class="mg-h"></view><view class="mg-d1"></view><view class="mg-d2"></view></view>
+          <text>米字格</text>
+        </view>
+        <view class="opt-chip {{gridIndex === 2 ? 'on' : ''}}" data-index="2" bindtap="onGridTap">
+          <view class="mini-grid mg-fang"><view class="mg-v"></view><view class="mg-h"></view></view>
+          <text>方格</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="field">
+      <view class="field-label">纸张</view>
+      <view class="chip-row">
+        <view class="opt-chip {{paperIndex === 0 ? 'on' : ''}}" data-index="0" bindtap="onPaperTap">
+          <view class="paper-demo classic"><text class="pd-demo">描</text></view>
+          <view class="pd-text"><view class="pd-name">仿真字帖纸</view><view class="pd-sub">绿格 · 红描红</view></view>
+        </view>
+        <view class="opt-chip {{paperIndex === 1 ? 'on' : ''}}" data-index="1" bindtap="onPaperTap">
+          <view class="paper-demo plain"><text class="pd-demo gray">描</text></view>
+          <view class="pd-text"><view class="pd-name">素雅</view><view class="pd-sub">灰格 · 浅描红</view></view>
+        </view>
+      </view>
+    </view>
+
+    <view class="switch-row">
+      <view class="sw-text">
+        <view class="sw-title">显示拼音</view>
+        <view class="sw-sub">自动标注在每行行首{{modeIndex === 1 ? '（听写卷固定开启）' : ''}}</view>
+      </view>
+      <switch checked="{{showPinyin}}" bindchange="onPinyinToggle" color="#f0821e" />
+    </view>
+  </view>
+
+  <!-- 描红遍数 -->
+  <view class="card block" wx:if="{{modeIndex !== 1}}">
+    <view class="sec-head"><view class="sec-dot"></view><text>遍数</text><text class="sec-idx">04</text></view>
+    <view class="field row-last">
+      <view class="field-label-row"><text>描红遍数（红色）</text><text class="v-badge">{{traceCount}} 遍</text></view>
+      <slider min="0" max="8" step="1" value="{{traceCount}}" bindchange="onTraceChange" activeColor="#f0821e" backgroundColor="#e9d7bc" block-size="24" />
+      <view class="auto-tip">范字固定 1 遍，行内其余自动补空白练习格</view>
+    </view>
+  </view>
+
+  <button class="btn-primary generate" loading="{{submitting}}" bindtap="submit">
+    {{modeIndex === 1 ? '生成听写卷' : modeIndex === 2 ? '生成生字卡片' : '生成字帖'}} →
+  </button>
+  <view class="quota-tip" wx:if="{{quotaRemaining !== null}}">今日剩余生成 {{quotaRemaining}} 份</view>
+</view>
+
+<!-- 课本导入弹框 -->
+<view class="tb-mask" wx:if="{{modalOpen}}" bindtap="closeModal" catchtouchmove="noop">
+  <view class="tb-panel" catchtap="noop">
+    <view class="tb-head">
+      <text class="tb-title">内容导入</text>
+      <view class="tb-close" bindtap="closeModal">✕</view>
+    </view>
+
+    <!-- 课文 | 古诗词 页签（固定） -->
+    <view class="tb-toptabs">
+      <view class="tb-toptab {{modalTabIndex === 0 ? 'on' : ''}}" data-index="0" bindtap="onModalTabTap">课文生字</view>
+      <view class="tb-toptab {{modalTabIndex === 1 ? 'on' : ''}}" data-index="1" bindtap="onModalTabTap">古诗词</view>
+    </view>
+
+    <!-- 中段：单一滚动区，内容再多也不会遮挡底栏 -->
+    <scroll-view scroll-y class="tb-body">
+
+      <!-- ===== 课文生字 ===== -->
+      <block wx:if="{{modalTabIndex === 0}}">
+        <view class="tb-block-label">选择教材</view>
+        <view class="tb-books-grid">
+          <view
+            wx:for="{{bookNames}}"
+            wx:key="index"
+            class="tb-book {{modalBookIndex === index ? 'on' : ''}}"
+            data-index="{{index}}"
+            bindtap="onModalBookTap"
+          >
+            <text class="tb-book-name">{{bookShorts[index]}}</text>
+            <text class="tb-book-count">{{bookCounts[index]}}</text>
+            <text wx:if="{{bookLegacy[index]}}" class="tb-book-legacy">旧版</text>
+          </view>
+        </view>
+        <view wx:if="{{!bookNames.length}}" class="tb-loading">教材加载中…</view>
+        <view class="tb-legacy-tip" wx:if="{{modalBookIndex >= 0 && bookLegacy[modalBookIndex]}}">该册为旧版课目，生字以孩子实际课本为准</view>
+
+        <view class="tb-current" wx:if="{{modalBookIndex >= 0}}">{{bookNames[modalBookIndex]}}</view>
+
+        <view class="tb-tabs" wx:if="{{modalSections.length}}">
+          <view
+            wx:for="{{modalSections}}"
+            wx:key="label"
+            class="tb-tab {{modalSectionIndex === index ? 'on' : ''}}"
+            data-index="{{index}}"
+            bindtap="onModalSectionTap"
+          >{{item.label}}</view>
+          <view class="tb-tab-all" bindtap="onToggleSectionAll">全选本组</view>
+        </view>
+
+        <view class="tb-block-label" wx:if="{{modalSections.length}}">选择课文（可多选）</view>
+        <view wx:if="{{modalBookLoading}}" class="tb-loading">课文加载中…</view>
+        <view wx:elif="{{modalSections.length}}" class="tb-lesson-wrap">
+          <view
+            wx:for="{{modalSections[modalSectionIndex].lessons}}"
+            wx:key="index"
+            class="tb-lesson {{item.selected ? 'on' : ''}}"
+            data-index="{{item.index}}"
+            bindtap="onModalLessonClick"
+          >{{item.selected ? '✓ ' : ''}}{{item.title}}</view>
+        </view>
+        <view wx:else class="tb-loading">选择教材后显示课文</view>
+      </block>
+
+      <!-- ===== 古诗词 ===== -->
+      <block wx:if="{{modalTabIndex === 1}}">
+        <view class="tb-block-label">选择年级</view>
+        <scroll-view scroll-x class="tb-tabs-scroll" enhanced show-scrollbar="{{false}}">
+          <view class="tb-gradebar">
+            <view
+              wx:for="{{poemGrades}}"
+              wx:key="*this"
+              class="tb-grade {{poemGradeIndex === index ? 'on' : ''}}"
+              data-index="{{index}}"
+              bindtap="onPoemGradeTap"
+            >{{item}}</view>
+          </view>
+        </scroll-view>
+
+        <view class="tb-block-label">选择诗词（单选）</view>
+        <view
+          wx:for="{{poemsOfGrade}}"
+          wx:key="id"
+          class="tb-poem {{poemSelectedId === item.id ? 'on' : ''}}"
+          data-id="{{item.id}}"
+          bindtap="onPoemTap"
+        >
+          <view class="tb-poem-head">
+            <text class="tb-poem-title">{{item.title}}</text>
+            <text class="tb-poem-author">{{item.author}}</text>
+          </view>
+          <text class="tb-poem-text">{{item.text}}</text>
+        </view>
+        <view wx:if="{{!poemsOfGrade.length}}" class="tb-loading">诗词加载中…</view>
+      </block>
+
+      <view class="tb-body-pad"></view>
+    </scroll-view>
+
+    <!-- 底栏（固定） -->
+    <view class="tb-footer">
+      <view class="tb-stat" wx:if="{{modalTabIndex === 0}}">
+        <text>已选 <b>{{selectedCount}}</b> 课 · <b>{{selectedCharCount}}</b> 个生字</text>
+        <text class="tb-limit">{{selectedCharCount > 60 ? '超过 60 字上限' : '上限 60 字'}}</text>
+      </view>
+      <view class="tb-stat" wx:else>
+        <text>选一首诗 · 整首生字练习</text>
+        <text class="tb-limit">标点自动去除</text>
+      </view>
+      <button class="tb-import" bindtap="confirmImport" disabled="{{modalTabIndex === 0 && (selectedCount === 0 || selectedCharCount > 60)}}">导入选中内容</button>
+    </view>
+  </view>
+</view>

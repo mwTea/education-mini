@@ -1,0 +1,12 @@
+services:
+  copybook:
+    build: ./backend
+    container_name: copybook-backend
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      # - COPYBOOK_DATA_DIR=/app/data   # 数据目录（默认即 /app/data）
+    volumes:
+      - ./backend/data:/app/data   # 字帖数据持久化，重建容器不丢
+    restart: unless-stopped

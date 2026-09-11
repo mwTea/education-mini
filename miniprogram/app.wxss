@@ -1,0 +1,146 @@
+/* app.wxss —— 习字簿设计语言：纸感底 + 田字格纹 + 暖橙主色 */
+page {
+  background-color: #faf4e8;
+  background-image:
+    linear-gradient(rgba(210, 187, 148, 0.14) 2rpx, transparent 2rpx),
+    linear-gradient(90deg, rgba(210, 187, 148, 0.14) 2rpx, transparent 2rpx);
+  background-size: 56rpx 56rpx;
+  color: #3a2e25;
+  font-size: 28rpx;
+  font-family: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif;
+}
+
+button::after {
+  border: none;
+}
+
+/* 主按钮：暖橙渐变 + 投影 */
+.btn-primary {
+  background: linear-gradient(135deg, #ffa04d 0%, #f2703f 100%);
+  color: #fff;
+  border-radius: 48rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  height: 96rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12rpx 28rpx rgba(242, 112, 63, 0.35);
+}
+
+.btn-ghost {
+  background: #fff;
+  color: #b0653a;
+  border: 2rpx solid #ecd9c3;
+  border-radius: 48rpx;
+  font-size: 28rpx;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-ghost.danger {
+  color: #d9534f;
+  border-color: #f2c4c0;
+}
+
+/* 通用卡片 */
+.card {
+  background: #fff;
+  border-radius: 32rpx;
+  box-shadow: 0 10rpx 30rpx rgba(140, 95, 50, 0.1);
+}
+
+/* 区块标题：色点 + 标题 */
+.sec-head {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #3a2e25;
+}
+
+.sec-dot {
+  width: 14rpx;
+  height: 14rpx;
+  border-radius: 4rpx;
+  background: linear-gradient(135deg, #ffa04d, #f2703f);
+}
+
+/* 分段控制器 */
+.seg {
+  display: flex;
+  background: #f4ecdd;
+  border-radius: 20rpx;
+  padding: 6rpx;
+}
+
+.seg-item {
+  flex: 1;
+  text-align: center;
+  font-size: 26rpx;
+  color: #a4937f;
+  border-radius: 16rpx;
+  padding: 14rpx 0;
+  transition: all 0.2s;
+}
+
+.seg-item.on {
+  background: #fff;
+  color: #e2703a;
+  font-weight: 600;
+  box-shadow: 0 4rpx 12rpx rgba(150, 108, 60, 0.12);
+}
+
+/* 迷你田字格（选择器预览用） */
+.mini-grid {
+  position: relative;
+  width: 52rpx;
+  height: 52rpx;
+  border: 3rpx solid #5b9e7d;
+  border-radius: 6rpx;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+.mg-v {
+  position: absolute;
+  left: 50%;
+  top: 2rpx;
+  bottom: 2rpx;
+  border-left: 2rpx dashed #a8cbb6;
+}
+
+.mg-h {
+  position: absolute;
+  top: 50%;
+  left: 2rpx;
+  right: 2rpx;
+  border-top: 2rpx dashed #a8cbb6;
+}
+
+.mg-d1,
+.mg-d2 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 96%;
+  height: 0;
+  border-top: 2rpx dashed #a8cbb6;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.mg-d2 {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.mg-fang {
+  border-color: #7f878e;
+}
+
+.mg-fang .mg-v,
+.mg-fang .mg-h {
+  border-color: transparent;
+}

@@ -1,0 +1,41 @@
+<view class="page-wrap">
+  <view class="card">
+    <view class="sec-head"><view class="sec-dot"></view><text>教材版本</text><text class="sec-idx">01</text></view>
+    <view class="seg" style="margin-top: 24rpx;">
+      <view class="seg-item {{version === 'pep' ? 'on' : ''}}" data-v="pep" bindtap="onVersionTap">人教版</view>
+      <view class="seg-item {{version === 'jijiao' ? 'on' : ''}}" data-v="jijiao" bindtap="onVersionTap">冀教版</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="sec-head"><view class="sec-dot"></view><text>年级学期</text><text class="sec-idx">02</text></view>
+    <view class="book-grid">
+      <view wx:for="{{books}}" wx:key="id" class="book-item {{bookIndex === index ? 'on' : ''}}" data-index="{{index}}" bindtap="onBookTap"><text>{{item.short}}</text></view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="sec-head"><view class="sec-dot"></view><text>难度</text><text class="sec-idx">03</text></view>
+    <view class="seg" style="margin-top: 24rpx;">
+      <view wx:for="{{diffs}}" wx:key="id" class="seg-item {{diffIndex === index ? 'on' : ''}}" data-index="{{index}}" bindtap="onDiffTap">{{item.name}}</view>
+    </view>
+    <view class="auto-tip">{{diffs[diffIndex].tip}}</view>
+  </view>
+
+  <!-- 错题复习：有待复习题时展示，带数据摘要 -->
+  <view class="review-card" wx:if="{{learning && learning.pending}}" bindtap="goReview">
+    <view class="rv-icon">错</view>
+    <view class="rv-info">
+      <view class="rv-title">错题复习{{learning.due ? ' · ' + learning.due + ' 题今天该练' : ''}}</view>
+      <view class="rv-sub" wx:if="{{learning.count}}">近7天已练 {{learning.count}} 题 · 答对率 {{learning.rate}}%</view>
+      <view class="rv-sub" wx:else>本册累计 {{learning.pending}} 道错题待消化</view>
+    </view>
+    <view class="rv-go">去复习</view>
+  </view>
+
+  <view class="dual-btns">
+    <button class="btn-ghost2 grow" bindtap="goQuiz">在线练习</button>
+    <button class="btn-primary grow" bindtap="goConfig">生成题卡</button>
+  </view>
+  <view class="ad-slot" />
+</view>

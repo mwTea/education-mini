@@ -1,0 +1,85 @@
+<view class="page-wrap {{stage === 'quiz' ? 'quiz-active' : ''}}">
+  <!-- 开始页：选题量 -->
+  <view wx:if="{{stage === 'start'}}" class="start-card">
+    <view class="s-title">{{reviewMode ? '错题复习' : '在线口算练习'}}</view>
+    <view class="s-sub">{{cfgLabel}}</view>
+    <view class="s-sub">在线口算练习 · 不计入生成次数</view>
+    <block wx:if="{{showCfg && !reviewMode}}">
+    <view class="s-label">教材版本</view>
+    <view class="seg">
+      <view class="seg-item {{cfg.version === 'pep' ? 'on' : ''}}" data-v="pep" bindtap="onCfgVersion">人教版</view>
+      <view class="seg-item {{cfg.version === 'jijiao' ? 'on' : ''}}" data-v="jijiao" bindtap="onCfgVersion">冀教版</view>
+    </view>
+    <view class="s-label">年级学期</view>
+    <view class="book-grid">
+      <view wx:for="{{books}}" wx:key="id" class="bk {{cfg.bookId === item.id ? 'on' : ''}}" data-id="{{item.id}}" bindtap="onCfgBook">{{item.short}}</view>
+    </view>
+    <view class="s-label">难度</view>
+    <view class="seg">
+      <view class="seg-item {{cfg.difficulty === 'basic' ? 'on' : ''}}" data-d="basic" bindtap="onCfgDiff">基础</view>
+      <view class="seg-item {{cfg.difficulty === 'standard' ? 'on' : ''}}" data-d="standard" bindtap="onCfgDiff">巩固</view>
+      <view class="seg-item {{cfg.difficulty === 'advanced' ? 'on' : ''}}" data-d="advanced" bindtap="onCfgDiff">培优</view>
+    </view>
+    </block>
+    <view class="s-label">题目数量</view>
+    <view class="seg">
+      <view wx:for="{{counts}}" wx:key="*this" class="seg-item {{count === item ? 'on' : ''}}" data-v="{{item}}" bindtap="onCountTap">{{item}} 题</view>
+    </view>
+    <button class="btn-primary" bindtap="onStart">开始练习 →</button>
+  </view>
+
+  <!-- 答题 -->
+  <block wx:if="{{stage === 'quiz'}}">
+    <view class="topbar">
+      <text class="q-meta">{{idx + 1}}/{{total}}</text>
+      <view class="progress"><view class="pg-bar" style="width: {{(idx / total) * 100}}%"></view></view>
+      <text class="q-timer {{qSec > 20 ? 'slow' : ''}}">{{qSec}}s</text>
+    </view>
+    <view class="q-stem" style="font-size:{{cur.stem.length > 22 ? 36 : cur.stem.length > 14 ? 48 : 64}}rpx;">{{cur.stem}}</view>
+    <view class="ans-row">
+      <view class="ans-box {{feedback}}">{{input || '？'}}</view>
+    </view>
+    <view class="keypad">
+      <view class="key" data-k="1" bindtap="onKey">1</view><view class="key" data-k="2" bindtap="onKey">2</view><view class="key" data-k="3" bindtap="onKey">3</view>
+      <view class="key" data-k="4" bindtap="onKey">4</view><view class="key" data-k="5" bindtap="onKey">5</view><view class="key" data-k="6" bindtap="onKey">6</view>
+      <view class="key" data-k="7" bindtap="onKey">7</view><view class="key" data-k="8" bindtap="onKey">8</view><view class="key" data-k="9" bindtap="onKey">9</view>
+      <view class="key" data-k="." bindtap="onKey">.</view><view class="key" data-k="0" bindtap="onKey">0</view><view class="key func" data-k="del" bindtap="onKey">删除</view>
+      <view class="row2">
+        <view class="key half draft" bindtap="onDraftToggle">✏️ 草稿</view>
+        <view class="key half ok" data-k="ok" bindtap="onKey">确定</view>
+      </view>
+    </view>
+
+    <view wx:if="{{draft}}" class="draft-mask" catchtouchmove="noop">
+      <canvas type="2d" id="draft-cv" class="draft-cv"
+        bindtouchstart="onDraftStart" bindtouchmove="onDraftMove" bindtouchend="onDraftEnd"></canvas>
+      <view class="draft-bar">
+        <view class="d-act" bindtap="onDraftClear">清空</view>
+        <view class="d-act primary" bindtap="onDraftToggle">退出草稿</view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 结算 -->
+  <view wx:if="{{stage === 'done'}}" class="result-card">
+    <view class="r-stars">{{stars}}</view>
+    <view class="r-score">{{score}}<text class="r-total">/{{total}}</text></view>
+    <view class="r-words">{{words}}</view>
+    <view class="r-chips">
+      <view class="chip"><view class="c-num">{{usedSec}}s</view><view class="c-lbl">总用时</view></view>
+      <view class="chip"><view class="c-num">{{avgSec}}s</view><view class="c-lbl">平均每题</view></view>
+      <view class="chip"><view class="c-num">{{rate}}%</view><view class="c-lbl">正确率</view></view>
+    </view>
+  </view>
+  <block wx:if="{{stage === 'done'}}">
+    <view class="card" wx:if="{{wrongs.length}}">
+      <view class="sec-head"><view class="sec-dot"></view><text>错题（{{wrongs.length}}）</text></view>
+      <view class="wrong-item" wx:for="{{wrongs}}" wx:key="index">
+        <text class="w-stem">{{item.stem}}</text>
+        <text class="w-ans">正确：{{item.answer}}</text>
+      </view>
+    </view>
+    <button class="btn-primary generate" bindtap="onRetry">再练一组</button>
+    <button class="btn-ghost2" bindtap="onWrongRetry" wx:if="{{wrongs.length}}">只练错题</button>
+  </block>
+</view>

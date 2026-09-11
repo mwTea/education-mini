@@ -1,0 +1,190 @@
+<view class="page-wrap">
+
+  <!-- 类型 -->
+  <view class="card block">
+    <view class="sec-head"><view class="sec-dot"></view><text>类型</text><text class="sec-idx">01</text></view>
+    <view class="seg" style="margin-top: 24rpx;">
+      <view class="seg-item {{typeIndex === 0 ? 'on' : ''}}" data-index="0" bindtap="onTypeTap">字母字帖</view>
+      <view class="seg-item {{typeIndex === 1 ? 'on' : ''}}" data-index="1" bindtap="onTypeTap">单词字帖</view>
+      <view class="seg-item {{typeIndex === 2 ? 'on' : ''}}" data-index="2" bindtap="onTypeTap">默写帖</view>
+    </view>
+    <view class="hint" wx:if="{{typeIndex === 0}}">26 组字母，大小写同步描红，四线三格标准书写。</view>
+    <view class="hint" wx:if="{{typeIndex === 1}}">按教材单元或多选主题词包导入，自动附中文释义与词性。</view>
+    <view class="hint" wx:if="{{typeIndex === 2}}">可从词库导入或手动输入；支持中译英（看中文默英文）与英译汉（看英文默中文）两种方向，页首附核对栏。</view>
+  </view>
+
+  <!-- 内容 -->
+  <view class="card block">
+    <view class="sec-head"><view class="sec-dot"></view><text>练习内容</text><text class="sec-idx">02</text></view>
+
+    <!-- 字母字帖：内置 26 组 -->
+    <view class="field row-last" wx:if="{{typeIndex === 0}}">
+      <view class="letters-preview">{{letters}}</view>
+      <view class="auto-tip">内置内容：Aa–Zz 大小写成对，无需输入</view>
+    </view>
+
+    <!-- 单词/默写帖：词库导入 -->
+    <block wx:if="{{typeIndex !== 0}}">
+      <view class="field">
+        <view class="field-label">从词库导入（可多组合并）</view>
+        <view class="book-row" bindtap="openWordModal">
+          <view class="book-bubble">{{importSummary ? '✓' : '词'}}</view>
+          <view class="book-info">
+            <view class="book-name">{{importSummary || '选择教材单元 / 词包'}}</view>
+            <view class="book-sub">{{importSummary ? '点击可重选' : '教材同步词表 + 少儿高频词 + 核心词汇'}}</view>
+          </view>
+          <view class="chev">›</view>
+        </view>
+      </view>
+      <view class="field" wx:if="{{importSummary}}">
+        <view class="field-label-row">
+          <text>已导入内容</text>
+          <text class="counter">{{text.length}}/300</text>
+        </view>
+        <view class="words-preview">{{text}}</view>
+      </view>
+    </block>
+
+    <!-- 默写帖：手动输入（可与导入内容混用） -->
+    <view class="field row-last" wx:if="{{typeIndex === 2}}">
+      <view class="field-label-row">
+        <text>单词或句子</text>
+        <text class="counter">{{text.length}}/300</text>
+      </view>
+      <textarea class="textarea" placeholder="例如：good morning teacher" value="{{text}}" bindinput="onTextInput" maxlength="300" auto-height />
+    </view>
+  </view>
+
+  <!-- 样式 -->
+  <view class="card block">
+    <view class="sec-head"><view class="sec-dot"></view><text>样式</text><text class="sec-idx">03</text></view>
+
+    <view class="field" wx:if="{{typeIndex === 2}}">
+      <view class="field-label">默写方向</view>
+      <view class="chip-row">
+        <view class="opt-chip {{dictDirIndex === 0 ? 'on' : ''}}" data-index="0" bindtap="onDictDirTap">
+          <text class="case-demo">汉</text>
+          <view class="pd-text"><view class="pd-name">中译英</view><view class="pd-sub">提示中文 · 默写英文</view></view>
+        </view>
+        <view class="opt-chip {{dictDirIndex === 1 ? 'on' : ''}}" data-index="1" bindtap="onDictDirTap">
+          <text class="case-demo">EN</text>
+          <view class="pd-text"><view class="pd-name">英译汉</view><view class="pd-sub">提示英文 · 默写中文</view></view>
+        </view>
+      </view>
+    </view>
+
+    <view class="field" wx:if="{{typeIndex !== 0}}">
+      <view class="field-label">大小写</view>
+      <view class="chip-row">
+        <view class="opt-chip {{caseIndex === 0 ? 'on' : ''}}" data-index="0" bindtap="onCaseTap">
+          <text class="case-demo">Aa</text><text>保持原样</text>
+        </view>
+        <view class="opt-chip {{caseIndex === 1 ? 'on' : ''}}" data-index="1" bindtap="onCaseTap">
+          <text class="case-demo">AA</text><text>全部大写</text>
+        </view>
+        <view class="opt-chip {{caseIndex === 2 ? 'on' : ''}}" data-index="2" bindtap="onCaseTap">
+          <text class="case-demo">aa</text><text>全部小写</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="field row-last">
+      <view class="field-label">纸张</view>
+      <view class="chip-row">
+        <view class="opt-chip {{paperIndex === 0 ? 'on' : ''}}" data-index="0" bindtap="onPaperTap">
+          <view class="paper-demo classic"><text class="pd-demo">a</text></view>
+          <view class="pd-text"><view class="pd-name">仿真字帖纸</view><view class="pd-sub">绿线 · 红描红</view></view>
+        </view>
+        <view class="opt-chip {{paperIndex === 1 ? 'on' : ''}}" data-index="1" bindtap="onPaperTap">
+          <view class="paper-demo plain"><text class="pd-demo gray">a</text></view>
+          <view class="pd-text"><view class="pd-name">素雅</view><view class="pd-sub">灰线 · 浅描红</view></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 遍数 -->
+  <view class="card block">
+    <view class="sec-head"><view class="sec-dot"></view><text>遍数</text><text class="sec-idx">04</text></view>
+
+    <view class="field" wx:if="{{typeIndex !== 2}}">
+      <view class="field-label-row"><text>描红次数（浅色字）</text><text class="v-badge">{{traceCount}} 次</text></view>
+      <slider min="0" max="4" step="1" value="{{traceCount}}" bindchange="onTraceChange" activeColor="#f0821e" backgroundColor="#e9d7bc" block-size="24" />
+    </view>
+
+    <view class="field row-last">
+      <view class="field-label-row"><text>{{typeIndex === 2 ? '每词书写次数' : '练习次数（描红后空白书写）'}}</text><text class="v-badge">{{blankCount}} 次</text></view>
+      <slider min="1" max="6" step="1" value="{{blankCount}}" bindchange="onBlankChange" activeColor="#f0821e" backgroundColor="#e9d7bc" block-size="24" />
+      <view class="auto-tip" wx:if="{{typeIndex !== 2}}">每个单词：先描红 {{traceCount}} 次，紧接着空白练习 {{blankCount}} 次</view>
+    </view>
+  </view>
+
+  <button class="btn-primary generate" loading="{{submitting}}" bindtap="submit">
+    {{typeIndex === 0 ? '生成字母字帖' : typeIndex === 1 ? '生成单词字帖' : '生成默写帖'}} →
+  </button>
+  <view class="quota-tip" wx:if="{{quotaRemaining !== null}}">今日剩余生成 {{quotaRemaining}} 份</view>
+</view>
+
+<!-- 词库导入弹框 -->
+<view class="tb-mask" wx:if="{{wordModalOpen}}" bindtap="closeWordModal" catchtouchmove="noop">
+  <view class="tb-panel" catchtap="noop">
+    <view class="tb-head">
+      <text class="tb-title">从词库导入</text>
+      <view class="tb-close" bindtap="closeWordModal">✕</view>
+    </view>
+
+    <view class="tb-toptabs">
+      <view class="tb-toptab {{wordModalTab === 0 ? 'on' : ''}}" data-index="0" bindtap="onWordModalTabTap">教材词表</view>
+      <view class="tb-toptab {{wordModalTab === 1 ? 'on' : ''}}" data-index="1" bindtap="onWordModalTabTap">主题词包</view>
+    </view>
+
+    <!-- 中段：单一滚动区 -->
+    <scroll-view scroll-y class="tb-body">
+      <view class="tb-block-label">选择词库</view>
+      <view class="tb-books-grid">
+        <view
+          wx:for="{{wbList}}"
+          wx:key="id"
+          class="tb-book {{wbIndex === index ? 'on' : ''}}"
+          data-index="{{index}}"
+          bindtap="onWbTap"
+        >
+          <text class="tb-book-name">{{item.short}}</text>
+          <text class="tb-book-count">{{item.count}}词</text>
+          <text wx:if="{{item.legacy}}" class="tb-book-legacy">旧版</text>
+        </view>
+      </view>
+      <view wx:if="{{!wbList.length}}" class="tb-loading">{{wbEmptyText}}</view>
+      <view class="tb-legacy-tip" wx:if="{{wbIndex >= 0 && wbList[wbIndex].legacy}}">该册为旧版教材词表，以孩子实际课本为准</view>
+
+      <view class="tb-current" wx:if="{{wbCurrentName}}">{{wbCurrentName}}</view>
+
+      <view class="tb-tabs" wx:if="{{wbUnits.length}}">
+        <view class="tb-tab-all" bindtap="onUnitAllTap">全选 / 清空</view>
+      </view>
+      <view class="tb-block-label" wx:if="{{wbUnits.length}}">选择单元（可多选）</view>
+      <view wx:if="{{wbLoading}}" class="tb-loading">词库加载中…</view>
+      <view wx:elif="{{wbUnits.length}}" class="tb-lesson-wrap">
+        <view
+          wx:for="{{wbUnits}}"
+          wx:key="title"
+          class="tb-lesson {{item.selected ? 'on' : ''}}"
+          data-index="{{index}}"
+          bindtap="onUnitTap"
+        >{{item.selected ? '✓ ' : ''}}{{item.title}}（{{item.words.length}}）</view>
+      </view>
+      <view wx:else class="tb-loading">选择词库后显示单元</view>
+
+      <view class="tb-body-pad"></view>
+    </scroll-view>
+
+    <!-- 底栏（固定） -->
+    <view class="tb-footer">
+      <view class="tb-stat">
+        <text>已选 <b>{{selectedWordCount}}</b> 个单词</text>
+        <text class="tb-limit">自动去重 · 上限 300 字符</text>
+      </view>
+      <button class="tb-import" bindtap="confirmWordImport" disabled="{{selectedWordCount === 0}}">导入选中单词</button>
+    </view>
+  </view>
+</view>

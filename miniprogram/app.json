@@ -1,0 +1,45 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/chinese/chinese",
+    "pages/english/english",
+    "pages/preview/preview",
+    "pages/history/history",
+    "pages/about/about",
+    "pages/radicals/radicals",
+    "pages/math/index/index",
+    "pages/math/config/config",
+    "pages/profile/profile",
+    "pages/math/quiz/quiz"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#faf4e8",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "字帖出题器",
+    "backgroundColor": "#faf4e8",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "color": "#9a8c80",
+    "selectedColor": "#f0821e",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/history/history",
+        "text": "历史"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

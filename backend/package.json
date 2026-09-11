@@ -1,0 +1,24 @@
+{
+  "name": "copybook-backend",
+  "version": "0.1.0",
+  "description": "语文英语字帖出题器 - 后端服务（字帖排版 + 可打印页面生成）",
+  "main": "src/server.js",
+  "scripts": {
+    "predev": "node scripts/check-port.js",
+    "prestart": "node scripts/check-port.js",
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "dev:preview": "node scripts/dev-preview.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18.11"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "hanzi-writer-data": "^2.0.1",
+    "pdfkit": "^0.20.2",
+    "pinyin-pro": "^3.29.3"
+  },
+  "license": "MIT"
+}

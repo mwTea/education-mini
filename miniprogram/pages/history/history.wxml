@@ -1,0 +1,23 @@
+<view class="page-wrap">
+  <view wx:if="{{list.length}}" class="keep-tip">生成记录保留 10 天，过期后可重新生成</view>
+  <block wx:if="{{list.length}}">
+    <view class="history-item" wx:for="{{list}}" wx:key="id" data-id="{{item.id}}" bindtap="open">
+      <view class="r-tag {{item.type === 'chinese' ? 'cn' : item.type === 'math' ? 'cn' : 'en'}}">{{item.type === 'chinese' ? '语' : item.type === 'math' ? '数' : 'EN'}}</view>
+      <view class="history-info">
+        <view class="history-title">{{item.title}}</view>
+        <view class="history-meta">{{item.pageCount || 1}} 页 · {{item.dateText}}</view>
+      </view>
+      <view class="delete" data-id="{{item.id}}" catchtap="remove">删除</view>
+    </view>
+  </block>
+
+  <view wx:else class="empty">
+    <view class="empty-grid">
+      <view class="eg-v"></view>
+      <view class="eg-h"></view>
+      <text class="eg-char">字</text>
+    </view>
+    <view class="empty-text">还没有生成过字帖</view>
+    <view class="empty-sub">去首页创建一份吧</view>
+  </view>
+</view>

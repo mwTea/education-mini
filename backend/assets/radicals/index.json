@@ -1,0 +1,1420 @@
+{
+  "items": [
+    {
+      "id": "冫",
+      "name": "两点水",
+      "exampleChars": [
+        "凉",
+        "习",
+        "决",
+        "准",
+        "冲",
+        "净"
+      ],
+      "pdf": "/assets/radicals/radical-5Yar.pdf"
+    },
+    {
+      "id": "讠",
+      "name": "言字旁",
+      "exampleChars": [
+        "词",
+        "语",
+        "说",
+        "请",
+        "讲",
+        "许"
+      ],
+      "pdf": "/assets/radicals/radical-6K6g.pdf"
+    },
+    {
+      "id": "亻",
+      "name": "单人旁",
+      "exampleChars": [
+        "们",
+        "你",
+        "什",
+        "体",
+        "住",
+        "伙"
+      ],
+      "pdf": "/assets/radicals/radical-5Lq7.pdf"
+    },
+    {
+      "id": "刂",
+      "name": "立刀旁",
+      "exampleChars": [
+        "前",
+        "到",
+        "刚",
+        "别",
+        "利",
+        "刻"
+      ],
+      "pdf": "/assets/radicals/radical-5YiC.pdf"
+    },
+    {
+      "id": "丷",
+      "name": "八字头",
+      "exampleChars": [
+        "单",
+        "关",
+        "兽",
+        "兰",
+        "养"
+      ],
+      "pdf": "/assets/radicals/radical-5Li3.pdf"
+    },
+    {
+      "id": "冖",
+      "name": "秃宝盖",
+      "exampleChars": [
+        "写",
+        "农",
+        "冠"
+      ],
+      "pdf": "/assets/radicals/radical-5YaW.pdf"
+    },
+    {
+      "id": "卜",
+      "name": "卜字边",
+      "exampleChars": [
+        "卡",
+        "卜"
+      ],
+      "pdf": "/assets/radicals/radical-5Y2c.pdf"
+    },
+    {
+      "id": "卩",
+      "name": "单耳刀",
+      "exampleChars": [
+        "却",
+        "即",
+        "印",
+        "卵",
+        "卸"
+      ],
+      "pdf": "/assets/radicals/radical-5Y2p.pdf"
+    },
+    {
+      "id": "阝",
+      "name": "双耳刀",
+      "exampleChars": [
+        "阳",
+        "那",
+        "部",
+        "际",
+        "阵",
+        "邻"
+      ],
+      "pdf": "/assets/radicals/radical-6Zid.pdf"
+    },
+    {
+      "id": "力",
+      "name": "力字旁",
+      "exampleChars": [
+        "力",
+        "动",
+        "加",
+        "劳",
+        "劲",
+        "劝"
+      ],
+      "pdf": "/assets/radicals/radical-5Yqb.pdf"
+    },
+    {
+      "id": "又",
+      "name": "又字旁",
+      "exampleChars": [
+        "又",
+        "双",
+        "变",
+        "及",
+        "发",
+        "难"
+      ],
+      "pdf": "/assets/radicals/radical-5Y-I.pdf"
+    },
+    {
+      "id": "廴",
+      "name": "建之旁",
+      "exampleChars": [
+        "建",
+        "延"
+      ],
+      "pdf": "/assets/radicals/radical-5bu0.pdf"
+    },
+    {
+      "id": "工",
+      "name": "工字旁",
+      "exampleChars": [
+        "左",
+        "差",
+        "巧"
+      ],
+      "pdf": "/assets/radicals/radical-5bel.pdf"
+    },
+    {
+      "id": "土",
+      "name": "提土旁",
+      "exampleChars": [
+        "地",
+        "土",
+        "在",
+        "壁",
+        "坏",
+        "坡"
+      ],
+      "pdf": "/assets/radicals/radical-5Zyf.pdf"
+    },
+    {
+      "id": "士",
+      "name": "士字旁",
+      "exampleChars": [
+        "声",
+        "士",
+        "壮",
+        "壳",
+        "壶"
+      ],
+      "pdf": "/assets/radicals/radical-5aOr.pdf"
+    },
+    {
+      "id": "扌",
+      "name": "提手旁",
+      "exampleChars": [
+        "打",
+        "把",
+        "才",
+        "拍",
+        "招",
+        "扛"
+      ],
+      "pdf": "/assets/radicals/radical-5omM.pdf"
+    },
+    {
+      "id": "艹",
+      "name": "草字头",
+      "exampleChars": [
+        "草",
+        "花",
+        "节",
+        "苍",
+        "茫",
+        "苗"
+      ],
+      "pdf": "/assets/radicals/radical-6Im5.pdf"
+    },
+    {
+      "id": "寸",
+      "name": "寸字底",
+      "exampleChars": [
+        "对",
+        "封",
+        "导",
+        "射",
+        "尊",
+        "寿"
+      ],
+      "pdf": "/assets/radicals/radical-5a-4.pdf"
+    },
+    {
+      "id": "大",
+      "name": "大字头",
+      "exampleChars": [
+        "天",
+        "大",
+        "头",
+        "太",
+        "奇",
+        "奖"
+      ],
+      "pdf": "/assets/radicals/radical-5aSn.pdf"
+    },
+    {
+      "id": "口",
+      "name": "口字旁",
+      "exampleChars": [
+        "口",
+        "听",
+        "句",
+        "台",
+        "可",
+        "后"
+      ],
+      "pdf": "/assets/radicals/radical-5Y-j.pdf"
+    },
+    {
+      "id": "囗",
+      "name": "国字框",
+      "exampleChars": [
+        "回",
+        "国",
+        "因",
+        "圆",
+        "园",
+        "团"
+      ],
+      "pdf": "/assets/radicals/radical-5ZuX.pdf"
+    },
+    {
+      "id": "巾",
+      "name": "巾字旁",
+      "exampleChars": [
+        "带",
+        "幅",
+        "市",
+        "师",
+        "帆",
+        "币"
+      ],
+      "pdf": "/assets/radicals/radical-5be-.pdf"
+    },
+    {
+      "id": "山",
+      "name": "山字旁",
+      "exampleChars": [
+        "山",
+        "岁",
+        "岸",
+        "岛",
+        "峡",
+        "岭"
+      ],
+      "pdf": "/assets/radicals/radical-5bGx.pdf"
+    },
+    {
+      "id": "彳",
+      "name": "双人旁",
+      "exampleChars": [
+        "很",
+        "得",
+        "待",
+        "径",
+        "徒",
+        "循"
+      ],
+      "pdf": "/assets/radicals/radical-5b2z.pdf"
+    },
+    {
+      "id": "彡",
+      "name": "三撇儿",
+      "exampleChars": [
+        "彩",
+        "形",
+        "影",
+        "彤",
+        "彬",
+        "彭"
+      ],
+      "pdf": "/assets/radicals/radical-5b2h.pdf"
+    },
+    {
+      "id": "夕",
+      "name": "夕字旁",
+      "exampleChars": [
+        "多",
+        "夕",
+        "外",
+        "夜",
+        "够"
+      ],
+      "pdf": "/assets/radicals/radical-5aSV.pdf"
+    },
+    {
+      "id": "犭",
+      "name": "反犬旁",
+      "exampleChars": [
+        "猴",
+        "猪",
+        "猛",
+        "猜",
+        "狂",
+        "犯"
+      ],
+      "pdf": "/assets/radicals/radical-54qt.pdf"
+    },
+    {
+      "id": "饣",
+      "name": "食字旁",
+      "exampleChars": [
+        "饭",
+        "饿",
+        "饱",
+        "馋",
+        "饲",
+        "馆"
+      ],
+      "pdf": "/assets/radicals/radical-6aWj.pdf"
+    },
+    {
+      "id": "广",
+      "name": "广字头",
+      "exampleChars": [
+        "广",
+        "床",
+        "平",
+        "底",
+        "度",
+        "座"
+      ],
+      "pdf": "/assets/radicals/radical-5bm_.pdf"
+    },
+    {
+      "id": "门",
+      "name": "门字框",
+      "exampleChars": [
+        "闪",
+        "问",
+        "间",
+        "门",
+        "闭",
+        "闹"
+      ],
+      "pdf": "/assets/radicals/radical-6Zeo.pdf"
+    },
+    {
+      "id": "氵",
+      "name": "三点水",
+      "exampleChars": [
+        "清",
+        "池",
+        "江",
+        "没",
+        "河",
+        "洗"
+      ],
+      "pdf": "/assets/radicals/radical-5rC1.pdf"
+    },
+    {
+      "id": "忄",
+      "name": "竖心旁",
+      "exampleChars": [
+        "惊",
+        "情",
+        "快",
+        "怪",
+        "慢",
+        "忆"
+      ],
+      "pdf": "/assets/radicals/radical-5b-E.pdf"
+    },
+    {
+      "id": "宀",
+      "name": "宝盖头",
+      "exampleChars": [
+        "家",
+        "定",
+        "宽",
+        "它",
+        "客",
+        "守"
+      ],
+      "pdf": "/assets/radicals/radical-5a6A.pdf"
+    },
+    {
+      "id": "辶",
+      "name": "走之旁",
+      "exampleChars": [
+        "远",
+        "近",
+        "还",
+        "运",
+        "迷",
+        "造"
+      ],
+      "pdf": "/assets/radicals/radical-6L62.pdf"
+    },
+    {
+      "id": "彐",
+      "name": "横山",
+      "exampleChars": [
+        "灵",
+        "归",
+        "寻",
+        "录"
+      ],
+      "pdf": "/assets/radicals/radical-5b2Q.pdf"
+    },
+    {
+      "id": "尸",
+      "name": "尸字头",
+      "exampleChars": [
+        "尺",
+        "尽",
+        "层",
+        "展",
+        "屋",
+        "局"
+      ],
+      "pdf": "/assets/radicals/radical-5bC4.pdf"
+    },
+    {
+      "id": "己",
+      "name": "己字旁",
+      "exampleChars": [
+        "己"
+      ],
+      "pdf": "/assets/radicals/radical-5bex.pdf"
+    },
+    {
+      "id": "子",
+      "name": "子字旁",
+      "exampleChars": [
+        "子",
+        "字",
+        "学",
+        "孩",
+        "孔",
+        "季"
+      ],
+      "pdf": "/assets/radicals/radical-5a2Q.pdf"
+    },
+    {
+      "id": "纟",
+      "name": "绞丝旁",
+      "exampleChars": [
+        "纸",
+        "红",
+        "细",
+        "结",
+        "给",
+        "纷"
+      ],
+      "pdf": "/assets/radicals/radical-57qf.pdf"
+    },
+    {
+      "id": "王",
+      "name": "王字旁",
+      "exampleChars": [
+        "王",
+        "玩",
+        "珠",
+        "现",
+        "球",
+        "琴"
+      ],
+      "pdf": "/assets/radicals/radical-546L.pdf"
+    },
+    {
+      "id": "木",
+      "name": "木字旁",
+      "exampleChars": [
+        "果",
+        "本",
+        "木",
+        "林",
+        "桌",
+        "桥"
+      ],
+      "pdf": "/assets/radicals/radical-5pyo.pdf"
+    },
+    {
+      "id": "支",
+      "name": "支字旁",
+      "exampleChars": [
+        "支"
+      ],
+      "pdf": "/assets/radicals/radical-5pSv.pdf"
+    },
+    {
+      "id": "攵",
+      "name": "反文旁",
+      "exampleChars": [
+        "故",
+        "放",
+        "收",
+        "敢",
+        "散",
+        "敬"
+      ],
+      "pdf": "/assets/radicals/radical-5pS1.pdf"
+    },
+    {
+      "id": "日",
+      "name": "日字旁",
+      "exampleChars": [
+        "日",
+        "春",
+        "早",
+        "是",
+        "星",
+        "明"
+      ],
+      "pdf": "/assets/radicals/radical-5pel.pdf"
+    },
+    {
+      "id": "曰",
+      "name": "曰字旁",
+      "exampleChars": [
+        "更",
+        "电",
+        "最",
+        "替",
+        "曾",
+        "曰"
+      ],
+      "pdf": "/assets/radicals/radical-5puw.pdf"
+    },
+    {
+      "id": "月",
+      "name": "月字旁",
+      "exampleChars": [
+        "月",
+        "有",
+        "朗",
+        "期",
+        "望",
+        "朝"
+      ],
+      "pdf": "/assets/radicals/radical-5pyI.pdf"
+    },
+    {
+      "id": "欠",
+      "name": "欠字旁",
+      "exampleChars": [
+        "欢",
+        "次",
+        "欣",
+        "欧",
+        "款",
+        "歉"
+      ],
+      "pdf": "/assets/radicals/radical-5qyg.pdf"
+    },
+    {
+      "id": "止",
+      "name": "止字旁",
+      "exampleChars": [
+        "正",
+        "步",
+        "此",
+        "止",
+        "武",
+        "歪"
+      ],
+      "pdf": "/assets/radicals/radical-5q2i.pdf"
+    },
+    {
+      "id": "火",
+      "name": "火字旁",
+      "exampleChars": [
+        "火",
+        "灯",
+        "炉",
+        "烟",
+        "灾",
+        "炮"
+      ],
+      "pdf": "/assets/radicals/radical-54Gr.pdf"
+    },
+    {
+      "id": "灬",
+      "name": "四点底",
+      "exampleChars": [
+        "熊",
+        "燕",
+        "然",
+        "熟",
+        "照",
+        "热"
+      ],
+      "pdf": "/assets/radicals/radical-54Gs.pdf"
+    },
+    {
+      "id": "爫",
+      "name": "爪字头",
+      "exampleChars": [
+        "爱",
+        "觅",
+        "爵"
+      ],
+      "pdf": "/assets/radicals/radical-54ir.pdf"
+    },
+    {
+      "id": "片",
+      "name": "片字旁",
+      "exampleChars": [
+        "片",
+        "版"
+      ],
+      "pdf": "/assets/radicals/radical-54mH.pdf"
+    },
+    {
+      "id": "牛",
+      "name": "牛字旁",
+      "exampleChars": [
+        "牛",
+        "物",
+        "牢",
+        "特",
+        "犁",
+        "牲"
+      ],
+      "pdf": "/assets/radicals/radical-54mb.pdf"
+    },
+    {
+      "id": "手",
+      "name": "手字底",
+      "exampleChars": [
+        "手",
+        "掰",
+        "拿",
+        "掌",
+        "拜",
+        "承"
+      ],
+      "pdf": "/assets/radicals/radical-5omL.pdf"
+    },
+    {
+      "id": "毛",
+      "name": "毛字旁",
+      "exampleChars": [
+        "毛",
+        "毫",
+        "毯",
+        "毡"
+      ],
+      "pdf": "/assets/radicals/radical-5q-b.pdf"
+    },
+    {
+      "id": "气",
+      "name": "气字头",
+      "exampleChars": [
+        "气",
+        "氛",
+        "氧"
+      ],
+      "pdf": "/assets/radicals/radical-5rCU.pdf"
+    },
+    {
+      "id": "攴",
+      "name": "攴字旁",
+      "exampleChars": [
+        "敲"
+      ],
+      "pdf": "/assets/radicals/radical-5pS0.pdf"
+    },
+    {
+      "id": "斤",
+      "name": "斤字旁",
+      "exampleChars": [
+        "新",
+        "断",
+        "斧",
+        "斯"
+      ],
+      "pdf": "/assets/radicals/radical-5pak.pdf"
+    },
+    {
+      "id": "方",
+      "name": "方字旁",
+      "exampleChars": [
+        "旁",
+        "族",
+        "旅",
+        "旋",
+        "旗",
+        "旖"
+      ],
+      "pdf": "/assets/radicals/radical-5pa5.pdf"
+    },
+    {
+      "id": "父",
+      "name": "父字头",
+      "exampleChars": [
+        "爸",
+        "爷",
+        "父",
+        "爹"
+      ],
+      "pdf": "/assets/radicals/radical-54i2.pdf"
+    },
+    {
+      "id": "户",
+      "name": "户字头",
+      "exampleChars": [
+        "居",
+        "所",
+        "房",
+        "扁",
+        "户",
+        "扇"
+      ],
+      "pdf": "/assets/radicals/radical-5oi3.pdf"
+    },
+    {
+      "id": "礻",
+      "name": "示字旁",
+      "exampleChars": [
+        "神",
+        "祝",
+        "礼",
+        "祖",
+        "社",
+        "祸"
+      ],
+      "pdf": "/assets/radicals/radical-56S7.pdf"
+    },
+    {
+      "id": "心",
+      "name": "心字底",
+      "exampleChars": [
+        "心",
+        "思",
+        "意",
+        "想",
+        "志",
+        "忘"
+      ],
+      "pdf": "/assets/radicals/radical-5b-D.pdf"
+    },
+    {
+      "id": "戈",
+      "name": "戈字旁",
+      "exampleChars": [
+        "我",
+        "成",
+        "戴",
+        "戏",
+        "或",
+        "战"
+      ],
+      "pdf": "/assets/radicals/radical-5oiI.pdf"
+    },
+    {
+      "id": "皿",
+      "name": "皿字底",
+      "exampleChars": [
+        "盖",
+        "监",
+        "盘",
+        "盆",
+        "益",
+        "盈"
+      ],
+      "pdf": "/assets/radicals/radical-55q_.pdf"
+    },
+    {
+      "id": "目",
+      "name": "目字旁",
+      "exampleChars": [
+        "目",
+        "看",
+        "相",
+        "真",
+        "着",
+        "直"
+      ],
+      "pdf": "/assets/radicals/radical-55uu.pdf"
+    },
+    {
+      "id": "石",
+      "name": "石字旁",
+      "exampleChars": [
+        "石",
+        "碧",
+        "碰",
+        "破",
+        "碌",
+        "磨"
+      ],
+      "pdf": "/assets/radicals/radical-55-z.pdf"
+    },
+    {
+      "id": "禾",
+      "name": "禾木旁",
+      "exampleChars": [
+        "禾",
+        "种",
+        "秋",
+        "称",
+        "秤",
+        "秧"
+      ],
+      "pdf": "/assets/radicals/radical-56a-.pdf"
+    },
+    {
+      "id": "鸟",
+      "name": "鸟字边",
+      "exampleChars": [
+        "鸟",
+        "鹰",
+        "鹂",
+        "鸡",
+        "鸭",
+        "鸳"
+      ],
+      "pdf": "/assets/radicals/radical-6bif.pdf"
+    },
+    {
+      "id": "穴",
+      "name": "穴字头",
+      "exampleChars": [
+        "窗",
+        "突",
+        "穷",
+        "究",
+        "窟",
+        "窿"
+      ],
+      "pdf": "/assets/radicals/radical-56m0.pdf"
+    },
+    {
+      "id": "立",
+      "name": "立字旁",
+      "exampleChars": [
+        "立",
+        "站",
+        "童",
+        "亲",
+        "竟",
+        "竖"
+      ],
+      "pdf": "/assets/radicals/radical-56uL.pdf"
+    },
+    {
+      "id": "竹",
+      "name": "竹字头",
+      "exampleChars": [
+        "竹"
+      ],
+      "pdf": "/assets/radicals/radical-56u5.pdf"
+    },
+    {
+      "id": "米",
+      "name": "米字旁",
+      "exampleChars": [
+        "米",
+        "粒",
+        "精",
+        "籽",
+        "粗",
+        "粮"
+      ],
+      "pdf": "/assets/radicals/radical-57Gz.pdf"
+    },
+    {
+      "id": "缶",
+      "name": "缶字旁",
+      "exampleChars": [
+        "罐",
+        "缺",
+        "缸"
+      ],
+      "pdf": "/assets/radicals/radical-57y2.pdf"
+    },
+    {
+      "id": "羊",
+      "name": "羊字旁",
+      "exampleChars": [
+        "羊",
+        "美",
+        "群",
+        "羡",
+        "羞"
+      ],
+      "pdf": "/assets/radicals/radical-576K.pdf"
+    },
+    {
+      "id": "羽",
+      "name": "羽字旁",
+      "exampleChars": [
+        "翠",
+        "羽",
+        "翅",
+        "翁",
+        "翩",
+        "翔"
+      ],
+      "pdf": "/assets/radicals/radical-5769.pdf"
+    },
+    {
+      "id": "耂",
+      "name": "老字头",
+      "exampleChars": [
+        "者",
+        "考"
+      ],
+      "pdf": "/assets/radicals/radical-6ICC.pdf"
+    },
+    {
+      "id": "而",
+      "name": "而字旁",
+      "exampleChars": [
+        "耐",
+        "耍"
+      ],
+      "pdf": "/assets/radicals/radical-6ICM.pdf"
+    },
+    {
+      "id": "耳",
+      "name": "耳字旁",
+      "exampleChars": [
+        "耳",
+        "聚",
+        "聪",
+        "联",
+        "耽",
+        "耸"
+      ],
+      "pdf": "/assets/radicals/radical-6ICz.pdf"
+    },
+    {
+      "id": "舟",
+      "name": "舟字旁",
+      "exampleChars": [
+        "船",
+        "艘",
+        "舰",
+        "舟",
+        "般",
+        "舵"
+      ],
+      "pdf": "/assets/radicals/radical-6Iif.pdf"
+    },
+    {
+      "id": "虫",
+      "name": "虫字旁",
+      "exampleChars": [
+        "虫",
+        "蛙",
+        "蚊",
+        "蛇",
+        "蝴",
+        "蝶"
+      ],
+      "pdf": "/assets/radicals/radical-6Jmr.pdf"
+    },
+    {
+      "id": "虍",
+      "name": "虎字头",
+      "exampleChars": [
+        "虚",
+        "虐"
+      ],
+      "pdf": "/assets/radicals/radical-6JmN.pdf"
+    },
+    {
+      "id": "血",
+      "name": "血字旁",
+      "exampleChars": [
+        "血"
+      ],
+      "pdf": "/assets/radicals/radical-6KGA.pdf"
+    },
+    {
+      "id": "行",
+      "name": "行字旁",
+      "exampleChars": [
+        "行",
+        "街",
+        "衡"
+      ],
+      "pdf": "/assets/radicals/radical-6KGM.pdf"
+    },
+    {
+      "id": "衣",
+      "name": "衣字旁",
+      "exampleChars": [
+        "衣",
+        "装",
+        "袋",
+        "裂",
+        "衰",
+        "袅"
+      ],
+      "pdf": "/assets/radicals/radical-6KGj.pdf"
+    },
+    {
+      "id": "衤",
+      "name": "衣字旁",
+      "exampleChars": [
+        "被",
+        "补",
+        "裕",
+        "衬",
+        "衫",
+        "裸"
+      ],
+      "pdf": "/assets/radicals/radical-6KGk.pdf"
+    },
+    {
+      "id": "西",
+      "name": "西字头",
+      "exampleChars": [
+        "西"
+      ],
+      "pdf": "/assets/radicals/radical-6KW_.pdf"
+    },
+    {
+      "id": "见",
+      "name": "见字边",
+      "exampleChars": [
+        "见",
+        "观",
+        "觉",
+        "视",
+        "规",
+        "览"
+      ],
+      "pdf": "/assets/radicals/radical-6KeB.pdf"
+    },
+    {
+      "id": "角",
+      "name": "角字旁",
+      "exampleChars": [
+        "角",
+        "触",
+        "解"
+      ],
+      "pdf": "/assets/radicals/radical-6KeS.pdf"
+    },
+    {
+      "id": "言",
+      "name": "言字旁",
+      "exampleChars": [
+        "言",
+        "警",
+        "譬",
+        "誓",
+        "誉"
+      ],
+      "pdf": "/assets/radicals/radical-6KiA.pdf"
+    },
+    {
+      "id": "谷",
+      "name": "谷字旁",
+      "exampleChars": [
+        "谷",
+        "豁"
+      ],
+      "pdf": "/assets/radicals/radical-6LC3.pdf"
+    },
+    {
+      "id": "豆",
+      "name": "豆字旁",
+      "exampleChars": [
+        "豆",
+        "豌"
+      ],
+      "pdf": "/assets/radicals/radical-6LGG.pdf"
+    },
+    {
+      "id": "贝",
+      "name": "贝字旁",
+      "exampleChars": [
+        "贴",
+        "贝",
+        "财",
+        "赛",
+        "购",
+        "贵"
+      ],
+      "pdf": "/assets/radicals/radical-6LSd.pdf"
+    },
+    {
+      "id": "走",
+      "name": "走字旁",
+      "exampleChars": [
+        "走",
+        "赶",
+        "起",
+        "趣",
+        "超",
+        "趁"
+      ],
+      "pdf": "/assets/radicals/radical-6LWw.pdf"
+    },
+    {
+      "id": "足",
+      "name": "足字旁",
+      "exampleChars": [
+        "足",
+        "跑",
+        "蹦",
+        "跳",
+        "路",
+        "跨"
+      ],
+      "pdf": "/assets/radicals/radical-6Laz.pdf"
+    },
+    {
+      "id": "身",
+      "name": "身字旁",
+      "exampleChars": [
+        "身",
+        "躺",
+        "躯",
+        "躲"
+      ],
+      "pdf": "/assets/radicals/radical-6Lqr.pdf"
+    },
+    {
+      "id": "车",
+      "name": "车字旁",
+      "exampleChars": [
+        "车",
+        "转",
+        "军",
+        "轻",
+        "辆",
+        "软"
+      ],
+      "pdf": "/assets/radicals/radical-6L2m.pdf"
+    },
+    {
+      "id": "辛",
+      "name": "辛字旁",
+      "exampleChars": [
+        "辛",
+        "辫",
+        "辨",
+        "辩",
+        "辟"
+      ],
+      "pdf": "/assets/radicals/radical-6L6b.pdf"
+    },
+    {
+      "id": "辰",
+      "name": "辰字旁",
+      "exampleChars": [
+        "辱"
+      ],
+      "pdf": "/assets/radicals/radical-6L6w.pdf"
+    },
+    {
+      "id": "邑",
+      "name": "右耳刀",
+      "exampleChars": [],
+      "pdf": "/assets/radicals/radical-6YKR.pdf"
+    },
+    {
+      "id": "酉",
+      "name": "酉字旁",
+      "exampleChars": [
+        "醋",
+        "醒",
+        "酒",
+        "配",
+        "醉",
+        "酣"
+      ],
+      "pdf": "/assets/radicals/radical-6YWJ.pdf"
+    },
+    {
+      "id": "里",
+      "name": "里字旁",
+      "exampleChars": [
+        "里",
+        "野"
+      ],
+      "pdf": "/assets/radicals/radical-6YeM.pdf"
+    },
+    {
+      "id": "釒",
+      "name": "金字旁",
+      "exampleChars": [],
+      "pdf": "/assets/radicals/radical-6YeS.pdf"
+    },
+    {
+      "id": "长",
+      "name": "长字旁",
+      "exampleChars": [
+        "长"
+      ],
+      "pdf": "/assets/radicals/radical-6ZW_.pdf"
+    },
+    {
+      "id": "雨",
+      "name": "雨字头",
+      "exampleChars": [
+        "雪",
+        "雨",
+        "雷",
+        "震",
+        "霜",
+        "露"
+      ],
+      "pdf": "/assets/radicals/radical-6Zuo.pdf"
+    },
+    {
+      "id": "青",
+      "name": "青字旁",
+      "exampleChars": [
+        "青",
+        "静"
+      ],
+      "pdf": "/assets/radicals/radical-6Z2S.pdf"
+    },
+    {
+      "id": "非",
+      "name": "非字旁",
+      "exampleChars": [
+        "辈",
+        "靠"
+      ],
+      "pdf": "/assets/radicals/radical-6Z2e.pdf"
+    },
+    {
+      "id": "面",
+      "name": "面字旁",
+      "exampleChars": [
+        "面"
+      ],
+      "pdf": "/assets/radicals/radical-6Z2i.pdf"
+    },
+    {
+      "id": "革",
+      "name": "革字旁",
+      "exampleChars": [
+        "鞋",
+        "革",
+        "鞭"
+      ],
+      "pdf": "/assets/radicals/radical-6Z2p.pdf"
+    },
+    {
+      "id": "音",
+      "name": "音字旁",
+      "exampleChars": [
+        "音",
+        "韵",
+        "黯"
+      ],
+      "pdf": "/assets/radicals/radical-6Z-z.pdf"
+    },
+    {
+      "id": "页",
+      "name": "页字边",
+      "exampleChars": [
+        "颗",
+        "领",
+        "顶",
+        "页",
+        "颜",
+        "顺"
+      ],
+      "pdf": "/assets/radicals/radical-6aG1.pdf"
+    },
+    {
+      "id": "风",
+      "name": "风字边",
+      "exampleChars": [
+        "风",
+        "飕"
+      ],
+      "pdf": "/assets/radicals/radical-6aOO.pdf"
+    },
+    {
+      "id": "飞",
+      "name": "飞字旁",
+      "exampleChars": [
+        "飞"
+      ],
+      "pdf": "/assets/radicals/radical-6aOe.pdf"
+    },
+    {
+      "id": "食",
+      "name": "食字底",
+      "exampleChars": [
+        "食"
+      ],
+      "pdf": "/assets/radicals/radical-6aOf.pdf"
+    },
+    {
+      "id": "马",
+      "name": "马字旁",
+      "exampleChars": [
+        "马",
+        "验",
+        "骤",
+        "驮",
+        "骄",
+        "驴"
+      ],
+      "pdf": "/assets/radicals/radical-6ams.pdf"
+    },
+    {
+      "id": "鱼",
+      "name": "鱼字旁",
+      "exampleChars": [
+        "鱼",
+        "鲜",
+        "鳄",
+        "鲫",
+        "鲸",
+        "鳃"
+      ],
+      "pdf": "/assets/radicals/radical-6bG8.pdf"
+    },
+    {
+      "id": "鹿",
+      "name": "鹿字旁",
+      "exampleChars": [
+        "鹿"
+      ],
+      "pdf": "/assets/radicals/radical-6bm_.pdf"
+    },
+    {
+      "id": "麦",
+      "name": "麦字旁",
+      "exampleChars": [
+        "麦"
+      ],
+      "pdf": "/assets/radicals/radical-6bqm.pdf"
+    },
+    {
+      "id": "齐",
+      "name": "齐字旁",
+      "exampleChars": [
+        "齐"
+      ],
+      "pdf": "/assets/radicals/radical-6b2Q.pdf"
+    },
+    {
+      "id": "齿",
+      "name": "齿字旁",
+      "exampleChars": [
+        "齿",
+        "龄"
+      ],
+      "pdf": "/assets/radicals/radical-6b2_.pdf"
+    },
+    {
+      "id": "龙",
+      "name": "龙字旁",
+      "exampleChars": [
+        "龙",
+        "袭"
+      ],
+      "pdf": "/assets/radicals/radical-6b6Z.pdf"
+    },
+    {
+      "id": "龟",
+      "name": "龟字旁",
+      "exampleChars": [
+        "龟"
+      ],
+      "pdf": "/assets/radicals/radical-6b6f.pdf"
+    },
+    {
+      "id": "鼻",
+      "name": "鼻字旁",
+      "exampleChars": [
+        "鼻"
+      ],
+      "pdf": "/assets/radicals/radical-6by7.pdf"
+    },
+    {
+      "id": "黑",
+      "name": "黑字旁",
+      "exampleChars": [
+        "黑",
+        "默",
+        "黛"
+      ],
+      "pdf": "/assets/radicals/radical-6buR.pdf"
+    }
+  ],
+  "overviewPdf": "/assets/radicals/overview.pdf"
+}

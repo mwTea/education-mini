@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# macOS
+.DS_Store
+*.swp
+
+# Logs & temp
+*.log
+*.tmp
+.tmp-scratch/
+output/
+
+# Runtime data (sheets, users - generated on server)
+backend/data/
+
+# Large font binaries (download via scripts/fetch-fonts.sh, not tracked)
+backend/assets/fonts/*.ttf
+
+# IDE
+.vscode/
+.idea/
+
+# Private config
+project.private.config.json
+
+# Build artifacts
+dist/

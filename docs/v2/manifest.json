@@ -1,0 +1,80 @@
+[
+  {
+    "original": "描红习字簿_V2_Sprint开发任务书_v1.0.docx",
+    "path": "planning/描红习字簿_V2_Sprint开发任务书_v1.0.docx",
+    "bytes": 49226,
+    "sha256": "35f9c8c056ffeadbc3c9d29aaf1de2f35ab9b277e4a8b15681aa3e048bbf1e30"
+  },
+  {
+    "original": "描红习字簿_V2_产品迭代设计文档_v1.0.docx",
+    "path": "design/描红习字簿_V2_产品迭代设计文档_v1.0.docx",
+    "bytes": 1828830,
+    "sha256": "c400d8408ca0f443f0dc28a2754fce8da603c2b0ab9d39c688103f831619044c"
+  },
+  {
+    "original": "描红习字簿_V2_功能详细设计说明书_v1.0.docx",
+    "path": "design/描红习字簿_V2_功能详细设计说明书_v1.0.docx",
+    "bytes": 56911,
+    "sha256": "7a5adfd879f9f24dec7024062db7cdbdf4bee2165b0da6ef72964660a5550db7"
+  },
+  {
+    "original": "描红习字簿_V2_技术详细设计说明书_v1.0.docx",
+    "path": "design/描红习字簿_V2_技术详细设计说明书_v1.0.docx",
+    "bytes": 46445,
+    "sha256": "8277b12ff3be070745154881ccb5e4dc88077b3e8cd2a3ab9d394bb5d9cf2fdb"
+  },
+  {
+    "original": "Codex 图像 2026年9月11日 10_27_40.png",
+    "path": "ui/reference/Codex 图像 2026年9月11日 10_27_40.png",
+    "bytes": 1806250,
+    "sha256": "1f49e47137082a1b0e52d47ff7a9c2234d549177aa6c002fefd7e649a0ea33f9"
+  },
+  {
+    "original": "Codex 图像 2026年9月11日 10_30_27.png",
+    "path": "planning/roadmap/Codex 图像 2026年9月11日 10_30_27.png",
+    "bytes": 1911942,
+    "sha256": "1c99cb2ba3c93ef2de1170cfdeb05ae1e468f22713c331a0bcee32ba087a911d"
+  },
+  {
+    "original": "Codex 图像 2026年9月11日 10_30_46.png",
+    "path": "ui/design-system/Codex 图像 2026年9月11日 10_30_46.png",
+    "bytes": 1772682,
+    "sha256": "d9b6786194307a739e53f2d0ef81957a2ace7c32ad658a3571a9c13ab1e7319c"
+  },
+  {
+    "original": "Codex 图像 2026年9月11日 10_30_56.png",
+    "path": "ui/reference/Codex 图像 2026年9月11日 10_30_56.png",
+    "bytes": 1709357,
+    "sha256": "57f6ca7b4a807925cb8ed888eb8b38bcf7d9661e99a6371aca41620e7f4d8d0f"
+  },
+  {
+    "original": "Codex 图像 2026年9月11日 10_31_12.png",
+    "path": "ui/reference/Codex 图像 2026年9月11日 10_31_12.png",
+    "bytes": 1653509,
+    "sha256": "461641c9c78c988ed140699ae3e99d105dc5c76c863bf1a4a982a7b9153ce0c1"
+  },
+  {
+    "original": "Codex 图像 2026年9月11日 10_32_21.png",
+    "path": "archive/duplicates/Codex 图像 2026年9月11日 10_32_21.png",
+    "bytes": 1709357,
+    "sha256": "57f6ca7b4a807925cb8ed888eb8b38bcf7d9661e99a6371aca41620e7f4d8d0f"
+  },
+  {
+    "original": "Codex 图像 2026年9月11日 10_32_42.png",
+    "path": "ui/reference/Codex 图像 2026年9月11日 10_32_42.png",
+    "bytes": 1695163,
+    "sha256": "22d3635d71e8d50f3c5d6c347e577b9b24051940ec887de2de50aeebe5870da0"
+  },
+  {
+    "original": "Codex 图像 2026年9月11日 10_32_58.png",
+    "path": "archive/duplicates/Codex 图像 2026年9月11日 10_32_58.png",
+    "bytes": 1653509,
+    "sha256": "461641c9c78c988ed140699ae3e99d105dc5c76c863bf1a4a982a7b9153ce0c1"
+  },
+  {
+    "original": "Codex 图像 2026年9月11日 10_33_28.png",
+    "path": "ui/reference/Codex 图像 2026年9月11日 10_33_28.png",
+    "bytes": 1784368,
+    "sha256": "295e64b425177041251d067c3e25d416b66667457c930b08ce9f6a3e267df37e"
+  }
+]

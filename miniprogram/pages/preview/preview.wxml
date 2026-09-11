@@ -1,0 +1,38 @@
+<view class="preview-page">
+  <view wx:if="{{loading}}" class="state">加载中…</view>
+  <view wx:elif="{{error}}" class="state error">{{error}}</view>
+
+  <block wx:else>
+    <view class="info-bar">
+      <view class="r-tag {{sheet.type === 'chinese' ? 'cn' : sheet.type === 'math' ? 'math' : 'en'}}">{{sheet.type === 'chinese' ? '语' : sheet.type === 'math' ? '数' : 'EN'}}</view>
+      <view class="info-chips">
+        <text class="ichip">{{sheet.type === 'chinese' ? '语文' : sheet.type === 'math' ? '数学' : '英语'}}</text>
+        <text class="ichip" wx:if="{{sheet.subtype}}">{{sheet.subtype}}</text>
+        <text class="ichip" wx:if="{{sheet.wordBank}}">默写帖</text>
+        <text class="ichip" wx:if="{{sheet.type !== 'math'}}">{{sheet.charCount}}{{sheet.type === 'chinese' ? ' 字' : ' 字符'}}</text>
+        <text class="ichip" wx:if="{{sheet.type === 'math'}}">{{sheet.charCount}} 题</text>
+        <text class="ichip">{{sheet.pages.length}} 页</text>
+        <text class="ichip" wx:if="{{sheet.answerPage}}">含答案页</text>
+      </view>
+    </view>
+
+    <scroll-view scroll-y class="preview-scroll">
+      <view class="sheet-wrap">
+        <sheet-view sheet="{{sheet}}" />
+      </view>
+      <view class="print-tip" wx:if="{{sheet.dictationNote}}">{{sheet.dictationNote}}</view>
+      <view class="print-tip" wx:if="{{sheet.notice}}">{{sheet.notice}}</view>
+      <view class="print-tip">「打开 PDF」可直接预览，右上角 ··· 可转发到电脑打印</view>
+      <view class="print-tip sub">字帖记录保留 10 天，过期自动清理，重新生成一份即可</view>
+    </scroll-view>
+
+    <view class="preview-footer">
+      <button class="btn-primary footer-main" bindtap="openPdf">打开 PDF</button>
+      <view class="footer-side">
+        <button class="btn-ghost" bindtap="copyPrintUrl">打印链接</button>
+        <button class="btn-ghost" bindtap="redoEdit">重新编辑</button>
+      </view>
+      <view class="pdf-caption">打开后点右上角「···」可转发到电脑 / 保存，直接打印</view>
+    </view>
+  </block>
+</view>

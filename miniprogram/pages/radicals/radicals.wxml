@@ -1,0 +1,33 @@
+<view class="page-wrap">
+  <view class="tip-card">
+    <view class="tip-title">常用偏旁部首练习</view>
+    <view class="tip-sub">预生成字帖，点开即打印 · 例字来自人教版教材 · 不占每日生成份数</view>
+  </view>
+
+  <!-- 归类总表入口暂时隐藏（恢复：见 git 历史或产品文档） -->
+
+  <view class="search-row">
+    <input class="search-input" placeholder="搜索偏旁，如：三点水 / 氵" value="{{keyword}}" bindinput="onSearch" />
+  </view>
+
+  <view wx:if="{{loading}}" class="state">加载中…</view>
+  <view wx:elif="{{error}}" class="state error">{{error}}</view>
+  <view wx:elif="{{!filtered.length}}" class="state">没有匹配的偏旁</view>
+
+  <view class="radical-grid" wx:else>
+    <view class="radical-card" wx:for="{{filtered}}" wx:key="id" data-idx="{{index}}" bindtap="onOpen">
+      <view class="r-grid">
+        <view class="rg-v"></view>
+        <view class="rg-h"></view>
+        <text class="r-char">{{item.id}}</text>
+      </view>
+      <view class="r-name">{{item.name}}</view>
+      <view class="r-ex">{{item.exampleCharsText}}</view>
+    </view>
+  </view>
+
+  <view class="pdf-caption">点击偏旁打开练习页（PDF），右上角「···」可转发到电脑打印</view>
+
+  <!-- 预留广告位容器（后期接流量主零改版） -->
+  <view class="ad-slot" />
+</view>

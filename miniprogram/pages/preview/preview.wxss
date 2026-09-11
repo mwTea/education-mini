@@ -1,0 +1,152 @@
+.preview-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #eef0f2;
+}
+
+/* 顶部信息条 */
+.info-bar {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  padding: 20rpx 32rpx;
+  background: rgba(255, 253, 246, 0.92);
+  border-bottom: 2rpx solid #f0e2cc;
+}
+
+.r-tag {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  font-weight: 600;
+  flex-shrink: 0;
+  font-family: 'Kaiti SC', serif;
+}
+
+.r-tag.cn {
+  background: #ffe9d2;
+  color: #d97a2b;
+}
+
+.r-tag.en {
+  background: #ddf3e6;
+  color: #2f9e63;
+}
+
+.info-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.ichip {
+  background: #fff;
+  border: 2rpx solid #ecd9c3;
+  color: #8a7a68;
+  border-radius: 999rpx;
+  padding: 4rpx 18rpx;
+  font-size: 22rpx;
+}
+
+.preview-scroll {
+  flex: 1;
+  min-height: 0;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+/* 纸张容器 + 印章 */
+.sheet-wrap {
+  position: relative;
+}
+
+.sheet-seal {
+  position: absolute;
+  right: 16rpx;
+  top: 12rpx;
+  z-index: 5;
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 14rpx;
+  background: #d9534f;
+  color: #fff;
+  font-size: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Kaiti SC', serif;
+  transform: rotate(12deg);
+  opacity: 0.92;
+  box-shadow: 0 8rpx 18rpx rgba(217, 83, 79, 0.35);
+}
+
+.print-tip {
+  text-align: center;
+  color: #b3a89d;
+  font-size: 24rpx;
+  padding: 16rpx 0 24rpx;
+}
+
+.print-tip.sub {
+  padding-top: 0;
+  margin-top: -12rpx;
+  font-size: 22rpx;
+  color: #c5bab0;
+}
+
+/* 底部操作：主按钮 + 次按钮行 */
+.preview-footer {
+  padding: 20rpx 32rpx calc(20rpx + env(safe-area-inset-bottom));
+  background: #fffdf6;
+  border-top: 2rpx solid #f0e2cc;
+}
+
+.footer-main {
+  width: 100%;
+}
+
+.footer-side {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 16rpx;
+}
+
+.footer-side button {
+  flex: 1;
+  height: 76rpx;
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.state {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9a8c80;
+}
+
+.state.error {
+  color: #d9534f;
+  padding: 0 60rpx;
+  text-align: center;
+  white-space: pre-line;
+  line-height: 1.8;
+}
+
+.pdf-caption {
+  text-align: center;
+  color: #b3a89d;
+  font-size: 22rpx;
+  padding-top: 12rpx;
+}
+
+.r-tag.math { background: #3f92bb; }

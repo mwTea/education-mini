@@ -1,0 +1,46 @@
+# 字帖出题器 — nginx 反向代理示例（独立服务器 / 全新 nginx 环境）
+# 放到服务器 /etc/nginx/conf.d/copybook.conf，证书路径按实际情况修改。
+#
+# ┌─ 生产事故记录（2026-09-02，见 lt-life docs/notes/20260902-nginx-copybook-default-server-outage.md）─┐
+# │ 在 60.205.171.222 这类共享 nginx 的服务器上部署本文件时，曾因 conf.d include 排在             │
+# │ 业务主 server 之前，copybook 成为 80 端口事实上的 default_server，劫持全部未匹配               │
+# │ Host 的业务流量返回 404，造成 manage/H5/接口 全线故障约 19.5 小时。                          │
+# │                                                                                               │
+# │ 在已有 nginx 的服务器上新增本配置，必须遵守：                                                  │
+# │ 1. server 必须带明确 server_name（禁止裸 listen + 通配/缺省匹配）；                            │
+# │ 2. reload 前用 `nginx -T` 确认没有 becoming default server 的意外变化；                        │
+# │    确需 default_server 的，整个端口只能有一处声明，且属于业务主 server；                        │
+# │ 3. reload 后除验证本服务域名外，必须抽查同端口上其他业务 Host 的应答是否正常（影响面验证）。      │
+# │                                                                                               │
+# │ 另：222 上 443 目前由 /opt/copybook-backend/https-proxy.js（Node）独占，仅服务 copybook 证书；   │
+# │ 其他域名要上 HTTPS 需先做 SNI 分流规划。                                                        │
+# └───────────────────────────────────────────────────────────────────────────────────────────────┘
+
+# 2026-09-02 决策：走方案 A —— 443 收归 nginx 统一管理（copybook 的 443 server block 即本样例，
+# https-proxy.js 退役；id-photo 等新域名以独立 server block 共存，SNI 分流）。
+# 迁移 runbook：/Users/likangdong/Documents/workspace/ideas/tools/id-photo/server/deploy/PLAN-A-443-migration.md
+
+server {
+    listen 80;
+    server_name your-domain.com;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name your-domain.com;
+
+    ssl_certificate     /etc/letsencrypt/live/your-domain.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/your-domain.com/privkey.pem;
+
+    client_max_body_size 2m;
+
+    # 小程序 request 域名只需代理 /api；打印页/字体需要整站代理
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}

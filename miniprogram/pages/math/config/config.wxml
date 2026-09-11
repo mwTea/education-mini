@@ -1,0 +1,86 @@
+<view class="page-wrap">
+  <!-- 摘要头：册别 + 参数就地可调 -->
+  <view class="sum-card">
+    <view class="sum-title">{{bookName}}</view>
+    <view class="sum-row">
+      <view class="sum-chip diff">{{diffName}}</view>
+      <view class="sum-chip">{{count}} 题</view>
+      <view class="sum-chip" wx:if="{{withAnswer}}">带答案页</view>
+    </view>
+    <view class="sum-adjust">
+      <view class="adj-item">
+        <text class="adj-label">难度</text>
+        <view class="mini-seg">
+          <view wx:for="{{diffs}}" wx:key="id" class="mini-seg-item {{diff === item.id ? 'on' : ''}}" data-id="{{item.id}}" bindtap="onDiffTap">{{item.name}}</view>
+        </view>
+      </view>
+      <view class="adj-item">
+        <text class="adj-label">题量</text>
+        <view class="mini-seg">
+          <view wx:for="{{counts}}" wx:key="*this" class="mini-seg-item {{count === item ? 'on' : ''}}" data-v="{{item}}" bindtap="onCountTap">{{item}}</view>
+        </view>
+      </view>
+      <view class="adj-item">
+        <text class="adj-label">答案页</text>
+        <switch checked="{{withAnswer}}" color="#3f92bb" bindchange="onAnswerToggle" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 常用模板一键配 -->
+  <view class="card">
+    <view class="sec-head"><view class="sec-dot"></view><text>常用搭配</text><text class="sec-idx">一键</text></view>
+    <view class="auto-tip">搭配会同时设置下方题型勾选和题量，之后可在「题型微调」里继续加减</view>
+    <view class="preset-row">
+      <view class="preset {{preset === 'daily' ? 'on' : ''}}" data-p="daily" bindtap="onPresetTap">
+        <text class="p-name">每日口算</text>
+        <text class="p-sub">本册题型 · 50 题</text>
+      </view>
+      <view class="preset {{preset === 'vertical' ? 'on' : ''}}" data-p="vertical" bindtap="onPresetTap">
+        <text class="p-name">竖式专项</text>
+        <text class="p-sub">本册竖式题 · 16 题</text>
+      </view>
+      <view class="preset {{preset === 'word' ? 'on' : ''}}" data-p="word" bindtap="onPresetTap">
+        <text class="p-name">应用题专项</text>
+        <text class="p-sub">本册应用题 · 10 题</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 题型微调：名称 + 例题预览 -->
+  <view class="card">
+    <view class="sec-head"><view class="sec-dot"></view><text>题型微调</text><text class="sec-idx">已选 {{selectedCount}}/{{types.length}}</text></view>
+    <view class="auto-tip">仅生成已选题型；不同题目不足时，在所选范围内重复巩固</view>
+    <view class="type-list">
+      <view
+        wx:for="{{types}}" wx:key="id"
+        class="type-row {{item.selected ? 'on' : ''}}"
+        data-index="{{index}}" bindtap="onTypeTap"
+      >
+        <view class="t-check">{{item.selected ? '✓' : ''}}</view>
+        <view class="t-info">
+          <text class="t-name">{{item.name}}</text>
+          <text class="t-eg">如：{{item.eg}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="type-actions">
+      <text class="ta-btn" bindtap="onSelectAll">全选</text>
+      <text class="ta-btn" bindtap="onClearAll">清空</text>
+      <text class="ta-btn" bindtap="onRecommend">恢复推荐</text>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{wordSelected && wordTopics.length}}">
+    <view class="sec-head"><view class="sec-dot"></view><text>应用题知识点</text></view>
+    <view class="type-list">
+      <view class="type-row {{item.selected ? 'on' : ''}}" wx:for="{{wordTopics}}" wx:key="id" data-id="{{item.id}}" bindtap="onWordTopicTap">
+        <view class="t-check">{{item.selected ? '✓' : ''}}</view><text class="t-name">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+  <button class="btn-primary generate" loading="{{submitting}}" bindtap="onGenerate">生成题卡 →</button>
+  <button bindtap="saveFavorite">保存为常用练习</button>
+  <view class="quota-tip" wx:if="{{quotaRemaining !== null}}">今日剩余生成 {{quotaRemaining}} 份 · 生成后可反复打印</view>
+  <view class="ad-slot" />
+</view>
