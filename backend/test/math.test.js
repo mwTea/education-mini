@@ -119,3 +119,112 @@ test('分数无负答案，100以内加减进退位符合难度', () => {
     }
   }
 });
+
+test('应用题：同知识点多场景，不再是单句式换数字', () => {
+  const patterns = new Set();
+  for (let i = 0; i < 5; i += 1) {
+    const s = buildMathSheet({ bookId: 'math-1a', options: { version: 'jijiao', count: 10, types: ['word-problem'] } });
+    s.questions.forEach((q) => patterns.add(q.stem.replace(/\d+/g, '#')));
+  }
+  assert.ok(patterns.size >= 3, `场景只有 ${patterns.size} 种: ${[...patterns].join(' | ')}`);
+});
+
+test('应用题：数值范围跟本册教材走（五下表内复习不出大数除法，三上分数初步分母≤9）', () => {
+  let divides = [], fracs = [];
+  for (let i = 0; i < 5; i += 1) {
+    const s5 = buildMathSheet({ bookId: 'math-5b', options: { version: 'pep', count: 10, types: ['word-problem'] } });
+    divides = divides.concat(s5.questions.filter((q) => q.knowledge === 'divide'));
+    const s3 = buildMathSheet({ bookId: 'math-3a', options: { version: 'pep', count: 10, types: ['word-problem'], difficulty: 'advanced' } });
+    fracs = fracs.concat(s3.questions.filter((q) => q.knowledge === 'fraction'));
+  }
+  assert.ok(divides.length >= 3, '五下未抽到除法应用题');
+  divides.forEach((q) => {
+    const max = Math.max(...q.stem.match(/\d+/g).map(Number));
+    assert.ok(max <= 81, `五下除法应用超出表内范围: ${q.stem}`);
+  });
+  assert.ok(fracs.length >= 3, '三上未抽到分数应用题');
+  fracs.forEach((q) => {
+    q.stem.match(/\/(\d+)/g)?.forEach((f) => assert.ok(Number(f.slice(1)) <= 9, `三上分数分母超初步范围: ${q.stem}`));
+  });
+});
+
+test('应用题：分数答案均为最简（不出现 5/5、11/11 之类未化简结果）', () => {
+  const gcd = (a, b) => b ? gcd(b, a % b) : a;
+  for (const [version, v] of Object.entries(VERSIONS)) {
+    for (const bookId of Object.keys(v.books)) {
+      for (let i = 0; i < 3; i += 1) {
+        const s = buildMathSheet({ bookId, options: { version, count: 10, types: ['word-problem'], difficulty: 'advanced' } });
+        s.questions.forEach((q) => {
+          const m = String(q.answer).match(/^(\d+)\/(\d+)/);
+          if (!m) return;
+          const [a, b] = [Number(m[1]), Number(m[2])];
+          assert.ok(a < b && gcd(a, b) === 1, `${version}/${bookId} 分数答案未化简: ${q.answer}（${q.stem}）`);
+        });
+      }
+    }
+  }
+});
+
+test('单位换算：数量不再恒为 1 或 10 的倍数', () => {
+  for (const [version, bookId] of [['pep', 'math-2a'], ['jijiao', 'math-3a']]) {
+    const s = buildMathSheet({ bookId, options: { version, count: 60, types: ['unit-convert'] } });
+    const ns = s.questions.map((q) => Number(q.stem.match(/^(\d+)/)[1]));
+    assert.ok(new Set(ns).size >= 8, `${bookId} 换算数值单一: ${[...new Set(ns)].join(',')}`);
+    assert.ok(ns.some((n) => n % 10 !== 0), `${bookId} 换算数量全是 10 的倍数`);
+    assert.ok(!ns.includes(1) || ns.filter((n) => n === 1).length < ns.length / 4, `${bookId} 换算数量以 1 为主`);
+  }
+});
+
+test('渲染：题目区小题不带序号，大题序号与答案页序号保留', () => {
+  const { sheetToHtml } = require('../src/services/render/html.service');
+  const s = buildMathSheet({ bookId: 'math-2a', options: { version: 'jijiao', count: 40, withAnswer: true } });
+  const html = sheetToHtml(s);
+  assert.ok(/<h2>\d+、/.test(html), '大题序号应保留');
+  assert.ok(!/class="question">\d+\.|class="clock"><div>\d+\./.test(html), '题目区不应出现"序号. "');
+  assert.ok(html.includes('class="answers"><div>1. '), '答案页应保留"题号. 答案"');
+});
+
+test('几何计算：周长/面积/多边形/圆按教材册别收录，答案与公式一致', () => {
+  assert.ok(VERSIONS.pep.books['math-3a'].types.includes('perimeter'));
+  assert.ok(VERSIONS.jijiao.books['math-3a'].types.includes('perimeter'));
+  assert.ok(VERSIONS.pep.books['math-3b'].types.includes('area'));
+  assert.ok(VERSIONS.jijiao.books['math-3b'].types.includes('area'));
+  assert.ok(VERSIONS.pep.books['math-5a'].types.includes('polygon-area'));
+  assert.ok(VERSIONS.jijiao.books['math-5a'].types.includes('polygon-area'));
+  assert.ok(VERSIONS.pep.books['math-6a'].types.includes('circle'));
+  assert.ok(VERSIONS.jijiao.books['math-6a'].types.includes('circle'));
+
+  const nums = (s) => s.match(/\d+(?:\.\d+)?/g).map(Number);
+  for (const q of buildMathSheet({ bookId: 'math-3a', options: { version: 'pep', count: 20, types: ['perimeter'] } }).questions) {
+    const [a, b] = nums(q.stem);
+    assert.equal(Number(q.answer), q.stem.includes('正方形') ? 4 * a : 2 * (a + b), q.stem);
+  }
+  for (const q of buildMathSheet({ bookId: 'math-3b', options: { version: 'jijiao', count: 20, types: ['area'] } }).questions) {
+    const [a, b] = nums(q.stem);
+    assert.equal(Number(q.answer), q.stem.includes('正方形') ? a * a : a * b, q.stem);
+  }
+  for (const q of buildMathSheet({ bookId: 'math-5a', options: { version: 'pep', count: 20, types: ['polygon-area'] } }).questions) {
+    const n = nums(q.stem);
+    const expect = q.stem.includes('平行四边形') ? n[0] * n[1]
+      : q.stem.includes('三角形') ? n[0] * n[1] / 2
+        : (n[0] + n[1]) * n[2] / 2;
+    assert.equal(Number(q.answer), expect, q.stem);
+  }
+  for (const q of buildMathSheet({ bookId: 'math-6a', options: { version: 'jijiao', count: 20, types: ['circle'] } }).questions) {
+    const n = nums(q.stem);
+    const answer = Number(q.answer);
+    if (q.stem.startsWith('圆的周长')) assert.equal(answer, Math.round(n[0] / 3.14), q.stem);
+    else if (q.stem.includes('周长')) assert.ok(Math.abs(answer - 2 * 3.14 * n[0]) < 0.005, q.stem);
+    else assert.ok(Math.abs(answer - 3.14 * n[0] * n[0]) < 0.005, q.stem);
+  }
+  // 三下起面积单位（平方米/平方分米/平方厘米）进入换算池
+  const s3 = buildMathSheet({ bookId: 'math-3b', options: { version: 'pep', count: 30, types: ['unit-convert'] } });
+  assert.ok(s3.questions.some((q) => /平方/.test(q.stem)), '三下换算应含面积单位');
+  // 周长/面积同步进入应用题知识点
+  let knowledges = new Set();
+  for (let i = 0; i < 5; i += 1) {
+    const w = buildMathSheet({ bookId: 'math-3a', options: { version: 'pep', count: 10, types: ['word-problem'] } });
+    w.questions.forEach((q) => knowledges.add(q.knowledge));
+  }
+  assert.ok(knowledges.has('perimeter'), '三上应用题应含周长应用');
+});

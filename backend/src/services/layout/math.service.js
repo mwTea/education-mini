@@ -80,22 +80,77 @@ const TYPES = {
   'fraction-add': () => { const n = rand(1, 8); const m = rand(1, 10 - n); return { stem: `${n}/10 + ${m}/10 =`, answer: `${n + m}/10` }; },
   'percent': () => { const p = pick([10, 20, 25, 50, 75, 80]); const base = pick([20, 40, 60, 80, 120, 200]); return { stem: `${base} 的 ${p}% =`, answer: `${base * p / 100}` }; },
   'unit-convert': (d, scope) => {
-    // 参数化双向换算：大单位→小单位（乘进率）与小单位→大单位（除进率）随机
-    const pairs = scope.units;
-    const [big, small, ratio] = pick(pairs);
-    const n = rand(1, Math.max(1, Math.min(Math.floor(scope.max / ratio), d === 'basic' ? 9 : d === 'advanced' ? 60 : 20)));
+    // 参数化双向换算：大单位→小单位（乘进率）与小单位→大单位（除进率）随机。
+    // 数量只按难度分档、时间单位限自然上限，不再用运算口径 scope.max 压缩——
+    // 此前进率 1000 的单位被压成恒为 1，题面全是 1 或 10 的倍数。
+    const [big, small, ratio] = pick(scope.units);
+    const cyclic = big === '时' || big === '分';
+    const grade = Number(scope.bookId[5]);
+    const n = d === 'basic' ? rand(2, 9)
+      : d === 'advanced' ? rand(11, cyclic ? 24 : grade <= 2 ? 20 : grade <= 4 ? 49 : 99)
+      : rand(2, 20);
     if (Math.random() < 0.55) return { stem: `${n}${big} = ( ) ${small}`, answer: `${n * ratio}` };
     return { stem: `${n * ratio}${small} = ( ) ${big}`, answer: `${n}` };
+  },
+  // ---- 图形与几何（周长/面积/圆）：答案为纯数字，单位随题面 ----
+  'perimeter': (d) => {
+    // 三上"长方形和正方形的周长"；正方形随机混入（约 1/3）
+    if (Math.random() < 0.35) {
+      const side = d === 'basic' ? rand(2, 8) : d === 'advanced' ? rand(5, 18) : rand(3, 15);
+      return { stem: `正方形边长${side}厘米，周长=( )厘米`, answer: String(side * 4) };
+    }
+    const long = d === 'basic' ? rand(3, 9) : d === 'advanced' ? rand(8, 20) : rand(5, 15);
+    const wide = rand(2, long - 1);
+    return { stem: `长方形长${long}厘米、宽${wide}厘米，周长=( )厘米`, answer: String(2 * (long + wide)) };
+  },
+  'area': (d) => {
+    // 三下"面积"；边长/宽 ≤9 保证乘法不超已学口径（两位数×一位数）
+    if (Math.random() < 0.35) {
+      const side = d === 'basic' ? rand(2, 8) : rand(3, 9);
+      return { stem: `正方形边长${side}厘米，面积=( )平方厘米`, answer: String(side * side) };
+    }
+    const long = d === 'basic' ? rand(2, 9) : d === 'advanced' ? rand(4, 15) : rand(3, 12);
+    const wide = rand(2, Math.min(long, 9));
+    return { stem: `长方形长${long}厘米、宽${wide}厘米，面积=( )平方厘米`, answer: String(long * wide) };
+  },
+  'polygon-area': (d) => {
+    // 五上"多边形面积"：平行四边形/三角形/梯形；除法题保证整除（高取偶数）
+    const kind = pick(['平行四边形', '三角形', '梯形']);
+    const base = d === 'basic' ? rand(2, 12) : d === 'advanced' ? rand(6, 25) : rand(4, 20);
+    const height = d === 'basic' ? rand(2, 9) : d === 'advanced' ? rand(3, 20) : rand(2, 15);
+    if (kind === '平行四边形') return { stem: `平行四边形底${base}厘米、高${height}厘米，面积=( )平方厘米`, answer: String(base * height) };
+    if (kind === '三角形') {
+      const h = height % 2 ? height + 1 : height;
+      return { stem: `三角形底${base}厘米、高${h}厘米，面积=( )平方厘米`, answer: String(base * h / 2) };
+    }
+    const top = rand(2, base - 1), h = height % 2 ? height + 1 : height;
+    return { stem: `梯形上底${top}厘米、下底${base}厘米、高${h}厘米，面积=( )平方厘米`, answer: String((top + base) * h / 2) };
+  },
+  'circle': (d) => {
+    // 六上"圆的周长和面积"（π 取 3.14）；周长/面积各半，非基础随机出"知周长求直径"
+    const fmt = (n) => String(parseFloat(n.toFixed(2)));
+    if (d !== 'basic' && Math.random() < 0.3) {
+      const dm = rand(2, 9);
+      return { stem: `圆的周长是${fmt(3.14 * dm)}厘米，直径=( )厘米`, answer: String(dm) };
+    }
+    const r = d === 'basic' ? rand(1, 5) : d === 'advanced' ? rand(4, 12) : rand(2, 9);
+    if (Math.random() < 0.5) return { stem: `圆的半径是${r}厘米，周长=( )厘米`, answer: fmt(2 * 3.14 * r) };
+    return { stem: `圆的半径是${r}厘米，面积=( )平方厘米`, answer: fmt(3.14 * r * r) };
   },
   'word-problem': (d, scope) => curriculumWord(d, scope),
   'clock-read': (d) => clockQuestion(d, false),
   'clock-draw': (d) => clockQuestion(d, true),
 };
 
+function gcd(a, b) {
+  let x = a, y = b;
+  while (y) { const r = x % y; x = y; y = r; }
+  return x;
+}
+
 function fraction(n, d) {
-  let a = n, b = d;
-  while (b) { const r = a % b; a = b; b = r; }
-  return d / a === 1 ? String(n / a) : `${n / a}/${d / a}`;
+  const g = gcd(n, d);
+  return d / g === 1 ? String(n / g) : `${n / g}/${d / g}`;
 }
 
 function clockQuestion(d, blank) {
@@ -106,59 +161,266 @@ function clockQuestion(d, blank) {
     layout: 'clock', clock: { hour, minute, blank } };
 }
 
+// ---- 应用题：多场景模板 × 数值范围跟本册已学题型走 × 难度分档 ----
+// 知识挂钩约定：加减按本册加减口径（20 内 / 100 内 / 万以内）选场景与数量级；
+// 乘除按表内 / 多位数乘除一位数 / 两位数三档；分数区分"初步认识"（和小于整体、
+// 天然最简、不约分）与"同分母加减"（结果约分、可为 1）。
 function curriculumWord(d, scope) {
   const topic = pick(scope.wordTopics || wordTopics(scope));
+  const ts = scope.types;
+  const bas = d === 'basic', adv = d === 'advanced';
   let stem, answer;
+
   if (topic === 'additive') {
-    const max = d === 'basic' ? Math.min(scope.max, 50) : scope.max;
-    const total = rand(6, max), a = rand(2, total - 2), b = total - a;
-    if (!scope.types.some((t) => t.startsWith('sub-')) || Math.random() < 0.5) { stem = `图书角有故事书 ${a} 本，绘本 ${b} 本，一共有多少本书？`; answer = `${total}本`; }
-    else { stem = `图书角有 ${total} 本书，借走 ${a} 本，还剩多少本？`; answer = `${b}本`; }
+    const cap = ts.includes('add-10000') || ts.includes('sub-10000') ? 9999
+      : ts.includes('add-100') || ts.includes('sub-100') ? 100 : 20;
+    const bands = {
+      20: { basic: [6, 12], standard: [8, 20], advanced: [11, 20] },
+      100: { basic: [12, 45], standard: [30, 80], advanced: [55, 100] },
+      9999: { basic: [110, 899], standard: [1100, 4999], advanced: [3000, 9999] },
+    };
+    const [lo, hi] = bands[cap][d];
+    const total = rand(lo, hi);
+    const a = rand(Math.max(2, Math.round(total * 0.2)), total - 2), b = total - a;
+    const hasSub = ts.some((t) => /^sub-/.test(t)) || ts.includes('vertical-sub');
+    const big = cap > 100; // 万以内换大数量语境，避免"图书角 8000 本书"
+    const sums = big ? [
+      [`学校图书馆有故事书 ${a} 本、科技书 ${b} 本，两类书一共有多少本？`, `${total}本`],
+      [`体育场东区有 ${a} 个座位、西区有 ${b} 个座位，一共有多少个座位？`, `${total}个`],
+    ] : [
+      [`图书角有故事书 ${a} 本、绘本 ${b} 本，一共有多少本书？`, `${total}本`],
+      [`舞蹈队有 ${a} 人、合唱队有 ${b} 人，两队一共有多少人？`, `${total}人`],
+      [`妈妈买了 ${a} 个苹果和 ${b} 个橘子，一共买了多少个水果？`, `${total}个`],
+    ];
+    const subs = big ? [
+      [`学校图书馆有 ${total} 本图书，借出 ${a} 本，还剩多少本？`, `${b}本`],
+      [`商店运来 ${total} 台电视机，卖出 ${a} 台，还剩多少台？`, `${b}台`],
+    ] : [
+      [`公交车上有 ${total} 人，到站后下去 ${a} 人，车上还有多少人？`, `${b}人`],
+      [`树上有 ${total} 只小鸟，飞走 ${a} 只，还剩多少只？`, `${b}只`],
+      [`一本故事书有 ${total} 页，已经看了 ${a} 页，还剩多少页没看？`, `${b}页`],
+    ];
+    const inverse = big
+      ? [`仓库运走 ${a} 箱货物后还剩 ${b} 箱，仓库原来有多少箱货物？`, `${total}箱`]
+      : [`停车场开走 ${a} 辆汽车后还剩 ${b} 辆，原来有多少辆汽车？`, `${total}辆`];
+    // 逆向求原数（被减数）只在培优且已学减法时出现
+    [stem, answer] = adv && hasSub && Math.random() < 0.35 ? inverse
+      : !hasSub || Math.random() < 0.5 ? pick(sums) : pick(subs);
   } else if (topic === 'multiply' || topic === 'divide') {
-    const table = scope.bookId[5] <= '2';
-    const n = rand(2, table ? 9 : d === 'basic' ? 20 : 90);
-    const twoDigits = topic === 'multiply' ? scope.types.includes('mul-2digit') : scope.types.includes('div-2digit');
-    const groups = rand(2, table || !twoDigits ? 9 : 30);
-    if (topic === 'multiply') { stem = `每盒有 ${n} 支铅笔，${groups} 盒一共有多少支？`; answer = `${n * groups}支`; }
-    else { stem = `${n * groups} 本书平均分给 ${groups} 个小组，每组分到多少本？`; answer = `${n}本`; }
-  } else if (topic === 'decimal') {
-    const a = rand(12, 90), b = rand(11, 80);
-    if (scope.types.includes('decimal-mul') && d !== 'basic') {
-      const weight = rand(12, 45);
-      stem = `苹果每千克 ${(a / 10).toFixed(1)} 元，买 ${(weight / 10).toFixed(1)} 千克，应付多少元？`;
-      answer = `${(a * weight / 100).toFixed(2)}元`;
-    } else if (scope.types.includes('decimal-div') && Math.random() < 0.5) {
-      const packs = rand(2, 9);
-      stem = `${packs} 袋大米一共重 ${(a * packs / 10).toFixed(1)} 千克，平均每袋重多少千克？`;
-      answer = `${(a / 10).toFixed(1)}千克`;
+    // 每份数/份数跟本册乘除单元：表内 → 多位数乘除一位数 → 两位数
+    const twoDigit = ts.includes('mul-2digit') || ts.includes('div-2digit');
+    const oneDigit = ts.includes('mul-1digit') || ts.includes('div-1digit')
+      || ts.includes('vertical-mul') || ts.includes('vertical-div');
+    let per, groups;
+    if (twoDigit) {
+      per = bas ? rand(11, 29) : rand(21, 99);
+      groups = bas ? rand(11, 20) : rand(11, 49);
+    } else if (oneDigit) {
+      per = bas ? rand(12, 49) : adv ? rand(112, 998) : rand(21, 199);
+      groups = rand(2, 9);
+    } else { // 表内乘除法
+      per = rand(2, 9); groups = rand(2, 9);
+    }
+    if (topic === 'multiply') {
+      if (!twoDigit && !oneDigit && adv && groups >= 4 && Math.random() < 0.5) {
+        // 表内乘加两步（口诀单元的乘加乘减）
+        const first = rand(2, groups - 2);
+        const scenes = [
+          [`每盒铅笔 ${per} 支，上午卖出 ${first} 盒、下午卖出 ${groups - first} 盒，一共卖出多少支？`, `${per * groups}支`],
+          [`每箱酸奶 ${per} 瓶，先运来 ${first} 箱、又运来 ${groups - first} 箱，一共运来多少瓶？`, `${per * groups}瓶`],
+        ];
+        [stem, answer] = pick(scenes);
+      } else {
+        const scenes = [
+          [`每盒铅笔 ${per} 支，${groups} 盒一共有多少支？`, `${per * groups}支`],
+          [`每箱酸奶 ${per} 瓶，${groups} 箱一共有多少瓶？`, `${per * groups}瓶`],
+          [`同学们栽树，每排栽 ${per} 棵，栽了 ${groups} 排，一共栽了多少棵？`, `${per * groups}棵`],
+          [`每袋糖果 ${per} 颗，${groups} 袋一共有多少颗？`, `${per * groups}颗`],
+        ];
+        [stem, answer] = pick(scenes);
+      }
+    } else if (!twoDigit && !oneDigit && adv && Math.random() < 0.5) {
+      // 表内包含除（求份数），与等分除交替
+      const scenes = [
+        [`一共有 ${per * groups} 个毽子，每 ${groups} 个装一盒，能装几盒？`, `${per}盒`],
+        [`${per * groups} 个小朋友做游戏，每 ${groups} 人分成一组，可以分成几组？`, `${per}组`],
+      ];
+      [stem, answer] = pick(scenes);
     } else {
-      stem = `一本练习本 ${(a / 10).toFixed(1)} 元，一支笔 ${(b / 10).toFixed(1)} 元，一共多少元？`;
-      answer = `${((a + b) / 10).toFixed(1)}元`;
+      const scenes = [
+        [`${per * groups} 本书平均分给 ${groups} 个小组，每个小组分到多少本？`, `${per}本`],
+        [`${per * groups} 瓶水平均分给 ${groups} 个小朋友，每人分到多少瓶？`, `${per}瓶`],
+        [`${per * groups} 棵树苗平均栽成 ${groups} 行，每行栽多少棵？`, `${per}棵`],
+      ];
+      [stem, answer] = pick(scenes);
+    }
+  } else if (topic === 'decimal') {
+    const cents = (x) => (x / 10).toFixed(1);
+    if (ts.includes('decimal-mul') && !bas) {
+      const price = rand(adv ? 30 : 12, adv ? 95 : 45);
+      const weight = rand(adv ? 15 : 12, adv ? 95 : 45);
+      const pay = (price * weight / 100).toFixed(2);
+      const scenes = [
+        [`苹果每千克 ${cents(price)} 元，买 ${cents(weight)} 千克，应付多少元？`, `${pay}元`],
+        [`牛肉每千克 ${cents(price)} 元，妈妈买了 ${cents(weight)} 千克，一共花了多少元？`, `${pay}元`],
+        [`香蕉每千克 ${cents(price)} 元，买 ${cents(weight)} 千克需要多少元？`, `${pay}元`],
+      ];
+      [stem, answer] = pick(scenes);
+    } else if (ts.includes('decimal-div') && Math.random() < 0.5) {
+      const per = rand(12, adv ? 90 : 45), packs = rand(2, 9);
+      const scenes = [
+        [`${packs} 袋大米一共重 ${cents(per * packs)} 千克，平均每袋重多少千克？`, `${cents(per)}千克`],
+        [`${packs} 盒牛奶一共 ${cents(per * packs)} 升，平均每盒多少升？`, `${cents(per)}升`],
+      ];
+      [stem, answer] = pick(scenes);
+    } else {
+      // 一位小数加减（小数初步 / 复习）
+      const a = rand(22, bas ? 50 : adv ? 95 : 80), b = rand(11, a - 11);
+      const scenes = [
+        [`一本练习本 ${cents(b)} 元，一支钢笔 ${cents(a)} 元，一共多少元？`, `${cents(a + b)}元`],
+        [`一个文具盒 ${cents(b)} 元，付出 ${cents(a)} 元，应找回多少元？`, `${cents(a - b)}元`],
+        [`一根彩带长 ${cents(a)} 米，剪去 ${cents(b)} 米，还剩多少米？`, `${cents(a - b)}米`],
+        [`小明的身高是 ${cents(a)} 米，比爸爸矮 ${cents(b)} 米，爸爸身高多少米？`, `${cents(a + b)}米`],
+      ];
+      [stem, answer] = pick(scenes);
+    }
+  } else if (topic === 'fraction') {
+    if (ts.includes('fraction-add2')) {
+      // 同分母分数加减：结果约分，和可为 1；培优混入比多少
+      const den = rand(4, 12);
+      const x = rand(1, den - 2), y = rand(1, den - x);
+      const sub = y < x && Math.random() < 0.3;
+      const sum = sub ? x - y : x + y;
+      const ans = sum === den ? '1' : fraction(sum, den);
+      const scenes = [
+        [`一条彩带，第一次用了全长的 ${x}/${den}，第二次用了全长的 ${y}/${den}，${sub ? '第二次比第一次多用全长的几分之几' : '一共用了全长的几分之几'}？`, ans],
+        [`一杯果汁，上午喝了全杯的 ${x}/${den}，下午喝了全杯的 ${y}/${den}，${sub ? '下午比上午多喝了几分之几' : '一共喝了几分之几'}？`, ans],
+      ];
+      [stem, answer] = pick(scenes);
+    } else {
+      // 分数初步认识：和小于整体，且天然最简（该阶段还没学约分）
+      let den = rand(3, 9), x = 1, y = 1;
+      for (let i = 0; i < 50; i += 1) {
+        const a = rand(1, den - 2), b = rand(1, den - a - 1);
+        if (gcd(a + b, den) === 1) { x = a; y = b; break; }
+        den = den >= 9 ? 3 : den + 1; // 换个分母再试
+      }
+      const scenes = [
+        [`一条彩带，第一次用了全长的 ${x}/${den}，第二次用了全长的 ${y}/${den}，一共用了全长的几分之几？`, `${x + y}/${den}`],
+        [`一杯果汁，先喝了全杯的 ${x}/${den}，又喝了全杯的 ${y}/${den}，一共喝了几分之几？`, `${x + y}/${den}`],
+        [`一块蛋糕，第一次吃了它的 ${x}/${den}，第二次吃了它的 ${y}/${den}，两次一共吃了几分之几？`, `${x + y}/${den}`],
+      ];
+      [stem, answer] = pick(scenes);
     }
   } else if (topic === 'fraction-mul') {
-    const den = rand(3, 12), numerator = rand(1, den - 1), whole = den * rand(5, 20);
-    stem = `一本书有 ${whole} 页，已经看了全书的 ${numerator}/${den}，还剩多少页没看？`;
-    answer = `${whole - whole * numerator / den}页`;
+    const den = rand(3, 12), numerator = rand(1, den - 1);
+    const whole = den * (bas ? rand(2, 5) : adv ? rand(10, 20) : rand(5, 12));
+    const part = whole * numerator / den;
+    // 培优偏两步（求剩余），基础只求部分量
+    const remain = Math.random() < (adv ? 0.6 : bas ? 0.3 : 0.45);
+    const scenes = remain ? [
+      [`一本书有 ${whole} 页，已经看了全书的 ${numerator}/${den}，还剩多少页没看？`, `${whole - part}页`],
+      [`水果店运来 ${whole} 千克苹果，卖出了总数的 ${numerator}/${den}，还剩多少千克？`, `${whole - part}千克`],
+    ] : [
+      [`一本书有 ${whole} 页，淘气已经看了全书的 ${numerator}/${den}，看了多少页？`, `${part}页`],
+      [`水果店运来 ${whole} 千克苹果，卖出了总数的 ${numerator}/${den}，卖出多少千克？`, `${part}千克`],
+    ];
+    [stem, answer] = pick(scenes);
   } else if (topic === 'fraction-div') {
-    const den = rand(3, 12), numerator = rand(1, den - 1), count = rand(2, 8);
-    stem = `把 ${numerator}/${den} 米长的彩带平均分成 ${count} 段，每段长多少米？`;
-    answer = `${fraction(numerator, den * count)}米`;
-  } else if (topic === 'fraction') {
-    const den = rand(4, 12), a = rand(1, den - 2), b = rand(1, den - a);
-    stem = `一条彩带，第一次用了全长的 ${a}/${den}，第二次用了全长的 ${b}/${den}，一共用了全长的几分之几？`;
-    answer = `${a + b}/${den}`;
+    const den = rand(3, 12), numerator = rand(1, den - 1);
+    const parts = bas ? rand(2, 4) : adv ? rand(3, 12) : rand(2, 8);
+    const ans = fraction(numerator, den * parts);
+    const scenes = [
+      [`把 ${numerator}/${den} 米长的彩带平均分成 ${parts} 段，每段长多少米？`, `${ans}米`],
+      [`把 ${numerator}/${den} 米长的绳子平均剪成 ${parts} 段，每段长多少米？`, `${ans}米`],
+      [`一杯 ${numerator}/${den} 升的果汁平均分给 ${parts} 个小朋友，每人分得多少升？`, `${ans}升`],
+    ];
+    [stem, answer] = pick(scenes);
   } else if (topic === 'ratio') {
-    const a = rand(1, 4), b = rand(a + 1, 7), part = rand(5, 30);
-    stem = `把 ${(a + b) * part} 本书按 ${a}:${b} 分给甲、乙两个班，乙班比甲班多分到多少本？`;
-    answer = `${(b - a) * part}本`;
+    const a = rand(1, 4), b = rand(a + 1, 7);
+    const part = bas ? rand(2, 8) : adv ? rand(10, 40) : rand(5, 20);
+    const total = (a + b) * part;
+    const askPart = adv && Math.random() < 0.5;
+    const scenes = [
+      [`把 ${total} 本书按 ${a}:${b} 分给甲、乙两个班，${askPart ? '甲班分到多少本' : '乙班比甲班多分到多少本'}？`, `${askPart ? a * part : (b - a) * part}本`],
+      [`把 ${total} 颗糖按 ${a}:${b} 装进大、小两个袋子，${askPart ? '大袋装多少颗' : '大袋比小袋多装多少颗'}？`, `${askPart ? b * part : (b - a) * part}颗`],
+    ];
+    [stem, answer] = pick(scenes);
   } else if (topic === 'volume') {
-    const a = rand(3, 12), b = rand(2, 9), h = rand(2, 8);
-    stem = `一个长方体盒子，长 ${a} 厘米，宽 ${b} 厘米，高 ${h} 厘米，它的体积是多少立方厘米？`;
-    answer = `${a * b * h}立方厘米`;
+    const a = bas ? rand(2, 6) : adv ? rand(5, 12) : rand(3, 9);
+    const b = bas ? rand(2, 5) : rand(2, 9);
+    const h = bas ? rand(2, 4) : adv ? rand(3, 8) : rand(2, 6);
+    const scenes = [
+      [`一个长方体盒子，长 ${a} 厘米、宽 ${b} 厘米、高 ${h} 厘米，它的体积是多少立方厘米？`, `${a * b * h}立方厘米`],
+      [`一块长方体橡皮，长 ${a} 厘米、宽 ${b} 厘米、高 ${h} 厘米，体积是多少立方厘米？`, `${a * b * h}立方厘米`],
+      [`一个长方体木块，长 ${a} 厘米、宽 ${b} 厘米、高 ${h} 厘米，体积是多少立方厘米？`, `${a * b * h}立方厘米`],
+    ];
+    [stem, answer] = pick(scenes);
+  } else if (topic === 'perimeter') {
+    // 周长应用（三上）：一圈/边框，正方形随机混入
+    if (Math.random() < 0.35) {
+      const side = bas ? rand(2, 8) : adv ? rand(5, 18) : rand(3, 15);
+      const scenes = [
+        [`一个正方形花坛的边长是 ${side} 米，它的周长是多少米？`, `${side * 4}米`],
+        [`一块正方形手帕的边长是 ${side} 分米，在它四周缝一圈花边，需要多少分米花边？`, `${side * 4}分米`],
+      ];
+      [stem, answer] = pick(scenes);
+    } else {
+      const long = bas ? rand(4, 9) : adv ? rand(8, 20) : rand(5, 15);
+      const wide = rand(2, long - 1);
+      const scenes = [
+        [`一块长方形菜地，长 ${long} 米、宽 ${wide} 米，沿菜地走一圈是多少米？`, `${2 * (long + wide)}米`],
+        [`一个长方形相框，长 ${long} 分米、宽 ${wide} 分米，做相框边框需要多长的木条？`, `${2 * (long + wide)}分米`],
+      ];
+      [stem, answer] = pick(scenes);
+    }
+  } else if (topic === 'area') {
+    if (ts.includes('polygon-area')) {
+      // 多边形面积应用（五上）
+      const base = bas ? rand(2, 12) : adv ? rand(6, 25) : rand(4, 18);
+      const height = bas ? rand(2, 9) : rand(2, 15);
+      if (Math.random() < 0.5) {
+        const scenes = [
+          [`一块平行四边形菜地，底 ${base} 米、高 ${height} 米，它的面积是多少平方米？`, `${base * height}平方米`],
+          [`一个平行四边形标志牌，底 ${base} 分米、高 ${height} 分米，面积是多少平方分米？`, `${base * height}平方分米`],
+        ];
+        [stem, answer] = pick(scenes);
+      } else {
+        const h = height % 2 ? height + 1 : height; // 底×高需为偶数（÷2 取整）
+        const scenes = [
+          [`一块三角形草地，底 ${base} 米、高 ${h} 米，它的面积是多少平方米？`, `${base * h / 2}平方米`],
+          [`一个三角形交通标志牌，底 ${base} 分米、高 ${h} 分米，面积是多少平方分米？`, `${base * h / 2}平方分米`],
+        ];
+        [stem, answer] = pick(scenes);
+      }
+    } else {
+      // 长方形/正方形面积应用（三下）
+      if (Math.random() < 0.35) {
+        const side = bas ? rand(2, 8) : rand(3, 9);
+        const scenes = [
+          [`一块正方形毛巾的边长是 ${side} 分米，它的面积是多少平方分米？`, `${side * side}平方分米`],
+          [`一张正方形桌布的边长是 ${side} 分米，它的面积是多少平方分米？`, `${side * side}平方分米`],
+        ];
+        [stem, answer] = pick(scenes);
+      } else {
+        const long = bas ? rand(2, 9) : adv ? rand(4, 15) : rand(3, 12);
+        const wide = rand(2, Math.min(long, 9));
+        const scenes = [
+          [`一块长方形地毯，长 ${long} 分米、宽 ${wide} 分米，它的面积是多少平方分米？`, `${long * wide}平方分米`],
+          [`一块长方形玻璃，长 ${long} 分米、宽 ${wide} 分米，这块玻璃的面积是多少平方分米？`, `${long * wide}平方分米`],
+        ];
+        [stem, answer] = pick(scenes);
+      }
+    }
   } else {
-    const price = rand(4, 30) * 20, pct = pick([10, 20, 25, 50]);
-    stem = `一件衣服原价 ${price} 元，优惠 ${pct}%，现在售价多少元？`;
-    answer = `${price * (100 - pct) / 100}元`;
+    const price = bas ? rand(2, 10) * 10 : adv ? rand(10, 50) * 100 : rand(4, 30) * 20;
+    const cands = [10, 20, 50, 80];
+    if (price % 4 === 0) cands.push(25, 75);
+    const pct = pick(cands);
+    const item = pick(['一件衣服', '一个书包', '一台电风扇']);
+    [stem, answer] = Math.random() < 0.4
+      ? [`${item}原价 ${price} 元，优惠 ${pct}%，便宜了多少元？`, `${price * pct / 100}元`]
+      : [`${item}原价 ${price} 元，优惠 ${pct}%，现在售价多少元？`, `${price * (100 - pct) / 100}元`];
   }
   return { stem, answer, layout: 'word', knowledge: topic };
 }
@@ -172,11 +434,11 @@ const PEP_BOOKS = {
   'math-1b': { name: '一年级下册', types: ['sub-20', 'add-100', 'sub-100', 'vertical-add', 'vertical-sub', 'unit-convert'] }, // 退位减、口算、笔算、人民币
   'math-2a': { name: '二年级上册', types: ['mul-table', 'mul-inverse', 'div-table', 'add-100', 'sub-100', 'unit-convert'] }, // 表内乘除、厘米和米、复习
   'math-2b': { name: '二年级下册', types: ['div-remainder', 'add-10000', 'sub-10000', 'vertical-add', 'vertical-sub', 'unit-convert'] }, // 有余数、万以内笔算（新版前移）、时间
-  'math-3a': { name: '三年级上册', types: ['mixed-2step', 'mixed-paren', 'mul-1digit', 'vertical-mul', 'unit-convert', 'fraction-add'] }, // 混合运算、乘法笔算、长度质量、分数初步
-  'math-3b': { name: '三年级下册', types: ['div-1digit', 'vertical-div', 'decimal-add', 'vertical-decimal', 'unit-convert', 'word-problem'] }, // 除法笔算、小数初步、年月日
+  'math-3a': { name: '三年级上册', types: ['mixed-2step', 'mixed-paren', 'mul-1digit', 'vertical-mul', 'perimeter', 'unit-convert', 'fraction-add'] }, // 混合运算、乘法笔算、长方形正方形周长、长度质量、分数初步
+  'math-3b': { name: '三年级下册', types: ['div-1digit', 'vertical-div', 'decimal-add', 'vertical-decimal', 'area', 'unit-convert', 'word-problem'] }, // 除法笔算、小数初步、长方形正方形面积、年月日
   'math-4a': { name: '四年级上册', types: ['mul-2digit', 'vertical-mul', 'vertical-div', 'vertical-decimal', 'add-10000', 'sub-10000', 'word-problem'] }, // 多位数乘两位数笔算 + 复习
-  'math-5a': { name: '五年级上册', types: ['decimal-mul', 'decimal-div', 'decimal-add', 'decimal-sub', 'vertical-decimal', 'mixed-2step', 'word-problem'] }, // 小数乘除
-  'math-6a': { name: '六年级上册', types: ['fraction-add2', 'fraction-add', 'percent', 'mixed-2step', 'word-problem'] }, // 分数乘除、百分数、负数
+  'math-5a': { name: '五年级上册', types: ['decimal-mul', 'decimal-div', 'decimal-add', 'decimal-sub', 'vertical-decimal', 'polygon-area', 'mixed-2step', 'word-problem'] }, // 小数乘除、多边形面积
+  'math-6a': { name: '六年级上册', types: ['fraction-add2', 'fraction-add', 'percent', 'circle', 'mixed-2step', 'word-problem'] }, // 分数乘除、百分数、圆的周长和面积
   // 2013 版（新版 2027 春才出，当前在读）
   'math-4b': { name: '四年级下册', types: ['mixed-2step', 'mixed-paren', 'decimal-add', 'decimal-sub', 'vertical-decimal', 'mul-2digit', 'vertical-mul', 'unit-convert', 'word-problem'] }, // 四则运算、运算律、小数意义（名数换算）、小数加减
   'math-5b': { name: '五年级下册', types: ['fraction-add2', 'fraction-add', 'div-table', 'unit-convert', 'word-problem'] }, // 分数加减、体积容积换算
@@ -190,11 +452,11 @@ const JJ_BOOKS = {
   'math-1b': { name: '一年级下册', types: ['sub-20', 'add-100', 'sub-100', 'vertical-add', 'vertical-sub'] }, // 20减法、100内口算、两位数±两位数笔算
   'math-2a': { name: '二年级上册', types: ['add-100', 'sub-100', 'mul-table', 'mul-inverse', 'div-table', 'unit-convert'] }, // 100内加减、口诀、求商、人民币
   'math-2b': { name: '二年级下册', types: ['div-remainder', 'add-10000', 'sub-10000', 'vertical-add', 'vertical-sub', 'unit-convert'] }, // 有余数除法、大数口算、三位数笔算、时间长度
-  'math-3a': { name: '三年级上册', types: ['mul-1digit', 'div-1digit', 'vertical-mul', 'vertical-div', 'unit-convert'] }, // 多位数乘/除以一位数口算笔算、质量
-  'math-3b': { name: '三年级下册', types: ['mul-2digit', 'vertical-mul', 'decimal-add', 'vertical-decimal', 'vertical-add', 'vertical-sub', 'unit-convert', 'word-problem'] }, // 两位数×两位数、小数初步、长度年月日
+  'math-3a': { name: '三年级上册', types: ['mul-1digit', 'div-1digit', 'vertical-mul', 'vertical-div', 'perimeter', 'unit-convert'] }, // 多位数乘/除以一位数口算笔算、长方形正方形周长、质量
+  'math-3b': { name: '三年级下册', types: ['mul-2digit', 'vertical-mul', 'decimal-add', 'vertical-decimal', 'vertical-add', 'vertical-sub', 'area', 'unit-convert', 'word-problem'] }, // 两位数×两位数、小数初步、长方形正方形面积、长度年月日
   'math-4a': { name: '四年级上册', types: ['div-2digit', 'vertical-div', 'mul-2digit', 'vertical-mul', 'vertical-decimal', 'vertical-add', 'vertical-sub', 'add-10000', 'sub-10000', 'unit-convert', 'word-problem'] }, // 除数两位数口算笔算、更大的数、度量衡
-  'math-5a': { name: '五年级上册', types: ['decimal-add', 'decimal-sub', 'decimal-mul', 'decimal-div', 'vertical-decimal', 'vertical-mul', 'vertical-div', 'mixed-2step', 'word-problem'] }, // 小数认识与加减、小数乘除、小数应用
-  'math-6a': { name: '六年级上册', types: ['fraction-add2', 'percent', 'ratio-fill', 'mixed-2step', 'word-problem'] }, // 比和比例、百分数
+  'math-5a': { name: '五年级上册', types: ['decimal-add', 'decimal-sub', 'decimal-mul', 'decimal-div', 'vertical-decimal', 'polygon-area', 'vertical-mul', 'vertical-div', 'mixed-2step', 'word-problem'] }, // 小数认识与加减、小数乘除、多边形面积、小数应用
+  'math-6a': { name: '六年级上册', types: ['fraction-add2', 'percent', 'ratio-fill', 'circle', 'mixed-2step', 'word-problem'] }, // 圆的周长和面积、比和比例、百分数
   // 经典版（新版 2027 春才出版，当前在读）
   'math-4b': { name: '四年级下册', types: ['mul-2digit', 'vertical-mul', 'fraction-add', 'decimal-add', 'decimal-sub', 'vertical-decimal', 'vertical-div', 'word-problem'] }, // 三位数×两位数、分数意义、小数认识、小数加减
   'math-5b': { name: '五年级下册', types: ['fraction-add2', 'fraction-mul', 'fraction-div', 'volume-cuboid', 'unit-convert', 'word-problem'] }, // 分数乘除、体积容积换算
@@ -339,6 +601,7 @@ const TYPE_LABELS = {
   'add-10000': '万以内加法', 'sub-10000': '万以内减法', 'mul-2digit': '两位数乘法',
   'mixed-2step': '两步混合', 'mixed-paren': '带括号混合', 'vertical-mul': '竖式乘法', 'vertical-div': '竖式除法', 'vertical-add': '竖式加法', 'vertical-sub': '竖式减法', 'vertical-decimal': '竖式小数加减', 'div-2digit': '除数两位数除法', 'time-elapsed': '经过时间', 'div-1digit': '多位数除以一位数', 'decimal-sub': '小数减法', 'decimal-div': '小数除法', 'fraction-add2': '同分母分数加减',
   'decimal-add': '小数加法', 'decimal-mul': '小数乘法', 'fraction-add': '同分母分数', 'percent': '百分数',
+  'perimeter': '长方形正方形周长', 'area': '长方形正方形面积', 'polygon-area': '多边形面积', 'circle': '圆的周长和面积',
   'unit-convert': '单位换算', 'word-problem': '应用题',
 };
 

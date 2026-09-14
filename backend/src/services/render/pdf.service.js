@@ -489,7 +489,7 @@ function drawMathPage(doc, kai, page, opts, startY) {
       const colW = CONTENT_W / (row.columns || 4);
       row.items.forEach((item, i) => {
         const x = MARGIN + i * colW;
-        drawText(doc, kai, `${item.no}. ${item.clock.blank ? item.answer : '写出时间'}`, x, y + 12, 9, '#222');
+        drawText(doc, kai, `${item.clock.blank ? item.answer : '写出时间'}`, x, y + 12, 9, '#222');
         const g = clockGeometry(item.clock), ox = x + 4, oy = y + 18;
         doc.save();
         doc.circle(ox + 60, oy + 60, 54).lineWidth(1).strokeColor('#222').stroke();
@@ -511,19 +511,19 @@ function drawMathPage(doc, kai, page, opts, startY) {
       row.items.forEach((item, i) => {
         const x = MARGIN + (i % cols) * colW;
         const iy = y + Math.floor(i / cols) * rowH + 16;
-        drawText(doc, kai, `${item.no}. ${item.stem}`, x, iy, cols === 4 ? 11 : 12, '#2f2a26');
+        drawText(doc, kai, item.stem, x, iy, cols === 4 ? 11 : 12, '#2f2a26');
       });
       y += row.heightMm ? row.heightMm * 72 / 25.4 : rowH;
     } else if (row.kind === 'vertical') {
       // 竖式题：横式出题 + 留白，孩子自己列竖式
       row.items.forEach((item, i) => {
         const x = MARGIN + (i % 2) * (CONTENT_W / 2);
-        drawText(doc, kai, `${item.no}. ${item.stem}`, x, y + 16, 13, '#2f2a26');
+        drawText(doc, kai, item.stem, x, y + 16, 13, '#2f2a26');
       });
       y += row.heightMm ? row.heightMm * 72 / 25.4 : 85;
     } else if (row.kind === 'word') {
       row.items.forEach((item) => {
-        const lines = wrapText(kai, `${item.no}. ${item.stem}`, 11, CONTENT_W);
+        const lines = wrapText(kai, item.stem, 11, CONTENT_W);
         lines.forEach((s, i) => drawText(doc, kai, s, MARGIN, y + 14 + i * 17, 11, '#2f2a26'));
         const h = Math.max((row.heightMm || 42) * 72 / 25.4, lines.length * 17 + 65);
         line(doc, MARGIN, y + h - 12, MARGIN + CONTENT_W, y + h - 12, '#bbb', 0.5, true);

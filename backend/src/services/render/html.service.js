@@ -294,8 +294,9 @@ function mathToHtml(sheet) {
       if (row.kind === 'section') return `<h2>${esc(row.text)}</h2>`;
       const columns = row.columns || (row.kind === 'word' ? 1 : row.kind === 'vertical' ? 2 : 3);
       const items = (row.items || []).map((item) => {
-        if (row.kind === 'clock') return `<div class="clock"><div>${item.no}. ${item.clock.blank ? esc(item.answer) : '写出时间'}</div>${clockSvg(item.clock)}${item.clock.blank ? '' : '<div>时间：________</div>'}</div>`;
-        return `<div class="question">${item.no}. ${esc(item.stem)}</div>`;
+        // 小题不带序号（避免与题目里的数字混淆），顺序即大题内的阅读顺序
+        if (row.kind === 'clock') return `<div class="clock"><div>${item.clock.blank ? esc(item.answer) : '写出时间'}</div>${clockSvg(item.clock)}${item.clock.blank ? '' : '<div>时间：________</div>'}</div>`;
+        return `<div class="question">${esc(item.stem)}</div>`;
       }).join('');
       return `<div class="row ${row.kind}" style="grid-template-columns:repeat(${columns},1fr);min-height:${row.heightMm || 11}mm">${items}</div>`;
     }).join('');

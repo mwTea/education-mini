@@ -1,32 +1,41 @@
 // pages/index/index.js
 const { getHistory } = require('../../utils/history');
-const { request } = require('../../utils/request');
-const { api } = require('../../config/index');
+const learning = require('../../utils/learning');
+
+/** 今日练习目标题数，用于首页进度条与「已练 x/y 题」 */
+const DAILY_GOAL = 10;
 
 Page({
   data: {
     recent: [],
-    stats: { lessons: 0, chars: 0 },
+    todayCount: 0,
+    dailyGoal: DAILY_GOAL,
+    todayPercent: 0,
   },
 
   onShow() {
-    this.setData({ recent: getHistory().slice(0, 3) });
-    this.loadStats();
+    const start = new Date();
+    start.setHours(0, 0, 0, 0);
+    const now = Date.now();
+    const todayCount = learning.read().runs
+      .filter((run) => run.at >= start.getTime() && run.at <= now)
+      .reduce((sum, run) => sum + Math.max(0, Number(run.count) || 0), 0);
+    const recent = getHistory().slice(0, 2).map((item) => {
+      const saved = new Date(item.savedAt);
+      const dateText = item.dateText || (Number.isFinite(saved.getTime())
+        ? `${saved.getMonth() + 1}月${saved.getDate()}日` : '');
+      return { ...item, dateText };
+    });
+    this.setData({
+      recent,
+      todayCount,
+      todayPercent: Math.min(100, Math.round((todayCount / DAILY_GOAL) * 100)),
+    });
   },
 
-  /** 首页「同步课文/生字」数字取自后端统计 */
-  loadStats() {
-    if (this._statsOk) return;
-    request({ url: api.textbooks })
-      .then((d) => {
-        if (d && d.stats) {
-          this._statsOk = true;
-          this.setData({
-            stats: { lessons: d.stats.lessons || 0, chars: d.stats.distinctChars || 0 },
-          });
-        }
-      })
-      .catch(() => { /* 统计拉取失败不影响使用 */ });
+  /** 首页 banner「开启今日学习」直达学习 tab */
+  goLearn() {
+    wx.switchTab({ url: '/pages/learn/learn' });
   },
 
 
@@ -75,11 +84,7 @@ Page({
     wx.navigateTo({ url: `/pages/math/quiz/quiz?${q}` });
   },
 
-  /** Hero 主按钮：进入学习专区（在线练习中心），避免"开始练习"被直达口算 */
-  goLearn() {
-    wx.switchTab({ url: '/pages/learn/learn' });
-  },
-
+  goChineseQuiz() { wx.navigateTo({ url: '/pages/chinese/quiz/quiz' }); },
   goEnglishQuiz() { wx.navigateTo({ url: '/pages/english/quiz/quiz' }); },
 
   onShareAppMessage() {

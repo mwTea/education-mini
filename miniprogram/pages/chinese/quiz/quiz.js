@@ -17,7 +17,8 @@ function shuffle(a) {
 
 Page({
   data: {
-    stage: 'pick', grade: 1, sem: 'a', bookName: '', lessons: [], loading: false,
+    stage: 'pick', grade: 1, sem: 'a', bookName: '', books: [], grades: [], semesters: [],
+    lessons: [], loading: false, loadError: '', outdated: false,
     idx: 0, total: 0, cur: null, chosen: -1, feedback: '', score: 0,
     rate: 0, stars: '', words: '', wrongChars: [],
   },
@@ -25,8 +26,9 @@ Page({
   onLoad() {
     let grade = 1;
     try { grade = wx.getStorageSync('cb_grade') || 1; } catch (e) { /* 忽略 */ }
-    this.setData({ grade });
-    this.loadBook();
+    grade = Number(grade);
+    this.setData({ grade: Number.isInteger(grade) && grade >= 1 && grade <= 6 ? grade : 1 });
+    this.loadBooks();
     this.checkProgress();
   },
 
@@ -63,14 +65,51 @@ Page({
       stage: 'quiz', bookName: p.bookName || '', grade: p.grade || this.data.grade, sem: p.sem || 'a',
       total: this._qs.length, idx: p.idx, cur: this._qs[p.idx], chosen: -1, feedback: '', score: p.score,
     });
+    // 续练可能属于另一册，换课和再练时也必须使用该册的生字池。
+    this.loadBook();
   },
 
   bookId() { return `rj-yuwen-${this.data.grade}${this.data.sem}`; },
 
-  loadBook() {
-    this.setData({ loading: true, lessons: [], outdated: false });
-    request({ url: api.textbook(this.bookId()) })
+  loadBooks() {
+    this.setData({ loading: true, loadError: '' });
+    return request({ url: api.textbooks })
       .then((d) => {
+        const books = (d.items || []).map((b) => {
+          const match = /^rj-yuwen-([1-6])([ab])$/.exec(b.id);
+          return match ? { id: b.id, name: b.name, grade: Number(match[1]), sem: match[2] } : null;
+        }).filter(Boolean).sort((a, b) => a.grade - b.grade || a.sem.localeCompare(b.sem));
+        const grades = [...new Set(books.map((b) => b.grade))].map((grade) => ({
+          value: grade, label: `${'一二三四五六'[grade - 1]}年级`,
+        }));
+        this.setData({ books, grades });
+        if (this.data.stage !== 'pick') return;
+        const selected = books.find((b) => b.id === this.bookId())
+          || books.find((b) => b.grade === this.data.grade) || books[0];
+        if (!selected) {
+          this.setData({ loading: false, loadError: '暂无可用教材，请稍后重试' });
+          return;
+        }
+        this.setData({ grade: selected.grade, sem: selected.sem });
+        return this.loadBook();
+      })
+      .catch(() => {
+        if (this.data.stage === 'pick') this.setData({ loading: false, loadError: '教材列表加载失败，请重试' });
+      });
+  },
+
+  loadBook() {
+    const bookId = this.bookId();
+    const requestId = this._bookRequest = (this._bookRequest || 0) + 1;
+    const semesters = this.data.books.filter((b) => b.grade === Number(this.data.grade))
+      .map((b) => ({ value: b.sem, label: b.sem === 'a' ? '上册' : '下册' }));
+    this._book = null;
+    this._allChars = [];
+    this.setData({ loading: true, lessons: [], outdated: false, loadError: '', bookName: '', semesters });
+    return request({ url: api.textbook(bookId) })
+      .then((d) => {
+        // 快速切换年级/册别时，忽略过期响应，避免列表和出题内容串册。
+        if (requestId !== this._bookRequest) return;
         this._book = d.book;
         const lessons = (d.book.lessons || []).map((l) => ({
           title: l.title,
@@ -83,24 +122,38 @@ Page({
         this.setData({ bookName: d.book.name, lessons, outdated, loading: false });
       })
       .catch(() => {
-        this.setData({ loading: false });
-        wx.showToast({ title: '课本加载失败', icon: 'none' });
+        if (requestId !== this._bookRequest) return;
+        this.setData({ loading: false, loadError: '课本加载失败，请重试' });
       });
+  },
+
+  onGradeTap(e) {
+    const grade = Number(e.currentTarget.dataset.grade);
+    if (grade === Number(this.data.grade) || this.data.stage !== 'pick') return;
+    const available = this.data.books.filter((b) => b.grade === grade);
+    const selected = available.find((b) => b.sem === this.data.sem) || available[0];
+    if (!selected) return;
+    this.setData({ grade, sem: selected.sem });
+    this.loadBook();
   },
 
   onSemTap(e) {
     const sem = e.currentTarget.dataset.sem;
-    if (sem === this.data.sem) return;
+    if (sem === this.data.sem || this.data.stage !== 'pick'
+      || !this.data.books.some((b) => b.grade === Number(this.data.grade) && b.sem === sem)) return;
     this.setData({ sem });
     this.loadBook();
   },
 
+  onReload() { return this.data.books.length ? this.loadBook() : this.loadBooks(); },
+
   onLessonTap(e) {
+    if (this.data.loading || this.data.loadError || this.data.stage !== 'pick') return;
     const lesson = this._book && this._book.lessons[Number(e.currentTarget.dataset.index)];
     if (this.data.outdated) {
       wx.showModal({
         title: '课本注音数据待更新',
-        content: '当前后端服务还没有逐字拼音数据。本地开发请启动最新 backend（npm start）并使用本地地址；线上需部署后再试。',
+        content: '这册教材的注音内容还在准备中，请先选择其他教材练习。',
         showCancel: false,
       });
       return;
@@ -183,9 +236,18 @@ Page({
   backToPick() {
     clearTimeout(this._advance);
     this.setData({ stage: 'pick' });
+    // 续练恢复期间教材目录可能尚未返回；重新选课时统一对齐目录和教材。
+    if (!this.data.books.length) this.loadBooks();
+    else this.loadBook();
   },
 
-  onRetry() { this.startLesson(this._lesson); },
+  onRetry() {
+    if (this.data.loading || !this._book || this._book.id !== this.bookId()) {
+      wx.showToast({ title: '请先返回选课，重新加载教材', icon: 'none' });
+      return;
+    }
+    this.startLesson(this._lesson);
+  },
 
   onUnload() { clearTimeout(this._advance); this.saveProgress(); },
   onHide() { clearTimeout(this._advance); this.saveProgress(); },

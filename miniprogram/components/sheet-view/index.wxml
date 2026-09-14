@@ -113,21 +113,21 @@
         <view wx:if="{{row.kind === 'section'}}" class="msection">{{row.text}}</view>
         <view wx:elif="{{row.kind === 'clock'}}" class="clock-grid">
           <view class="clock-item" wx:for="{{row.items}}" wx:for-item="item" wx:key="no">
-            <text>{{item.no}}. {{item.clock.blank ? item.answer : '写出时间'}}</text>
+            <text>{{item.clock.blank ? item.answer : '写出时间'}}</text>
             <image src="{{item.clockImage}}" mode="aspectFit" class="clock-image" />
             <text wx:if="{{!item.clock.blank}}">时间：______</text>
           </view>
         </view>
         <view wx:elif="{{row.kind === 'inline'}}" class="mgrid">
           <view class="mitem cols-{{row.columns}}" style="width:{{100 / row.columns}}%;" wx:for="{{row.items}}" wx:for-item="item" wx:key="no">
-            <text>{{item.no}}. {{item.stem}}</text>
+            <text>{{item.stem}}</text>
           </view>
         </view>
         <view wx:elif="{{row.kind === 'vertical'}}" class="vgrid">
-          <view class="vbox" wx:for="{{row.items}}" wx:for-item="item" wx:key="no">{{item.no}}. {{item.stem}}</view>
+          <view class="vbox" wx:for="{{row.items}}" wx:for-item="item" wx:key="no">{{item.stem}}</view>
         </view>
         <view wx:elif="{{row.kind === 'word'}}" class="mword">
-          <view class="wq" wx:for="{{row.items}}" wx:for-item="item" wx:key="no">{{item.no}}. {{item.stem}}</view>
+          <view class="wq" wx:for="{{row.items}}" wx:for-item="item" wx:key="no">{{item.stem}}</view>
         </view>
       </block>
       <view class="mpage-sep" wx:if="{{page.rows.length && page.rows[0].kind === 'word'}}"></view>

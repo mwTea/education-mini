@@ -5,12 +5,19 @@
       <image class="head-mascot" src="/assets/mascot/read.png" mode="aspectFit" />
       <view><view class="head-title">看拼音选字</view><view class="head-sub">{{bookName}}</view></view>
     </view>
-    <view class="seg">
-      <view class="seg-item {{sem === 'a' ? 'on' : ''}}" data-sem="a" bindtap="onSemTap">{{grade}}年级上册</view>
-      <view class="seg-item {{sem === 'b' ? 'on' : ''}}" data-sem="b" bindtap="onSemTap">{{grade}}年级下册</view>
+    <view wx:if="{{grades.length}}" class="book-picker">
+      <view class="picker-label">选择年级</view>
+      <view class="grade-grid">
+        <button wx:for="{{grades}}" wx:key="value" class="grade-chip {{grade == item.value ? 'on' : ''}}" data-grade="{{item.value}}" bindtap="onGradeTap" aria-label="{{item.label}}" aria-pressed="{{grade == item.value}}">{{item.label}}</button>
+      </view>
+      <view class="seg">
+        <button wx:for="{{semesters}}" wx:key="value" class="seg-item {{sem === item.value ? 'on' : ''}}" data-sem="{{item.value}}" bindtap="onSemTap" aria-pressed="{{sem === item.value}}">{{item.label}}</button>
+      </view>
     </view>
-    <view wx:if="{{outdated}}" class="outdated-tip">课本注音数据待更新：本地请启动最新 backend 并使用本地地址，线上需部署后再试</view>
+    <view wx:if="{{outdated}}" class="outdated-tip">这册教材的注音内容还在准备中，请先选择其他教材练习。</view>
     <view wx:if="{{loading}}" class="loading">课本加载中…</view>
+    <view wx:elif="{{loadError}}" class="load-error"><view>{{loadError}}</view><button class="reload-btn" bindtap="onReload">重新加载</button></view>
+    <view wx:elif="{{!lessons.length}}" class="loading">这册教材暂无可练课文</view>
     <view wx:for="{{lessons}}" wx:key="title" class="lesson-card" data-index="{{index}}" bindtap="onLessonTap">
       <view class="lesson-info"><view class="lesson-title">{{item.title}}</view><view class="lesson-count">{{item.count}} 个生字</view></view>
       <view class="lesson-go">开始</view>

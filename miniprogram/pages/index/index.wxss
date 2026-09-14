@@ -1,51 +1,59 @@
-/* 首页：暖橙渐变 Hero（大圆角 + 小墨 + 装饰）+ 学科浅底卡片 + 图形化快捷入口。 */
-.page-wrap{min-height:100vh;padding:28rpx 28rpx 60rpx;box-sizing:border-box}
-
-.brand-row{display:flex;align-items:center;justify-content:space-between}
-.brand{font-size:42rpx;font-weight:750;color:#12305e;letter-spacing:1rpx}
-.slogan{font-size:22rpx;color:var(--c-text-sub);margin-top:4rpx}
-.brand-mark{width:72rpx;height:72rpx;border-radius:12rpx;background:var(--c-chinese);color:#fff;font-size:40rpx;font-weight:700;display:flex;align-items:center;justify-content:center;transform:rotate(8deg);font-family:'Kaiti SC','STKaiti','KaiTi',serif;box-shadow:0 8rpx 18rpx rgba(245,108,108,.32)}
-
-/* Hero：卡片式顶栏，暖橙氛围；主操作白底深橙 */
-.hero{position:relative;overflow:hidden;display:flex;align-items:center;margin-top:26rpx;padding:40rpx 32rpx;background:linear-gradient(135deg,#ffb066 0%,#fb8b34 62%,#f97316 100%);border-radius:36rpx;min-height:300rpx;box-sizing:border-box;box-shadow:0 16rpx 34rpx rgba(249,115,22,.26)}
-.hero-copy{position:relative;z-index:2;flex:1}
-.hero-title{font-size:38rpx;font-weight:750;color:#fff;letter-spacing:1rpx}
-.hero-sub{font-size:23rpx;color:rgba(255,255,255,.9);margin-top:12rpx}
-.hero-btn{display:inline-flex;margin-top:30rpx;padding:16rpx 40rpx;border-radius:999rpx;background:#fff;color:#c2410c;font-size:26rpx;font-weight:650;box-shadow:0 8rpx 20rpx rgba(124,45,18,.22)}
-.hero-mascot{position:relative;z-index:2;width:220rpx;height:190rpx;margin-right:-10rpx;flex-shrink:0;filter:drop-shadow(0 12rpx 18rpx rgba(146,64,14,.28))}
-.bubble{position:absolute;border-radius:50%;background:rgba(255,255,255,.22);z-index:1}
-.b1{width:70rpx;height:70rpx;right:210rpx;top:16rpx}
-.b2{width:32rpx;height:32rpx;right:26rpx;top:88rpx}
-.b3{width:22rpx;height:22rpx;left:20rpx;bottom:18rpx}
-.deco-star{position:absolute;z-index:1;right:250rpx;bottom:26rpx;width:20rpx;height:20rpx;background:rgba(255,255,255,.55);transform:rotate(45deg);border-radius:4rpx}
-.deco-ring{position:absolute;z-index:1;left:34rpx;top:20rpx;width:26rpx;height:26rpx;border:4rpx solid rgba(255,255,255,.35);border-radius:50%;box-sizing:border-box}
-
-.section-title,.recent-title{font-size:29rpx;font-weight:700;color:var(--c-text);margin:32rpx 0 16rpx}
-
-/* 三科卡：学科浅底 + 渐变图标 + 箭头浅章 */
-.subject-card{display:flex;align-items:center;padding:26rpx 24rpx;border-radius:var(--r-card);margin-bottom:16rpx}
-.subject-card.red{background:linear-gradient(135deg,#fff6f5,#ffe9e7)}
-.subject-card.blue{background:linear-gradient(135deg,#f2f7ff,#dfeeff)}
-.subject-card.green{background:linear-gradient(135deg,#effcf7,#d9f6ec)}
-.subject-icon{width:78rpx;height:78rpx;border-radius:24rpx;color:#fff;display:flex;align-items:center;justify-content:center;font-size:31rpx;font-weight:700;letter-spacing:1rpx;flex-shrink:0}
-.subject-card.red .subject-icon{background:linear-gradient(135deg,#ff8f6b,var(--c-chinese));box-shadow:0 8rpx 18rpx rgba(245,108,108,.32)}
-.subject-card.blue .subject-icon{background:linear-gradient(135deg,#6ea8ff,var(--c-math));box-shadow:0 8rpx 18rpx rgba(59,130,246,.32)}
-.subject-card.green .subject-icon{background:linear-gradient(135deg,#5fd6ad,var(--c-english));box-shadow:0 8rpx 18rpx rgba(16,185,129,.32)}
-.subject-copy{flex:1;margin-left:20rpx;min-width:0}
-.subject-name{font-size:30rpx;font-weight:650;color:var(--c-text)}
-.subject-desc{font-size:21rpx;color:var(--c-text-sub);margin-top:5rpx}
-.subject-card .arrow{font-size:38rpx;color:var(--c-text-faint);width:56rpx;height:56rpx;border-radius:50%;background:rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-
-/* 快捷入口：浅彩底卡（用户选定版本），图形保留各自颜色 */
-.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12rpx;margin-top:24rpx}
-.quick-item{border-radius:var(--r-tile);padding:24rpx 6rpx 18rpx;text-align:center;font-size:21rpx;color:var(--c-text);display:flex;flex-direction:column;align-items:center}
-.q-blue{background:linear-gradient(160deg,#eef5ff,#dbeafe)}
-.q-green{background:linear-gradient(160deg,#effcf7,#dcf6ea)}
-.q-red{background:linear-gradient(160deg,#fff3f2,#ffe4e0)}
-.q-violet{background:linear-gradient(160deg,#f6f3ff,#ede9fe)}
-.quick-icon{width:64rpx;height:64rpx;margin-bottom:10rpx}
-
-.recent-item{display:flex;align-items:center;background:var(--bg-card);border-radius:var(--r-tile);padding:20rpx;margin-bottom:12rpx;box-shadow:var(--shadow-card)}
-.recent-dot{width:12rpx;height:12rpx;border-radius:50%;background:var(--c-primary);margin-right:16rpx}
-.recent-info{flex:1;font-size:25rpx;color:var(--c-text)}
-.recent-info text{display:block;color:var(--c-text-faint);font-size:20rpx;margin-top:4rpx}
+/* 首页：小墨场景 → 在线练习 → 同步打印 → 最近生成。 */
+page{background:#f3f7fc}
+.page-wrap{min-height:100vh;color:#12305e;padding-bottom:40rpx;box-sizing:border-box}
+.hero{position:relative;height:316rpx;background:#d9f2ff;overflow:hidden}
+.hero-banner{display:block;width:100%;height:100%}
+.home-content{position:relative;margin-top:-24rpx;padding:0 24rpx}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:16rpx;margin-bottom:20rpx}
+.section-title{font-size:36rpx;line-height:1.4;font-weight:700;letter-spacing:1rpx}
+.practice-panel{padding:30rpx 0 28rpx;background:#fff;border-radius:36rpx;box-shadow:0 8rpx 26rpx rgba(32,76,116,.05)}
+.practice-panel .section-head{padding:0 28rpx}
+.today-count{font-size:24rpx;color:#64748b;white-space:nowrap}
+.today-count text{font-size:36rpx;line-height:1;font-weight:700;color:#1688f8}
+.today-progress{height:14rpx;margin:0 28rpx 16rpx;border-radius:999rpx;background:#e5eef7;overflow:hidden}
+.today-progress-bar{height:100%;border-radius:999rpx;background:linear-gradient(90deg,#4a9eff,#1688f8);transition:width .3s}
+.page-wrap button{margin:0;padding:0;border-radius:0;border:0;background:transparent;font-family:inherit;font-weight:400;line-height:1.4;text-align:left;color:inherit}
+.page-wrap button::after{border:0}
+.page-wrap .practice-row{display:flex;align-items:center;gap:20rpx;width:auto;margin:0 28rpx 18rpx;padding:20rpx 24rpx;border-radius:24rpx;box-sizing:border-box}
+.practice-row:last-child{margin-bottom:0}
+.page-wrap .practice-row.chinese{background:#fff1eb}
+.page-wrap .practice-row.math{background:#eaf5ff}
+.page-wrap .practice-row.english{background:#eaf9f0}
+.practice-row.chinese .practice-arrow{background:#ffe4d6}
+.practice-row.math .practice-arrow{background:#d6ecff}
+.practice-row.english .practice-arrow{background:#d7f2e2}
+.practice-icon-wrap{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:80rpx;height:80rpx}
+.practice-icon-img{width:68rpx;height:68rpx}
+.practice-text{flex:1;min-width:0}
+.practice-subject{font-size:30rpx;font-weight:700;line-height:1.4}
+.practice-row.chinese .practice-subject{color:#c83f39}
+.practice-row.math .practice-subject{color:#2262cc}
+.practice-row.english .practice-subject{color:#138254}
+.practice-name{margin-top:4rpx;font-size:22rpx;line-height:1.4;color:#7c8aa0}
+.practice-arrow{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:50rpx;height:50rpx;border-radius:50%;background:rgba(255,255,255,.85);color:#1688f8;font-size:42rpx;line-height:1}
+.print-section,.recent-section{margin-top:32rpx}
+.print-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18rpx}
+.page-wrap .print-tile{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;min-width:0;padding:30rpx 8rpx 33rpx;border-radius:28rpx;box-sizing:border-box;text-align:center}
+.page-wrap .print-tile.print-chinese{background:#fff0e5;color:#c83f39}
+.page-wrap .print-tile.print-math{background:#e6f2ff;color:#2262cc}
+.page-wrap .print-tile.print-english{background:#e5f7ec;color:#138254}
+.print-chinese .print-name{color:#c83f39}
+.print-math .print-name{color:#2262cc}
+.print-english .print-name{color:#138254}
+.print-icon-wrap{display:flex;align-items:center;justify-content:center;width:98rpx;height:98rpx;margin-bottom:15rpx}
+.print-icon{display:block;width:84rpx;height:84rpx}
+.print-name{font-size:27rpx;font-weight:700;line-height:1.4}
+.print-desc{margin-top:5rpx;font-size:20rpx;line-height:1.4;color:#7c8aa0;white-space:nowrap}
+.page-wrap .history-link{display:inline-flex;align-items:center;justify-content:center;width:auto;height:72rpx;padding:0 26rpx;border-radius:36rpx;background:transparent;font-size:28rpx;font-weight:500;line-height:1;color:#268bff;letter-spacing:1rpx}
+.history-arrow{flex-shrink:0;width:14rpx;height:14rpx;margin-left:10rpx;border-top:2rpx solid currentColor;border-right:2rpx solid currentColor;transform:rotate(45deg)}
+.recent-section .section-head{margin-bottom:10rpx}
+.recent-list{padding:0 22rpx;border-radius:28rpx;background:#fff}
+.page-wrap .recent-item{display:flex;align-items:center;width:100%;gap:18rpx;padding:22rpx 0;border-bottom:1rpx solid #eff3f8;box-sizing:border-box}
+.recent-item:last-child{border-bottom:0}
+.recent-icon{width:60rpx;height:60rpx;flex-shrink:0}
+.recent-info{flex:1;min-width:0}
+.recent-name{font-size:26rpx;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.recent-meta{font-size:22rpx;color:#64748b;margin-top:8rpx}
+.recent-arrow{color:#7892ad;font-size:36rpx;flex-shrink:0}
+.row-pressed{opacity:.7}
+.tile-pressed{opacity:.75}

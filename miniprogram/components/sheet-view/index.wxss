@@ -322,7 +322,6 @@
 .mword { text-align: left; }
 .mword .wq { min-height: 210rpx; box-sizing: border-box; }
 .mitem { width: 33.33%; box-sizing: border-box; padding: 14rpx 8rpx; font-size: 30rpx; color: #2f2a26; }
-.mno { color: #9aa0a6; font-size: 24rpx; margin-right: 8rpx; }
 .vgrid { display: flex; flex-wrap: wrap; margin-top: 10rpx; }
 .vbox { width: 50%; box-sizing: border-box; height: 220rpx; padding: 16rpx 20rpx; }
 .vnum { font-size: 40rpx; color: #2f2a26; margin-left: 40rpx; line-height: 1.7; }

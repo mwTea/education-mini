@@ -1,24 +1,72 @@
 <view class="page-wrap">
-  <view class="brand-row"><view><view class="brand">描红习字簿</view><view class="slogan">小学生学习好帮手</view></view><view class="brand-mark">学</view></view>
-  <view class="hero">
-    <view class="hero-copy"><view class="hero-title">每天进步一点点</view><view class="hero-sub">让练习更简单、更有成就感</view><view class="hero-btn" bindtap="goLearn">开始练习</view></view>
-    <image class="hero-mascot" src="/assets/mascot/wave.png" mode="aspectFit" />
-    <view class="bubble b1"></view>
-    <view class="bubble b2"></view>
-    <view class="bubble b3"></view>
-    <view class="deco-star"></view>
-    <view class="deco-ring"></view>
+  <view class="hero" hover-class="row-pressed" bindtap="goLearn" aria-role="button" aria-label="开启今日学习，前往学习页">
+    <image class="hero-banner" src="/assets/home/banner-v3.jpg" mode="aspectFill" />
   </view>
-  <view class="section-title">选择学科</view>
-  <view class="subject-card red" bindtap="goChinese"><view class="subject-icon">语</view><view class="subject-copy"><view class="subject-name">语文</view><view class="subject-desc">在线练习 · 打印资料</view></view><view class="arrow">›</view></view>
-  <view class="subject-card blue" bindtap="goMath"><view class="subject-icon">数</view><view class="subject-copy"><view class="subject-name">数学</view><view class="subject-desc">在线口算 · 同步题卡</view></view><view class="arrow">›</view></view>
-  <view class="subject-card green" bindtap="goEnglish"><view class="subject-icon">Abc</view><view class="subject-copy"><view class="subject-name">英语</view><view class="subject-desc">单词书写 · 听写资料</view></view><view class="arrow">›</view></view>
-  <view class="quick-grid">
-    <view class="quick-item q-blue" bindtap="goQuizFast"><image class="quick-icon" src="/assets/quick/quiz.png" mode="aspectFit" /><text>在线口算</text></view>
-    <view class="quick-item q-green" bindtap="goEnglishQuiz"><image class="quick-icon" src="/assets/quick/english.png" mode="aspectFit" /><text>在线英语</text></view>
-    <view class="quick-item q-red" bindtap="goChinese"><image class="quick-icon" src="/assets/quick/chinese.png" mode="aspectFit" /><text>语文打印</text></view>
-    <view class="quick-item q-violet" bindtap="goHistory"><image class="quick-icon" src="/assets/quick/history.png" mode="aspectFit" /><text>打印历史</text></view>
+  <view class="home-content">
+    <view class="practice-panel">
+      <view class="section-head">
+        <view class="section-title">今日练习</view>
+        <view class="today-count">已练 <text>{{todayCount}}/{{dailyGoal}}</text> 题</view>
+      </view>
+      <view class="today-progress" aria-role="progressbar" aria-label="今日练习进度 {{todayPercent}}%">
+        <view class="today-progress-bar" style="width:{{todayPercent}}%"></view>
+      </view>
+      <button class="practice-row chinese" hover-class="row-pressed" bindtap="goChineseQuiz" aria-label="语文，看拼音选字">
+        <view class="practice-icon-wrap"><image class="practice-icon-img" src="/assets/home/subjects/chinese.png" mode="aspectFit" /></view>
+        <view class="practice-text">
+          <view class="practice-subject">语文</view>
+          <view class="practice-name">看拼音选字</view>
+        </view>
+        <view class="practice-arrow">›</view>
+      </button>
+      <button class="practice-row math" hover-class="row-pressed" bindtap="goQuizFast" aria-label="数学，口算练习">
+        <view class="practice-icon-wrap"><image class="practice-icon-img" src="/assets/home/subjects/math.png" mode="aspectFit" /></view>
+        <view class="practice-text">
+          <view class="practice-subject">数学</view>
+          <view class="practice-name">口算练习</view>
+        </view>
+        <view class="practice-arrow">›</view>
+      </button>
+      <button class="practice-row english" hover-class="row-pressed" bindtap="goEnglishQuiz" aria-label="英语，记词拼单词">
+        <view class="practice-icon-wrap"><image class="practice-icon-img" src="/assets/home/subjects/english.png" mode="aspectFit" /></view>
+        <view class="practice-text">
+          <view class="practice-subject">英语</view>
+          <view class="practice-name">记词拼单词</view>
+        </view>
+        <view class="practice-arrow">›</view>
+      </button>
+    </view>
+
+    <view class="print-section">
+      <view class="section-head"><view class="section-title">同步打印</view></view>
+      <view class="print-grid">
+        <button class="print-tile print-chinese" hover-class="tile-pressed" bindtap="goChinese" aria-label="语文同步打印">
+          <view class="print-icon-wrap"><image class="print-icon" src="/assets/home/subjects/chinese.png" mode="aspectFit" /></view>
+          <view class="print-name">语文</view><view class="print-desc">课本同步</view>
+        </button>
+        <button class="print-tile print-math" hover-class="tile-pressed" bindtap="goMath" aria-label="数学同步打印">
+          <view class="print-icon-wrap"><image class="print-icon" src="/assets/home/subjects/math.png" mode="aspectFit" /></view>
+          <view class="print-name">数学</view><view class="print-desc">口算题卡</view>
+        </button>
+        <button class="print-tile print-english" hover-class="tile-pressed" bindtap="goEnglish" aria-label="英语同步打印">
+          <view class="print-icon-wrap"><image class="print-icon" src="/assets/home/subjects/english.png" mode="aspectFit" /></view>
+          <view class="print-name">英语</view><view class="print-desc">单词字帖</view>
+        </button>
+      </view>
+    </view>
+
+    <view wx:if="{{recent.length}}" class="recent-section">
+      <view class="section-head">
+        <view class="section-title">最近生成</view>
+        <button class="history-link" hover-class="row-pressed" bindtap="goHistory" aria-label="查看全部打印历史">查看全部<view class="history-arrow"></view></button>
+      </view>
+      <view class="recent-list">
+        <button class="recent-item" hover-class="row-pressed" wx:for="{{recent}}" wx:key="id" data-id="{{item.id}}" bindtap="openSheet">
+          <image class="recent-icon" src="/assets/quick/history.png" mode="aspectFit" />
+          <view class="recent-info"><view class="recent-name">{{item.title}}</view><view class="recent-meta">{{item.pageCount || 1}} 页<text wx:if="{{item.dateText}}"> · {{item.dateText}}</text></view></view>
+          <view class="recent-arrow">›</view>
+        </button>
+      </view>
+    </view>
   </view>
-  <view wx:if="{{recent.length}}" class="recent-title">最近生成</view>
-  <view class="recent-item" wx:for="{{recent}}" wx:key="id" data-id="{{item.id}}" bindtap="openSheet"><view class="recent-dot"></view><view class="recent-info"><view>{{item.title}}</view><text>{{item.pageCount || 1}} 页 · {{item.dateText}}</text></view><view class="arrow">›</view></view>
 </view>

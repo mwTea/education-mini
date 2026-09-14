@@ -1,6 +1,6 @@
 {
-  "navigationBarTitleText": "字帖出题器",
-  "navigationBarBackgroundColor": "#f7f5f0",
-  "backgroundColor": "#f7f5f0",
+  "navigationBarTitleText": "描红习字簿",
+  "navigationBarBackgroundColor": "#d9f2ff",
+  "backgroundColor": "#f8fbff",
   "usingComponents": {}
 }
