@@ -1,8 +1,86 @@
 <view class="page-wrap">
-  <view class="page-title">打印资料</view><view class="page-sub">选学科，使用现有模板生成可下载 PDF</view>
-  <view class="hero"><view><view class="hero-title">一键生成纸笔习题</view><view class="hero-sub">打印下来，随时练习</view></view><view class="paper">PDF</view></view>
-  <view class="print-card" data-key="chinese" bindtap="openSubject"><view class="icon red">语</view><view class="copy"><view class="name">语文同步打印</view><view class="desc">生字 · 词语 · 字帖</view></view><view class="arrow">›</view></view>
-  <view class="print-card" data-key="math" bindtap="openSubject"><view class="icon blue">数</view><view class="copy"><view class="name">数学同步打印</view><view class="desc">口算 · 竖式 · 应用题</view></view><view class="arrow">›</view></view>
-  <view class="print-card" data-key="english" bindtap="openSubject"><view class="icon green">Abc</view><view class="copy"><view class="name">英语同步打印</view><view class="desc">单词 · 句子 · 默写</view></view><view class="arrow">›</view></view>
-  <view class="tool-grid"><view class="tool" bindtap="goRadicals"><view class="tool-icon red-text">偏</view><text>偏旁部首</text></view><view class="tool" bindtap="goNameSheet"><view class="tool-icon orange">名</view><text>名字字帖</text></view><view class="tool" bindtap="comingSoon"><view class="tool-icon purple">卷</view><text>测试小卷</text></view><view class="tool" bindtap="goHistory"><view class="tool-icon blue-text">史</view><text>打印历史</text></view></view>
+  <view class="hero-card">
+    <view class="hero-copy">
+      <view class="hero-title">打印中心</view>
+      <view class="hero-subtitle">同步教材 · 一键生成</view>
+      <view class="hero-subtitle">下载 PDF 后打印</view>
+      <view class="hero-benefits">
+        <view class="benefit"><view class="benefit-check">✓</view><text>覆盖小学 1–6 年级</text></view>
+        <view class="benefit"><view class="benefit-check">✓</view><text>多种练习模板</text></view>
+        <view class="benefit"><view class="benefit-check">✓</view><text>生成后可下载 PDF</text></view>
+      </view>
+    </view>
+    <view class="hero-visual">
+      <view class="hero-note">打印学习<text>从这里开始！</text></view>
+      <image class="hero-image" src="/assets/print/print-hero-xiaomo.png" mode="aspectFit" />
+      <view class="hero-star star-one">◆</view>
+      <view class="hero-star star-two">◆</view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-head">
+      <view class="section-title">同步教材</view>
+      <view class="section-subtitle">与课堂同步，打印更高效</view>
+    </view>
+    <button class="subject-card subject-chinese" hover-class="card-pressed" data-key="chinese" bindtap="openSubject" aria-label="语文同步打印，生字字帖、听写练习、生字卡片">
+      <view class="subject-icon icon-chinese">语</view>
+      <view class="subject-copy">
+        <view class="subject-name">语文同步打印</view>
+        <view class="subject-desc">生字字帖 · 听写练习 · 生字卡片</view>
+        <view class="subject-tag tag-chinese">覆盖 1–6 年级 · 支持多版本教材</view>
+      </view>
+      <view class="subject-arrow">›</view>
+    </button>
+    <button class="subject-card subject-math" hover-class="card-pressed" data-key="math" bindtap="openSubject" aria-label="数学同步打印，口算题卡、竖式计算、应用题">
+      <view class="subject-icon icon-math">数</view>
+      <view class="subject-copy">
+        <view class="subject-name">数学同步打印</view>
+        <view class="subject-desc">口算题卡 · 竖式计算 · 应用题</view>
+        <view class="subject-tag tag-math">覆盖 1–6 年级 · 支持多版本教材</view>
+      </view>
+      <view class="subject-arrow">›</view>
+    </button>
+    <button class="subject-card subject-english" hover-class="card-pressed" data-key="english" bindtap="openSubject" aria-label="英语同步打印，字母字帖、单词字帖、默写帖">
+      <view class="subject-icon icon-english">ABC</view>
+      <view class="subject-copy">
+        <view class="subject-name">英语同步打印</view>
+        <view class="subject-desc">字母字帖 · 单词字帖 · 默写帖</view>
+        <view class="subject-tag tag-english">覆盖 1–6 年级 · 支持教材词库</view>
+      </view>
+      <view class="subject-arrow">›</view>
+    </button>
+  </view>
+
+  <view class="section tools-section">
+    <view class="section-head">
+      <view class="section-title">专项工具</view>
+      <view class="section-subtitle">更多学习资料，满足个性化需求</view>
+    </view>
+    <view class="tool-grid">
+      <button class="tool-card" hover-class="card-pressed" bindtap="goRadicals" aria-label="偏旁部首，汉字专项练习">
+        <view class="tool-icon-wrap tool-red"><image class="tool-icon" src="/assets/print/tool-radicals.png" mode="aspectFit" /></view>
+        <view class="tool-copy"><view class="tool-name">偏旁部首</view><view class="tool-desc">汉字专项练习</view></view>
+      </button>
+      <button class="tool-card" hover-class="card-pressed" bindtap="goNameSheet" aria-label="姓名字帖，定制姓名练习">
+        <view class="tool-icon-wrap tool-orange"><image class="tool-icon" src="/assets/print/tool-name-sheet.png" mode="aspectFit" /></view>
+        <view class="tool-copy"><view class="tool-name">姓名字帖</view><view class="tool-desc">定制姓名练习</view></view>
+      </button>
+      <button class="tool-card" hover-class="card-pressed" bindtap="comingSoon" aria-label="测试小卷，后续开放">
+        <view class="tool-icon-wrap tool-purple"><image class="tool-icon" src="/assets/print/tool-test-paper.png" mode="aspectFit" /></view>
+        <view class="tool-copy"><view class="tool-name-row"><view class="tool-name">测试小卷</view><view class="soon-tag">后续开放</view></view><view class="tool-desc">单元 / 期中 / 期末</view></view>
+      </button>
+      <button class="tool-card" hover-class="card-pressed" bindtap="goHistory" aria-label="打印历史，查看已生成资料">
+        <view class="tool-icon-wrap tool-blue"><image class="tool-icon" src="/assets/print/tool-print-history.png" mode="aspectFit" /></view>
+        <view class="tool-copy"><view class="tool-name">打印历史</view><view class="tool-desc">查看已生成资料</view></view>
+      </button>
+    </view>
+  </view>
+
+  <view class="footer-card">
+    <view class="footer-note">好资料，<text>让学习更轻松！</text></view>
+    <image class="footer-image" src="/assets/print/print-footer-xiaomo.png" mode="aspectFit" />
+    <view class="footer-star footer-star-one">◆</view>
+    <view class="footer-star footer-star-two">◆</view>
+  </view>
 </view>

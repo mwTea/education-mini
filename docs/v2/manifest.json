@@ -76,5 +76,17 @@
     "path": "ui/reference/Codex 图像 2026年9月11日 10_33_28.png",
     "bytes": 1784368,
     "sha256": "295e64b425177041251d067c3e25d416b66667457c930b08ce9f6a3e267df37e"
+  },
+  {
+    "original": "codex-clipboard-d88300e1-df6c-44b2-bc40-a1796e8d7c86.png",
+    "path": "ui/source/打印中心UI方案AB-2026-09-14.png",
+    "bytes": 1734543,
+    "sha256": "8e5673570586a1d50768a48bff4ccabe0d76432aed40be1641fd2811c3617d72"
+  },
+  {
+    "original": "codex-clipboard-6fa6eed8-784f-4e5c-b2d8-8830a5be5aaf.png",
+    "path": "ui/source/打印中心UI素材总览-2026-09-14.png",
+    "bytes": 1912666,
+    "sha256": "ffcd7ea17961cba42b0da9b4cc0b223f2dbbfc6512c0c5bc6f8cc964974437bc"
   }
 ]

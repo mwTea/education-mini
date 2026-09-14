@@ -8,7 +8,7 @@ Page({
   /** 名字字帖：输姓名直达语文生成页（从首页快捷位移入打印工具格） */
   goNameSheet() {
     wx.showModal({
-      title: '名字字帖',
+      title: '姓名字帖',
       editable: true,
       placeholderText: '输入孩子姓名，如：李小明',
       success: (r) => {

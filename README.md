@@ -92,6 +92,14 @@ npm test
 2. 修改 `config/index.js` 中 `BASE_URL` 指向你的后端地址
 3. 在小程序后台「开发设置 → 服务器域名」添加 request + downloadFile 合法域名
 
+提交前检查主包与媒体资源体积：
+
+```bash
+node scripts/check-miniprogram-size.js
+```
+
+当前约束按更严格的十进制口径执行：小程序主包小于 1.5 MB（1,500,000 bytes），单个图片或音频资源不超过 200 KB（200,000 bytes）。媒体检查覆盖整个 `miniprogram/`；主包统计排除不会上传的 `.DS_Store`、本地私有配置和临时抓取目录。
+
 ### 部署
 
 参照 `deploy/nginx.conf.sample` 配置反代；管理后台访问 `/admin`（Token 通过环境变量 `ADMIN_TOKEN` 设置）。

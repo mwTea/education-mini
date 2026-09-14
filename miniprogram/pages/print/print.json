@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "打印"
+  "navigationBarTitleText": "打印",
+  "navigationBarBackgroundColor": "#ffffff",
+  "backgroundColor": "#f3f7fc",
+  "backgroundTextStyle": "dark"
 }

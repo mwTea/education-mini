@@ -1,24 +1,74 @@
-/* 打印页：暖色氛围 Hero + 渐变学科图标 + 白卡投影工具格。 */
-.page-wrap{min-height:100vh;padding:36rpx 28rpx 60rpx;box-sizing:border-box}
-.page-title{font-size:44rpx;font-weight:700;color:#12305e}
-.page-sub{font-size:25rpx;color:var(--c-text-sub);margin:10rpx 0 28rpx}
-.hero{display:flex;justify-content:space-between;align-items:center;padding:30rpx;background:linear-gradient(135deg,var(--c-warm-soft),#ffedd5);border-radius:var(--r-card);margin-bottom:24rpx}
-.hero-title{font-size:30rpx;font-weight:650;color:#c2410c}
-.hero-sub{font-size:23rpx;color:#9a6a4b;margin-top:8rpx}
-.paper{width:82rpx;height:96rpx;background:#fff;border-radius:8rpx;box-shadow:0 8rpx 18rpx rgba(154,80,20,.13);display:flex;align-items:center;justify-content:center;color:var(--c-warm);font-size:21rpx;font-weight:700}
-.print-card{display:flex;align-items:center;background:var(--bg-card);border-radius:var(--r-card);padding:24rpx;margin-bottom:16rpx;box-shadow:var(--shadow-card)}
-.icon{width:76rpx;height:76rpx;border-radius:20rpx;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:29rpx}
-.red{background:linear-gradient(135deg,#ff8f6b,var(--c-chinese));box-shadow:0 8rpx 18rpx rgba(245,108,108,.3)}
-.blue{background:linear-gradient(135deg,#6ea8ff,var(--c-math));box-shadow:0 8rpx 18rpx rgba(59,130,246,.3)}
-.green{background:linear-gradient(135deg,#5fd6ad,var(--c-english));box-shadow:0 8rpx 18rpx rgba(16,185,129,.3)}
-.copy{flex:1;margin-left:20rpx}
-.name{font-size:29rpx;font-weight:650;color:var(--c-text)}
-.desc{font-size:22rpx;color:var(--c-text-sub);margin-top:6rpx}
-.arrow{font-size:42rpx;color:var(--c-text-faint)}
-.tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:16rpx;margin-top:24rpx}
-.tool{background:var(--bg-card);border-radius:var(--r-tile);padding:24rpx;display:flex;align-items:center;gap:16rpx;font-size:25rpx;color:var(--c-text);box-shadow:var(--shadow-card)}
-.tool-icon{width:58rpx;height:58rpx;border-radius:16rpx;display:flex;align-items:center;justify-content:center;font-weight:700}
-.red-text{color:var(--c-chinese);background:var(--c-chinese-soft)}
-.orange{color:var(--c-warn);background:#fffbeb}
-.purple{color:#8b5cf6;background:#f5f3ff}
-.blue-text{color:var(--c-primary-ink);background:var(--c-primary-soft)}
+/* 打印中心方案 A：同步入口优先，历史保留在专项工具，不重复展示最近打印。 */
+page{background:#f3f7fc}
+.page-wrap{min-height:100vh;padding:24rpx 24rpx calc(44rpx + env(safe-area-inset-bottom));box-sizing:border-box;color:#12305e}
+.page-wrap button{margin:0;padding:0;border:0;border-radius:0;background:transparent;color:inherit;font-family:inherit;font-weight:400;line-height:1.4;text-align:left}
+.page-wrap button::after{border:0}
+
+.hero-card{position:relative;display:flex;min-height:350rpx;padding:38rpx 30rpx 22rpx;box-sizing:border-box;border-radius:36rpx;overflow:hidden;background:linear-gradient(135deg,#e9f7ff 0%,#d9f1ff 56%,#edfaff 100%);box-shadow:0 10rpx 30rpx rgba(32,76,116,.06)}
+.hero-card::after{content:"";position:absolute;right:-48rpx;bottom:-78rpx;width:310rpx;height:210rpx;border-radius:50%;background:rgba(115,224,198,.24);transform:rotate(-12deg)}
+.hero-copy{position:relative;z-index:2;width:48%}
+.hero-title{font-size:52rpx;line-height:1.15;font-weight:800;letter-spacing:2rpx;color:#0d2f69}
+.hero-subtitle{margin-top:8rpx;font-size:23rpx;line-height:1.3;color:#285b91;white-space:nowrap}
+.hero-subtitle+.hero-subtitle{margin-top:2rpx}
+.hero-benefits{margin-top:22rpx}
+.benefit{display:flex;align-items:center;gap:10rpx;margin-top:12rpx;font-size:22rpx;line-height:1.3;color:#315f8f;white-space:nowrap}
+.benefit-check{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:28rpx;height:28rpx;border-radius:50%;background:#10b981;color:#fff;font-size:19rpx;font-weight:800;line-height:1}
+.hero-visual{position:absolute;z-index:1;right:-6rpx;bottom:-10rpx;width:58%;height:96%}
+.hero-image{position:absolute;right:-4rpx;bottom:-4rpx;width:100%;height:78%}
+.hero-note{position:absolute;z-index:2;top:4rpx;right:18rpx;transform:rotate(-7deg);font-size:25rpx;line-height:1.35;font-weight:700;color:#1262d7;letter-spacing:1rpx;text-align:center}
+.hero-note text{display:block}
+.hero-star{position:absolute;z-index:2;color:#f7c928;font-size:28rpx;transform:rotate(45deg)}
+.star-one{top:100rpx;left:38rpx}.star-two{top:145rpx;right:10rpx;font-size:20rpx}
+
+.section{margin-top:30rpx}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16rpx;margin:0 8rpx 18rpx}
+.section-title{font-size:36rpx;line-height:1.2;font-weight:800;letter-spacing:1rpx;color:#0d2f69;white-space:nowrap}
+.section-subtitle{min-width:0;font-size:22rpx;line-height:1.35;color:#7285a0;text-align:right}
+.page-wrap .subject-card{display:flex;align-items:center;width:100%;min-height:154rpx;margin-bottom:16rpx;padding:22rpx 24rpx;border-radius:28rpx;box-sizing:border-box;box-shadow:0 8rpx 26rpx rgba(32,76,116,.04)}
+.page-wrap .subject-card.subject-chinese{background:linear-gradient(100deg,#fff0ed,#fff7f5)}
+.page-wrap .subject-card.subject-math{background:linear-gradient(100deg,#eaf4ff,#f2f8ff)}
+.page-wrap .subject-card.subject-english{background:linear-gradient(100deg,#eafaf2,#f3fcf7)}
+.subject-icon{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:106rpx;height:106rpx;border-radius:25rpx;color:#fff;font-size:42rpx;font-weight:800;box-shadow:0 10rpx 22rpx rgba(23,83,151,.18)}
+.icon-chinese{background:linear-gradient(145deg,#ff8b70,#ff5f62)}
+.icon-math{background:linear-gradient(145deg,#75acff,#3a7cf2)}
+.icon-english{background:linear-gradient(145deg,#4bd5a0,#08b976);font-size:34rpx;letter-spacing:-1rpx}
+.subject-copy{flex:1;min-width:0;margin-left:24rpx}
+.subject-name{font-size:31rpx;line-height:1.35;font-weight:750;color:#102f62}
+.subject-desc{margin-top:5rpx;font-size:23rpx;line-height:1.35;color:#315f8f;white-space:nowrap}
+.subject-tag{display:inline-flex;max-width:100%;margin-top:9rpx;padding:5rpx 13rpx;border-radius:999rpx;box-sizing:border-box;font-size:19rpx;line-height:1.25;white-space:nowrap}
+.tag-chinese{background:#ffe6e1;color:#d25b56}.tag-math{background:#dcecff;color:#3474c8}.tag-english{background:#d9f5e7;color:#19855f}
+.subject-arrow{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:54rpx;height:54rpx;margin-left:8rpx;color:#3684d7;font-size:50rpx;line-height:1}
+
+.tools-section{margin-top:34rpx}
+.tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:16rpx}
+.page-wrap .tool-card{position:relative;display:flex;align-items:center;width:100%;min-width:0;height:138rpx;padding:18rpx 16rpx;border-radius:26rpx;box-sizing:border-box;background:#fff;box-shadow:0 8rpx 24rpx rgba(32,76,116,.05)}
+.tool-icon-wrap{display:flex;align-items:center;justify-content:center;flex-shrink:0;width:82rpx;height:82rpx;border-radius:20rpx}
+.tool-red{background:#fff0ef}.tool-orange{background:#fff6df}.tool-purple{background:#f3efff}.tool-blue{background:#eaf5ff}
+.tool-icon{width:76rpx;height:76rpx}
+.tool-copy{flex:1;min-width:0;margin-left:14rpx}
+.tool-name-row{display:flex;align-items:center;gap:6rpx;min-width:0}
+.tool-name{font-size:26rpx;line-height:1.35;font-weight:700;color:#16345f;white-space:nowrap}
+.tool-desc{margin-top:6rpx;font-size:20rpx;line-height:1.3;color:#7b8ba2;white-space:nowrap}
+.soon-tag{flex-shrink:0;padding:3rpx 7rpx;border-radius:999rpx;background:#f2effc;color:#8069bd;font-size:15rpx;line-height:1.2}
+
+.footer-card{position:relative;height:250rpx;margin-top:24rpx;border-radius:42rpx 42rpx 30rpx 30rpx;overflow:hidden;background:linear-gradient(160deg,#e8f8ff 0%,#d9f3ff 62%,#ecfbff 100%);box-shadow:0 8rpx 24rpx rgba(32,76,116,.04)}
+.footer-card::before{content:"";position:absolute;left:-40rpx;bottom:-70rpx;width:390rpx;height:160rpx;border-radius:50%;background:rgba(125,225,200,.25);transform:rotate(7deg)}
+.footer-note{position:absolute;z-index:2;left:42rpx;top:48rpx;transform:rotate(-8deg);font-size:29rpx;line-height:1.45;font-weight:750;color:#1262d7;letter-spacing:2rpx}
+.footer-note text{display:block}
+.footer-note::after{content:"";display:block;width:176rpx;height:3rpx;margin:7rpx 0 0 12rpx;border-radius:999rpx;background:#78aaf0;transform:rotate(-4deg)}
+.footer-image{position:absolute;z-index:1;right:12rpx;bottom:-28rpx;width:58%;height:112%}
+.footer-star{position:absolute;z-index:2;color:#f6c927;font-size:24rpx;transform:rotate(45deg)}
+.footer-star-one{top:42rpx;right:300rpx}.footer-star-two{top:83rpx;right:28rpx;font-size:18rpx}
+.card-pressed{opacity:.72;transform:scale(.988)}
+
+@media (max-width:340px){
+  .page-wrap{padding-left:18rpx;padding-right:18rpx}
+  .hero-card{padding-left:24rpx;padding-right:20rpx}
+  .hero-title{font-size:46rpx}
+  .hero-subtitle,.benefit{font-size:20rpx}
+  .subject-icon{width:94rpx;height:94rpx}
+  .subject-copy{margin-left:18rpx}
+  .subject-name{font-size:28rpx}.subject-desc{font-size:20rpx}.subject-tag{font-size:17rpx}
+  .tool-icon-wrap{width:72rpx;height:72rpx}.tool-icon{width:66rpx;height:66rpx}
+  .tool-copy{margin-left:10rpx}.tool-name{font-size:23rpx}.tool-desc{font-size:18rpx}.soon-tag{display:none}
+}
