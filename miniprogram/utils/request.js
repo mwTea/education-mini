@@ -46,4 +46,4 @@ function request(options) {
   });
 }
 
-module.exports = { request, BASE_URL };
+module.exports = { request, clientId, BASE_URL };

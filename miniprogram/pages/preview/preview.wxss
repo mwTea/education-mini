@@ -5,6 +5,37 @@
   background: #eef2f7;
 }
 
+.success-hero {
+  display: flex;
+  align-items: center;
+  min-height: 180rpx;
+  padding: 12rpx 32rpx 8rpx;
+  background: linear-gradient(135deg, #edf7ff, #fff7ed);
+  box-sizing: border-box;
+}
+
+.success-mascot {
+  width: 230rpx;
+  height: 166rpx;
+  flex-shrink: 0;
+}
+
+.success-copy {
+  margin-left: 14rpx;
+}
+
+.success-title {
+  color: #173260;
+  font-size: 31rpx;
+  font-weight: 700;
+}
+
+.success-sub {
+  margin-top: 8rpx;
+  color: #64748b;
+  font-size: 22rpx;
+}
+
 /* 顶部信息条 */
 .info-bar {
   display: flex;

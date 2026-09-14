@@ -14,6 +14,7 @@ router.get('/v1/quota', (req, res) => res.json(quotaStatus(req)));
 
 router.use('/v1/sheets', require('./sheets.routes'));
 router.use('/v1/session', require('./session.routes'));
+router.use('/v1/share', require('./share.routes'));
 router.use('/v1/admin', require('./admin.routes'));
 router.use('/v1/textbooks', require('./textbooks.routes'));
 router.use('/v1', require('./library.routes'));

@@ -26,7 +26,7 @@
 ### 通用
 - PDF 矢量路径渲染（微信/打印/浏览器字形完全一致）
 - 打印 HTML 页（电脑浏览器直接打印）
-- 每日生成配额（默认 8 份/天，VIP 不限次）
+- 每日生成配额（基础 3 份/天；好友打开分享 +1、微信群打开 +5；VIP 不限次）
 - 云端历史（openid 归属，换手机不丢）
 - 手机 H5 管理后台（用户/生成量/会员管理）
 
@@ -140,7 +140,7 @@ git -c credential.helper= -c http.proxy=http://127.0.0.1:12450 push origin main
 |---|---|---|
 | `PORT` | 后端监听端口 | 3001 |
 | `ADMIN_TOKEN` | H5 管理后台口令 | copybook-admin |
-| `DAILY_SHEET_LIMIT` | 每日生成配额 | 8 |
+| `DAILY_SHEET_LIMIT` | 每日生成配额 | 3 |
 | `WXA_APPID` / `WXA_SECRET` | 微信小程序凭据（openid 登录） | 无 |
 | `IP_DAILY_SHEET_LIMIT` | 未登录 IP 兜底配额 | 50 |
 

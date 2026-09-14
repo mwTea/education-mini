@@ -3,6 +3,13 @@
   <view wx:elif="{{error}}" class="state error">{{error}}</view>
 
   <block wx:else>
+    <view class="success-hero" wx:if="{{sheet.type === 'chinese'}}">
+      <image class="success-mascot" src="/assets/chinese/mascot-success.png" mode="aspectFit" />
+      <view class="success-copy">
+        <view class="success-title">字帖生成成功！</view>
+        <view class="success-sub">{{sheet.charCount}} 字 · {{sheet.pages.length}} 页</view>
+      </view>
+    </view>
     <view class="info-bar">
       <view class="r-tag {{sheet.type === 'chinese' ? 'cn' : sheet.type === 'math' ? 'math' : 'en'}}">{{sheet.type === 'chinese' ? '语' : sheet.type === 'math' ? '数' : 'EN'}}</view>
       <view class="info-chips">
@@ -29,7 +36,7 @@
     <view class="preview-footer">
       <button class="btn-primary footer-main" bindtap="openPdf">打开 PDF</button>
       <view class="footer-side">
-        <button class="btn-ghost" bindtap="copyPrintUrl">打印链接</button>
+        <button class="btn-ghost" bindtap="copyPrintUrl">复制打印链接</button>
         <button class="btn-ghost" bindtap="redoEdit">重新编辑</button>
       </view>
       <view class="pdf-caption">打开后点右上角「···」可转发到电脑 / 保存，直接打印</view>

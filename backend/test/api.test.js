@@ -135,6 +135,14 @@ test('教材生字表接口（1-6 年级真实数据）', async () => {
 });
 
 test('古诗词库与英语词库接口', async () => {
+  const hanziRes = await fetch(`${base}/api/v1/hanzi/春`);
+  assert.equal(hanziRes.status, 200);
+  const hanzi = await hanziRes.json();
+  assert.equal(hanzi.char, '春');
+  assert.equal(hanzi.pinyin, 'chūn');
+  assert.ok(hanzi.strokeCount > 0);
+  assert.ok(Array.isArray(hanzi.words));
+
   const poemsRes = await fetch(`${base}/api/v1/poems`);
   assert.equal(poemsRes.status, 200);
   const { items: poems } = await poemsRes.json();

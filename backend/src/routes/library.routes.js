@@ -4,12 +4,29 @@ const express = require('express');
 
 const poemService = require('../services/poem.service');
 const wordbookService = require('../services/wordbook.service');
+const hanziService = require('../services/hanzi.service');
+const { pinyin } = require('pinyin-pro');
 
 const router = express.Router();
 
 // 古诗词库（语文）
 router.get('/poems', (req, res) => {
   res.json({ items: poemService.list() });
+});
+
+// 生字卡片轻量预览数据：只返回单字信息，不下发笔顺路径等大字段。
+router.get('/hanzi/:char', (req, res) => {
+  const char = Array.from(String(req.params.char || ''))[0] || '';
+  if (!/[\u3400-\u9fff]/.test(char)) return res.status(400).json({ error: '请输入一个汉字' });
+  const data = hanziService.lookup(char) || {};
+  return res.json({
+    char,
+    pinyin: pinyin(char, { toneType: 'symbol' }),
+    radical: data.radical || '',
+    strokeCount: data.strokeCount || 0,
+    structure: data.structure || '',
+    words: Array.isArray(data.words) ? data.words.slice(0, 3) : [],
+  });
 });
 
 // 英语词库：教材同步词表 + 主题词包

@@ -6,7 +6,9 @@ const assert = require('node:assert/strict');
 // 限流：分钟突发按 IP；每日主配额按 X-Client-ID（设备），IP 只做兜底
 process.env.RATE_LIMIT_PER_MIN = '10';
 process.env.DAILY_SHEET_LIMIT = '2';
-const { sheetQuota, resetQuota, RATE_MAX, DAILY_MAX, IP_DAILY_MAX } = require('../src/middleware/quota.middleware');
+const {
+  sheetQuota, resetQuota, RATE_MAX, DEFAULT_DAILY_MAX, DAILY_MAX, IP_DAILY_MAX,
+} = require('../src/middleware/quota.middleware');
 
 function fakeReq(ip, xff, cid) {
   const headers = {};
@@ -32,6 +34,10 @@ function run(req) {
   sheetQuota(req, res, () => { passed = true; });
   return { passed, res };
 }
+
+test('默认普通用户每日生成配额为 3 份', () => {
+  assert.equal(DEFAULT_DAILY_MAX, 3);
+});
 
 test('限流：单 IP 每分钟超过上限返回 429 RATE_LIMIT', () => {
   resetQuota();

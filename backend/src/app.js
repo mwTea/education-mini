@@ -28,7 +28,7 @@ app.use('/assets/radicals', (req, res, next) => {
 app.use((req, res, next) => {
   res.set('Access-Control-Allow-Origin', '*');
   if (req.method === 'OPTIONS') {
-    res.set('Access-Control-Allow-Headers', 'Content-Type, X-Client-ID');
+    res.set('Access-Control-Allow-Headers', 'Content-Type, X-Client-ID, X-User-Token');
     res.set('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS');
     return res.sendStatus(204);
   }

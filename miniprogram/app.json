@@ -5,6 +5,7 @@
     "pages/print/print",
     "pages/growth/growth",
     "pages/chinese/chinese",
+    "pages/chinese/settings/settings",
     "pages/chinese/quiz/quiz",
     "pages/english/english",
     "pages/english/quiz/quiz",

@@ -1,0 +1,83 @@
+<view class="settings-page">
+  <view class="settings-intro">
+    <view class="intro-title">按孩子当前阶段调整</view>
+    <view class="intro-sub">默认设置已经适合日常练习，不修改也可以直接生成</view>
+  </view>
+
+  <view class="setting-card" wx:if="{{modeIndex !== 1}}">
+    <view class="setting-head"><view class="head-dot"></view><text>字体</text></view>
+    <view class="choice-row two-col">
+      <view class="choice-tile {{fontIndex === 0 ? 'on' : ''}}" data-index="0" bindtap="onFontTap">
+        <view class="font-sample kai">永</view>
+        <view><view class="choice-name">正楷</view><view class="choice-sub">楷体 · 适合初学</view></view>
+      </view>
+      <view class="choice-tile {{fontIndex === 1 ? 'on' : ''}}" data-index="1" bindtap="onFontTap">
+        <view class="font-sample xing">永</view>
+        <view><view class="choice-name">行楷</view><view class="choice-sub">行书 · 进阶练字</view></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="setting-card" wx:if="{{modeIndex !== 1}}">
+    <view class="setting-head"><view class="head-dot"></view><text>格线</text></view>
+    <view class="choice-row three-col">
+      <view class="grid-tile {{gridIndex === 0 ? 'on' : ''}}" data-index="0" bindtap="onGridTap">
+        <view class="mini-grid"><view class="line-v"></view><view class="line-h"></view></view><text>田字格</text>
+      </view>
+      <view class="grid-tile {{gridIndex === 1 ? 'on' : ''}}" data-index="1" bindtap="onGridTap">
+        <view class="mini-grid"><view class="line-v"></view><view class="line-h"></view><view class="line-d d1"></view><view class="line-d d2"></view></view><text>米字格</text>
+      </view>
+      <view class="grid-tile {{gridIndex === 2 ? 'on' : ''}}" data-index="2" bindtap="onGridTap">
+        <view class="mini-grid plain"></view><text>方格</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="setting-card">
+    <view class="setting-head"><view class="head-dot"></view><text>纸张</text></view>
+    <view class="choice-row two-col">
+      <view class="choice-tile paper {{paperIndex === 0 ? 'on' : ''}}" data-index="0" bindtap="onPaperTap">
+        <view class="paper-sample classic">描</view>
+        <view><view class="choice-name">仿真字帖纸</view><view class="choice-sub">绿格 · 红描红</view></view>
+      </view>
+      <view class="choice-tile paper {{paperIndex === 1 ? 'on' : ''}}" data-index="1" bindtap="onPaperTap">
+        <view class="paper-sample simple">描</view>
+        <view><view class="choice-name">素雅</view><view class="choice-sub">灰格 · 浅描红</view></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="setting-card compact">
+    <view class="switch-copy">
+      <view class="switch-title">显示拼音</view>
+      <view class="switch-sub">{{modeIndex === 1 ? '听写卷固定显示拼音' : '自动标注在每行行首'}}</view>
+    </view>
+    <switch checked="{{showPinyin}}" disabled="{{modeIndex === 1}}" bindchange="onPinyinToggle" color="#3b82f6" />
+  </view>
+
+  <view class="setting-card" wx:if="{{modeIndex !== 1}}">
+    <view class="setting-head count-head"><view class="head-dot"></view><text>描红遍数</text><text class="count-badge">{{traceCount}} 遍</text></view>
+    <view class="trace-grid">
+      <view wx:for="{{traceOptions}}" wx:key="*this" class="trace-chip {{traceCount === item ? 'on' : ''}}" data-value="{{item}}" bindtap="onTraceTap">{{item}}</view>
+    </view>
+    <view class="setting-note">范字固定 1 遍；0 表示只保留范字，其余格子用于自主练习</view>
+  </view>
+
+  <view class="preview-card">
+    <view class="preview-head"><text>效果预览</text><text class="preview-meta">示例：春</text></view>
+    <view class="practice-preview {{paperIndex === 1 ? 'simple' : ''}}">
+      <view class="preview-pinyin" wx:if="{{showPinyin}}">chūn</view>
+      <view class="preview-cells">
+        <view wx:for="{{previewCells}}" wx:key="key" class="practice-cell grid-{{gridIndex}}">
+          <view class="cell-v" wx:if="{{gridIndex !== 2}}"></view><view class="cell-h" wx:if="{{gridIndex !== 2}}"></view>
+          <view class="cell-d d1" wx:if="{{gridIndex === 1}}"></view><view class="cell-d d2" wx:if="{{gridIndex === 1}}"></view>
+          <text class="preview-char {{item.style}} {{fontIndex === 1 ? 'xing' : ''}}">{{item.char}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="summary">{{summary}}</view>
+  </view>
+
+  <view class="settings-spacer"></view>
+  <view class="save-bar"><button class="btn-primary save-btn" bindtap="saveSettings">保存设置</button></view>
+</view>

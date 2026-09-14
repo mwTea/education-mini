@@ -2,11 +2,16 @@
 const { request } = require('../../utils/request');
 const { api } = require('../../config/index');
 const { addHistory } = require('../../utils/history');
+const { ensureFonts } = require('../../utils/font');
+const { enableShareTickets, rewardedShare } = require('../../utils/share-reward');
 
 const MODES = ['copy', 'dictation', 'card'];
 const PAPERS = ['classic', 'plain'];
 const GRIDS = ['tian', 'mi', 'fang'];
 const FONTS = ['kai', 'xingkai'];
+const FONT_NAMES = ['正楷', '行楷'];
+const GRID_NAMES = ['田字格', '米字格', '方格'];
+const PAPER_NAMES = ['仿真字帖纸', '素雅'];
 
 // 单份体量上限（与后端 LIMITS 一致）：练习/听写 30 字，卡片 20 字
 const MAX_CHARS = 30;
@@ -50,6 +55,19 @@ Page({
     submitting: false,
     pinyinOverride: '', // 手工拼音修正（空格分隔，多音字用）
     quotaRemaining: null, // 今日剩余生成份数
+    shareBonus: 0,
+    manualOpen: false,
+    previewChar: '春',
+    previewPinyin: 'chūn',
+    previewCells: [],
+    previewIsSample: true,
+    styleSummary: '',
+    modeLimit: MAX_CHARS,
+    cardMeta: {
+      char: '春', pinyin: 'chūn', radical: '日', strokeCount: 9,
+      structure: '上下结构', words: ['春天', '春风', '春雨'], wordsText: '春天　春风　春雨',
+    },
+    cardPreviewCells: [0, 1, 2, 3, 4],
 
     // 课本导入（底部弹框：课文 | 古诗词）
     bookNames: [],
@@ -64,6 +82,7 @@ Page({
     modalBookLoading: false,
     selectedCount: 0,
     selectedCharCount: 0,
+    selectedLessonTitle: '',
     importSummary: '',
 
     // 古诗词
@@ -75,15 +94,22 @@ Page({
 
   books: [],
   lessonsCache: {}, // bookId -> lessons
-  selectedSet: {}, // lessonIndex -> true（当前册）
+  selectedLessonIndex: -1, // 教材课文单选：-1 表示未选择
+  importedBookId: '',
+  importedLessonIndex: -1,
+  importedPinyin: [],
   poemsCache: null, // 全量古诗词
+  cardMetaCache: {},
+  cardMetaRequestId: 0,
 
   onLoad(query) {
+    ensureFonts();
+    enableShareTickets();
     const patch = {};
     if (query.chars) patch.chars = decodeURIComponent(query.chars).slice(0, MAX_CHARS);
     if (query.title) patch.title = decodeURIComponent(query.title).slice(0, 30);
     if (query.mode === 'dictation') patch.modeIndex = 1;
-    this.setData(patch);
+    this.setData(patch, () => this.refreshDerived());
     this.loadTextbooks(query.from === 'textbook');
   },
 
@@ -94,14 +120,14 @@ Page({
   async refreshQuota() {
     try {
       const res = await request({ url: api.quota });
-      this.setData({ quotaRemaining: res.remaining });
+      this.setData({ quotaRemaining: res.remaining, shareBonus: res.shareBonus || 0 });
     } catch (e) {
       // 配额查询失败不阻塞生成
     }
   },
 
   onPinyinInput(e) {
-    this.setData({ pinyinOverride: e.detail.value });
+    this.setData({ pinyinOverride: e.detail.value }, () => this.refreshDerived());
   },
 
   async loadTextbooks(autoOpen) {
@@ -126,11 +152,19 @@ Page({
   },
 
   onCharsInput(e) {
-    this.setData({ chars: e.detail.value });
+    this.importedPinyin = [];
+    this.setData({ chars: e.detail.value }, () => this.refreshDerived());
   },
 
   onModeTap(e) {
-    this.setData({ modeIndex: Number(e.currentTarget.dataset.index) });
+    const modeIndex = Number(e.currentTarget.dataset.index);
+    const limit = limitFor(modeIndex);
+    const chars = Array.from(this.data.chars).slice(0, limit).join('');
+    this.setData({
+      modeIndex,
+      chars,
+      showPinyin: modeIndex === 1 ? true : this.data.showPinyin,
+    }, () => this.refreshDerived());
   },
 
   onGridTap(e) {
@@ -150,7 +184,90 @@ Page({
   },
 
   onTraceChange(e) {
-    this.setData({ traceCount: Number(e.detail.value) });
+    this.setData({ traceCount: Number(e.detail.value) }, () => this.refreshDerived());
+  },
+
+  toggleManual() {
+    this.setData({ manualOpen: !this.data.manualOpen });
+  },
+
+  refreshDerived() {
+    const charList = Array.from((this.data.chars || '').replace(/\s+/g, ''));
+    const previewChar = charList[0] || '春';
+    const manualPinyin = (this.data.pinyinOverride || '').trim().split(/[\s,，、]+/).filter(Boolean);
+    const previewPinyin = manualPinyin[0] || this.importedPinyin[0] || (charList.length ? '' : 'chūn');
+    const previewCells = [];
+    for (let i = 0; i < 6; i += 1) {
+      let style = 'blank';
+      if (this.data.modeIndex !== 1) {
+        if (i === 0) style = 'demo';
+        else if (i <= this.data.traceCount) style = 'trace';
+      }
+      previewCells.push({ key: `c${i}`, style, char: style === 'blank' ? '' : previewChar });
+    }
+    const parts = [];
+    if (this.data.modeIndex !== 1) {
+      parts.push(FONT_NAMES[this.data.fontIndex], GRID_NAMES[this.data.gridIndex]);
+    }
+    parts.push(PAPER_NAMES[this.data.paperIndex]);
+    if (this.data.showPinyin) parts.push('拼音');
+    if (this.data.modeIndex !== 1) parts.push(`描红 ${this.data.traceCount} 遍`);
+    this.setData({
+      previewChar,
+      previewPinyin,
+      previewCells,
+      previewIsSample: charList.length === 0,
+      styleSummary: parts.join(' · '),
+      modeLimit: limitFor(this.data.modeIndex),
+    });
+    if (this.data.modeIndex === 2) this.loadCardMeta(previewChar, previewPinyin);
+  },
+
+  async loadCardMeta(char, fallbackPinyin) {
+    const requestId = ++this.cardMetaRequestId;
+    const cached = this.cardMetaCache[char];
+    if (cached) {
+      this.setData({ cardMeta: { ...cached, pinyin: fallbackPinyin || cached.pinyin, wordsText: (cached.words || []).join('　') } });
+      return;
+    }
+    try {
+      const meta = await request({ url: api.hanzi(char) });
+      if (requestId !== this.cardMetaRequestId) return;
+      this.cardMetaCache[char] = meta;
+      this.setData({ cardMeta: { ...meta, pinyin: fallbackPinyin || meta.pinyin, wordsText: (meta.words || []).join('　') } });
+    } catch (e) {
+      if (requestId !== this.cardMetaRequestId) return;
+      this.setData({
+        cardMeta: {
+          char,
+          pinyin: fallbackPinyin || '自动注音',
+          radical: '',
+          strokeCount: 0,
+          structure: '',
+          words: [],
+          wordsText: '',
+        },
+      });
+    }
+  },
+
+  openSettings() {
+    wx.navigateTo({
+      url: '/pages/chinese/settings/settings',
+      success: (res) => {
+        res.eventChannel.emit('initSettings', {
+          modeIndex: this.data.modeIndex,
+          fontIndex: this.data.fontIndex,
+          gridIndex: this.data.gridIndex,
+          paperIndex: this.data.paperIndex,
+          showPinyin: this.data.showPinyin,
+          traceCount: this.data.traceCount,
+        });
+        res.eventChannel.on('saveSettings', (settings) => {
+          this.setData(settings, () => this.refreshDerived());
+        });
+      },
+    });
   },
 
   // ================= 课本导入弹框 =================
@@ -209,7 +326,7 @@ Page({
     const book = this.books[idx];
     if (!book) return;
     this.setData({ modalBookIndex: idx, modalBookLoading: true, modalSections: [] });
-    this.selectedSet = {};
+    this.selectedLessonIndex = book.id === this.importedBookId ? this.importedLessonIndex : -1;
 
     const cached = this.lessonsCache[book.id];
     if (cached) {
@@ -241,7 +358,12 @@ Page({
     lessons.forEach((l, i) => {
       const sec = sectionOf(l.title);
       if (!groups[sec]) groups[sec] = [];
-      groups[sec].push({ index: i, title: l.title, selected: false });
+      groups[sec].push({
+        index: i,
+        title: l.title,
+        charCount: Array.from(l.chars || '').length,
+        selected: i === this.selectedLessonIndex,
+      });
     });
     const sections = order
       .filter((k) => groups[k] && groups[k].length)
@@ -250,45 +372,33 @@ Page({
       modalSections: sections,
       modalSectionIndex: 0,
       modalBookLoading: false,
-      selectedCount: 0,
-      selectedCharCount: 0,
+      selectedCount: this.selectedLessonIndex >= 0 ? 1 : 0,
+      selectedCharCount: this.selectedLessonIndex >= 0 && lessons[this.selectedLessonIndex]
+        ? Array.from(lessons[this.selectedLessonIndex].chars || '').length : 0,
+      selectedLessonTitle: this.selectedLessonIndex >= 0 && lessons[this.selectedLessonIndex]
+        ? lessons[this.selectedLessonIndex].title : '',
     });
   },
 
   onModalLessonClick(e) {
     const idx = Number(e.currentTarget.dataset.index);
-    if (this.selectedSet[idx]) delete this.selectedSet[idx];
-    else this.selectedSet[idx] = true;
-    this.refreshSelection();
-  },
-
-  onToggleSectionAll() {
-    const sec = this.data.modalSections[this.data.modalSectionIndex];
-    if (!sec) return;
-    const allSelected = sec.lessons.every((l) => this.selectedSet[l.index]);
-    sec.lessons.forEach((l) => {
-      if (allSelected) delete this.selectedSet[l.index];
-      else this.selectedSet[l.index] = true;
-    });
+    this.selectedLessonIndex = this.selectedLessonIndex === idx ? -1 : idx;
     this.refreshSelection();
   },
 
   refreshSelection() {
-    // 重建 sections 的 selected 标记与统计
+    // 单课选择：点击新课直接替换旧课，再次点击当前课取消。
     const lessons = this.lessonsCache[this.books[this.data.modalBookIndex].id] || [];
     const sections = this.data.modalSections.map((sec) => ({
       ...sec,
-      lessons: sec.lessons.map((l) => ({ ...l, selected: !!this.selectedSet[l.index] })),
+      lessons: sec.lessons.map((l) => ({ ...l, selected: l.index === this.selectedLessonIndex })),
     }));
-    let charCount = 0;
-    Object.keys(this.selectedSet).forEach((k) => {
-      const lesson = lessons[Number(k)];
-      if (lesson) charCount += Array.from(lesson.chars).length;
-    });
+    const selected = this.selectedLessonIndex >= 0 ? lessons[this.selectedLessonIndex] : null;
     this.setData({
       modalSections: sections,
-      selectedCount: Object.keys(this.selectedSet).length,
-      selectedCharCount: charCount,
+      selectedCount: selected ? 1 : 0,
+      selectedCharCount: selected ? Array.from(selected.chars || '').length : 0,
+      selectedLessonTitle: selected ? selected.title : '',
     });
   },
 
@@ -314,51 +424,48 @@ Page({
       if (overflow) {
         wx.showToast({ title: `本诗 ${chars.length} 个生字，${unit}上限 ${limit} 字，已取前 ${limit} 字`, icon: 'none' });
       }
+      this.importedBookId = '';
+      this.importedLessonIndex = -1;
+      this.importedPinyin = [];
       this.setData({
         chars: chars.slice(0, limit).join(''),
         title: `${poem.title} · ${poem.author}`.slice(0, 30),
         importSummary: `${poem.grade} · ${poem.title}`,
         modalOpen: false,
-      });
+      }, () => this.refreshDerived());
       return;
     }
 
-    const lessons = this.lessonsCache[this.books[this.data.modalBookIndex].id] || [];
-    const picked = Object.keys(this.selectedSet)
-      .map(Number)
-      .sort((a, b) => a - b)
-      .map((i) => lessons[i])
-      .filter(Boolean);
-    if (!picked.length) {
+    const book = this.books[this.data.modalBookIndex];
+    const lessons = book ? (this.lessonsCache[book.id] || []) : [];
+    const picked = this.selectedLessonIndex >= 0 ? lessons[this.selectedLessonIndex] : null;
+    if (!picked) {
       wx.showToast({ title: '请先选择课文', icon: 'none' });
       return;
     }
     const chars = [];
     const seen = new Set();
-    picked.forEach((l) => {
-      Array.from(l.chars).forEach((ch) => {
-        if (!seen.has(ch)) {
-          seen.add(ch);
-          chars.push(ch);
-        }
-      });
+    Array.from(picked.chars || '').forEach((ch) => {
+      if (!seen.has(ch)) {
+        seen.add(ch);
+        chars.push(ch);
+      }
     });
     const limit = limitFor(this.data.modeIndex);
     if (chars.length > limit) {
       const unit = this.data.modeIndex === 2 ? '卡片每份最多 20 字' : '每份最多 30 字';
-      wx.showToast({ title: `共 ${chars.length} 个生字，${unit}，请少选几课`, icon: 'none' });
+      wx.showToast({ title: `本课 ${chars.length} 个生字，${unit}`, icon: 'none' });
       return;
     }
-    const book = this.books[this.data.modalBookIndex];
-    const title = picked.length === 1
-      ? picked[0].title
-      : `${book.short}生字（${picked.length}课）`;
+    this.importedBookId = book.id;
+    this.importedLessonIndex = this.selectedLessonIndex;
+    this.importedPinyin = Array.isArray(picked.items) ? picked.items.map((item) => item.py || '') : [];
     this.setData({
       chars: chars.join(''),
-      title,
-      importSummary: `${book.short} · ${picked.map((l) => l.title.split(' ')[0]).join('、')}`,
+      title: picked.title,
+      importSummary: `${book.short} · ${picked.title}`,
       modalOpen: false,
-    });
+    }, () => this.refreshDerived());
   },
 
   async submit() {
@@ -414,7 +521,7 @@ Page({
   },
 
   onShareAppMessage() {
-    return { title: '语文字帖 · 生字/听写/卡片，一键成帖', path: '/pages/chinese/chinese', imageUrl: '/assets/share-chinese.png' };
+    return rewardedShare({ title: '语文字帖 · 生字/听写/卡片，一键成帖', path: '/pages/chinese/chinese', imageUrl: '/assets/share-chinese.png' });
   },
 
   onShareTimeline() {

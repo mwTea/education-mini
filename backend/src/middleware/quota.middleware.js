@@ -13,7 +13,8 @@
 
 const RATE_WINDOW_MS = 60 * 1000;
 const RATE_MAX = Number(process.env.RATE_LIMIT_PER_MIN || 10);
-const DAILY_MAX = Number(process.env.DAILY_SHEET_LIMIT || 8);
+const DEFAULT_DAILY_MAX = 3;
+const DAILY_MAX = Number(process.env.DAILY_SHEET_LIMIT || DEFAULT_DAILY_MAX);
 const IP_DAILY_MAX = Number(process.env.IP_DAILY_SHEET_LIMIT || 50);
 
 let minute = { windowStart: 0, ips: new Map() };
@@ -47,6 +48,7 @@ function take(key, max, res, code, message) {
 const fs = require('fs');
 const path = require('path');
 const userStore = require('../store/user.store');
+const shareRewardStore = require('../store/share-reward.store');
 
 let vipFileList = null;
 function fileVip(openid) {
@@ -92,10 +94,11 @@ function sheetQuota(req, res, next) {
 
   const cid = openid || clientId(req);
   const mainKey = openid ? `u:${openid}` : (cid ? `c:${cid}` : `ip:${ip}`);
-  const mainLimit = cid ? DAILY_MAX : IP_DAILY_MAX;
+  const shareBonus = openid ? shareRewardStore.bonusFor(openid) : 0;
+  const mainLimit = cid ? DAILY_MAX + shareBonus : IP_DAILY_MAX;
 
   const used = take(mainKey, mainLimit, res, 'DAILY_LIMIT',
-    cid ? `今日生成已达上限（${DAILY_MAX} 份/天），明天再来吧` : `今日生成已达上限（${IP_DAILY_MAX} 份/天），明天再来吧`);
+    cid ? `今日生成次数已用完（基础 ${DAILY_MAX} 份${shareBonus ? ` + 分享奖励 ${shareBonus} 份` : ''}），明天再来吧` : `今日生成已达上限（${IP_DAILY_MAX} 份/天），明天再来吧`);
   if (used === null) return;
 
   // 带设备 ID 的请求同时受 IP 兜底约束
@@ -116,13 +119,15 @@ function quotaStatus(req) {
   const openid = userStore.openidOf(req.headers['x-user-token']);
   if (openid) {
     const used = (daily.dayKey === dayKey() ? daily.keys.get(`u:${openid}`) : 0) || 0;
-    return { limit: DAILY_MAX, remaining: Math.max(0, DAILY_MAX - used) };
+    const shareBonus = shareRewardStore.bonusFor(openid);
+    const limit = DAILY_MAX + shareBonus;
+    return { baseLimit: DAILY_MAX, shareBonus, limit, remaining: Math.max(0, limit - used) };
   }
   const cid = clientId(req);
   const mainKey = cid ? `c:${cid}` : `ip:${ip}`;
   const mainLimit = cid ? DAILY_MAX : IP_DAILY_MAX;
   const used = (daily.dayKey === dayKey() ? daily.keys.get(mainKey) : 0) || 0;
-  return { limit: mainLimit, remaining: Math.max(0, mainLimit - used) };
+  return { baseLimit: mainLimit, shareBonus: 0, limit: mainLimit, remaining: Math.max(0, mainLimit - used) };
 }
 
 /** 测试辅助：重置计数 */
@@ -131,4 +136,4 @@ function resetQuota() {
   daily = { dayKey: '', keys: new Map() };
 }
 
-module.exports = { sheetQuota, quotaStatus, resetQuota, RATE_MAX, DAILY_MAX, IP_DAILY_MAX };
+module.exports = { sheetQuota, quotaStatus, resetQuota, RATE_MAX, DEFAULT_DAILY_MAX, DAILY_MAX, IP_DAILY_MAX };

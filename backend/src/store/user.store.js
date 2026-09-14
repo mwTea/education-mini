@@ -5,9 +5,10 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
-const FILE = path.join(__dirname, '..', '..', 'data', 'users.json');
+const DATA_DIR = process.env.COPYBOOK_DATA_DIR || path.join(__dirname, '..', '..', 'data');
+const FILE = path.join(DATA_DIR, 'users.json');
 let users = null; // Map
-const tokens = new Map(); // token -> openid
+const tokens = new Map(); // token -> { openid, sessionKey }
 
 function load() {
   if (users) return users;
@@ -32,14 +33,19 @@ function upsert(openid) {
   return u;
 }
 
-function issueToken(openid) {
+function issueToken(openid, sessionKey = '') {
   const token = crypto.randomBytes(24).toString('hex');
-  tokens.set(token, openid);
+  tokens.set(token, { openid, sessionKey });
   return token;
 }
 
-function openidOf(token) {
+function sessionOf(token) {
   return (token && tokens.get(String(token).slice(0, 64))) || null;
+}
+
+function openidOf(token) {
+  const current = sessionOf(token);
+  return current && current.openid;
 }
 
 function isVip(u) {
@@ -66,4 +72,4 @@ function stats() {
   };
 }
 
-module.exports = { upsert, issueToken, openidOf, isVip, setVip, stats };
+module.exports = { upsert, issueToken, sessionOf, openidOf, isVip, setVip, stats };

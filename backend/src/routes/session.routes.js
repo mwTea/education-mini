@@ -15,7 +15,7 @@ function code2Session(appid, secret, code) {
       res.on('end', () => {
         try {
           const d = JSON.parse(raw);
-          if (d.openid) resolve(d.openid);
+          if (d.openid) resolve({ openid: d.openid, sessionKey: d.session_key || '' });
           else reject(new Error(d.errmsg || 'code2Session 失败'));
         } catch (e) { reject(e); }
       });
@@ -30,8 +30,11 @@ router.post('/', async (req, res) => {
   const devId = req.body && req.body.devId;
   try {
     let openid = null;
+    let sessionKey = '';
     if (code && appid && secret) {
-      openid = await code2Session(appid, secret, code);
+      const wxSession = await code2Session(appid, secret, code);
+      openid = wxSession.openid;
+      sessionKey = wxSession.sessionKey;
     } else if (devId) {
       openid = `dev_${String(devId).slice(0, 40)}`;
     } else if (code) {
@@ -39,7 +42,7 @@ router.post('/', async (req, res) => {
     }
     if (!openid) return res.status(400).json({ error: '缺少 code 或 devId' });
     const user = store.upsert(openid);
-    res.json({ token: store.issueToken(openid), vip: store.isVip(user), vipUntil: user.vipUntil || null });
+    res.json({ token: store.issueToken(openid, sessionKey), vip: store.isVip(user), vipUntil: user.vipUntil || null });
   } catch (e) {
     res.status(400).json({ error: `登录失败：${e.message}` });
   }
