@@ -1,0 +1,317 @@
+{
+  "id": "pep-3b",
+  "name": "人教PEP英语三年级下册（新版）",
+  "publisher": "人民教育出版社",
+  "edition": "PEP",
+  "grade": 3,
+  "semester": "下册",
+  "kind": "textbook",
+  "coverage": "full_core",
+  "note": "当前新版；按新版教材核心词汇与句型整理。",
+  "units": [
+    {
+      "unitNo": 1,
+      "title": "Meeting new people",
+      "words": [
+        {
+          "word": "from",
+          "meaning": "来自"
+        },
+        {
+          "word": "China",
+          "meaning": "中国"
+        },
+        {
+          "word": "Canada",
+          "meaning": "加拿大"
+        },
+        {
+          "word": "new",
+          "meaning": "新的"
+        },
+        {
+          "word": "people",
+          "meaning": "人们"
+        },
+        {
+          "word": "neighbour",
+          "meaning": "邻居"
+        },
+        {
+          "word": "welcome",
+          "meaning": "欢迎"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Where are you from?",
+          "translation": "你来自哪里？",
+          "level": 2
+        },
+        {
+          "text": "I'm from China.",
+          "translation": "我来自中国。",
+          "level": 1
+        },
+        {
+          "text": "Nice to meet you.",
+          "translation": "很高兴认识你。",
+          "level": 1
+        }
+      ]
+    },
+    {
+      "unitNo": 2,
+      "title": "Expressing yourself",
+      "words": [
+        {
+          "word": "body",
+          "meaning": "身体"
+        },
+        {
+          "word": "leg",
+          "meaning": "腿"
+        },
+        {
+          "word": "tail",
+          "meaning": "尾巴"
+        },
+        {
+          "word": "dance",
+          "meaning": "跳舞"
+        },
+        {
+          "word": "sing",
+          "meaning": "唱歌"
+        },
+        {
+          "word": "talk",
+          "meaning": "说话"
+        },
+        {
+          "word": "gift",
+          "meaning": "礼物"
+        },
+        {
+          "word": "card",
+          "meaning": "卡片"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "We talk.",
+          "translation": "我们说话。",
+          "level": 1
+        },
+        {
+          "text": "We draw pictures or make cards.",
+          "translation": "我们画画或制作卡片。",
+          "level": 2
+        },
+        {
+          "text": "We sing songs or dance.",
+          "translation": "我们唱歌或跳舞。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 3,
+      "title": "Learning better",
+      "words": [
+        {
+          "word": "ruler",
+          "meaning": "尺子"
+        },
+        {
+          "word": "pen",
+          "meaning": "钢笔"
+        },
+        {
+          "word": "pencil",
+          "meaning": "铅笔"
+        },
+        {
+          "word": "book",
+          "meaning": "书"
+        },
+        {
+          "word": "paper",
+          "meaning": "纸"
+        },
+        {
+          "word": "computer",
+          "meaning": "电脑"
+        },
+        {
+          "word": "bag",
+          "meaning": "包"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "I have a pen.",
+          "translation": "我有一支钢笔。",
+          "level": 1
+        },
+        {
+          "text": "Here you are.",
+          "translation": "给你。",
+          "level": 1
+        },
+        {
+          "text": "Thank you.",
+          "translation": "谢谢你。",
+          "level": 1
+        }
+      ]
+    },
+    {
+      "unitNo": 4,
+      "title": "Healthy food",
+      "words": [
+        {
+          "word": "breakfast",
+          "meaning": "早餐"
+        },
+        {
+          "word": "milk",
+          "meaning": "牛奶"
+        },
+        {
+          "word": "bread",
+          "meaning": "面包"
+        },
+        {
+          "word": "juice",
+          "meaning": "果汁"
+        },
+        {
+          "word": "noodle",
+          "meaning": "面条"
+        },
+        {
+          "word": "egg",
+          "meaning": "鸡蛋"
+        },
+        {
+          "word": "vegetable",
+          "meaning": "蔬菜"
+        },
+        {
+          "word": "rice",
+          "meaning": "米饭"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "I'd like some bread and eggs, please.",
+          "translation": "我想要些面包和鸡蛋。",
+          "level": 3
+        },
+        {
+          "text": "Would you like some rice and meat?",
+          "translation": "你想要些米饭和肉吗？",
+          "level": 3
+        }
+      ]
+    },
+    {
+      "unitNo": 5,
+      "title": "Old toys",
+      "words": [
+        {
+          "word": "old",
+          "meaning": "旧的"
+        },
+        {
+          "word": "toy",
+          "meaning": "玩具"
+        },
+        {
+          "word": "boat",
+          "meaning": "小船"
+        },
+        {
+          "word": "doll",
+          "meaning": "玩偶"
+        },
+        {
+          "word": "ball",
+          "meaning": "球"
+        },
+        {
+          "word": "box",
+          "meaning": "盒子"
+        },
+        {
+          "word": "shelf",
+          "meaning": "架子"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "They're my old toys.",
+          "translation": "它们是我的旧玩具。",
+          "level": 2
+        },
+        {
+          "text": "Where is my animal book?",
+          "translation": "我的动物书在哪里？",
+          "level": 2
+        },
+        {
+          "text": "It's in the box.",
+          "translation": "它在盒子里。",
+          "level": 1
+        }
+      ]
+    },
+    {
+      "unitNo": 6,
+      "title": "Numbers in life",
+      "words": [
+        {
+          "word": "eleven",
+          "meaning": "十一"
+        },
+        {
+          "word": "twelve",
+          "meaning": "十二"
+        },
+        {
+          "word": "thirteen",
+          "meaning": "十三"
+        },
+        {
+          "word": "fourteen",
+          "meaning": "十四"
+        },
+        {
+          "word": "fifteen",
+          "meaning": "十五"
+        },
+        {
+          "word": "sixteen",
+          "meaning": "十六"
+        },
+        {
+          "word": "twenty",
+          "meaning": "二十"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "How many books do we have?",
+          "translation": "我们有多少本书？",
+          "level": 3
+        },
+        {
+          "text": "We have fifteen books.",
+          "translation": "我们有十五本书。",
+          "level": 2
+        }
+      ]
+    }
+  ]
+}

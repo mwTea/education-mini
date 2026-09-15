@@ -1,0 +1,149 @@
+{
+  "id": "pep-6b",
+  "name": "人教PEP英语六年级下册（2026春现行版）",
+  "publisher": "人民教育出版社",
+  "edition": "PEP",
+  "grade": 6,
+  "semester": "下册",
+  "kind": "textbook",
+  "coverage": "core",
+  "note": "2026春现行版。",
+  "units": [
+    {
+      "unitNo": 1,
+      "title": "How tall are you?",
+      "words": [
+        {
+          "word": "taller",
+          "meaning": "更高的"
+        },
+        {
+          "word": "shorter",
+          "meaning": "更矮的"
+        },
+        {
+          "word": "heavier",
+          "meaning": "更重的"
+        },
+        {
+          "word": "kilogram",
+          "meaning": "千克"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "How tall are you?",
+          "translation": "你多高？",
+          "level": 2
+        },
+        {
+          "text": "You're taller than me.",
+          "translation": "你比我高。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 2,
+      "title": "Last weekend",
+      "words": [
+        {
+          "word": "cleaned",
+          "meaning": "打扫了"
+        },
+        {
+          "word": "washed",
+          "meaning": "洗了"
+        },
+        {
+          "word": "watched",
+          "meaning": "看了"
+        },
+        {
+          "word": "slept",
+          "meaning": "睡了"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "How was your weekend?",
+          "translation": "你的周末怎么样？",
+          "level": 2
+        },
+        {
+          "text": "What did you do?",
+          "translation": "你做了什么？",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 3,
+      "title": "Where did you go?",
+      "words": [
+        {
+          "word": "went",
+          "meaning": "去了"
+        },
+        {
+          "word": "camping",
+          "meaning": "野营"
+        },
+        {
+          "word": "fishing",
+          "meaning": "钓鱼"
+        },
+        {
+          "word": "bought",
+          "meaning": "买了"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Where did you go?",
+          "translation": "你去了哪里？",
+          "level": 2
+        },
+        {
+          "text": "How did you go there?",
+          "translation": "你怎么去的？",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 4,
+      "title": "Then and now",
+      "words": [
+        {
+          "word": "dining hall",
+          "meaning": "饭厅"
+        },
+        {
+          "word": "gym",
+          "meaning": "体育馆"
+        },
+        {
+          "word": "ago",
+          "meaning": "以前"
+        },
+        {
+          "word": "different",
+          "meaning": "不同的"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "There was no gym before.",
+          "translation": "以前没有体育馆。",
+          "level": 2
+        },
+        {
+          "text": "Now there is a new gym.",
+          "translation": "现在有一座新体育馆。",
+          "level": 2
+        }
+      ]
+    }
+  ]
+}

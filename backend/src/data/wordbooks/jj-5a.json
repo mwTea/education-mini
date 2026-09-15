@@ -1,0 +1,149 @@
+{
+  "id": "jj-5a",
+  "name": "冀教版英语五年级上册（2026现行版）",
+  "publisher": "河北教育出版社",
+  "edition": "冀教版（三起）",
+  "grade": 5,
+  "semester": "上册",
+  "kind": "textbook",
+  "coverage": "core",
+  "note": "2026现行版。",
+  "units": [
+    {
+      "unitNo": 1,
+      "title": "My Family",
+      "words": [
+        {
+          "word": "father",
+          "meaning": "父亲"
+        },
+        {
+          "word": "mother",
+          "meaning": "母亲"
+        },
+        {
+          "word": "grandfather",
+          "meaning": "祖父"
+        },
+        {
+          "word": "cousin",
+          "meaning": "堂/表兄弟姐妹"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "This is my father, my mother and me.",
+          "translation": "这是我、爸爸和妈妈。",
+          "level": 3
+        },
+        {
+          "text": "I don't have brothers or sisters.",
+          "translation": "我没有兄弟姐妹。",
+          "level": 3
+        }
+      ]
+    },
+    {
+      "unitNo": 2,
+      "title": "My Country and English-speaking Countries",
+      "words": [
+        {
+          "word": "country",
+          "meaning": "国家"
+        },
+        {
+          "word": "China",
+          "meaning": "中国"
+        },
+        {
+          "word": "Canada",
+          "meaning": "加拿大"
+        },
+        {
+          "word": "capital",
+          "meaning": "首都"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "What country is this?",
+          "translation": "这是哪个国家？",
+          "level": 2
+        },
+        {
+          "text": "What is the capital city of Canada?",
+          "translation": "加拿大的首都是哪里？",
+          "level": 3
+        }
+      ]
+    },
+    {
+      "unitNo": 3,
+      "title": "A Travel Plan",
+      "words": [
+        {
+          "word": "travel",
+          "meaning": "旅行"
+        },
+        {
+          "word": "trip",
+          "meaning": "旅行"
+        },
+        {
+          "word": "hotel",
+          "meaning": "酒店"
+        },
+        {
+          "word": "plan",
+          "meaning": "计划"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Where do you want to go?",
+          "translation": "你想去哪里？",
+          "level": 2
+        },
+        {
+          "text": "How will we go there?",
+          "translation": "我们怎么去那里？",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 4,
+      "title": "Jenny and Danny Come to China",
+      "words": [
+        {
+          "word": "arrive",
+          "meaning": "到达"
+        },
+        {
+          "word": "festival",
+          "meaning": "节日"
+        },
+        {
+          "word": "wonderful",
+          "meaning": "精彩的"
+        },
+        {
+          "word": "visit",
+          "meaning": "参观"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "When will you arrive?",
+          "translation": "你们什么时候到？",
+          "level": 2
+        },
+        {
+          "text": "What year is it?",
+          "translation": "今年是什么年？",
+          "level": 2
+        }
+      ]
+    }
+  ]
+}

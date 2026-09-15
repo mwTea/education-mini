@@ -55,4 +55,20 @@ KAI_URL=$(curl -s https://api.github.com/repos/lxgw/LxgwWenKai/releases/latest \
 fetch_resume Slidexiaxing-Regular.ttf 10073644 \
   "https://raw.githubusercontent.com/maoken-fonts/slidefont/master/fonts/Slidexiaxing-Regular.ttf"
 
+# 英语书写：三款均来自 Google Fonts，OFL 1.1；文件与 PDF 字形来源完全一致。
+# Edu SA Beginner 是面向学校书写教学的规范手写体，本产品以“衡水体”展示；
+# Noto Sans / Nunito 分别作为标准印刷体和圆润体备选。
+fetch EduSABeginner-Regular.ttf \
+  "https://fonts.gstatic.com/s/edusabeginner/v5/rnC_-xRb1x-1lHXnLaZZ2xOoLIGfU3L82irpr_3C9989fo0.ttf"
+fetch NotoSans-Regular.ttf \
+  "https://fonts.gstatic.com/s/notosans/v42/o-0mIpQlx3QUlC5A4PNB6Ryti20_6n1iPHjcz6L1SoM-jCpoiyD9A99d.ttf"
+fetch Nunito-Regular.ttf \
+  "https://fonts.gstatic.com/s/nunito/v32/XRXI3I6Li01BKofiOc5wtlZ2di8HDLshRTM.ttf"
+fetch EduSABeginner-OFL.txt \
+  "https://raw.githubusercontent.com/google/fonts/main/ofl/edusabeginner/OFL.txt"
+fetch NotoSans-OFL.txt \
+  "https://raw.githubusercontent.com/google/fonts/main/ofl/notosans/OFL.txt"
+fetch Nunito-OFL.txt \
+  "https://raw.githubusercontent.com/google/fonts/main/ofl/nunito/OFL.txt"
+
 echo "完成"

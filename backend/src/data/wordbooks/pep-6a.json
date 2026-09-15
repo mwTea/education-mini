@@ -1,0 +1,217 @@
+{
+  "id": "pep-6a",
+  "name": "人教PEP英语六年级上册（2026秋新版）",
+  "publisher": "人民教育出版社",
+  "edition": "PEP",
+  "grade": 6,
+  "semester": "上册",
+  "kind": "textbook",
+  "coverage": "core_review_needed",
+  "note": "当前新版；Unit 1/5/6公开资料充分，Unit 2-4上线前建议再与教材附录逐项核。",
+  "units": [
+    {
+      "unitNo": 1,
+      "title": "Amazing places",
+      "words": [
+        {
+          "word": "climb",
+          "meaning": "攀登"
+        },
+        {
+          "word": "kilometre",
+          "meaning": "千米"
+        },
+        {
+          "word": "village",
+          "meaning": "村庄"
+        },
+        {
+          "word": "landmark",
+          "meaning": "地标"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "How was your weekend?",
+          "translation": "你的周末过得怎么样？",
+          "level": 2
+        },
+        {
+          "text": "What did you do there?",
+          "translation": "你在那里做了什么？",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 2,
+      "title": "Growing up",
+      "words": [
+        {
+          "word": "grow",
+          "meaning": "成长"
+        },
+        {
+          "word": "change",
+          "meaning": "改变"
+        },
+        {
+          "word": "before",
+          "meaning": "以前"
+        },
+        {
+          "word": "now",
+          "meaning": "现在"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "What were you like before?",
+          "translation": "你以前是什么样的？",
+          "level": 3
+        },
+        {
+          "text": "Now I'm taller.",
+          "translation": "现在我更高了。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 3,
+      "title": "Our Earth",
+      "words": [
+        {
+          "word": "earth",
+          "meaning": "地球"
+        },
+        {
+          "word": "ocean",
+          "meaning": "海洋"
+        },
+        {
+          "word": "forest",
+          "meaning": "森林"
+        },
+        {
+          "word": "world",
+          "meaning": "世界"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "What do you know about the Earth?",
+          "translation": "你对地球了解多少？",
+          "level": 3
+        },
+        {
+          "text": "The Earth is our home.",
+          "translation": "地球是我们的家园。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 4,
+      "title": "Money and choices",
+      "words": [
+        {
+          "word": "money",
+          "meaning": "钱"
+        },
+        {
+          "word": "save",
+          "meaning": "存钱"
+        },
+        {
+          "word": "spend",
+          "meaning": "花费"
+        },
+        {
+          "word": "plan",
+          "meaning": "计划"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "How much is it?",
+          "translation": "它多少钱？",
+          "level": 2
+        },
+        {
+          "text": "I want to save some money.",
+          "translation": "我想存些钱。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 5,
+      "title": "Exploring space",
+      "words": [
+        {
+          "word": "earth",
+          "meaning": "地球"
+        },
+        {
+          "word": "moon",
+          "meaning": "月球"
+        },
+        {
+          "word": "space",
+          "meaning": "太空"
+        },
+        {
+          "word": "astronaut",
+          "meaning": "宇航员"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "What do you know about space?",
+          "translation": "你对太空了解多少？",
+          "level": 3
+        },
+        {
+          "text": "Astronauts travel in spaceships.",
+          "translation": "宇航员乘宇宙飞船旅行。",
+          "level": 3
+        }
+      ]
+    },
+    {
+      "unitNo": 6,
+      "title": "Energy, nature and us",
+      "words": [
+        {
+          "word": "energy",
+          "meaning": "能源"
+        },
+        {
+          "word": "electricity",
+          "meaning": "电"
+        },
+        {
+          "word": "resource",
+          "meaning": "资源"
+        },
+        {
+          "word": "reuse",
+          "meaning": "再利用"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "We should save energy.",
+          "translation": "我们应该节约能源。",
+          "level": 2
+        },
+        {
+          "text": "We can reuse bottles.",
+          "translation": "我们可以重复利用瓶子。",
+          "level": 2
+        }
+      ]
+    }
+  ]
+}

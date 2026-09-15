@@ -1,0 +1,217 @@
+{
+  "id": "pep-5a",
+  "name": "人教PEP英语五年级上册（2026秋新版）",
+  "publisher": "人民教育出版社",
+  "edition": "PEP",
+  "grade": 5,
+  "semester": "上册",
+  "kind": "textbook",
+  "coverage": "core",
+  "note": "Unit标题按人教社当前新版资源核对；当前文件为核心同步数据，非完整附录词表。",
+  "units": [
+    {
+      "unitNo": 1,
+      "title": "Different friends",
+      "words": [
+        {
+          "word": "classmate",
+          "meaning": "同学"
+        },
+        {
+          "word": "quiet",
+          "meaning": "安静的"
+        },
+        {
+          "word": "strong",
+          "meaning": "强壮的"
+        },
+        {
+          "word": "clever",
+          "meaning": "聪明的"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "What's he like?",
+          "translation": "他是什么样的人？",
+          "level": 2
+        },
+        {
+          "text": "He's quiet and clever.",
+          "translation": "他安静又聪明。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 2,
+      "title": "My feelings",
+      "words": [
+        {
+          "word": "happy",
+          "meaning": "高兴的"
+        },
+        {
+          "word": "sad",
+          "meaning": "难过的"
+        },
+        {
+          "word": "angry",
+          "meaning": "生气的"
+        },
+        {
+          "word": "worried",
+          "meaning": "担心的"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "How do you feel?",
+          "translation": "你感觉怎么样？",
+          "level": 2
+        },
+        {
+          "text": "I feel happy.",
+          "translation": "我感觉很开心。",
+          "level": 1
+        }
+      ]
+    },
+    {
+      "unitNo": 3,
+      "title": "Work and play",
+      "words": [
+        {
+          "word": "work",
+          "meaning": "学习；工作"
+        },
+        {
+          "word": "play",
+          "meaning": "玩"
+        },
+        {
+          "word": "weekend",
+          "meaning": "周末"
+        },
+        {
+          "word": "often",
+          "meaning": "经常"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "What do you do after school?",
+          "translation": "放学后你做什么？",
+          "level": 3
+        },
+        {
+          "text": "I often do my homework.",
+          "translation": "我经常做作业。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 4,
+      "title": "Healthy habits",
+      "words": [
+        {
+          "word": "habit",
+          "meaning": "习惯"
+        },
+        {
+          "word": "healthy",
+          "meaning": "健康的"
+        },
+        {
+          "word": "exercise",
+          "meaning": "锻炼"
+        },
+        {
+          "word": "sleep",
+          "meaning": "睡眠"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "We should exercise every day.",
+          "translation": "我们应该每天锻炼。",
+          "level": 3
+        },
+        {
+          "text": "We shouldn't go to bed late.",
+          "translation": "我们不应该晚睡。",
+          "level": 3
+        }
+      ]
+    },
+    {
+      "unitNo": 5,
+      "title": "Food we eat",
+      "words": [
+        {
+          "word": "food",
+          "meaning": "食物"
+        },
+        {
+          "word": "vegetable",
+          "meaning": "蔬菜"
+        },
+        {
+          "word": "fruit",
+          "meaning": "水果"
+        },
+        {
+          "word": "meat",
+          "meaning": "肉"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "What would you like?",
+          "translation": "你想吃什么？",
+          "level": 2
+        },
+        {
+          "text": "I'd like some rice.",
+          "translation": "我想要些米饭。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 6,
+      "title": "Nature and us",
+      "words": [
+        {
+          "word": "nature",
+          "meaning": "自然"
+        },
+        {
+          "word": "forest",
+          "meaning": "森林"
+        },
+        {
+          "word": "river",
+          "meaning": "河流"
+        },
+        {
+          "word": "protect",
+          "meaning": "保护"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "How can we protect nature?",
+          "translation": "我们怎样保护自然？",
+          "level": 3
+        },
+        {
+          "text": "We can plant more trees.",
+          "translation": "我们可以种更多的树。",
+          "level": 2
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,217 @@
+{
+  "id": "pep-4a",
+  "name": "人教PEP英语四年级上册（2026秋新版）",
+  "publisher": "人民教育出版社",
+  "edition": "PEP",
+  "grade": 4,
+  "semester": "上册",
+  "kind": "textbook",
+  "coverage": "core",
+  "note": "Unit标题按人教社当前新版资源核对；当前文件为核心同步数据，非完整附录词表。",
+  "units": [
+    {
+      "unitNo": 1,
+      "title": "Helping at home",
+      "words": [
+        {
+          "word": "help",
+          "meaning": "帮助"
+        },
+        {
+          "word": "chore",
+          "meaning": "家务"
+        },
+        {
+          "word": "cook",
+          "meaning": "做饭"
+        },
+        {
+          "word": "clean",
+          "meaning": "打扫"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Can you help?",
+          "translation": "你能帮忙吗？",
+          "level": 1
+        },
+        {
+          "text": "We can do some chores.",
+          "translation": "我们可以做一些家务。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 2,
+      "title": "My friends",
+      "words": [
+        {
+          "word": "friend",
+          "meaning": "朋友"
+        },
+        {
+          "word": "quiet",
+          "meaning": "安静的"
+        },
+        {
+          "word": "strong",
+          "meaning": "强壮的"
+        },
+        {
+          "word": "helpful",
+          "meaning": "乐于助人的"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "What's he like?",
+          "translation": "他是什么样的人？",
+          "level": 2
+        },
+        {
+          "text": "He's tall and strong.",
+          "translation": "他又高又壮。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 3,
+      "title": "Places we live in",
+      "words": [
+        {
+          "word": "home",
+          "meaning": "家"
+        },
+        {
+          "word": "house",
+          "meaning": "房子"
+        },
+        {
+          "word": "bedroom",
+          "meaning": "卧室"
+        },
+        {
+          "word": "kitchen",
+          "meaning": "厨房"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Where do you live?",
+          "translation": "你住在哪里？",
+          "level": 2
+        },
+        {
+          "text": "I live in a flat.",
+          "translation": "我住在公寓里。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 4,
+      "title": "Helping in the community",
+      "words": [
+        {
+          "word": "community",
+          "meaning": "社区"
+        },
+        {
+          "word": "park",
+          "meaning": "公园"
+        },
+        {
+          "word": "street",
+          "meaning": "街道"
+        },
+        {
+          "word": "volunteer",
+          "meaning": "志愿者"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "How can we help our community?",
+          "translation": "我们怎样帮助社区？",
+          "level": 3
+        },
+        {
+          "text": "We can clean the park.",
+          "translation": "我们可以打扫公园。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 5,
+      "title": "The weather and us",
+      "words": [
+        {
+          "word": "sunny",
+          "meaning": "晴朗的"
+        },
+        {
+          "word": "rainy",
+          "meaning": "下雨的"
+        },
+        {
+          "word": "windy",
+          "meaning": "有风的"
+        },
+        {
+          "word": "cloudy",
+          "meaning": "多云的"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "How's the weather today?",
+          "translation": "今天天气怎么样？",
+          "level": 2
+        },
+        {
+          "text": "It's sunny.",
+          "translation": "天气晴朗。",
+          "level": 1
+        }
+      ]
+    },
+    {
+      "unitNo": 6,
+      "title": "Changing for the seasons",
+      "words": [
+        {
+          "word": "spring",
+          "meaning": "春天"
+        },
+        {
+          "word": "summer",
+          "meaning": "夏天"
+        },
+        {
+          "word": "autumn",
+          "meaning": "秋天"
+        },
+        {
+          "word": "winter",
+          "meaning": "冬天"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "I like summer.",
+          "translation": "我喜欢夏天。",
+          "level": 1
+        },
+        {
+          "text": "It's cool in autumn.",
+          "translation": "秋天天气凉爽。",
+          "level": 2
+        }
+      ]
+    }
+  ]
+}

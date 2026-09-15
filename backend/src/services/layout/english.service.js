@@ -45,12 +45,13 @@ function mergePhrases(tokens) {
  */
 
 const DEFAULT_OPTIONS = {
+  englishFont: 'hengshui', // hengshui 规范手写 | print 标准印刷 | rounded 圆润
   letterCase: 'origin', // origin | upper | lower
   mode: 'copy', // copy 抄写 | dictation 默写
   dictationDir: 'zh2en', // zh2en 中译英（提示中文默英文）| en2zh 英译汉（提示英文默中文）
   paper: 'classic',
   traceCount: 1,
-  blankCount: 2,
+  blankCount: 3,
   cellsPerLine: 24,
   rowsPerPage: 12,
 };
@@ -72,6 +73,9 @@ function clampOption(value, [min, max], fallback) {
 
 function normalizeOptions(raw = {}) {
   const opts = { ...DEFAULT_OPTIONS };
+  opts.englishFont = ['hengshui', 'print', 'rounded'].includes(raw.englishFont)
+    ? raw.englishFont
+    : DEFAULT_OPTIONS.englishFont;
   opts.letterCase = ['origin', 'upper', 'lower'].includes(raw.letterCase)
     ? raw.letterCase
     : DEFAULT_OPTIONS.letterCase;
@@ -274,4 +278,188 @@ function buildEnglishSheet({ title, text, options }) {
   return sheet;
 }
 
-module.exports = { buildEnglishSheet, DEFAULT_OPTIONS };
+function entryWord(entry) {
+  return typeof entry === 'string' ? entry : String((entry && entry.word) || '');
+}
+
+function entryMeaning(entry) {
+  if (entry && typeof entry === 'object' && entry.meaning) return String(entry.meaning);
+  return lookupZh(entryWord(entry)) || '';
+}
+
+function entryDetails(entry) {
+  if (!entry || typeof entry !== 'object') return [];
+  const labels = [
+    ['phonetic', '音标'],
+    ['partOfSpeech', '词性'],
+    ['plural', '复数'],
+    ['collocation', '搭配'],
+  ];
+  return labels
+    .filter(([key]) => typeof entry[key] === 'string' && entry[key].trim())
+    .map(([key, label]) => `${label}：${entry[key].trim()}`);
+}
+
+function wordRepeatCount(word) {
+  const length = Array.from(String(word || '')).length;
+  if (length <= 5) return 6;
+  if (length <= 7) return 5;
+  if (length <= 9) return 4;
+  if (length <= 12) return 3;
+  return 2;
+}
+
+function sentenceText(entry) {
+  return typeof entry === 'string' ? entry : String((entry && entry.text) || '');
+}
+
+function sentenceTranslation(entry) {
+  return entry && typeof entry === 'object' ? String(entry.translation || '') : '';
+}
+
+function lineRow(text, style, cellsPerLine) {
+  return wrapLines(text, cellsPerLine).map((chars) => ({
+    kind: 'erow',
+    cells: chars.map((char) => ({ char, style })),
+  }));
+}
+
+function blankSentenceRows(text, count, cellsPerLine) {
+  const lineCount = Math.max(1, wrapLines(text, cellsPerLine).length);
+  const rows = [];
+  for (let n = 0; n < Math.max(1, count); n += 1) {
+    for (let i = 0; i < lineCount; i += 1) {
+      rows.push({ kind: 'erow', cells: Array.from({ length: cellsPerLine }, () => ({ char: ' ', style: 'blank' })) });
+    }
+  }
+  return rows;
+}
+
+function tokenizeSentence(text) {
+  const clean = String(text || '').replace(/\s+/g, ' ').trim();
+  const match = clean.match(/^(.*?)([.!?;,]+)?$/);
+  const body = (match && match[1] ? match[1] : clean).trim();
+  return {
+    tokens: body.split(' ').filter(Boolean),
+    punctuation: (match && match[2]) || '',
+  };
+}
+
+function shuffledTokens(tokens) {
+  const shuffled = tokens.slice();
+  for (let i = shuffled.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  if (shuffled.length > 1 && shuffled.every((token, index) => token === tokens[index])) {
+    shuffled.push(shuffled.shift());
+  }
+  return shuffled;
+}
+
+function buildCurriculumEnglishSheet({ title, book, unit, options = {} }) {
+  const opts = normalizeOptions(options);
+  opts.exerciseType = ['word', 'sentence', 'unscramble'].includes(options.exerciseType)
+    ? options.exerciseType : 'word';
+  opts.practiceMode = ['copy', 'zh2en'].includes(options.practiceMode)
+    ? options.practiceMode : 'copy';
+  opts.showTranslation = options.showTranslation === true;
+  opts.answerSheet = options.answerSheet !== false;
+
+  const rows = [];
+  let answerPage = null;
+  const words = (unit.words || []).slice(0, LIMITS.maxWords);
+  const sentences = (unit.sentences || []).slice(0, 12);
+
+  if (opts.exerciseType === 'word') {
+    words.forEach((entry, index) => {
+      const word = applyCase(entryWord(entry), opts.letterCase);
+      const meaning = entryMeaning(entry);
+      if (!word) return;
+      if (opts.practiceMode === 'zh2en') {
+        rows.push({
+          kind: 'word-dictation',
+          no: index + 1,
+          meaning: meaning || '词义待补充',
+          // 听写采用固定模板：每题只保留一组完整四线三格。
+          lineCount: 1,
+        });
+      } else {
+        rows.push({
+          kind: 'word-copy',
+          no: index + 1,
+          word,
+          meaning: opts.showTranslation ? meaning : '',
+          details: entryDetails(entry),
+          repeatCount: wordRepeatCount(word),
+        });
+      }
+    });
+  } else if (opts.exerciseType === 'sentence') {
+    sentences.forEach((entry, index) => {
+      const text = sentenceText(entry);
+      const translation = sentenceTranslation(entry);
+      if (!text) return;
+      if (opts.practiceMode === 'zh2en') {
+        rows.push({
+          kind: 'sentence-dictation',
+          no: index + 1,
+          translation: translation || '译文待补充',
+          // 听写采用固定模板：每题只保留一组完整四线三格。
+          lineCount: 1,
+        });
+      } else {
+        if (opts.showTranslation && translation) rows.push({ kind: 'hint', text: `${index + 1}. ${translation}` });
+        for (let n = 0; n < opts.traceCount; n += 1) rows.push(...lineRow(text, 'trace', opts.cellsPerLine));
+        for (let n = 0; n < opts.blankCount; n += 1) rows.push(...blankSentenceRows(text, 1, opts.cellsPerLine));
+      }
+    });
+  } else {
+    const answers = [];
+    sentences.forEach((entry, index) => {
+      const text = sentenceText(entry);
+      const translation = sentenceTranslation(entry);
+      const parsed = tokenizeSentence(text);
+      if (!parsed.tokens.length) return;
+      rows.push({
+        kind: 'unscramble',
+        no: index + 1,
+        tokens: shuffledTokens(parsed.tokens),
+        punctuation: parsed.punctuation,
+        translation: opts.showTranslation ? translation : '',
+      });
+      rows.push(...blankSentenceRows(text, 1, opts.cellsPerLine));
+      answers.push({ no: index + 1, answer: text });
+    });
+    if (opts.answerSheet && answers.length) answerPage = { rows: [{ kind: 'answers', items: answers }] };
+  }
+
+  let rowsPerPage = opts.rowsPerPage;
+  if (opts.exerciseType === 'word' && opts.practiceMode === 'copy') rowsPerPage = 10;
+  else if (opts.exerciseType === 'word' && opts.practiceMode === 'zh2en') rowsPerPage = 20;
+  else if (opts.exerciseType === 'sentence' && opts.practiceMode === 'zh2en') rowsPerPage = 4;
+  const pages = chunk(rows, rowsPerPage).map((pageRows, index) => ({ number: index + 1, rows: pageRows }));
+  const charCount = opts.exerciseType === 'word'
+    ? words.reduce((count, entry) => count + Array.from(entryWord(entry).replace(/\s/g, '')).length, 0)
+    : sentences.reduce((count, entry) => count + Array.from(sentenceText(entry).replace(/\s/g, '')).length, 0);
+  const subtype = opts.exerciseType === 'word' ? '单词练习' : opts.exerciseType === 'sentence' ? '句子练习' : '连词成句';
+  return {
+    type: 'english',
+    subtype,
+    title,
+    options: opts,
+    charCount,
+    contentMeta: {
+      bookId: book.id,
+      bookName: book.name,
+      unitNo: unit.unitNo,
+      unitTitle: unit.title,
+      wordCount: words.length,
+      sentenceCount: sentences.length,
+    },
+    pages,
+    ...(answerPage ? { answerPage } : {}),
+  };
+}
+
+module.exports = { buildEnglishSheet, buildCurriculumEnglishSheet, tokenizeSentence, DEFAULT_OPTIONS };

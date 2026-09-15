@@ -1,0 +1,338 @@
+{
+  "id": "jj-3a",
+  "name": "冀教版英语三年级上册（2024新教材）",
+  "publisher": "河北教育出版社",
+  "edition": "冀教版（三起）",
+  "grade": 3,
+  "semester": "上册",
+  "kind": "textbook",
+  "coverage": "full_core",
+  "note": "2024新版；当前使用。",
+  "units": [
+    {
+      "unitNo": 1,
+      "title": "Hello!",
+      "words": [
+        {
+          "word": "hello",
+          "meaning": "你好"
+        },
+        {
+          "word": "name",
+          "meaning": "名字"
+        },
+        {
+          "word": "fine",
+          "meaning": "好的"
+        },
+        {
+          "word": "thanks",
+          "meaning": "谢谢"
+        },
+        {
+          "word": "goodbye",
+          "meaning": "再见"
+        },
+        {
+          "word": "morning",
+          "meaning": "早晨"
+        },
+        {
+          "word": "boy",
+          "meaning": "男孩"
+        },
+        {
+          "word": "girl",
+          "meaning": "女孩"
+        },
+        {
+          "word": "nice",
+          "meaning": "友好的"
+        },
+        {
+          "word": "meet",
+          "meaning": "遇见"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Hello, I'm Li Ming.",
+          "translation": "你好，我是李明。",
+          "level": 1
+        },
+        {
+          "text": "How are you?",
+          "translation": "你好吗？",
+          "level": 1
+        },
+        {
+          "text": "I'm fine, thanks.",
+          "translation": "我很好，谢谢。",
+          "level": 1
+        }
+      ]
+    },
+    {
+      "unitNo": 2,
+      "title": "My school",
+      "words": [
+        {
+          "word": "school",
+          "meaning": "学校"
+        },
+        {
+          "word": "playground",
+          "meaning": "操场"
+        },
+        {
+          "word": "library",
+          "meaning": "图书馆"
+        },
+        {
+          "word": "classroom",
+          "meaning": "教室"
+        },
+        {
+          "word": "tidy",
+          "meaning": "整洁的"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "This is my school.",
+          "translation": "这是我的学校。",
+          "level": 1
+        },
+        {
+          "text": "This is my classroom.",
+          "translation": "这是我的教室。",
+          "level": 1
+        },
+        {
+          "text": "It's tidy.",
+          "translation": "它很整洁。",
+          "level": 1
+        }
+      ]
+    },
+    {
+      "unitNo": 3,
+      "title": "Colours and letters",
+      "words": [
+        {
+          "word": "colour",
+          "meaning": "颜色"
+        },
+        {
+          "word": "red",
+          "meaning": "红色"
+        },
+        {
+          "word": "yellow",
+          "meaning": "黄色"
+        },
+        {
+          "word": "blue",
+          "meaning": "蓝色"
+        },
+        {
+          "word": "orange",
+          "meaning": "橙色"
+        },
+        {
+          "word": "green",
+          "meaning": "绿色"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "What colour is this?",
+          "translation": "这是什么颜色？",
+          "level": 2
+        },
+        {
+          "text": "It's orange.",
+          "translation": "它是橙色的。",
+          "level": 1
+        }
+      ]
+    },
+    {
+      "unitNo": 4,
+      "title": "My friends",
+      "words": [
+        {
+          "word": "friend",
+          "meaning": "朋友"
+        },
+        {
+          "word": "her",
+          "meaning": "她的"
+        },
+        {
+          "word": "his",
+          "meaning": "他的"
+        },
+        {
+          "word": "pencil box",
+          "meaning": "铅笔盒"
+        },
+        {
+          "word": "pen",
+          "meaning": "钢笔"
+        },
+        {
+          "word": "ruler",
+          "meaning": "尺子"
+        },
+        {
+          "word": "pencil",
+          "meaning": "铅笔"
+        },
+        {
+          "word": "book",
+          "meaning": "书"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "This is my friend.",
+          "translation": "这是我的朋友。",
+          "level": 1
+        },
+        {
+          "text": "Her name is Mary.",
+          "translation": "她叫玛丽。",
+          "level": 1
+        },
+        {
+          "text": "We are friends.",
+          "translation": "我们是朋友。",
+          "level": 1
+        }
+      ]
+    },
+    {
+      "unitNo": 5,
+      "title": "About me",
+      "words": [
+        {
+          "word": "head",
+          "meaning": "头"
+        },
+        {
+          "word": "body",
+          "meaning": "身体"
+        },
+        {
+          "word": "leg",
+          "meaning": "腿"
+        },
+        {
+          "word": "foot",
+          "meaning": "脚"
+        },
+        {
+          "word": "arm",
+          "meaning": "手臂"
+        },
+        {
+          "word": "hand",
+          "meaning": "手"
+        },
+        {
+          "word": "face",
+          "meaning": "脸"
+        },
+        {
+          "word": "eye",
+          "meaning": "眼睛"
+        },
+        {
+          "word": "nose",
+          "meaning": "鼻子"
+        },
+        {
+          "word": "hair",
+          "meaning": "头发"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Let's make a robot.",
+          "translation": "我们做一个机器人吧。",
+          "level": 2
+        },
+        {
+          "text": "I have two eyes.",
+          "translation": "我有两只眼睛。",
+          "level": 1
+        },
+        {
+          "text": "My hair is long.",
+          "translation": "我的头发很长。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 6,
+      "title": "My family",
+      "words": [
+        {
+          "word": "family",
+          "meaning": "家庭"
+        },
+        {
+          "word": "father",
+          "meaning": "父亲"
+        },
+        {
+          "word": "mother",
+          "meaning": "母亲"
+        },
+        {
+          "word": "sister",
+          "meaning": "姐妹"
+        },
+        {
+          "word": "brother",
+          "meaning": "兄弟"
+        },
+        {
+          "word": "teacher",
+          "meaning": "教师"
+        },
+        {
+          "word": "doctor",
+          "meaning": "医生"
+        },
+        {
+          "word": "worker",
+          "meaning": "工人"
+        },
+        {
+          "word": "farmer",
+          "meaning": "农民"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "This is my family.",
+          "translation": "这是我的家人。",
+          "level": 1
+        },
+        {
+          "text": "He is a teacher.",
+          "translation": "他是一名老师。",
+          "level": 1
+        },
+        {
+          "text": "She is a doctor.",
+          "translation": "她是一名医生。",
+          "level": 1
+        }
+      ]
+    }
+  ]
+}

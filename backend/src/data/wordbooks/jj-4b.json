@@ -1,0 +1,149 @@
+{
+  "id": "jj-4b",
+  "name": "冀教版英语四年级下册（2026现行版）",
+  "publisher": "河北教育出版社",
+  "edition": "冀教版（三起）",
+  "grade": 4,
+  "semester": "下册",
+  "kind": "textbook",
+  "coverage": "core",
+  "note": "2026现行版。",
+  "units": [
+    {
+      "unitNo": 1,
+      "title": "Hello Again!",
+      "words": [
+        {
+          "word": "teacher",
+          "meaning": "老师"
+        },
+        {
+          "word": "friend",
+          "meaning": "朋友"
+        },
+        {
+          "word": "pencil",
+          "meaning": "铅笔"
+        },
+        {
+          "word": "ruler",
+          "meaning": "尺子"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Welcome back to school!",
+          "translation": "欢迎回到学校！",
+          "level": 2
+        },
+        {
+          "text": "Nice to meet you.",
+          "translation": "很高兴认识你。",
+          "level": 1
+        }
+      ]
+    },
+    {
+      "unitNo": 2,
+      "title": "Days and Months",
+      "words": [
+        {
+          "word": "day",
+          "meaning": "天"
+        },
+        {
+          "word": "week",
+          "meaning": "周"
+        },
+        {
+          "word": "month",
+          "meaning": "月"
+        },
+        {
+          "word": "Monday",
+          "meaning": "星期一"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "What day is it today?",
+          "translation": "今天星期几？",
+          "level": 2
+        },
+        {
+          "text": "What month is it?",
+          "translation": "现在是几月？",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 3,
+      "title": "All about Me",
+      "words": [
+        {
+          "word": "birthday",
+          "meaning": "生日"
+        },
+        {
+          "word": "age",
+          "meaning": "年龄"
+        },
+        {
+          "word": "height",
+          "meaning": "身高"
+        },
+        {
+          "word": "address",
+          "meaning": "地址"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "How old are you?",
+          "translation": "你几岁？",
+          "level": 2
+        },
+        {
+          "text": "Where do you live?",
+          "translation": "你住在哪里？",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 4,
+      "title": "My Favourites",
+      "words": [
+        {
+          "word": "favourite",
+          "meaning": "最喜欢的"
+        },
+        {
+          "word": "colour",
+          "meaning": "颜色"
+        },
+        {
+          "word": "food",
+          "meaning": "食物"
+        },
+        {
+          "word": "sport",
+          "meaning": "运动"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "What's your favourite colour?",
+          "translation": "你最喜欢什么颜色？",
+          "level": 2
+        },
+        {
+          "text": "What's your favourite food?",
+          "translation": "你最喜欢的食物是什么？",
+          "level": 3
+        }
+      ]
+    }
+  ]
+}

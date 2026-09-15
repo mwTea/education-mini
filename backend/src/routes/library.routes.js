@@ -36,7 +36,7 @@ router.get('/wordbooks', (req, res) => {
 
 router.get('/wordbooks/:id', (req, res) => {
   const book = wordbookService.get(req.params.id);
-  if (!book) return res.status(404).json({ error: '词库不存在' });
+  if (!book || book.coverage === 'core_review_needed') return res.status(404).json({ error: '词库不存在或待复核' });
   return res.json({ book });
 });
 

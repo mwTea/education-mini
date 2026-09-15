@@ -1,0 +1,111 @@
+{
+  "id": "jj-3a",
+  "name": "冀教版英语三年级上册（2024新教材）",
+  "kind": "textbook",
+  "units": [
+    {
+      "title": "Unit 1 Hello!",
+      "words": [
+        "hi", "I", "am", "hello", "name", "fine", "thanks",
+        "goodbye", "bye", "morning", "boy", "girl", "nice", "meet"
+      ],
+      "sentences": [
+        "Hello, I'm Li Ming.",
+        "My name is Jenny.",
+        "How are you?",
+        "I'm fine, thanks.",
+        "Good morning.",
+        "Nice to meet you.",
+        "Nice to meet you too.",
+        "Goodbye, Jenny."
+      ]
+    },
+    {
+      "title": "Unit 2 My school",
+      "words": [
+        "school", "playground", "library", "classroom",
+        "tidy", "letter", "yes", "is", "are"
+      ],
+      "sentences": [
+        "This is my school.",
+        "This is the playground.",
+        "It's big.",
+        "This is the library.",
+        "This is my classroom.",
+        "It's tidy.",
+        "So many books!",
+        "I love my school."
+      ]
+    },
+    {
+      "title": "Unit 3 Colours and letters",
+      "words": [
+        "colour", "red", "yellow", "blue", "orange", "green"
+      ],
+      "sentences": [
+        "This is red.",
+        "This is yellow.",
+        "This is blue.",
+        "What colour is this?",
+        "It's orange.",
+        "What colour is it?",
+        "It's green."
+      ]
+    },
+    {
+      "title": "Unit 4 My friends",
+      "words": [
+        "friend", "her", "his", "one", "pencil box", "two",
+        "pen", "three", "ruler", "four", "pencil", "five",
+        "book", "black", "in", "under", "on", "she", "he", "we"
+      ],
+      "sentences": [
+        "This is my friend.",
+        "Her name is Mary.",
+        "His name is Li Ming.",
+        "My name is Jenny.",
+        "Nice to meet you.",
+        "Nice to meet you too.",
+        "We are friends."
+      ]
+    },
+    {
+      "title": "Unit 5 About me",
+      "words": [
+        "six", "seven", "eight", "nine", "ten",
+        "head", "body", "leg", "foot", "arm", "hand",
+        "face", "eye", "nose", "have", "ear", "mouth",
+        "hair", "OK", "tail", "short", "long", "big", "small"
+      ],
+      "sentences": [
+        "Let's make a robot.",
+        "How many parts?",
+        "Here is the head.",
+        "This is the body.",
+        "Look at my face.",
+        "I have two eyes.",
+        "My hair is long."
+      ]
+    },
+    {
+      "title": "Unit 6 My family",
+      "words": [
+        "family", "father", "teacher", "mother", "doctor",
+        "sister", "happy", "student", "brother", "policeman",
+        "bus driver", "worker", "love", "cook", "work",
+        "play", "look", "tall", "farmer"
+      ],
+      "sentences": [
+        "This is my family.",
+        "This is my father.",
+        "He is a teacher.",
+        "This is my mother.",
+        "She is a doctor.",
+        "We are a happy family.",
+        "We work together.",
+        "We play together.",
+        "I love my family."
+      ]
+    }
+  ]
+}

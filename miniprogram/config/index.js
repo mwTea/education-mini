@@ -6,7 +6,7 @@
 //    配置 request 合法域名（如 https://api.your-domain.com）
 let localDevtools = false;
 try { localDevtools = wx.getSystemInfoSync().platform === 'devtools'; } catch (e) { /* Device builds keep the production API. */ }
-const BASE_URL = localDevtools ? 'http://127.0.0.1:3101' : 'https://edu.10010rights.com.cn';
+const BASE_URL = localDevtools ? 'http://127.0.0.1:3000' : 'https://edu.10010rights.com.cn';
 // const BASE_URL = 'http://60.205.171.222:3001';
 // 线上服务器（已部署）：http://60.205.171.222:3001
 // 真机预览时把 BASE_URL 换成线上地址，并在体验版中开启「开发调试」跳过域名校验；
@@ -37,4 +37,7 @@ module.exports = {
   // 预览用子集字体（首次加载后由小程序缓存）；v2=换成文鼎楷体（教材楷体风格）
   fontKai: `${BASE_URL}/assets/fonts/subset-kai.ttf?v=2`,
   fontXingkai: `${BASE_URL}/assets/fonts/subset-xingkai.ttf`,
+  fontHengshui: `${BASE_URL}/assets/fonts/EduSABeginner-Regular.ttf?v=1`,
+  fontEnglishPrint: `${BASE_URL}/assets/fonts/NotoSans-Regular.ttf?v=1`,
+  fontEnglishRounded: `${BASE_URL}/assets/fonts/Nunito-Regular.ttf?v=1`,
 };

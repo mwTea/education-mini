@@ -1,0 +1,322 @@
+{
+  "id": "jj-3b",
+  "name": "冀教版英语三年级下册（新版）",
+  "publisher": "河北教育出版社",
+  "edition": "冀教版（三起）",
+  "grade": 3,
+  "semester": "下册",
+  "kind": "textbook",
+  "coverage": "full_core",
+  "note": "当前新版；2026同步资源可核。",
+  "units": [
+    {
+      "unitNo": 1,
+      "title": "Food we like",
+      "words": [
+        {
+          "word": "food",
+          "meaning": "食物"
+        },
+        {
+          "word": "apple",
+          "meaning": "苹果"
+        },
+        {
+          "word": "orange",
+          "meaning": "橙子"
+        },
+        {
+          "word": "banana",
+          "meaning": "香蕉"
+        },
+        {
+          "word": "rice",
+          "meaning": "米饭"
+        },
+        {
+          "word": "fish",
+          "meaning": "鱼"
+        },
+        {
+          "word": "meat",
+          "meaning": "肉"
+        },
+        {
+          "word": "chicken",
+          "meaning": "鸡肉"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "What do you like?",
+          "translation": "你喜欢什么？",
+          "level": 2
+        },
+        {
+          "text": "I like apples.",
+          "translation": "我喜欢苹果。",
+          "level": 1
+        },
+        {
+          "text": "What's your favourite food?",
+          "translation": "你最喜欢的食物是什么？",
+          "level": 3
+        }
+      ]
+    },
+    {
+      "unitNo": 2,
+      "title": "Good food, good health",
+      "words": [
+        {
+          "word": "breakfast",
+          "meaning": "早餐"
+        },
+        {
+          "word": "lunch",
+          "meaning": "午餐"
+        },
+        {
+          "word": "dinner",
+          "meaning": "晚餐"
+        },
+        {
+          "word": "milk",
+          "meaning": "牛奶"
+        },
+        {
+          "word": "soup",
+          "meaning": "汤"
+        },
+        {
+          "word": "water",
+          "meaning": "水"
+        },
+        {
+          "word": "healthy",
+          "meaning": "健康的"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "What do you like for breakfast?",
+          "translation": "早餐你喜欢吃什么？",
+          "level": 3
+        },
+        {
+          "text": "I like bread and milk.",
+          "translation": "我喜欢面包和牛奶。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 3,
+      "title": "My day",
+      "words": [
+        {
+          "word": "morning",
+          "meaning": "早晨"
+        },
+        {
+          "word": "wash",
+          "meaning": "洗"
+        },
+        {
+          "word": "evening",
+          "meaning": "晚上"
+        },
+        {
+          "word": "schoolbag",
+          "meaning": "书包"
+        },
+        {
+          "word": "clean",
+          "meaning": "打扫"
+        },
+        {
+          "word": "tidy",
+          "meaning": "整洁的"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "In the morning, I get up.",
+          "translation": "早晨我起床。",
+          "level": 2
+        },
+        {
+          "text": "I do my homework.",
+          "translation": "我做作业。",
+          "level": 1
+        },
+        {
+          "text": "I pack my schoolbag.",
+          "translation": "我整理书包。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 4,
+      "title": "On the farm",
+      "words": [
+        {
+          "word": "farm",
+          "meaning": "农场"
+        },
+        {
+          "word": "horse",
+          "meaning": "马"
+        },
+        {
+          "word": "cow",
+          "meaning": "奶牛"
+        },
+        {
+          "word": "pig",
+          "meaning": "猪"
+        },
+        {
+          "word": "rabbit",
+          "meaning": "兔子"
+        },
+        {
+          "word": "sheep",
+          "meaning": "绵羊"
+        },
+        {
+          "word": "duck",
+          "meaning": "鸭子"
+        },
+        {
+          "word": "twenty",
+          "meaning": "二十"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Welcome to my farm!",
+          "translation": "欢迎来到我的农场！",
+          "level": 1
+        },
+        {
+          "text": "How many ducks are there?",
+          "translation": "有多少只鸭子？",
+          "level": 2
+        },
+        {
+          "text": "There are twenty ducks.",
+          "translation": "有二十只鸭子。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 5,
+      "title": "At the zoo",
+      "words": [
+        {
+          "word": "zoo",
+          "meaning": "动物园"
+        },
+        {
+          "word": "panda",
+          "meaning": "熊猫"
+        },
+        {
+          "word": "elephant",
+          "meaning": "大象"
+        },
+        {
+          "word": "tiger",
+          "meaning": "老虎"
+        },
+        {
+          "word": "bear",
+          "meaning": "熊"
+        },
+        {
+          "word": "monkey",
+          "meaning": "猴子"
+        },
+        {
+          "word": "giraffe",
+          "meaning": "长颈鹿"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Look at the pandas!",
+          "translation": "看这些熊猫！",
+          "level": 1
+        },
+        {
+          "text": "They are cute.",
+          "translation": "它们很可爱。",
+          "level": 1
+        },
+        {
+          "text": "Its nose is long.",
+          "translation": "它的鼻子很长。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 6,
+      "title": "My week",
+      "words": [
+        {
+          "word": "week",
+          "meaning": "周"
+        },
+        {
+          "word": "Sunday",
+          "meaning": "星期日"
+        },
+        {
+          "word": "Monday",
+          "meaning": "星期一"
+        },
+        {
+          "word": "Tuesday",
+          "meaning": "星期二"
+        },
+        {
+          "word": "Wednesday",
+          "meaning": "星期三"
+        },
+        {
+          "word": "Thursday",
+          "meaning": "星期四"
+        },
+        {
+          "word": "Friday",
+          "meaning": "星期五"
+        },
+        {
+          "word": "Saturday",
+          "meaning": "星期六"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "What day is it today?",
+          "translation": "今天星期几？",
+          "level": 2
+        },
+        {
+          "text": "It's Saturday today!",
+          "translation": "今天星期六！",
+          "level": 2
+        },
+        {
+          "text": "What time is it?",
+          "translation": "几点了？",
+          "level": 2
+        }
+      ]
+    }
+  ]
+}

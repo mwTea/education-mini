@@ -1,0 +1,462 @@
+{
+  "id": "pep-3a",
+  "name": "人教PEP英语三年级上册（2024新教材）",
+  "publisher": "人民教育出版社",
+  "edition": "PEP",
+  "grade": 3,
+  "semester": "上册",
+  "kind": "textbook",
+  "coverage": "full_core",
+  "note": "2024新版；当前使用。",
+  "units": [
+    {
+      "unitNo": 1,
+      "title": "Making friends",
+      "words": [
+        {
+          "word": "name",
+          "meaning": "名字"
+        },
+        {
+          "word": "nice",
+          "meaning": "友好的"
+        },
+        {
+          "word": "ear",
+          "meaning": "耳朵"
+        },
+        {
+          "word": "hand",
+          "meaning": "手"
+        },
+        {
+          "word": "eye",
+          "meaning": "眼睛"
+        },
+        {
+          "word": "mouth",
+          "meaning": "嘴"
+        },
+        {
+          "word": "arm",
+          "meaning": "手臂"
+        },
+        {
+          "word": "can",
+          "meaning": "能；会"
+        },
+        {
+          "word": "share",
+          "meaning": "分享"
+        },
+        {
+          "word": "smile",
+          "meaning": "微笑"
+        },
+        {
+          "word": "listen",
+          "meaning": "听"
+        },
+        {
+          "word": "help",
+          "meaning": "帮助"
+        },
+        {
+          "word": "say",
+          "meaning": "说"
+        },
+        {
+          "word": "and",
+          "meaning": "和"
+        },
+        {
+          "word": "goodbye",
+          "meaning": "再见"
+        },
+        {
+          "word": "toy",
+          "meaning": "玩具"
+        },
+        {
+          "word": "friend",
+          "meaning": "朋友"
+        },
+        {
+          "word": "good",
+          "meaning": "好的"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "What's your name?",
+          "translation": "你叫什么名字？",
+          "level": 1
+        },
+        {
+          "text": "My name is Wu Binbin.",
+          "translation": "我的名字叫吴斌斌。",
+          "level": 1
+        },
+        {
+          "text": "Nice to meet you.",
+          "translation": "很高兴认识你。",
+          "level": 1
+        },
+        {
+          "text": "We can share.",
+          "translation": "我们可以分享。",
+          "level": 1
+        }
+      ]
+    },
+    {
+      "unitNo": 2,
+      "title": "Different families",
+      "words": [
+        {
+          "word": "mum",
+          "meaning": "妈妈"
+        },
+        {
+          "word": "dad",
+          "meaning": "爸爸"
+        },
+        {
+          "word": "grandma",
+          "meaning": "奶奶；外婆"
+        },
+        {
+          "word": "grandpa",
+          "meaning": "爷爷；外公"
+        },
+        {
+          "word": "mother",
+          "meaning": "母亲"
+        },
+        {
+          "word": "father",
+          "meaning": "父亲"
+        },
+        {
+          "word": "sister",
+          "meaning": "姐妹"
+        },
+        {
+          "word": "brother",
+          "meaning": "兄弟"
+        },
+        {
+          "word": "family",
+          "meaning": "家庭"
+        },
+        {
+          "word": "cousin",
+          "meaning": "堂/表兄弟姐妹"
+        },
+        {
+          "word": "uncle",
+          "meaning": "叔叔；舅舅"
+        },
+        {
+          "word": "aunt",
+          "meaning": "阿姨；姑姑"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "This is my mum.",
+          "translation": "这是我的妈妈。",
+          "level": 1
+        },
+        {
+          "text": "Is this your sister?",
+          "translation": "这是你的姐姐或妹妹吗？",
+          "level": 2
+        },
+        {
+          "text": "My family is big.",
+          "translation": "我的家庭很大。",
+          "level": 1
+        },
+        {
+          "text": "I have a brother.",
+          "translation": "我有一个兄弟。",
+          "level": 1
+        }
+      ]
+    },
+    {
+      "unitNo": 3,
+      "title": "Amazing animals",
+      "words": [
+        {
+          "word": "dog",
+          "meaning": "狗"
+        },
+        {
+          "word": "pet",
+          "meaning": "宠物"
+        },
+        {
+          "word": "cat",
+          "meaning": "猫"
+        },
+        {
+          "word": "fish",
+          "meaning": "鱼"
+        },
+        {
+          "word": "bird",
+          "meaning": "鸟"
+        },
+        {
+          "word": "rabbit",
+          "meaning": "兔子"
+        },
+        {
+          "word": "zoo",
+          "meaning": "动物园"
+        },
+        {
+          "word": "panda",
+          "meaning": "熊猫"
+        },
+        {
+          "word": "monkey",
+          "meaning": "猴子"
+        },
+        {
+          "word": "tiger",
+          "meaning": "老虎"
+        },
+        {
+          "word": "elephant",
+          "meaning": "大象"
+        },
+        {
+          "word": "giraffe",
+          "meaning": "长颈鹿"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Do you have a pet?",
+          "translation": "你有宠物吗？",
+          "level": 2
+        },
+        {
+          "text": "I have a cat.",
+          "translation": "我有一只猫。",
+          "level": 1
+        },
+        {
+          "text": "What's this?",
+          "translation": "这是什么？",
+          "level": 1
+        },
+        {
+          "text": "Let's go to the zoo.",
+          "translation": "我们去动物园吧。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 4,
+      "title": "Plants around us",
+      "words": [
+        {
+          "word": "apple",
+          "meaning": "苹果"
+        },
+        {
+          "word": "banana",
+          "meaning": "香蕉"
+        },
+        {
+          "word": "farm",
+          "meaning": "农场"
+        },
+        {
+          "word": "air",
+          "meaning": "空气"
+        },
+        {
+          "word": "water",
+          "meaning": "水；浇水"
+        },
+        {
+          "word": "flower",
+          "meaning": "花"
+        },
+        {
+          "word": "grass",
+          "meaning": "草"
+        },
+        {
+          "word": "plant",
+          "meaning": "植物；种植"
+        },
+        {
+          "word": "tree",
+          "meaning": "树"
+        },
+        {
+          "word": "sun",
+          "meaning": "太阳"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Do you like apples?",
+          "translation": "你喜欢苹果吗？",
+          "level": 2
+        },
+        {
+          "text": "Plants need air and water.",
+          "translation": "植物需要空气和水。",
+          "level": 2
+        },
+        {
+          "text": "We can water the flowers.",
+          "translation": "我们可以给花浇水。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 5,
+      "title": "The colourful world",
+      "words": [
+        {
+          "word": "colour",
+          "meaning": "颜色"
+        },
+        {
+          "word": "red",
+          "meaning": "红色"
+        },
+        {
+          "word": "blue",
+          "meaning": "蓝色"
+        },
+        {
+          "word": "green",
+          "meaning": "绿色"
+        },
+        {
+          "word": "yellow",
+          "meaning": "黄色"
+        },
+        {
+          "word": "purple",
+          "meaning": "紫色"
+        },
+        {
+          "word": "brown",
+          "meaning": "棕色"
+        },
+        {
+          "word": "pink",
+          "meaning": "粉色"
+        },
+        {
+          "word": "white",
+          "meaning": "白色"
+        },
+        {
+          "word": "black",
+          "meaning": "黑色"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "What colour is it?",
+          "translation": "它是什么颜色？",
+          "level": 2
+        },
+        {
+          "text": "It's yellow.",
+          "translation": "它是黄色的。",
+          "level": 1
+        },
+        {
+          "text": "Blue and yellow make green.",
+          "translation": "蓝色和黄色混合成绿色。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 6,
+      "title": "Useful numbers",
+      "words": [
+        {
+          "word": "one",
+          "meaning": "一"
+        },
+        {
+          "word": "two",
+          "meaning": "二"
+        },
+        {
+          "word": "three",
+          "meaning": "三"
+        },
+        {
+          "word": "four",
+          "meaning": "四"
+        },
+        {
+          "word": "five",
+          "meaning": "五"
+        },
+        {
+          "word": "six",
+          "meaning": "六"
+        },
+        {
+          "word": "seven",
+          "meaning": "七"
+        },
+        {
+          "word": "eight",
+          "meaning": "八"
+        },
+        {
+          "word": "nine",
+          "meaning": "九"
+        },
+        {
+          "word": "ten",
+          "meaning": "十"
+        },
+        {
+          "word": "o'clock",
+          "meaning": "……点钟"
+        },
+        {
+          "word": "piece",
+          "meaning": "一块；一片"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "How old are you?",
+          "translation": "你几岁了？",
+          "level": 2
+        },
+        {
+          "text": "I'm nine years old.",
+          "translation": "我九岁了。",
+          "level": 2
+        },
+        {
+          "text": "It's three o'clock.",
+          "translation": "现在三点了。",
+          "level": 2
+        }
+      ]
+    }
+  ]
+}

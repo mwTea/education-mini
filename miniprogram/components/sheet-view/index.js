@@ -130,6 +130,17 @@ Component({
           kind: row.kind || '',
           width: row.width || 0,
           count: row.count || 0,
+          no: row.no || 0,
+          word: row.word || '',
+          meaning: row.meaning || '',
+          details: row.details || [],
+          lineCount: row.lineCount || 1,
+          repeatCount: row.repeatCount || 6,
+          repeatSamples: Array.from({ length: row.repeatCount || 6 }, (_, sampleIndex) => ({ key: `p${pi}r${ri}s${sampleIndex}`, style: sampleIndex === 0 ? 'demo' : 'trace' })),
+          practiceLines: (row.practiceLines || []).map((line, li) => ({ key: `p${pi}r${ri}l${li}`, style: line.style || 'blank' })),
+          tokens: row.tokens || [],
+          punctuation: row.punctuation || '',
+          translation: row.translation || '',
           items: (row.items || []).map((item) => ({
             no: item.no,
             stem: item.stem || '',
@@ -203,6 +214,12 @@ Component({
       }
 
       const answerRows = sheet.answerPage && sheet.answerPage.rows ? sheet.answerPage.rows : null;
+      const englishFont = (sheet.options && sheet.options.englishFont) || 'hengshui';
+      const englishFontClass = {
+        hengshui: 'en-font-hengshui',
+        print: 'en-font-print',
+        rounded: 'en-font-rounded',
+      }[englishFont] || 'en-font-hengshui';
       this.setData({
         vm: {
           type: sheet.type,
@@ -218,6 +235,7 @@ Component({
             : (sheet.wordHints ? Object.keys(sheet.wordHints)
                 .map((w) => `${w} ${sheet.wordHints[w]}`).join('  /  ') : null),
           answerRows,
+          englishFontClass,
         },
       }, () => this.drawStrokeCanvases(pages));
     },

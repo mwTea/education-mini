@@ -4,7 +4,8 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 
 const { buildChineseSheet } = require('../src/services/layout/chinese.service');
-const { buildEnglishSheet } = require('../src/services/layout/english.service');
+const { buildEnglishSheet, buildCurriculumEnglishSheet, tokenizeSentence } = require('../src/services/layout/english.service');
+const wordbookService = require('../src/services/wordbook.service');
 
 test('语文：每字一行，范字固定 + 描红可选 + 空白补满', () => {
   const sheet = buildChineseSheet({
@@ -137,6 +138,7 @@ test('英语：抄写模式每词一组（描红×N + 练习×M 依次排列）'
   });
 
   assert.equal(sheet.type, 'english');
+  assert.equal(sheet.options.englishFont, 'hengshui');
   assert.equal(sheet.pages.length, 1);
 
   const cells = sheet.pages[0].rows[0].cells;
@@ -150,6 +152,15 @@ test('英语：抄写模式每词一组（描红×N + 练习×M 依次排列）'
   // 词义携带
   // 释义格式随词表版本可为「adj. 好的」或纯释义「好的」（2024 新版课本无词性前缀）
   assert.ok(/^adj\. 好的$|^好的$/.test(sheet.wordHints.GOOD));
+});
+
+test('英语：书写字体默认衡水体，并允许切换印刷体和圆润体', () => {
+  const print = buildEnglishSheet({ title: 't', text: 'Happy English', options: { englishFont: 'print' } });
+  const rounded = buildEnglishSheet({ title: 't', text: 'Happy English', options: { englishFont: 'rounded' } });
+  const invalid = buildEnglishSheet({ title: 't', text: 'Happy English', options: { englishFont: 'unknown' } });
+  assert.equal(print.options.englishFont, 'print');
+  assert.equal(rounded.options.englishFont, 'rounded');
+  assert.equal(invalid.options.englishFont, 'hengshui');
 });
 
 test('英语：默写方向——中译英提示中文、英译汉提示英文', () => {
@@ -266,4 +277,71 @@ test('英语：默写时按词典还原短语（gingerbread house 不拆成两�
   assert.ok(sheet.wordHints['gingerbread house']);
   const hints = sheet.pages[0].rows.filter((r) => r.kind === 'hint').map((r) => r.text);
   assert.ok(hints[2].includes('姜饼屋'), `提示行应含短语释义: ${hints[2]}`);
+});
+
+test('英语内容库：新旧词结构统一，待复核册别默认隐藏', () => {
+  const books = wordbookService.list();
+  assert.ok(books.find((book) => book.id === 'jj-3a'));
+  assert.ok(!books.find((book) => book.id === 'pep-6a'));
+  const pep = wordbookService.get('pep-3a');
+  assert.equal(typeof pep.units[0].words[0].word, 'string');
+  assert.equal(typeof pep.units[0].words[0].meaning, 'string');
+  assert.equal(typeof pep.units[0].sentences[0].translation, 'string');
+  const pack = wordbookService.get('pack-kids');
+  assert.equal(typeof pack.units[0].words[0].word, 'string');
+});
+
+test('英语教材：单词描红和听写单词使用数据包词义，英译汉模式回落描红', () => {
+  const book = wordbookService.get('pep-3a');
+  const unit = book.units[0];
+  const copy = buildCurriculumEnglishSheet({ title: 't', book, unit, options: { exerciseType: 'word', practiceMode: 'copy', showTranslation: true, traceCount: 1, blankCount: 1 } });
+  assert.equal(copy.subtype, '单词练习');
+  const copyRow = copy.pages.flatMap((page) => page.rows).find((row) => row.kind === 'word-copy');
+  assert.equal(copyRow.word, 'name');
+  assert.equal(copyRow.meaning, '名字');
+  assert.equal(copyRow.repeatCount, 6);
+
+  const zh2en = buildCurriculumEnglishSheet({ title: 't', book, unit, options: { exerciseType: 'word', practiceMode: 'zh2en', blankCount: 1 } });
+  assert.equal(zh2en.pages[0].rows[0].meaning, '名字');
+  assert.equal(zh2en.pages[0].rows[0].kind, 'word-dictation');
+  assert.equal(zh2en.pages[0].rows[0].lineCount, 1);
+
+  const en2zh = buildCurriculumEnglishSheet({ title: 't', book, unit, options: { exerciseType: 'word', practiceMode: 'en2zh', blankCount: 1 } });
+  assert.equal(en2zh.options.practiceMode, 'copy');
+  assert.equal(en2zh.pages[0].rows[0].kind, 'word-copy');
+  assert.equal(en2zh.pages[0].rows[0].word, 'name');
+});
+
+test('英语教材：单词和句子听写固定每题一行四线三格', () => {
+  const book = wordbookService.get('pep-3a');
+  const unit = book.units[0];
+  const sheet = buildCurriculumEnglishSheet({ title: 't', book, unit, options: { exerciseType: 'sentence', practiceMode: 'zh2en', blankCount: 3 } });
+  const row = sheet.pages[0].rows[0];
+  assert.equal(row.kind, 'sentence-dictation');
+  assert.ok(row.translation.includes('你叫什么名字'));
+  assert.equal(row.lineCount, 1);
+
+  const wordSheet = buildCurriculumEnglishSheet({ title: 't', book, unit, options: { exerciseType: 'word', practiceMode: 'zh2en', blankCount: 4 } });
+  assert.equal(wordSheet.pages[0].rows[0].lineCount, 1);
+});
+
+test('英语教材：句子练习保留缩写和翻译', () => {
+  const book = wordbookService.get('pep-3a');
+  const unit = book.units[0];
+  const sheet = buildCurriculumEnglishSheet({ title: 't', book, unit, options: { exerciseType: 'sentence', practiceMode: 'copy', showTranslation: true, traceCount: 1, blankCount: 1 } });
+  const rows = sheet.pages.flatMap((page) => page.rows);
+  assert.ok(rows.some((row) => row.kind === 'hint' && row.text.includes('你叫什么名字')));
+  assert.ok(rows.some((row) => (row.cells || []).map((cell) => cell.char).join('').includes("What's your name?")));
+});
+
+test('英语教材：连词成句保护缩写、分离标点并生成答案页', () => {
+  assert.deepEqual(tokenizeSentence("What's your name?"), { tokens: ["What's", 'your', 'name'], punctuation: '?' });
+  const book = wordbookService.get('pep-3a');
+  const unit = book.units[0];
+  const sheet = buildCurriculumEnglishSheet({ title: 't', book, unit, options: { exerciseType: 'unscramble', showTranslation: true, answerSheet: true } });
+  const question = sheet.pages.flatMap((page) => page.rows).find((row) => row.kind === 'unscramble');
+  assert.ok(question.tokens.includes("What's"));
+  assert.equal(question.punctuation, '?');
+  assert.ok(question.translation);
+  assert.equal(sheet.answerPage.rows[0].items[0].answer, "What's your name?");
 });

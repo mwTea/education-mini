@@ -22,7 +22,8 @@ function pickWords(units) {
   const seen = new Set();
   const words = [];
   units.forEach((u) => (u.words || []).forEach((raw) => {
-    const w = String(raw || '').trim().toLowerCase();
+    const value = raw && typeof raw === 'object' ? raw.word : raw;
+    const w = String(value || '').trim().toLowerCase();
     if (!/^[a-z]{3,10}$/.test(w) || seen.has(w)) return;
     seen.add(w);
     words.push(w);

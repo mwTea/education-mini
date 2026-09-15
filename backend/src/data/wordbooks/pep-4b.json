@@ -1,0 +1,217 @@
+{
+  "id": "pep-4b",
+  "name": "人教PEP英语四年级下册（2026春新版）",
+  "publisher": "人民教育出版社",
+  "edition": "PEP",
+  "grade": 4,
+  "semester": "下册",
+  "kind": "textbook",
+  "coverage": "core",
+  "note": "Unit标题按人教社当前新版资源核对；当前文件为核心同步数据，非完整附录词表。",
+  "units": [
+    {
+      "unitNo": 1,
+      "title": "Class rules",
+      "words": [
+        {
+          "word": "rule",
+          "meaning": "规则"
+        },
+        {
+          "word": "classroom",
+          "meaning": "教室"
+        },
+        {
+          "word": "late",
+          "meaning": "迟到的"
+        },
+        {
+          "word": "tidy",
+          "meaning": "整洁的"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Don't be late for class.",
+          "translation": "上课不要迟到。",
+          "level": 2
+        },
+        {
+          "text": "Keep the classroom clean.",
+          "translation": "保持教室干净。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 2,
+      "title": "Family rules",
+      "words": [
+        {
+          "word": "homework",
+          "meaning": "家庭作业"
+        },
+        {
+          "word": "bedroom",
+          "meaning": "卧室"
+        },
+        {
+          "word": "careful",
+          "meaning": "小心的"
+        },
+        {
+          "word": "tidy",
+          "meaning": "整理"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Do your homework first.",
+          "translation": "先做作业。",
+          "level": 2
+        },
+        {
+          "text": "Tidy your room.",
+          "translation": "整理你的房间。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 3,
+      "title": "Time for school",
+      "words": [
+        {
+          "word": "time",
+          "meaning": "时间"
+        },
+        {
+          "word": "class",
+          "meaning": "课"
+        },
+        {
+          "word": "English",
+          "meaning": "英语"
+        },
+        {
+          "word": "maths",
+          "meaning": "数学"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "What time is it?",
+          "translation": "几点了？",
+          "level": 2
+        },
+        {
+          "text": "It's time for school.",
+          "translation": "该上学了。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 4,
+      "title": "Going shopping",
+      "words": [
+        {
+          "word": "shop",
+          "meaning": "商店"
+        },
+        {
+          "word": "buy",
+          "meaning": "买"
+        },
+        {
+          "word": "price",
+          "meaning": "价格"
+        },
+        {
+          "word": "size",
+          "meaning": "尺码"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Can I help you?",
+          "translation": "我能帮您吗？",
+          "level": 2
+        },
+        {
+          "text": "How much is it?",
+          "translation": "它多少钱？",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 5,
+      "title": "Farms and us",
+      "words": [
+        {
+          "word": "farm",
+          "meaning": "农场"
+        },
+        {
+          "word": "cow",
+          "meaning": "奶牛"
+        },
+        {
+          "word": "sheep",
+          "meaning": "绵羊"
+        },
+        {
+          "word": "farmer",
+          "meaning": "农民"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "What are these?",
+          "translation": "这些是什么？",
+          "level": 2
+        },
+        {
+          "text": "They're sheep.",
+          "translation": "它们是绵羊。",
+          "level": 1
+        }
+      ]
+    },
+    {
+      "unitNo": 6,
+      "title": "From farm to table",
+      "words": [
+        {
+          "word": "food",
+          "meaning": "食物"
+        },
+        {
+          "word": "farm",
+          "meaning": "农场"
+        },
+        {
+          "word": "table",
+          "meaning": "餐桌"
+        },
+        {
+          "word": "fresh",
+          "meaning": "新鲜的"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Where does our food come from?",
+          "translation": "我们的食物来自哪里？",
+          "level": 3
+        },
+        {
+          "text": "Milk comes from cows.",
+          "translation": "牛奶来自奶牛。",
+          "level": 2
+        }
+      ]
+    }
+  ]
+}

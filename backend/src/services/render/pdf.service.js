@@ -28,6 +28,9 @@ const FONT_DIR = path.join(__dirname, '..', '..', '..', 'assets', 'fonts');
 const FONT_FILES = {
   kai: 'UKai-CN.ttf',
   xingkai: 'Slidexiaxing-Regular.ttf',
+  'english-hengshui': 'EduSABeginner-Regular.ttf',
+  'english-print': 'NotoSans-Regular.ttf',
+  'english-rounded': 'Nunito-Regular.ttf',
 };
 
 // 自定义字体覆盖：把有授权的字体放到 assets/fonts/custom-kai.ttf / custom-xingkai.ttf
@@ -45,12 +48,12 @@ const fontCache = {};
 
 function loadFont(key) {
   if (fontCache[key]) return fontCache[key];
-  const override = path.join(FONT_DIR, FONT_OVERRIDES[key]);
-  const file = fs.existsSync(override)
+  const override = FONT_OVERRIDES[key] ? path.join(FONT_DIR, FONT_OVERRIDES[key]) : null;
+  const file = override && fs.existsSync(override)
     ? override
     : path.join(FONT_DIR, FONT_FILES[key]);
   if (!fs.existsSync(file)) {
-    if (key !== 'kai') return loadFont('kai'); // 行楷缺失静默回落正楷
+    if (key !== 'kai') return loadFont('kai'); // 非基础字体缺失时静默回落正楷
     throw new HttpError(503, 'PDF 字体未安装：请先运行 backend/scripts/fetch-fonts.sh 下载开源楷体');
   }
   const fk = fontkit.openSync(file);
@@ -63,6 +66,11 @@ function loadFont(key) {
     ink: new Map(),
   };
   return fontCache[key];
+}
+
+function loadEnglishFont(opts = {}) {
+  const key = ['hengshui', 'print', 'rounded'].includes(opts.englishFont) ? opts.englishFont : 'hengshui';
+  return loadFont(`english-${key}`);
 }
 
 function hasGlyph(font, ch) {
@@ -154,18 +162,23 @@ function drawText(doc, font, str, x, baselineY, size, color, opts = {}) {
 function drawHeader(doc, kai, sheet, pal) {
   const dateText = new Date(sheet.createdAt || Date.now()).toLocaleDateString('zh-CN');
   const isChinese = sheet.type === 'chinese';
+  const opts = sheet.options || {};
   const typeText = isChinese
     ? `语文${sheet.subtype ? ' · ' + sheet.subtype : ''} · ${sheet.charCount} 字`
-    : `英语${sheet.wordBank ? ' · 默写帖' : ''} · ${sheet.charCount} 字符`;
+    : `英语${sheet.subtype ? ' · ' + sheet.subtype : sheet.wordBank ? ' · 默写帖' : ''} · ${sheet.charCount} 字符`;
 
-  drawText(doc, kai, sheet.title || '字帖练习', 0, MARGIN + 16, 16, '#2f2a26', { width: A4.width, align: 'center' });
-  drawText(doc, kai, `${typeText} · 共 ${sheet.pages.length} 页 · ${dateText}`, 0, MARGIN + 30, 8.5, '#8a929a', { width: A4.width, align: 'center' });
+  const isDictation = !isChinese && opts.practiceMode === 'zh2en';
+  const headerTitle = isDictation
+    ? (opts.exerciseType === 'sentence' ? '二、短语/句子' : '一、单词')
+    : (sheet.title || '字帖练习');
+  drawText(doc, kai, headerTitle, isDictation ? MARGIN : 0, MARGIN + 16, 16, '#2f2a26', { width: isDictation ? CONTENT_W / 2 : A4.width, align: isDictation ? 'left' : 'center' });
+  if (!isDictation) drawText(doc, kai, `${typeText} · 共 ${sheet.pages.length} 页 · ${dateText}`, 0, MARGIN + 30, 8.5, '#8a929a', { width: A4.width, align: 'center' });
 
   // 姓名 / 班级 / 日期 填写栏
   const lineY = MARGIN + 50;
   const seg = CONTENT_W / 3;
-  drawText(doc, kai, '姓名：__________', MARGIN, lineY, 9, '#6b7280');
-  drawText(doc, kai, '班级：__________', MARGIN + seg, lineY, 9, '#6b7280', { width: seg, align: 'center' });
+  drawText(doc, kai, '班级：__________', MARGIN, lineY, 9, '#6b7280');
+  drawText(doc, kai, '姓名：__________', MARGIN + seg, lineY, 9, '#6b7280', { width: seg, align: 'center' });
   drawText(doc, kai, '日期：__________', MARGIN + seg * 2, lineY, 9, '#6b7280');
 
   let y = lineY + 14;
@@ -408,7 +421,16 @@ function drawChinesePage(doc, kai, page, opts, pal, startY) {
   });
 }
 
+function drawEnglishFourLine(doc, x, top, width, height, pal) {
+  const unit = height / 3;
+  line(doc, x, top, x + width, top, pal.line, 0.65, false);
+  line(doc, x, top + unit, x + width, top + unit, pal.lineDashed, 0.55, true);
+  line(doc, x, top + unit * 2, x + width, top + unit * 2, pal.line, 0.65, false);
+  line(doc, x, top + height, x + width, top + height, pal.line, 0.65, false);
+}
+
 function drawEnglishPage(doc, kai, page, opts, pal, startY) {
+  const writingFont = loadEnglishFont(opts);
   const advance = CONTENT_W / (opts.cellsPerLine || 24);
   const font = advance / 0.62;
   const u = font * 0.52;
@@ -416,7 +438,77 @@ function drawEnglishPage(doc, kai, page, opts, pal, startY) {
   const rowGap = u * 0.9;
   let y = startY;
 
+  if (page.rows.length && page.rows.every((row) => row.kind === 'word-dictation')) {
+    const columns = 4;
+    const gapX = 18;
+    const colW = (CONTENT_W - gapX * (columns - 1)) / columns;
+    const cardH = 94;
+    page.rows.forEach((row, index) => {
+      const col = index % columns;
+      const lineNo = Math.floor(index / columns);
+      const x = MARGIN + col * (colW + gapX);
+      const top = startY + lineNo * cardH;
+      drawText(doc, kai, row.meaning, x, top + 14, 10, '#374151', { width: colW, align: 'left' });
+      const count = row.lineCount || 1;
+      for (let n = 0; n < count; n += 1) {
+        drawEnglishFourLine(doc, x, top + 26 + n * 20, colW, 16, pal);
+      }
+    });
+    return;
+  }
+
+  if (page.rows.length && page.rows.every((row) => row.kind === 'sentence-dictation')) {
+    page.rows.forEach((row, index) => {
+      const top = startY + index * 142;
+      drawText(doc, kai, `${row.no}. ${row.translation}`, MARGIN, top + 14, 10.5, '#30343b', { width: CONTENT_W, align: 'left' });
+      const count = row.lineCount || 1;
+      for (let n = 0; n < count; n += 1) {
+        drawEnglishFourLine(doc, MARGIN, top + 31 + n * 29, CONTENT_W, 23, pal);
+      }
+    });
+    return;
+  }
+
   page.rows.forEach((row) => {
+    if (row.kind === 'word-copy') {
+      const bandH = 36;
+      const unitH = bandH / 3;
+      line(doc, MARGIN, y, MARGIN + CONTENT_W, y, pal.line, 0.9, false);
+      line(doc, MARGIN, y + unitH, MARGIN + CONTENT_W, y + unitH, pal.lineDashed, 0.75, true);
+      line(doc, MARGIN, y + unitH * 2, MARGIN + CONTENT_W, y + unitH * 2, pal.line, 0.9, false);
+      line(doc, MARGIN, y + bandH, MARGIN + CONTENT_W, y + bandH, pal.line, 0.9, false);
+      const slots = row.repeatCount || 6;
+      const slotW = CONTENT_W / slots;
+      const size = 25;
+      for (let n = 0; n < slots; n += 1) {
+        drawText(doc, writingFont, row.word, MARGIN + n * slotW + 2, y + unitH * 2, size, n === 0 ? '#24332e' : pal.trace, { width: slotW - 4, align: 'left' });
+      }
+      const info = [row.meaning ? `释义：${row.meaning}` : '', ...(row.details || [])].filter(Boolean).join('   ');
+      if (info) drawText(doc, kai, info, MARGIN + 6, y + 52, 8.7, '#4b5563', { width: CONTENT_W - 12, align: 'left' });
+      line(doc, MARGIN, y + 60, MARGIN + CONTENT_W, y + 60, pal.line, 0.65, false);
+      y += 68;
+      return;
+    }
+    if (row.kind === 'word-meaning') {
+      const promptW = 150;
+      const gap = 18;
+      const writingX = MARGIN + promptW + gap;
+      const writingW = CONTENT_W - promptW - gap;
+      const lineCount = row.lineCount || 1;
+      const groupH = Math.max(58, lineCount * 34);
+
+      doc.save();
+      doc.roundedRect(MARGIN, y, promptW, groupH, 5).fill('#f7faf8');
+      doc.restore();
+      drawText(doc, writingFont, `${row.no}. ${row.word}`, MARGIN + 9, y + 24, 14, '#263b59', { width: promptW - 18, align: 'left' });
+      drawText(doc, kai, '写出中文释义', MARGIN + 9, y + 44, 8.5, '#64748b', { width: promptW - 18, align: 'left' });
+      for (let index = 0; index < lineCount; index += 1) {
+        const lineY = y + 28 + index * 34;
+        line(doc, writingX, lineY, writingX + writingW, lineY, pal.line, 0.9, false);
+      }
+      y += groupH + 14;
+      return;
+    }
     // 默写提示行
     if (row.kind === 'hint') {
       drawText(doc, kai, row.text, MARGIN, y + 11, 10, '#3a2e25');
@@ -436,6 +528,29 @@ function drawEnglishPage(doc, kai, page, opts, pal, startY) {
       y += size + 8;
       return;
     }
+    if (row.kind === 'unscramble') {
+      drawText(doc, kai, `${row.no}.`, MARGIN, y + 13, 10, '#334155');
+      let x = MARGIN + 20;
+      (row.tokens || []).forEach((token) => {
+        const boxW = Math.max(30, Math.min(110, Array.from(token).length * 7 + 15));
+        if (x + boxW > MARGIN + CONTENT_W) {
+          x = MARGIN + 20;
+          y += 28;
+        }
+        doc.save();
+        doc.roundedRect(x, y, boxW, 22, 4).lineWidth(0.8).strokeColor(pal.border).stroke();
+        doc.restore();
+        drawText(doc, writingFont, token, x, y + 15, 9.5, '#334155', { width: boxW, align: 'center' });
+        x += boxW + 7;
+      });
+      if (row.punctuation) drawText(doc, writingFont, row.punctuation, x, y + 15, 10, '#334155');
+      y += 29;
+      if (row.translation) {
+        drawText(doc, kai, row.translation, MARGIN + 20, y + 10, 8.5, '#64748b');
+        y += 15;
+      }
+      return;
+    }
     // 默写的四线格按单词宽度收窄
     const gridW = row.kind === 'erow' && row.width ? advance * row.width : CONTENT_W;
     line(doc, MARGIN, y, MARGIN + gridW, y, pal.line, 1, false);
@@ -445,7 +560,7 @@ function drawEnglishPage(doc, kai, page, opts, pal, startY) {
 
     (row.cells || []).forEach((cell, i) => {
       if (cell.style !== 'trace') return; // 描红浅色字；空白/间隔格不绘制
-      drawText(doc, kai, cell.char, MARGIN + i * advance, y + u * 2, font, pal.trace);
+      drawText(doc, writingFont, cell.char, MARGIN + i * advance, y + u * 2, font, pal.trace);
     });
     y += rowH + rowGap;
   });
@@ -564,7 +679,9 @@ function sheetToPdfBuffer(sheet) {
         doc.save();
         doc.rect(0, 0, A4.width, A4.height).fill('#ffffff');
         doc.restore();
-        const startY = sheet.type === 'math' ? drawMathHeader(doc, kai, sheet) : index === 0 ? drawHeader(doc, kai, sheet, pal) : MARGIN + 8;
+        const startY = sheet.type === 'math'
+          ? drawMathHeader(doc, kai, sheet)
+          : (sheet.type === 'english' || index === 0 ? drawHeader(doc, kai, sheet, pal) : MARGIN + 8);
         if (sheet.type === 'math') drawMathPage(doc, kai, page, opts, startY);
         else if (sheet.type === 'chinese') drawChinesePage(doc, kai, page, opts, pal, startY);
         else drawEnglishPage(doc, kai, page, opts, pal, startY);
@@ -580,6 +697,21 @@ function sheetToPdfBuffer(sheet) {
         drawMathPage(doc, kai, sheet.answerPage, opts, MARGIN + 34);
       }
 
+      if (sheet.type === 'english' && sheet.answerPage) {
+        const writingFont = loadEnglishFont(opts);
+        doc.addPage();
+        doc.save();
+        doc.rect(0, 0, A4.width, A4.height).fill('#ffffff');
+        doc.restore();
+        drawText(doc, kai, `${sheet.title} · 答案页`, 0, MARGIN + 14, 13, '#2f2a26', { width: A4.width, align: 'center' });
+        let answerY = MARGIN + 42;
+        sheet.answerPage.rows.flatMap((row) => row.items || []).forEach((item) => {
+          const lines = wrapText(writingFont, `${item.no}. ${item.answer}`, 10, CONTENT_W);
+          lines.forEach((text, index) => drawText(doc, writingFont, text, MARGIN, answerY + index * 16, 10, '#334155'));
+          answerY += Math.max(24, lines.length * 16 + 8);
+        });
+      }
+
       doc.end();
     } catch (err) {
       reject(err);
@@ -590,5 +722,5 @@ function sheetToPdfBuffer(sheet) {
 module.exports = {
   sheetToPdfBuffer,
   // 静态资源生成脚本（scripts/build-radicals.js）复用的绘制原语
-  internals: { loadFont, drawText, line, A4, MARGIN, CONTENT_W },
+  internals: { loadFont, loadEnglishFont, drawText, line, A4, MARGIN, CONTENT_W },
 };

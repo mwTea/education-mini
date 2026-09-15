@@ -1,0 +1,217 @@
+{
+  "id": "jj-4a",
+  "name": "冀教版英语四年级上册（2024新教材）",
+  "publisher": "河北教育出版社",
+  "edition": "冀教版（三起）",
+  "grade": 4,
+  "semester": "上册",
+  "kind": "textbook",
+  "coverage": "core",
+  "note": "2024新版；当前使用。",
+  "units": [
+    {
+      "unitNo": 1,
+      "title": "School life",
+      "words": [
+        {
+          "word": "school",
+          "meaning": "学校"
+        },
+        {
+          "word": "subject",
+          "meaning": "科目"
+        },
+        {
+          "word": "library",
+          "meaning": "图书馆"
+        },
+        {
+          "word": "playground",
+          "meaning": "操场"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Welcome to our school!",
+          "translation": "欢迎来到我们学校！",
+          "level": 1
+        },
+        {
+          "text": "What subjects do you have?",
+          "translation": "你们有什么科目？",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 2,
+      "title": "School rules",
+      "words": [
+        {
+          "word": "rule",
+          "meaning": "规则"
+        },
+        {
+          "word": "sign",
+          "meaning": "标志"
+        },
+        {
+          "word": "quiet",
+          "meaning": "安静的"
+        },
+        {
+          "word": "kind",
+          "meaning": "友善的"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Follow the signs.",
+          "translation": "遵守标志。",
+          "level": 2
+        },
+        {
+          "text": "Be kind to each other.",
+          "translation": "彼此友善。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 3,
+      "title": "Sports",
+      "words": [
+        {
+          "word": "sport",
+          "meaning": "运动"
+        },
+        {
+          "word": "football",
+          "meaning": "足球"
+        },
+        {
+          "word": "basketball",
+          "meaning": "篮球"
+        },
+        {
+          "word": "volleyball",
+          "meaning": "排球"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "I like sports.",
+          "translation": "我喜欢运动。",
+          "level": 1
+        },
+        {
+          "text": "What's your favourite sport?",
+          "translation": "你最喜欢什么运动？",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 4,
+      "title": "Jobs",
+      "words": [
+        {
+          "word": "job",
+          "meaning": "工作"
+        },
+        {
+          "word": "teacher",
+          "meaning": "教师"
+        },
+        {
+          "word": "doctor",
+          "meaning": "医生"
+        },
+        {
+          "word": "farmer",
+          "meaning": "农民"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "What do they do?",
+          "translation": "他们是做什么工作的？",
+          "level": 2
+        },
+        {
+          "text": "What do you want to be?",
+          "translation": "你将来想做什么？",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 5,
+      "title": "Meet my family",
+      "words": [
+        {
+          "word": "family",
+          "meaning": "家庭"
+        },
+        {
+          "word": "photo",
+          "meaning": "照片"
+        },
+        {
+          "word": "birthday",
+          "meaning": "生日"
+        },
+        {
+          "word": "visit",
+          "meaning": "拜访"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "This is my family photo.",
+          "translation": "这是我的全家福。",
+          "level": 2
+        },
+        {
+          "text": "Happy birthday!",
+          "translation": "生日快乐！",
+          "level": 1
+        }
+      ]
+    },
+    {
+      "unitNo": 6,
+      "title": "More about me",
+      "words": [
+        {
+          "word": "tall",
+          "meaning": "高的"
+        },
+        {
+          "word": "live",
+          "meaning": "居住"
+        },
+        {
+          "word": "animal",
+          "meaning": "动物"
+        },
+        {
+          "word": "hobby",
+          "meaning": "爱好"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "How tall are you?",
+          "translation": "你多高？",
+          "level": 2
+        },
+        {
+          "text": "Where do you live?",
+          "translation": "你住在哪里？",
+          "level": 2
+        }
+      ]
+    }
+  ]
+}

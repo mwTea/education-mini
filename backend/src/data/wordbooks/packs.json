@@ -1,0 +1,35 @@
+{
+  "note": "英语词包（自行编录的主题化高频词表，属事实性词汇数据，可自由使用）；教材同步词表见同目录 pep-*.json",
+  "items": [
+    {
+      "id": "pack-kids",
+      "name": "少儿高频词",
+      "kind": "pack",
+      "units": [
+        { "title": "我与家人", "words": ["i", "me", "my", "we", "you", "he", "she", "it", "they", "mom", "dad", "baby", "brother", "sister", "family", "friend", "boy", "girl", "man", "woman"] },
+        { "title": "身体动作", "words": ["eye", "ear", "nose", "mouth", "hand", "foot", "head", "face", "arm", "leg", "run", "jump", "walk", "swim", "fly", "clap", "sit", "stand", "sleep", "eat"] },
+        { "title": "颜色数字", "words": ["red", "blue", "yellow", "green", "black", "white", "pink", "orange", "purple", "brown", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"] },
+        { "title": "动物", "words": ["cat", "dog", "bird", "fish", "rabbit", "panda", "tiger", "lion", "monkey", "elephant", "duck", "pig", "cow", "horse", "sheep", "hen", "bear", "mouse", "snake", "frog"] },
+        { "title": "食物", "words": ["apple", "banana", "orange", "grape", "pear", "peach", "cake", "bread", "rice", "noodles", "egg", "milk", "water", "juice", "tea", "candy", "ice cream", "hamburger", "chicken", "fish soup"] },
+        { "title": "校园用品", "words": ["school", "book", "pen", "pencil", "ruler", "eraser", "bag", "desk", "chair", "blackboard", "teacher", "student", "class", "classroom", "picture", "crayon", "storybook", "pencil box", "schoolbag", "light"] },
+        { "title": "天气自然", "words": ["sun", "moon", "star", "sky", "cloud", "rain", "snow", "wind", "tree", "flower", "grass", "river", "sea", "mountain", "hot", "cold", "warm", "cool", "day", "night"] },
+        { "title": "常用动词", "words": ["go", "come", "see", "look", "listen", "say", "speak", "read", "write", "draw", "sing", "dance", "play", "like", "love", "have", "give", "take", "open", "close"] }
+      ]
+    },
+    {
+      "id": "pack-core",
+      "name": "核心词汇",
+      "kind": "pack",
+      "units": [
+        { "title": "时间与方位", "words": ["time", "morning", "afternoon", "evening", "night", "today", "tomorrow", "yesterday", "week", "month", "year", "hour", "minute", "now", "early", "late", "before", "after", "up", "down", "left", "right", "near", "far", "here", "there"] },
+        { "title": "家庭与社会", "words": ["people", "person", "name", "home", "house", "room", "door", "window", "bed", "table", "phone", "city", "country", "street", "road", "hospital", "park", "zoo", "shop", "farm"] },
+        { "title": "学习与工作", "words": ["work", "study", "learn", "teach", "ask", "answer", "think", "know", "remember", "forget", "understand", "question", "word", "sentence", "letter", "subject", "math", "english", "chinese", "music", "art", "science", "sport", "homework", "test"] },
+        { "title": "日常生活", "words": ["buy", "sell", "pay", "cook", "wash", "clean", "wear", "dress", "shirt", "coat", "shoes", "hat", "watch tv", "listen to", "get up", "go to bed", "have breakfast", "have lunch", "have dinner", "do sports"] },
+        { "title": "出行与地点", "words": ["bus", "car", "bike", "train", "plane", "ship", "boat", "taxi", "subway", "station", "airport", "ticket", "map", "travel", "visit", "way", "turn", "stop", "start", "arrive"] },
+        { "title": "情感与形容", "words": ["happy", "sad", "angry", "tired", "afraid", "sorry", "glad", "kind", "good", "bad", "big", "small", "long", "short", "tall", "young", "old", "new", "beautiful", "busy", "free", "easy", "hard", "safe", "dangerous"] },
+        { "title": "高频动词", "words": ["be", "do", "can", "will", "would", "should", "must", "may", "need", "want", "help", "make", "let", "put", "find", "use", "try", "keep", "feel", "bring", "show", "tell", "meet", "wait", "follow"] },
+        { "title": "常用连接与疑问", "words": ["and", "but", "or", "so", "because", "if", "when", "where", "what", "who", "whose", "which", "why", "how", "how many", "how much", "how old", "not", "no", "yes", "very", "too", "also", "again", "please"] }
+      ]
+    }
+  ]
+}

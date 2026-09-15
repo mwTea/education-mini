@@ -1,5 +1,9 @@
 node_modules/
 data/
+!src/data/
+src/data/*
+!src/data/wordbooks/
+!src/data/wordbooks/*.json
 assets/fonts/
 *.log
 .DS_Store

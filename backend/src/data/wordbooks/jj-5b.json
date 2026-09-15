@@ -1,0 +1,149 @@
+{
+  "id": "jj-5b",
+  "name": "冀教版英语五年级下册（2026现行版）",
+  "publisher": "河北教育出版社",
+  "edition": "冀教版（三起）",
+  "grade": 5,
+  "semester": "下册",
+  "kind": "textbook",
+  "coverage": "core",
+  "note": "2026现行版。",
+  "units": [
+    {
+      "unitNo": 1,
+      "title": "Going to Beijing",
+      "words": [
+        {
+          "word": "trip",
+          "meaning": "旅行"
+        },
+        {
+          "word": "train",
+          "meaning": "火车"
+        },
+        {
+          "word": "ticket",
+          "meaning": "票"
+        },
+        {
+          "word": "window",
+          "meaning": "窗户"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "We are going to Beijing.",
+          "translation": "我们要去北京。",
+          "level": 2
+        },
+        {
+          "text": "May I sit here?",
+          "translation": "我可以坐这里吗？",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 2,
+      "title": "In Beijing",
+      "words": [
+        {
+          "word": "people",
+          "meaning": "人们"
+        },
+        {
+          "word": "camera",
+          "meaning": "相机"
+        },
+        {
+          "word": "picture",
+          "meaning": "照片"
+        },
+        {
+          "word": "help",
+          "meaning": "帮助"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "There are many people here.",
+          "translation": "这里有很多人。",
+          "level": 2
+        },
+        {
+          "text": "May I take your picture?",
+          "translation": "我可以给你拍照吗？",
+          "level": 3
+        }
+      ]
+    },
+    {
+      "unitNo": 3,
+      "title": "Writing Home",
+      "words": [
+        {
+          "word": "postcard",
+          "meaning": "明信片"
+        },
+        {
+          "word": "letter",
+          "meaning": "信"
+        },
+        {
+          "word": "stamp",
+          "meaning": "邮票"
+        },
+        {
+          "word": "send",
+          "meaning": "寄送"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "I want to send a postcard.",
+          "translation": "我想寄一张明信片。",
+          "level": 2
+        },
+        {
+          "text": "Where is the post office?",
+          "translation": "邮局在哪里？",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 4,
+      "title": "Did You Have a Nice Trip?",
+      "words": [
+        {
+          "word": "yesterday",
+          "meaning": "昨天"
+        },
+        {
+          "word": "went",
+          "meaning": "去了"
+        },
+        {
+          "word": "saw",
+          "meaning": "看见了"
+        },
+        {
+          "word": "trip",
+          "meaning": "旅行"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Did you have a nice trip?",
+          "translation": "你旅途愉快吗？",
+          "level": 2
+        },
+        {
+          "text": "What did you do yesterday?",
+          "translation": "你昨天做了什么？",
+          "level": 2
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,217 @@
+{
+  "id": "pep-5b",
+  "name": "人教PEP英语五年级下册（2026春新版）",
+  "publisher": "人民教育出版社",
+  "edition": "PEP",
+  "grade": 5,
+  "semester": "下册",
+  "kind": "textbook",
+  "coverage": "core",
+  "note": "Unit标题按人教社当前新版资源核对；当前文件为核心同步数据，非完整附录词表。",
+  "units": [
+    {
+      "unitNo": 1,
+      "title": "Following the rules",
+      "words": [
+        {
+          "word": "rule",
+          "meaning": "规则"
+        },
+        {
+          "word": "follow",
+          "meaning": "遵守"
+        },
+        {
+          "word": "must",
+          "meaning": "必须"
+        },
+        {
+          "word": "safe",
+          "meaning": "安全的"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "We must follow the rules.",
+          "translation": "我们必须遵守规则。",
+          "level": 2
+        },
+        {
+          "text": "Don't feed the animals.",
+          "translation": "不要给动物喂食。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 2,
+      "title": "Our community",
+      "words": [
+        {
+          "word": "community",
+          "meaning": "社区"
+        },
+        {
+          "word": "hospital",
+          "meaning": "医院"
+        },
+        {
+          "word": "library",
+          "meaning": "图书馆"
+        },
+        {
+          "word": "park",
+          "meaning": "公园"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "What's in your community?",
+          "translation": "你的社区里有什么？",
+          "level": 2
+        },
+        {
+          "text": "Where is the hospital?",
+          "translation": "医院在哪里？",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 3,
+      "title": "Life in different seasons",
+      "words": [
+        {
+          "word": "season",
+          "meaning": "季节"
+        },
+        {
+          "word": "spring",
+          "meaning": "春天"
+        },
+        {
+          "word": "summer",
+          "meaning": "夏天"
+        },
+        {
+          "word": "winter",
+          "meaning": "冬天"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Which season do you like best?",
+          "translation": "你最喜欢哪个季节？",
+          "level": 3
+        },
+        {
+          "text": "I like spring best.",
+          "translation": "我最喜欢春天。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 4,
+      "title": "My hometown",
+      "words": [
+        {
+          "word": "hometown",
+          "meaning": "家乡"
+        },
+        {
+          "word": "city",
+          "meaning": "城市"
+        },
+        {
+          "word": "village",
+          "meaning": "村庄"
+        },
+        {
+          "word": "beautiful",
+          "meaning": "美丽的"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Where is your hometown?",
+          "translation": "你的家乡在哪里？",
+          "level": 2
+        },
+        {
+          "text": "My hometown is beautiful.",
+          "translation": "我的家乡很美。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 5,
+      "title": "Travelling around",
+      "words": [
+        {
+          "word": "travel",
+          "meaning": "旅行"
+        },
+        {
+          "word": "plane",
+          "meaning": "飞机"
+        },
+        {
+          "word": "train",
+          "meaning": "火车"
+        },
+        {
+          "word": "ticket",
+          "meaning": "票"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "How do you travel?",
+          "translation": "你怎样旅行？",
+          "level": 2
+        },
+        {
+          "text": "I usually travel by train.",
+          "translation": "我通常坐火车旅行。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 6,
+      "title": "Making a travel plan",
+      "words": [
+        {
+          "word": "plan",
+          "meaning": "计划"
+        },
+        {
+          "word": "holiday",
+          "meaning": "假期"
+        },
+        {
+          "word": "hotel",
+          "meaning": "酒店"
+        },
+        {
+          "word": "visit",
+          "meaning": "参观"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Where are you going?",
+          "translation": "你要去哪里？",
+          "level": 2
+        },
+        {
+          "text": "I'm going to Beijing.",
+          "translation": "我要去北京。",
+          "level": 2
+        }
+      ]
+    }
+  ]
+}

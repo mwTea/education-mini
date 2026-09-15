@@ -158,8 +158,12 @@
   align-items: flex-end;
   line-height: 1;
   white-space: nowrap;
-  font-family: 'CBKai', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'CBHengshui', 'Helvetica Neue', Arial, sans-serif;
 }
+
+.en-font-hengshui { font-family: 'CBHengshui', 'Comic Sans MS', cursive; }
+.en-font-print { font-family: 'CBEnglishPrint', 'Helvetica Neue', Arial, sans-serif; }
+.en-font-rounded { font-family: 'CBEnglishRounded', 'Arial Rounded MT Bold', sans-serif; }
 
 .etext.blank {
   color: transparent;
@@ -170,6 +174,19 @@
   text-align: center;
   flex-shrink: 0;
 }
+
+.word-copy-row { margin-bottom: 14rpx; }
+.word-four-line { position: relative; height: 72rpx; }
+.word-copy-samples { position: absolute; left: 4rpx; right: 4rpx; top: 0; height: 66.66%; display: flex; align-items: end; justify-content: space-between; font-size: 48rpx; line-height: 1; }
+.word-copy-samples text { overflow: hidden; white-space: nowrap; }
+.word-info { min-height: 38rpx; padding: 7rpx 8rpx 3rpx; border-bottom: 2rpx solid #5b9e7d; color: #4b5563; font-size: 18rpx; line-height: 1.4; }
+.word-dictation { display: inline-flex; width: 25%; min-height: 132rpx; padding: 0 10rpx 12rpx; vertical-align: top; box-sizing: border-box; flex-direction: column; }
+.dictation-prompt { min-height: 34rpx; color: #374151; font-size: 20rpx; }
+.dictation-lines, .sentence-lines { display: flex; flex-direction: column; gap: 7rpx; }
+.four-line-answer { position: relative; height: 32rpx; }
+.four-line-answer.sentence { height: 46rpx; }
+.sentence-dictation { margin-bottom: 24rpx; }
+.sentence-dictation .dictation-prompt { min-height: 38rpx; font-size: 21rpx; }
 
 /* ---- 生字卡片（与 PDF 同构：红框卡 / 顶栏拼音格+笔顺条 / 左栏范字标签 / 右栏描红+组词） ---- */
 .cardbox {
@@ -292,6 +309,67 @@
 
 
 /* ---- 英语默写：提示行与方格 ---- */
+.word-meaning-row {
+  display: flex;
+  gap: 16rpx;
+  padding: 16rpx 0 20rpx;
+  border-bottom: 2rpx solid #e8edf0;
+}
+
+.word-prompt {
+  display: flex;
+  width: 190rpx;
+  flex-shrink: 0;
+  flex-direction: column;
+  justify-content: center;
+  padding: 12rpx 14rpx;
+  border-radius: 10rpx;
+  background: #f7faf8;
+  box-sizing: border-box;
+}
+
+.word-title {
+  color: #263b59;
+  font-size: 27rpx;
+  font-weight: 700;
+  word-break: break-all;
+}
+
+.word-meaning {
+  margin-top: 7rpx;
+  color: #64748b;
+  font-size: 20rpx;
+}
+
+.word-lines,
+.meaning-lines {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10rpx;
+}
+
+.word-four-line {
+  position: relative;
+  width: 100%;
+  height: 72rpx;
+}
+
+.word-trace {
+  position: absolute;
+  left: 6rpx;
+  bottom: 20rpx;
+  font-size: 40rpx;
+  line-height: 1;
+}
+
+.meaning-line {
+  height: 48rpx;
+  border-bottom: 2rpx solid #5b9e7d;
+}
+
 .hrow {
   font-size: 26rpx;
   font-weight: 500;
@@ -310,6 +388,16 @@
   border-radius: 6rpx;
   box-sizing: border-box;
 }
+
+.urow { margin: 12rpx 0 18rpx; color: #334155; }
+.utop { display: flex; align-items: flex-start; gap: 10rpx; }
+.uno { flex-shrink: 0; padding-top: 10rpx; font-size: 24rpx; font-weight: 700; }
+.utokens { display: flex; flex: 1; flex-wrap: wrap; gap: 10rpx; }
+.utoken { padding: 9rpx 14rpx; border: 2rpx solid #5b9e7d; border-radius: 10rpx; background: #f8fafc; font-size: 23rpx; }
+.upunct { align-self: center; font-size: 26rpx; font-weight: 700; }
+.utrans { margin: 10rpx 0 0 42rpx; color: #64748b; font-size: 21rpx; }
+.eanswers { display: flex; flex-direction: column; gap: 14rpx; }
+.eanswer { color: #334155; font-size: 24rpx; line-height: 1.55; }
 
 /* ---- 数学：口算三列 / 竖式 / 应用题 / 答案 ---- */
 .mgrid { display: flex; flex-wrap: wrap; }

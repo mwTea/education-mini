@@ -2,8 +2,9 @@
 
 const { HttpError } = require('./http-error');
 const { buildChineseSheet } = require('../services/layout/chinese.service');
-const { buildEnglishSheet } = require('../services/layout/english.service');
+const { buildEnglishSheet, buildCurriculumEnglishSheet } = require('../services/layout/english.service');
 const { buildMathSheet } = require('../services/layout/math.service');
+const wordbookService = require('../services/wordbook.service');
 
 function asRecord(value, message) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) {
@@ -46,13 +47,17 @@ function parseCreatePayload(body) {
   }
   if (payload.type === 'english') {
     const content = asRecord(payload.content, 'content 必须是对象');
-    if (typeof content.text !== 'string' || !content.text.trim()) {
+    const hasBookUnit = typeof content.bookId === 'string' && content.bookId && Number.isFinite(Number(content.unitNo));
+    const hasText = typeof content.text === 'string' && content.text.trim();
+    if (!hasBookUnit && !hasText) {
       throw new HttpError(400, '请输入要练习的英文内容');
     }
     return {
       type: 'english',
       title: parseTitle(payload, '英语书写练习'),
-      content: { text: content.text },
+      content: hasBookUnit
+        ? { bookId: content.bookId, unitNo: Number(content.unitNo) }
+        : { text: content.text },
       options: payload.options || {},
     };
   }
@@ -81,11 +86,24 @@ function buildSheet(id, payload) {
     if (!sheet.pages.length) throw new HttpError(400, '未能生成题目');
     return { id, createdAt, ...sheet };
   }
-  const sheet = buildEnglishSheet({
-    title: payload.title,
-    text: payload.content.text,
-    options: payload.options,
-  });
+  let sheet;
+  if (payload.content.bookId) {
+    const source = wordbookService.getUnit(payload.content.bookId, payload.content.unitNo);
+    if (!source) throw new HttpError(400, '请选择有效的英语教材单元');
+    if (source.book.coverage === 'core_review_needed') throw new HttpError(400, '该册教材内容待复核，暂不支持生成');
+    sheet = buildCurriculumEnglishSheet({
+      title: payload.title || `${source.book.name} ${source.unit.title}`,
+      book: source.book,
+      unit: source.unit,
+      options: payload.options,
+    });
+  } else {
+    sheet = buildEnglishSheet({
+      title: payload.title,
+      text: payload.content.text,
+      options: payload.options,
+    });
+  }
   if (sheet.charCount === 0 || sheet.pages.length === 0) throw new HttpError(400, '未识别到有效英文内容');
   return { id, createdAt, ...sheet };
 }

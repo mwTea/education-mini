@@ -135,9 +135,26 @@
     <!-- 英语：默写提示行 / 方格行 / 四线三格 -->
     <block wx:else>
       <block wx:for="{{page.rows}}" wx:for-item="row" wx:key="key">
-      <view wx:if="{{row.kind === 'hint'}}" class="hrow">{{row.text}}</view>
+      <view wx:if="{{row.kind === 'word-copy'}}" class="word-copy-row">
+        <view class="word-four-line">
+          <view class="eline l1" style="border-top-color:{{vm.pal.line}};"></view><view class="eline l2" style="border-top-color:{{vm.pal.lineDashed}};"></view><view class="eline l3" style="border-top-color:{{vm.pal.line}};"></view><view class="eline l4" style="border-top-color:{{vm.pal.line}};"></view>
+          <view class="word-copy-samples {{vm.englishFontClass}}"><text wx:for="{{row.repeatSamples}}" wx:for-item="sample" wx:key="key" class="{{sample.style}}" style="color:{{sample.style === 'demo' ? vm.pal.demo : vm.pal.trace}};">{{row.word}}</text></view>
+        </view>
+        <view class="word-info" wx:if="{{row.meaning || row.details.length}}"><text wx:if="{{row.meaning}}">释义：{{row.meaning}}</text><text wx:for="{{row.details}}" wx:key="*this">　{{item}}</text></view>
+      </view>
+      <view wx:elif="{{row.kind === 'word-dictation'}}" class="word-dictation">
+        <text class="dictation-prompt">{{row.meaning}}</text><view class="dictation-lines"><view class="four-line-answer" wx:for="{{row.lineCount}}" wx:key="index"><view class="eline l1" style="border-top-color:{{vm.pal.line}};"></view><view class="eline l2" style="border-top-color:{{vm.pal.lineDashed}};"></view><view class="eline l3" style="border-top-color:{{vm.pal.line}};"></view><view class="eline l4" style="border-top-color:{{vm.pal.line}};"></view></view></view>
+      </view>
+      <view wx:elif="{{row.kind === 'sentence-dictation'}}" class="sentence-dictation">
+        <text class="dictation-prompt">{{row.no}}. {{row.translation}}</text><view class="sentence-lines"><view class="four-line-answer sentence" wx:for="{{row.lineCount}}" wx:key="index"><view class="eline l1" style="border-top-color:{{vm.pal.line}};"></view><view class="eline l2" style="border-top-color:{{vm.pal.lineDashed}};"></view><view class="eline l3" style="border-top-color:{{vm.pal.line}};"></view><view class="eline l4" style="border-top-color:{{vm.pal.line}};"></view></view></view>
+      </view>
+      <view wx:elif="{{row.kind === 'hint'}}" class="hrow">{{row.text}}</view>
       <view wx:elif="{{row.kind === 'fang'}}" class="fgrow">
         <view class="fcell" wx:for="{{row.count}}" wx:key="index" style="width:{{vm.metrics.rowH}}px;height:{{vm.metrics.rowH}}px;"></view>
+      </view>
+      <view wx:elif="{{row.kind === 'unscramble'}}" class="urow">
+        <view class="utop"><text class="uno">{{row.no}}.</text><view class="utokens {{vm.englishFontClass}}"><text class="utoken" wx:for="{{row.tokens}}" wx:key="index">{{item}}</text><text class="upunct">{{row.punctuation}}</text></view></view>
+        <view class="utrans" wx:if="{{row.translation}}">{{row.translation}}</view>
       </view>
       <view
         wx:else
@@ -148,7 +165,7 @@
         <view class="eline l2" style="border-top-color:{{vm.pal.lineDashed}};"></view>
         <view class="eline l3" style="border-top-color:{{vm.pal.line}};"></view>
         <view class="eline l4" style="border-top-color:{{vm.pal.line}};"></view>
-        <view class="etext" style="font-size:{{vm.metrics.font}}px;">
+        <view class="etext {{vm.englishFontClass}}" style="font-size:{{vm.metrics.font}}px;">
           <text
             class="ecell"
             wx:for="{{row.cells}}"
@@ -169,6 +186,12 @@
     <view class="m-answers-head">答案</view>
     <view class="mgrid" wx:for="{{vm.answerRows}}" wx:for-item="row" wx:key="key">
       <view class="aitem" wx:for="{{row.items}}" wx:for-item="item" wx:key="no">{{item.no}}. {{item.answer}}</view>
+    </view>
+  </block>
+  <block wx:if="{{vm.type === 'english' && vm.answerRows}}">
+    <view class="m-answers-head">答案</view>
+    <view class="eanswers {{vm.englishFontClass}}" wx:for="{{vm.answerRows}}" wx:for-item="row" wx:key="key">
+      <view class="eanswer" wx:for="{{row.items}}" wx:for-item="item" wx:key="no">{{item.no}}. {{item.answer}}</view>
     </view>
   </block>
 </view>

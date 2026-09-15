@@ -9,6 +9,7 @@ node_modules/
 *.log
 *.tmp
 .tmp-scratch/
+tmp/
 output/
 
 # Runtime data (sheets, users - generated on server)

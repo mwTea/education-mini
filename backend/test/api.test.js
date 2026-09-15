@@ -110,6 +110,33 @@ test('创建英语默写帖（报词栏）并渲染打印页', async () => {
   assert.ok(html.includes('报词栏'));
 });
 
+test('按教材单元创建英语连词成句并生成答案页', async () => {
+  const created = await fetch(`${base}/api/v1/sheets`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({
+      type: 'english',
+      title: 'Unit 1 连词成句',
+      content: { bookId: 'pep-3a', unitNo: 1 },
+      options: { exerciseType: 'unscramble', showTranslation: true, answerSheet: true },
+    }),
+  });
+  assert.equal(created.status, 201);
+  const { id, pageCount } = await created.json();
+  assert.ok(pageCount > 0);
+
+  const detail = await fetch(`${base}/api/v1/sheets/${id}`);
+  const { sheet } = await detail.json();
+  assert.equal(sheet.subtype, '连词成句');
+  assert.ok(sheet.pages[0].rows.some((row) => row.kind === 'unscramble'));
+  assert.ok(sheet.answerPage.rows[0].items.length > 0);
+
+  const print = await fetch(`${base}/api/v1/sheets/${id}/print`);
+  const html = await print.text();
+  assert.ok(html.includes('class="urow"'));
+  assert.ok(html.includes('class="page answer-page"'));
+});
+
 test('教材生字表接口（1-6 年级真实数据）', async () => {
   const listRes = await fetch(`${base}/api/v1/textbooks`);
   assert.equal(listRes.status, 200);

@@ -1,0 +1,149 @@
+{
+  "id": "jj-6b",
+  "name": "冀教版英语六年级下册（2026现行版）",
+  "publisher": "河北教育出版社",
+  "edition": "冀教版（三起）",
+  "grade": 6,
+  "semester": "下册",
+  "kind": "textbook",
+  "coverage": "core",
+  "note": "2026现行版。",
+  "units": [
+    {
+      "unitNo": 1,
+      "title": "Sports",
+      "words": [
+        {
+          "word": "sport",
+          "meaning": "运动"
+        },
+        {
+          "word": "football",
+          "meaning": "足球"
+        },
+        {
+          "word": "basketball",
+          "meaning": "篮球"
+        },
+        {
+          "word": "volleyball",
+          "meaning": "排球"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "I like sports.",
+          "translation": "我喜欢运动。",
+          "level": 1
+        },
+        {
+          "text": "What's your favourite sport?",
+          "translation": "你最喜欢什么运动？",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 2,
+      "title": "Good Health to You!",
+      "words": [
+        {
+          "word": "healthy",
+          "meaning": "健康的"
+        },
+        {
+          "word": "exercise",
+          "meaning": "锻炼"
+        },
+        {
+          "word": "minute",
+          "meaning": "分钟"
+        },
+        {
+          "word": "vegetable",
+          "meaning": "蔬菜"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "How often do you exercise?",
+          "translation": "你多久锻炼一次？",
+          "level": 2
+        },
+        {
+          "text": "You should eat more vegetables.",
+          "translation": "你应该多吃蔬菜。",
+          "level": 3
+        }
+      ]
+    },
+    {
+      "unitNo": 3,
+      "title": "What Will You Do This Summer?",
+      "words": [
+        {
+          "word": "summer",
+          "meaning": "夏天"
+        },
+        {
+          "word": "holiday",
+          "meaning": "假期"
+        },
+        {
+          "word": "visit",
+          "meaning": "拜访"
+        },
+        {
+          "word": "travel",
+          "meaning": "旅行"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "What will you do this summer?",
+          "translation": "这个夏天你要做什么？",
+          "level": 3
+        },
+        {
+          "text": "I will visit my grandparents.",
+          "translation": "我要去看望祖父母。",
+          "level": 2
+        }
+      ]
+    },
+    {
+      "unitNo": 4,
+      "title": "Li Ming Comes Home",
+      "words": [
+        {
+          "word": "home",
+          "meaning": "家"
+        },
+        {
+          "word": "remember",
+          "meaning": "记得"
+        },
+        {
+          "word": "goodbye",
+          "meaning": "再见"
+        },
+        {
+          "word": "surprise",
+          "meaning": "惊喜"
+        }
+      ],
+      "sentences": [
+        {
+          "text": "It's time to go home.",
+          "translation": "该回家了。",
+          "level": 2
+        },
+        {
+          "text": "I will miss you.",
+          "translation": "我会想念你。",
+          "level": 2
+        }
+      ]
+    }
+  ]
+}
